@@ -4,6 +4,13 @@ export default defineNuxtConfig({
   app: {
     baseURL: "Horizon-V2", // 重要：最後要有 /
   },
+  nitro: {
+    preset: "github_pages",
+    prerender: {
+      crawlLinks: true,
+      failOnError: false,
+    },
+  },
   devtools: { enabled: true },
   css: ["@/assets/scss/main.scss"],
 
