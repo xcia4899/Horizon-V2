@@ -2,12 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   app: {
-    baseURL: "Horizon-V2", // 重要：最後要有 /
+
+    // baseURL: "/", // 重要：前後後要有 /
+   baseURL: process.env.NUXT_APP_BASE_URL || "/",
   },
   nitro: {
     preset: "github_pages",
     prerender: {
-      crawlLinks: true,
+      crawlLinks: false,
       failOnError: false,
     },
   },
