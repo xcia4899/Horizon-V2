@@ -19,16 +19,21 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+  isolation: isolate;
 }
 
 /* 外層：滿版 sticky + 背景 + 層級 */
 .header {
   position: sticky;
+  position: relative;
   top: 0;
-  z-index: 1000;
+  //  background-color: #e9e9e9;
   // background-color: #fff;
   /* 內層：置中 + max-width */
+  z-index: 100;
   .header-inner {
+    position: relative;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 32px;
@@ -44,5 +49,6 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 16px;
+  z-index: 1;
 }
 </style>

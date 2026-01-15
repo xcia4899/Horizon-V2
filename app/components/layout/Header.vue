@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header-container">
     <div class="menu-toggle">
       <svg
         width="30"
@@ -15,11 +15,17 @@
     </div>
     <div class="logo">Horizon</div>
 
-    <ul ref="menuRef" class="navbar">
-      <!-- 商品，下拉選單 -->
-      <li class="navbar-item" @mouseenter="openMenu = 'product'">
+    <ul ref="menuRef" class="menu">
+      <!-- 商品 -->
+      <li
+        class="menu-item"
+        :class="{ active: openMenu === 'product' }"
+        @mouseenter="openMenu = 'product'"
+      >
+        <!-- 按鈕 -->
         <button
           type="button"
+          class="menu-title"
           :class="{ active: openMenu === 'product' }"
           @click="toggleMenu('product')"
         >
@@ -34,27 +40,78 @@
           <li class="dropdown-content">
             <div class="card">
               <div class="item-pic">
-                <img
-                  src="/images/pictrue/fourth-row2-01.png"
-                  alt=""
-                />
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
               </div>
               <div class="item-text">
                 <h3>全部商品</h3>
               </div>
             </div>
           </li>
-          <li class="dropdown-content"><a href="/products/all">全部商品</a></li>
-          <li class="dropdown-content"><a href="/products/new">新品上市</a></li>
           <li class="dropdown-content">
-            <a href="/products/sale">特價商品</a>
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>特價商品</h3>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </li>
+      <!-- 品牌 -->
+      <li
+        class="menu-item"
+        :class="{ active: openMenu === 'brand' }"
+        @mouseenter="openMenu = 'brand'"
+      >
+        <!-- 按鈕 -->
+        <button
+          type="button"
+          class="menu-title"
+          :class="{ active: openMenu === 'brand' }"
+          @click="toggleMenu('brand')"
+        >
+          品牌
+        </button>
+        <!-- 下拉選單 -->
+        <ul
+          class="dropdown"
+          :class="{ 'is-open': openMenu === 'brand' }"
+          @mouseleave="openMenu = 'brand'"
+        >
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>全部商品</h3>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>特價商品</h3>
+              </div>
+            </div>
           </li>
         </ul>
       </li>
       <!-- 活動 -->
-      <li class="relative menu-btn" @mouseenter="openMenu = 'event'">
+      <li
+        class="menu-item"
+        :class="{ active: openMenu === 'event' }"
+        @mouseenter="openMenu = 'event'"
+      >
+        <!-- 按鈕 -->
         <button
           type="button"
+          class="menu-title"
           :class="{ active: openMenu === 'event' }"
           @click="toggleMenu('event')"
         >
@@ -62,32 +119,73 @@
         </button>
         <!-- 下拉選單 -->
         <ul
-          :class="{ 'is-open': openMenu === 'event' }"
           class="dropdown"
-          @mouseleave="openMenu = null"
+          :class="{ 'is-open': openMenu === 'event' }"
+          @mouseleave="openMenu = 'event'"
         >
-          <li><a href="/event/all">全新活動</a></li>
-          <li><a href="/event/new">限時活動</a></li>
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>全部商品</h3>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>特價商品</h3>
+              </div>
+            </div>
+          </li>
         </ul>
       </li>
-      <!-- 關於 -->
-      <li class="relative menu-btn" @mouseenter="openMenu = 'about'">
+      <!-- 關於我們 -->
+      <li
+        class="menu-item"
+        :class="{ active: openMenu === 'about' }"
+        @mouseenter="openMenu = 'about'"
+      >
+        <!-- 按鈕 -->
         <button
           type="button"
+          class="menu-title"
           :class="{ active: openMenu === 'about' }"
           @click="toggleMenu('about')"
         >
-          關於
+          關於我們
         </button>
         <!-- 下拉選單 -->
         <ul
-          :class="{ 'is-open': openMenu === 'about' }"
           class="dropdown"
-          @mouseleave="openMenu = null"
+          :class="{ 'is-open': openMenu === 'about' }"
+          @mouseleave="openMenu = 'about'"
         >
-          <li><a href="/about/all">公司</a></li>
-          <li><a href="/about/new">理念</a></li>
-          <li><a href="/about/new">地點</a></li>
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>全部商品</h3>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>特價商品</h3>
+              </div>
+            </div>
+          </li>
         </ul>
       </li>
     </ul>
@@ -278,15 +376,15 @@ onBeforeUnmount(() => {
 </script>
 
 <style scoped lang="scss">
-.header {
+.header-container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-
+  align-items: flex-start;
+  top: 0;
   height: auto;
   margin: 0 auto;
-  z-index: 222;
-  @include baseTransition(0.6);
+
+  @include baseTransition(0.6s);
 
   // a {
   //   color: $color-white;
@@ -294,7 +392,7 @@ onBeforeUnmount(() => {
 
   .logo,
   .nav-right,
-  .navbar {
+  .menu {
     flex: 1;
     max-width: 300px;
     align-items: baseline;
@@ -304,7 +402,7 @@ onBeforeUnmount(() => {
     font-size: 40px;
     text-align: left;
     font-weight: bolder;
-    line-height: 70px;
+    line-height: $headerHeight;
     color: $color-purple;
     cursor: pointer;
   }
@@ -314,108 +412,126 @@ onBeforeUnmount(() => {
     position: absolute;
     top: 0px;
     left: 32px;
-    height: 70px;
+    height: $headerHeight;
     align-items: center;
   }
 
-  .navbar {
+  .menu {
     display: flex;
-    justify-content: space-around;
-    gap: 2vw;
-    max-width: 350px;
-    // width: 40%;
+    justify-content: center;
+    gap: 1vw;
+    max-width: 400px;
     margin: auto auto;
-    font-size: 18px;
-    font-weight: 500;
-    .navbar-item {
+    .menu-item {
       position: relative;
-    }
-    .dropdown {
-      position: fixed;
-      top: 80px;
-      left: 1%;
-      width: 98vw;
-      min-height: 80px;
-      padding: 16px;
-      background-color: #eff6ff;
-      color: #000;
-      border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 8%;
-
-      opacity: 0;
-      transform: translateY(-8px);
-      pointer-events: none;
-      transition: all 0.5s ease;
-      .dropdown-content {
-        aspect-ratio: 1/1;
+      height: $headerHeight;
+      padding: 0 16px;
+      background-color: transparent;
+      border-bottom: 4px solid transparent;
+      cursor: pointer;
+      .menu-title {
+        border-style: none;
+        transition: all 0.3s ease;
         display: flex;
         align-items: center;
+        letter-spacing: 1pz;
+        font-size: clamp(14px, 2.5vw, 18px);
+        white-space: nowrap;
+        background-color: transparent;
+        color: $color-white;
+        cursor: pointer;
+      }
+      .menu-title.active {
+        color: $color-purple;
+      }
+      .dropdown {
+        position: fixed;
+        top: $headerHeight;
+        left: 1%;
+        width: 98vw;
+        padding: 16px;
+
+        background-color: $color-lightgrey;
         border-radius: 8px;
-        padding: 8px;
-        .card {
-          position: relative;
-          width: 220px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 4%;
+
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        @include baseTransition(0.6s);
+        .dropdown-content {
+          aspect-ratio: 1/1;
           display: flex;
-          flex-direction: column;
-          border-radius: 6px;
-          color: $color-darkgery;
-          z-index: 1;
-          cursor: pointer;
-          &::after {
-            content: "";
-            position: absolute;
-            border-radius: 6px;
-            inset: 0 0 0 0;
-            width: 100%;
-            // height: 60%;
-            transform: scaleY(0);
-            transform-origin: top;  
-            background: $color-white;
-            transition: all 0.3s ease;
-            z-index: -1;
-          }
-          &:hover::after {
-            transform: scaleY(1);
-            box-shadow: $shadow-set;
-          }
-          * {
+          align-items: center;
+          border-radius: 8px;
+          padding: 8px;
+          .card {
             position: relative;
-            z-index: 1;
-          }
-          .item-pic {
-            width: 100%;
-            padding: 8px;
-            aspect-ratio: 1/1;
+            width: 160px;
+            display: flex;
+            flex-direction: column;
             border-radius: 6px;
-            overflow: hidden;
-            // background-color: #ccc;
-            background: $color-white;
-            img {
-              height: 100%;
-              width: 100%;
-              object-fit: cover;
-            }
-          }
-          .item-text {
-            padding: 16px 8px 32px;
-            text-align: center;
-            width: 100%;
-            overflow-wrap: break-word;
             color: $color-darkgery;
-            h3 {
-              font-size: 20px;
+            z-index: 1;
+            cursor: pointer;
+            &::after {
+              content: "";
+              position: absolute;
+              border-radius: 6px;
+              inset: 0 0 0 0;
+              transform: scaleY(0);
+              transform-origin: top;
+              background: $color-white;
+              @include baseTransition(0.3s);
+              z-index: -1;
+            }
+            &:hover::after {
+              transform: scaleY(1);
+              box-shadow: $shadow-set;
+            }
+            * {
+              position: relative;
+              z-index: 1;
+            }
+            .item-pic {
+              padding: 8px;
+              aspect-ratio: 1/1;
+              border-radius: 6px;
+              overflow: hidden;
+              background: $color-white;
+              img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+              }
+            }
+            .item-text {
+              padding: 16px 8px 16px;
+              text-align: center;
+              overflow-wrap: break-word;
+              color: $color-darkgery;
+              h3 {
+                font-size: 20px;
+              }
             }
           }
         }
       }
+      .dropdown.is-open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
     }
-    .dropdown.is-open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
+    .menu-item.active {
+      border-color: $color-purple;
     }
   }
 
@@ -438,7 +554,7 @@ onBeforeUnmount(() => {
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 70px;
+      height: $headerHeight;
       width: 25%;
       // height: 100%;
       font-size: 12px;
@@ -480,7 +596,7 @@ onBeforeUnmount(() => {
       // display: none;
       color: $color-darkgery;
       position: absolute;
-      top: 70px;
+      top: $headerHeight;
       right: 0px;
       max-height: 00px;
       width: 400px;
