@@ -1,5 +1,5 @@
 <template>
-  <div class=" header">
+  <div class="header">
     <div class="menu-toggle">
       <svg
         width="30"
@@ -15,17 +15,82 @@
     </div>
     <div class="logo">Horizon</div>
 
-    <nav ref="menuRef" class="navbar">
-      <NavDropdown
-        v-for="menu in menus"
-        :key="menu.key"
-        :menu="menu"
-        :openMenu="openMenu"
-        :toggleMenu="toggleMenu"
-      >
-        {{ menu.label }}
-      </NavDropdown>
-    </nav>
+    <ul ref="menuRef" class="navbar">
+      <!-- 商品，下拉選單 -->
+      <li class="navbar-item" @mouseenter="openMenu = 'product'">
+        <button
+          type="button"
+          :class="{ active: openMenu === 'product' }"
+          @click="toggleMenu('product')"
+        >
+          商品
+        </button>
+        <!-- 下拉選單 -->
+        <ul
+          class="dropdown"
+          :class="{ 'is-open': openMenu === 'product' }"
+          @mouseleave="openMenu = 'product'"
+        >
+          <li class="dropdown-content">
+            <div class="card">
+              <div class="item-pic">
+                <img
+                  src="/images/pictrue/fourth-row2-01.png"
+                  alt=""
+                />
+              </div>
+              <div class="item-text">
+                <h3>全部商品</h3>
+              </div>
+            </div>
+          </li>
+          <li class="dropdown-content"><a href="/products/all">全部商品</a></li>
+          <li class="dropdown-content"><a href="/products/new">新品上市</a></li>
+          <li class="dropdown-content">
+            <a href="/products/sale">特價商品</a>
+          </li>
+        </ul>
+      </li>
+      <!-- 活動 -->
+      <li class="relative menu-btn" @mouseenter="openMenu = 'event'">
+        <button
+          type="button"
+          :class="{ active: openMenu === 'event' }"
+          @click="toggleMenu('event')"
+        >
+          活動
+        </button>
+        <!-- 下拉選單 -->
+        <ul
+          :class="{ 'is-open': openMenu === 'event' }"
+          class="dropdown"
+          @mouseleave="openMenu = null"
+        >
+          <li><a href="/event/all">全新活動</a></li>
+          <li><a href="/event/new">限時活動</a></li>
+        </ul>
+      </li>
+      <!-- 關於 -->
+      <li class="relative menu-btn" @mouseenter="openMenu = 'about'">
+        <button
+          type="button"
+          :class="{ active: openMenu === 'about' }"
+          @click="toggleMenu('about')"
+        >
+          關於
+        </button>
+        <!-- 下拉選單 -->
+        <ul
+          :class="{ 'is-open': openMenu === 'about' }"
+          class="dropdown"
+          @mouseleave="openMenu = null"
+        >
+          <li><a href="/about/all">公司</a></li>
+          <li><a href="/about/new">理念</a></li>
+          <li><a href="/about/new">地點</a></li>
+        </ul>
+      </li>
+    </ul>
 
     <aside class="nav-right">
       <div class="btnitem search-btn">
@@ -137,8 +202,10 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+
 // 下拉選單邏輯 ==================
 type MenuKey = "product" | "brand" | "event" | "about" | null;
+
 interface MenuItem {
   text: string;
   img: string;
@@ -147,7 +214,7 @@ interface MenuItem {
 interface Menu {
   key: string;
   label: string;
-  items?: MenuItem[];
+  items: MenuItem[];
 }
 const menus: Menu[] = [
   {
@@ -175,34 +242,42 @@ const menus: Menu[] = [
   {
     key: "event",
     label: "活動",
+    items: [],
   },
   {
     key: "about",
     label: "關於我們",
+    items: [],
   },
 ];
 
 const menuRef = ref<HTMLElement | null>(null);
 const openMenu = ref<MenuKey>(null);
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
-
+function setOpenMenu(key: MenuKey) {
+  openMenu.value = key;
+}
 function toggleMenu(name: MenuKey) {
   openMenu.value = openMenu.value === name ? null : name;
 }
-
 function handleClickOutside(e: MouseEvent) {
   if (!menuRef.value) return;
   if (!menuRef.value.contains(e.target as Node)) {
     openMenu.value = null;
   }
 }
+// console.log("SSR:", import.meta.server);
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
 </script>
 
 <style scoped lang="scss">
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -213,15 +288,16 @@ function handleClickOutside(e: MouseEvent) {
   z-index: 222;
   @include baseTransition(0.6);
 
-  a {
-    color: $color-white;
-  }
+  // a {
+  //   color: $color-white;
+  // }
 
   .logo,
-  .nav-right {
-    max-width: 200px;
-    width: 30%;
-    height: 70px;
+  .nav-right,
+  .navbar {
+    flex: 1;
+    max-width: 300px;
+    align-items: baseline;
   }
 
   .logo {
@@ -229,12 +305,8 @@ function handleClickOutside(e: MouseEvent) {
     text-align: left;
     font-weight: bolder;
     line-height: 70px;
-    color: lighten($color-purple, 20%);
+    color: $color-purple;
     cursor: pointer;
-
-    a {
-      color: lighten($color-purple, 20%);
-    }
   }
 
   .menu-toggle {
@@ -247,53 +319,105 @@ function handleClickOutside(e: MouseEvent) {
   }
 
   .navbar {
+    display: flex;
+    justify-content: space-around;
+    gap: 2vw;
     max-width: 350px;
-    width: 40%;
+    // width: 40%;
     margin: auto auto;
     font-size: 18px;
     font-weight: 500;
-    flex: 1;
-    ul {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0;
-      margin: 0;
-      gap: 0.3vw;
+    .navbar-item {
+      position: relative;
     }
-
-    li {
+    .dropdown {
+      position: fixed;
+      top: 80px;
+      left: 1%;
+      width: 98vw;
+      min-height: 80px;
+      padding: 16px;
+      background-color: #eff6ff;
+      color: #000;
+      border-radius: 8px;
       display: flex;
       justify-content: center;
       align-items: center;
-      list-style: none;
-      height: 70px;
-      width: 50%;
-      background-color: transparent;
-      border-bottom: 4px solid transparent;
-      // box-sizing: border-box;
-      white-space: nowrap;
-      cursor: pointer;
+      gap: 8%;
 
-      a {
-        height: 100%;
-        text-decoration: none;
-        transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+      transition: all 0.5s ease;
+      .dropdown-content {
+        aspect-ratio: 1/1;
         display: flex;
         align-items: center;
-      }
-
-      &:hover {
-        border-color: $color-purple;
+        border-radius: 8px;
+        padding: 8px;
+        .card {
+          position: relative;
+          width: 220px;
+          display: flex;
+          flex-direction: column;
+          border-radius: 6px;
+          color: $color-darkgery;
+          z-index: 1;
+          cursor: pointer;
+          &::after {
+            content: "";
+            position: absolute;
+            border-radius: 6px;
+            inset: 0 0 0 0;
+            width: 100%;
+            // height: 60%;
+            transform: scaleY(0);
+            transform-origin: top;  
+            background: $color-white;
+            transition: all 0.3s ease;
+            z-index: -1;
+          }
+          &:hover::after {
+            transform: scaleY(1);
+            box-shadow: $shadow-set;
+          }
+          * {
+            position: relative;
+            z-index: 1;
+          }
+          .item-pic {
+            width: 100%;
+            padding: 8px;
+            aspect-ratio: 1/1;
+            border-radius: 6px;
+            overflow: hidden;
+            // background-color: #ccc;
+            background: $color-white;
+            img {
+              height: 100%;
+              width: 100%;
+              object-fit: cover;
+            }
+          }
+          .item-text {
+            padding: 16px 8px 32px;
+            text-align: center;
+            width: 100%;
+            overflow-wrap: break-word;
+            color: $color-darkgery;
+            h3 {
+              font-size: 20px;
+            }
+          }
+        }
       }
     }
-
-    .li-color {
-      // color: #a02fec !important;
-      border-color: $color-purple;
+    .dropdown.is-open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
     }
   }
-
 
   .nav-right {
     gap: 0.2vw;
@@ -349,7 +473,6 @@ function handleClickOutside(e: MouseEvent) {
         align-items: center;
         top: -24px;
         right: 0px;
-
       }
     }
 
@@ -365,7 +488,6 @@ function handleClickOutside(e: MouseEvent) {
       border-radius: 0 0 4px 4px;
       background-color: $color-white;
 
-
       font-size: 14px;
       font-weight: 600;
       color: $color-darkgery;
@@ -376,7 +498,6 @@ function handleClickOutside(e: MouseEvent) {
       flex-direction: column;
       gap: 8px;
       box-shadow: 0px 2px 2px 0px rgba(22, 22, 22, 0.4);
-
 
       .cart-area {
         padding: 16px;
@@ -391,11 +512,10 @@ function handleClickOutside(e: MouseEvent) {
         justify-content: space-between;
         align-items: center;
         padding: 8px 8px;
-        border-bottom: 1px solid darken($color-middlekgery, 20%);
+        border-bottom: 1px solid $color-middlekgery;
 
         img {
           max-width: 60px;
-
         }
 
         .itemname {
@@ -414,7 +534,7 @@ function handleClickOutside(e: MouseEvent) {
 
           &:hover {
             background-color: $color-purple;
-            border: 2px solid transparent
+            border: 2px solid transparent;
           }
 
           svg {
@@ -423,7 +543,6 @@ function handleClickOutside(e: MouseEvent) {
           }
 
           &:hover svg {
-
             color: $color-white;
           }
 
@@ -476,17 +595,11 @@ function handleClickOutside(e: MouseEvent) {
 
         .btn {
           height: 30px;
-
-          &:hover {
-            color: darken($color: $color-purple, $amount: 20%);
-          }
         }
       }
-
-
     }
 
-    .cart-btn:hover+.cart-show {
+    .cart-btn:hover + .cart-show {
       max-height: 600px;
       // background-color: #cf7e7e;
     }

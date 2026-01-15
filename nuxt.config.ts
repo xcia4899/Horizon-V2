@@ -1,22 +1,31 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// nuxt.config.ts
 export default defineNuxtConfig({
+  ssr: true,
   compatibilityDate: "2025-07-15",
-  app: {
 
-    // baseURL: "/", // 重要：前後後要有 /
-   baseURL: process.env.NUXT_APP_BASE_URL || "/",
+  app: {
+    // GH Pages 需要 /repo-name/，本機開發用 /
+    baseURL: process.env.NUXT_APP_BASE_URL || "/",
   },
-  nitro: {
-    preset: "github_pages",
-    prerender: {
-      crawlLinks: false,
-      failOnError: false,
-    },
-  },
+
+  // ✅ 只有在要部署 GH Pages（static）時才啟用
+  nitro:
+    process.env.NUXT_PUBLIC_DEPLOY_TARGET === "gh"
+      ? {
+          preset: "github_pages",
+          prerender: {
+            // 至少 prerender 首頁，避免停用 JS 空白
+            routes: ["/"],
+            crawlLinks: true,
+            failOnError: false,
+          },
+        }
+      : undefined,
+
   devtools: { enabled: true },
+
   css: ["@/assets/scss/main.scss"],
 
-  // B. SCSS 全域注入（每個 <style lang="scss"> 都可直接用）
   vite: {
     css: {
       preprocessorOptions: {
@@ -29,6 +38,7 @@ export default defineNuxtConfig({
       },
     },
   },
+
   modules: [
     "@nuxt/fonts",
     "@nuxt/icon",

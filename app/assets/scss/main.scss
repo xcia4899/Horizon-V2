@@ -45,7 +45,7 @@ p {
     padding: 0;
     line-height: 1.4;
     // margin-top: 16px;
-    
+
 }
 
 h2 {
@@ -240,85 +240,8 @@ input {
     font-size: 14px;
 }
 
-.redcharacter {
-    color: $color-red;
-    font-weight: bolder;
-}
-
-.content-area {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0px 32px;
-    transition: all 0.3s ease;
-
-    @media screen and (max-width: 670px) {
-        padding: 0px 16px;
-    }
-}
-
-
 .margin-topbottom {
     padding: 48px 0px;
-}
-
-.card {
-    width: 220px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border-radius: 6px;
-    cursor: pointer;
-
-    &::after {
-        content: "";
-        position: absolute;
-        border-radius: 6px;
-        top: 0;
-        left: 0;
-        width: 100%;
-        transition: all 0.3s ease-out;
-    }
-
-    &:hover::after {
-        height: 100%;
-        box-shadow: $shadow-set;
-    }
-
-    >* {
-        position: relative;
-        z-index: 2;
-    }
-
-    .item-pic {
-        height: auto;
-        width: 100%;
-        aspect-ratio: 1/1;
-        border-radius: 6px;
-        overflow: hidden;
-        display: flex;
-
-        img {
-            width: 100%;
-            object-fit: cover;
-            object-position: center;
-        }
-    }
-
-    .item-text {
-        padding: 16px 8px 32px;
-        text-align: center;
-        width: 100%;
-        // overflow-wrap: break-word; //不超出容器
-
-        h5 {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            /* 文字溢出顯示省略號 */
-            width: 100%;
-
-        }
-    }
 }
 
 ul {
