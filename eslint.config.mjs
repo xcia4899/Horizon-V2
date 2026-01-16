@@ -5,6 +5,8 @@ export default withNuxt(
   {
     files: ['**/*.vue'],
     rules: {
+      //命名規則
+      'vue/attribute-hyphenation': 'off',
       "@typescript-eslint/no-unused-vars": "warn",
       // 允許 HTML void elements 使用自閉合（官方建議，避免和 Prettier 打架）
       'vue/html-self-closing': ['error', {

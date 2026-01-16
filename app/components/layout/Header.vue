@@ -16,46 +16,14 @@
     <div class="logo">Horizon</div>
 
     <ul ref="menuRef" class="navbar">
-      <!-- navbarItem -->
-      <li
+      <HeaderNavbarMenu
         v-for="menu in menus"
         :key="menu.ID"
-        class="navbar-item"
-        :class="{ active: openMenu === menu.ID }"
-        @mouseenter="openMenu = menu.ID"
-      >
-        <!-- label -->
-        <button
-          type="button"
-          class="navbar-title"
-          :class="{ active: openMenu === menu.ID }"
-          @click="toggleMenu(menu.ID)"
-        >
-          {{ menu.label }}
-        </button>
-        <!-- 下拉選單 -->
-        <ul
-          v-show="menu.items.length > 0"
-          class="dropdown"
-          :class="{ 'is-open': openMenu === menu.ID }"
-          @mouseleave="openMenu = menu.ID"
-        >
-          <li
-            v-for="item in menu.items"
-            :key="item.text"
-            class="dropdown-content"
-          >
-            <div class="card">
-              <div class="item-pic">
-                <img :src="item.img" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>{{ item.text }}</h3>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
+        :menu="menu"
+        :openMenu="openMenu"
+        :setOpenMenu="setOpenMenu"
+        :toggleMenu="toggleMenu"
+      />
     </ul>
 
     <aside class="nav-right">
@@ -167,7 +135,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted,onBeforeUnmount  } from "vue";
 
 // 下拉選單邏輯 ==================
 // 選單固定 ID
@@ -193,8 +161,16 @@ const menus: Menu[] = [
     ID: "product",
     label: "商品",
     items: [
-      { text: "新品上市", img: "/images/pic-detal/RAZER-1000/10001.jpg", href: "" },
-      { text: "特價商品", img: "/images/pic-detal/PRO-1002/10001.png", href: "" },
+      {
+        text: "新品上市",
+        img: "/images/pic-detal/RAZER-1000/10001.jpg",
+        href: "",
+      },
+      {
+        text: "特價商品",
+        img: "/images/pic-detal/PRO-1002/10001.png",
+        href: "",
+      },
       { text: "滑鼠", img: "/images/pictrue/fourth-row2-01.png", href: "" },
       { text: "鍵盤", img: "", href: "" },
       { text: "耳機", img: "", href: "" },
@@ -226,6 +202,9 @@ const menus: Menu[] = [
 const menuRef = ref<HTMLElement | null>(null);
 // 目前開啟的dropdown的ID
 const openMenu = ref<OpenMenu>(null);
+const setOpenMenu = (name: OpenMenu) => {
+  openMenu.value = name;
+};
 
 //dropdown 開關切換
 function toggleMenu(name: MenuKey) {

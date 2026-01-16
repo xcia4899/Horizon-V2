@@ -1,10 +1,9 @@
 <template>
   <li
-        v-for="menu in menus"
-        :key="menu.ID"
+        
         class="navbar-item"
         :class="{ active: openMenu === menu.ID }"
-        @mouseenter="openMenu = menu.ID"
+        @mouseenter="setOpenMenu(menu.ID)"
       >
         <!-- label -->
         <button
@@ -20,7 +19,7 @@
           v-show="menu.items.length > 0"
           class="dropdown"
           :class="{ 'is-open': openMenu === menu.ID }"
-          @mouseleave="openMenu = menu.ID"
+          @mouseleave="setOpenMenu(menu.ID)"
         >
           <li
             v-for="item in menu.items"
@@ -41,7 +40,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
 // 選單固定 ID
 type MenuKey = "product" | "brand" | "event" | "about";
 // 選單控制（ null 代表全部關閉）
@@ -60,16 +58,12 @@ interface Menu {
   items: MenuItem[];
 }
 
-const props = defineProps<{
+defineProps<{
   menu: Menu;
-  openMenu: MenuKey;
-  setOpenMenu: (key: MenuKey) => void; // hover 用 set
-  toggleMenu: (key: MenuKey) => void; // click 用 toggle
+  openMenu: OpenMenu;
+  setOpenMenu: (key: OpenMenu) => void;
+  toggleMenu: (key: MenuKey) => void;
 }>();
-
-console.log("SSR:", import.meta.server);
-
-
 
 </script>
 
