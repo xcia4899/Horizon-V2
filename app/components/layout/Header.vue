@@ -15,174 +15,42 @@
     </div>
     <div class="logo">Horizon</div>
 
-    <ul ref="menuRef" class="menu">
-      <!-- 商品 -->
+    <ul ref="menuRef" class="navbar">
+      <!-- navbarItem -->
       <li
-        class="menu-item"
-        :class="{ active: openMenu === 'product' }"
-        @mouseenter="openMenu = 'product'"
+        v-for="menu in menus"
+        :key="menu.ID"
+        class="navbar-item"
+        :class="{ active: openMenu === menu.ID }"
+        @mouseenter="openMenu = menu.ID"
       >
-        <!-- 按鈕 -->
+        <!-- label -->
         <button
           type="button"
-          class="menu-title"
-          :class="{ active: openMenu === 'product' }"
-          @click="toggleMenu('product')"
+          class="navbar-title"
+          :class="{ active: openMenu === menu.ID }"
+          @click="toggleMenu(menu.ID)"
         >
-          商品
+          {{ menu.label }}
         </button>
         <!-- 下拉選單 -->
         <ul
+          v-show="menu.items.length > 0"
           class="dropdown"
-          :class="{ 'is-open': openMenu === 'product' }"
-          @mouseleave="openMenu = 'product'"
+          :class="{ 'is-open': openMenu === menu.ID }"
+          @mouseleave="openMenu = menu.ID"
         >
-          <li class="dropdown-content">
+          <li
+            v-for="item in menu.items"
+            :key="item.text"
+            class="dropdown-content"
+          >
             <div class="card">
               <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
+                <img :src="item.img" alt="" />
               </div>
               <div class="item-text">
-                <h3>全部商品</h3>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>特價商品</h3>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <!-- 品牌 -->
-      <li
-        class="menu-item"
-        :class="{ active: openMenu === 'brand' }"
-        @mouseenter="openMenu = 'brand'"
-      >
-        <!-- 按鈕 -->
-        <button
-          type="button"
-          class="menu-title"
-          :class="{ active: openMenu === 'brand' }"
-          @click="toggleMenu('brand')"
-        >
-          品牌
-        </button>
-        <!-- 下拉選單 -->
-        <ul
-          class="dropdown"
-          :class="{ 'is-open': openMenu === 'brand' }"
-          @mouseleave="openMenu = 'brand'"
-        >
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>全部商品</h3>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>特價商品</h3>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <!-- 活動 -->
-      <li
-        class="menu-item"
-        :class="{ active: openMenu === 'event' }"
-        @mouseenter="openMenu = 'event'"
-      >
-        <!-- 按鈕 -->
-        <button
-          type="button"
-          class="menu-title"
-          :class="{ active: openMenu === 'event' }"
-          @click="toggleMenu('event')"
-        >
-          活動
-        </button>
-        <!-- 下拉選單 -->
-        <ul
-          class="dropdown"
-          :class="{ 'is-open': openMenu === 'event' }"
-          @mouseleave="openMenu = 'event'"
-        >
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>全部商品</h3>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>特價商品</h3>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
-      <!-- 關於我們 -->
-      <li
-        class="menu-item"
-        :class="{ active: openMenu === 'about' }"
-        @mouseenter="openMenu = 'about'"
-      >
-        <!-- 按鈕 -->
-        <button
-          type="button"
-          class="menu-title"
-          :class="{ active: openMenu === 'about' }"
-          @click="toggleMenu('about')"
-        >
-          關於我們
-        </button>
-        <!-- 下拉選單 -->
-        <ul
-          class="dropdown"
-          :class="{ 'is-open': openMenu === 'about' }"
-          @mouseleave="openMenu = 'about'"
-        >
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>全部商品</h3>
-              </div>
-            </div>
-          </li>
-          <li class="dropdown-content">
-            <div class="card">
-              <div class="item-pic">
-                <img src="/images/pictrue/fourth-row2-01.png" alt="" />
-              </div>
-              <div class="item-text">
-                <h3>特價商品</h3>
+                <h3>{{ item.text }}</h3>
               </div>
             </div>
           </li>
@@ -302,62 +170,68 @@
 import { ref, onMounted } from "vue";
 
 // 下拉選單邏輯 ==================
-type MenuKey = "product" | "brand" | "event" | "about" | null;
+// 選單固定 ID
+type MenuKey = "product" | "brand" | "event" | "about";
+// 選單控制（ null 代表全部關閉）
+type OpenMenu = MenuKey | null;
 
+//下拉內容
 interface MenuItem {
   text: string;
   img: string;
   href: string;
 }
+// 主選單結構
 interface Menu {
-  key: string;
+  ID: MenuKey;
   label: string;
   items: MenuItem[];
 }
+// 所有導覽列選單資料
 const menus: Menu[] = [
   {
-    key: "product",
+    ID: "product",
     label: "商品",
     items: [
-      { text: "新品上市", img: "", href: "" },
-      { text: "特價商品", img: "", href: "" },
-      { text: "滑鼠", img: "", href: "" },
+      { text: "新品上市", img: "/images/pic-detal/RAZER-1000/10001.jpg", href: "" },
+      { text: "特價商品", img: "/images/pic-detal/PRO-1002/10001.png", href: "" },
+      { text: "滑鼠", img: "/images/pictrue/fourth-row2-01.png", href: "" },
       { text: "鍵盤", img: "", href: "" },
       { text: "耳機", img: "", href: "" },
       { text: "麥克風", img: "", href: "" },
     ],
   },
   {
-    key: "brand",
+    ID: "brand",
     label: "品牌",
     items: [
-      { text: "MSI", img: "", href: "" },
-      { text: "Logitech", img: "", href: "" },
-      { text: "Razer", img: "", href: "" },
-      { text: "ROG", img: "", href: "" },
+      { text: "MSI", img: "/images/logo/MSI.png", href: "" },
+      { text: "Logitech", img: "/images/logo/LOGI.png", href: "" },
+      { text: "Razer", img: "/images/logo/RAZER.png", href: "" },
+      { text: "ROG", img: "/images/logo/ROG.png", href: "" },
     ],
   },
   {
-    key: "event",
+    ID: "event",
     label: "活動",
     items: [],
   },
   {
-    key: "about",
+    ID: "about",
     label: "關於我們",
     items: [],
   },
 ];
-
+// 導覽列ref，用來判斷是否點擊到外部
 const menuRef = ref<HTMLElement | null>(null);
-const openMenu = ref<MenuKey>(null);
+// 目前開啟的dropdown的ID
+const openMenu = ref<OpenMenu>(null);
 
-function setOpenMenu(key: MenuKey) {
-  openMenu.value = key;
-}
+//dropdown 開關切換
 function toggleMenu(name: MenuKey) {
   openMenu.value = openMenu.value === name ? null : name;
 }
+// 點擊選單外部時關閉所有選單
 function handleClickOutside(e: MouseEvent) {
   if (!menuRef.value) return;
   if (!menuRef.value.contains(e.target as Node)) {
@@ -365,11 +239,11 @@ function handleClickOutside(e: MouseEvent) {
   }
 }
 // console.log("SSR:", import.meta.server);
-
+// 掛載時註冊全域點擊事件
 onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 });
-
+// 卸載時移除事件
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
@@ -392,7 +266,7 @@ onBeforeUnmount(() => {
 
   .logo,
   .nav-right,
-  .menu {
+  .navbar {
     flex: 1;
     max-width: 300px;
     align-items: baseline;
@@ -416,13 +290,13 @@ onBeforeUnmount(() => {
     align-items: center;
   }
 
-  .menu {
+  .navbar {
     display: flex;
     justify-content: center;
     gap: 1vw;
     max-width: 400px;
     margin: auto auto;
-    .menu-item {
+    .navbar-item {
       position: relative;
       display: flex;
       justify-content: center;
@@ -432,7 +306,7 @@ onBeforeUnmount(() => {
       background-color: transparent;
       border-bottom: 4px solid transparent;
       cursor: pointer;
-      .menu-title {
+      .navbar-title {
         border-style: none;
         transition: all 0.3s ease;
         display: flex;
@@ -444,7 +318,7 @@ onBeforeUnmount(() => {
         color: $color-white;
         cursor: pointer;
       }
-      .menu-title.active {
+      .navbar-title.active {
         color: $color-purple;
       }
       .dropdown {
@@ -458,20 +332,16 @@ onBeforeUnmount(() => {
         border-radius: 8px;
 
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
-        gap: 4%;
-
+        flex-wrap: wrap;
+        gap: 8px;
+        cursor: default;
         opacity: 0;
         transform: translateY(8px);
         pointer-events: none;
         @include baseTransition(0.6s);
         .dropdown-content {
-          aspect-ratio: 1/1;
-          display: flex;
-          align-items: center;
-          border-radius: 8px;
-          padding: 8px;
           .card {
             position: relative;
             width: 160px;
@@ -530,7 +400,7 @@ onBeforeUnmount(() => {
         pointer-events: auto;
       }
     }
-    .menu-item.active {
+    .navbar-item.active {
       border-color: $color-purple;
     }
   }
