@@ -1,36 +1,61 @@
 <template>
-  <li class="menu-btn" >
-    <button
-      type="button"
-      class="menu-btn-trigger"
-      :class="{ active: openMenu === menu.key }"
-     
-    >
-      {{ menu.label }}
-    </button>
-    <!-- 沒有 items 就不渲染 dropdown -->
-    <ul
-      v-show="menu.items.length"
-      class="dropdown"
-      :class="{ 'is-open': openMenu === menu.key }"
-    >
-      <li v-for="item in menu.items" :key="item.href" class="dropdown-item">
-        <a class="dropdown-link" :href="item.href">{{ item.text }}</a>
+  <li
+        v-for="menu in menus"
+        :key="menu.ID"
+        class="navbar-item"
+        :class="{ active: openMenu === menu.ID }"
+        @mouseenter="openMenu = menu.ID"
+      >
+        <!-- label -->
+        <button
+          type="button"
+          class="navbar-title"
+          :class="{ active: openMenu === menu.ID }"
+          @click="toggleMenu(menu.ID)"
+        >
+          {{ menu.label }}
+        </button>
+        <!-- 下拉選單 -->
+        <ul
+          v-show="menu.items.length > 0"
+          class="dropdown"
+          :class="{ 'is-open': openMenu === menu.ID }"
+          @mouseleave="openMenu = menu.ID"
+        >
+          <li
+            v-for="item in menu.items"
+            :key="item.text"
+            class="dropdown-content"
+          >
+            <div class="card">
+              <div class="item-pic">
+                <img :src="item.img" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>{{ item.text }}</h3>
+              </div>
+            </div>
+          </li>
+        </ul>
       </li>
-    </ul>
-  </li>
 </template>
 
 <script setup lang="ts">
-type MenuKey = "product" | "brand" | "event" | "about" | null;
+import { ref, onMounted } from "vue";
+// 選單固定 ID
+type MenuKey = "product" | "brand" | "event" | "about";
+// 選單控制（ null 代表全部關閉）
+type OpenMenu = MenuKey | null;
 
+//下拉內容
 interface MenuItem {
   text: string;
   img: string;
   href: string;
 }
+// 主選單結構
 interface Menu {
-  key: string;
+  ID: MenuKey;
   label: string;
   items: MenuItem[];
 }
@@ -41,7 +66,7 @@ const props = defineProps<{
   setOpenMenu: (key: MenuKey) => void; // hover 用 set
   toggleMenu: (key: MenuKey) => void; // click 用 toggle
 }>();
-// console.log("menu檔案",props.menu);
+
 console.log("SSR:", import.meta.server);
 
 
@@ -49,65 +74,113 @@ console.log("SSR:", import.meta.server);
 </script>
 
 <style scoped lang="scss">
-.menu-btn {
-  position: relative;
-  list-style: none;
-  height: 70px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  border-bottom: 4px solid transparent;
-  white-space: nowrap;
+.navbar-item {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: $headerHeight;
+      padding: 0 16px;
+      background-color: transparent;
+      border-bottom: 4px solid transparent;
+      cursor: pointer;
+      .navbar-title {
+        border-style: none;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        letter-spacing: 1pz;
+        font-size: clamp(14px, 2.5vw, 18px);
+        white-space: nowrap;
+        background-color: transparent;
+        color: $color-white;
+        cursor: pointer;
+      }
+      .navbar-title.active {
+        color: $color-purple;
+      }
+      .dropdown {
+        position: fixed;
+        top: $headerHeight;
+        left: 1%;
+        width: 98vw;
+        padding: 16px;
 
-  &:hover {
-    border-color: $color-purple;
-  }
-}
+        background-color: $color-lightgrey;
+        border-radius: 8px;
 
-.menu-btn-trigger {
-  background: transparent;
-  border: 0;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        cursor: default;
+        opacity: 0;
+        transform: translateY(8px);
+        pointer-events: none;
+        @include baseTransition(0.6s);
+        .dropdown-content {
+          .card {
+            position: relative;
+            width: 160px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 6px;
+            color: $color-darkgery;
+            z-index: 1;
+            cursor: pointer;
+            &::after {
+              content: "";
+              position: absolute;
+              border-radius: 6px;
+              inset: 0 0 0 0;
+              transform: scaleY(0);
+              transform-origin: top;
+              background: $color-white;
+              @include baseTransition(0.3s);
+              z-index: -1;
+            }
+            &:hover::after {
+              transform: scaleY(1);
+              box-shadow: $shadow-set;
+            }
+            * {
+              position: relative;
+              z-index: 1;
+            }
+            .item-pic {
+              padding: 8px;
+              aspect-ratio: 1/1;
+              border-radius: 6px;
+              overflow: hidden;
+              background: $color-white;
+              img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+              }
+            }
+            .item-text {
+              padding: 16px 8px 16px;
+              text-align: center;
+              overflow-wrap: break-word;
+              color: $color-darkgery;
+              h3 {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+      .dropdown.is-open {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+    }
+    .navbar-item.active {
+      border-color: $color-purple;
+    }
 
-/* 關閉狀態 */
-.dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
 
-  opacity: 0;
-  transform: translateY(8px);
-  pointer-events: none;
-
-  margin: 0;
-  padding: 8px 0;
-  list-style: none;
-
-  transition: all 0.3s ease;
-}
-
-/* 開啟狀態 */
-.dropdown.is-open {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.dropdown-item {
-  height: auto;
-  width: auto;
-  background: transparent;
-  border-bottom: 0;
-}
-
-.dropdown-link {
-  display: block;
-  padding: 8px 12px;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
 </style>
