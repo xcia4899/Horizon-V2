@@ -1,64 +1,58 @@
 <template>
   <li
     class="navbar-item"
-    :class="{ active: openMenu === menu.ID }"
+    :class="{ active: openMenu === menu.ID && hasItems }"
     @mouseenter="setOpenMenu(menu.ID)"
   >
     <!-- label -->
     <button
       type="button"
       class="navbar-title"
-      :class="{ active: openMenu === menu.ID }"
+      :class="{ active: openMenu === menu.ID && hasItems }"
       @click="toggleMenu(menu.ID)"
     >
       {{ menu.label }}
     </button>
     <!-- 下拉選單 -->
-    <ul
+    <div
       v-show="menu.items.length > 0"
       class="dropdown"
       :class="{ 'is-open': openMenu === menu.ID }"
-      @mouseleave="setOpenMenu(menu.ID)"
     >
-      <li v-for="item in menu.items" :key="item.text" class="dropdown-content">
-        <div class="card">
-          <div class="item-pic">
-            <img :src="item.img" alt="" />
+      <ul class="dropdown-inner">
+        <li
+          v-for="item in menu.items"
+          :key="item.text"
+          class="dropdown-content"
+        >
+          <div class="card">
+            <div class="item-pic">
+              <img :src="item.img" alt="" />
+            </div>
+            <div class="item-text">
+              <h3>{{ item.text }}</h3>
+            </div>
           </div>
-          <div class="item-text">
-            <h3>{{ item.text }}</h3>
-          </div>
-        </div>
-      </li>
-    </ul>
+        </li>
+      </ul>
+    </div>
   </li>
 </template>
 
 <script setup lang="ts">
-// 選單固定 ID
-type MenuKey = "product" | "brand" | "event" | "about";
-// 選單控制（ null 代表全部關閉）
-type OpenMenu = MenuKey | null;
+import { computed } from "vue";
+//menu 型別
+import type { MenuKey, OpenMenu, SetMenu } from "@/types/ui/menu";
 
-//下拉內容
-interface MenuItem {
-  text: string;
-  img: string;
-  href: string;
-}
-// 主選單結構
-interface Menu {
-  ID: MenuKey;
-  label: string;
-  items: MenuItem[];
-}
-
-defineProps<{
-  menu: Menu;
+const props = defineProps<{
+  menu: SetMenu;
   openMenu: OpenMenu;
   setOpenMenu: (key: OpenMenu) => void;
   toggleMenu: (key: MenuKey) => void;
 }>();
+const hasItems = computed(() => {
+  return props.menu.items.length > 0;
+});
 </script>
 
 <style scoped lang="scss">
@@ -93,20 +87,24 @@ defineProps<{
     left: 1%;
     width: 98vw;
     padding: 16px;
-
     background-color: $color-lightgrey;
     border-radius: 8px;
-
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    cursor: default;
     opacity: 0;
+    visibility: hidden;
     transform: translateY(8px);
     pointer-events: none;
     @include baseTransition(0.6s);
+    cursor: default;
+
+    .dropdown-inner {
+      max-width: 1280px; // 只限制內容
+      margin: 0 auto; // 內容置中
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
     .dropdown-content {
       .card {
         position: relative;
@@ -162,11 +160,18 @@ defineProps<{
   }
   .dropdown.is-open {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
   }
-}
-.navbar-item.active {
-  border-color: $color-purple;
+  &:hover {
+    border-color: $color-purple;
+  }
+  &:hover .navbar-title {
+    color: $color-purple;
+  }
+  &.active {
+    border-color: $color-purple;
+  }
 }
 </style>

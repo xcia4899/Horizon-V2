@@ -80,8 +80,9 @@ p {
     letter-spacing: 1px;
     font-size: clamp(14px, 1.5vw, 16px);
     font-weight: 400;
-      overflow-wrap: break-word;
+    overflow-wrap: break-word;
 }
+
 // white-space: nowrap;
 // overflow: hidden;
 // text-overflow: ellipsis;
@@ -91,9 +92,12 @@ a {
     color: $color-darkgery;
 }
 
-// button {
-//     padding: 0;
-// }
+button {
+    background: none;
+    border: 0;
+    border: 0;
+    padding: 0;
+}
 
 .btn {
     width: 160px;
@@ -259,7 +263,8 @@ input {
 }
 
 ul {
-    padding-left: 0px;
+    padding: 0px;
+    list-style: none;
 }
 
 li {
