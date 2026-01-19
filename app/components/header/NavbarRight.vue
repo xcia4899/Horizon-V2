@@ -1,11 +1,28 @@
 <template>
   <aside class="nav-right">
-    <!-- 搜尋 -->
-    <button type="button" class="btnitem search-btn">
-      <Icon name="mdi:magnify" class="icon" />
-    </button>
+    <div class="setItem search-area">
+      <!-- 搜尋 Modal -->
+      <div  class="search-input" :class="{ isOpen:showSearch}">
+        <el-input
+          ref="inputRef"
+          v-model="keyword"
+          placeholder="搜尋商品..."
+          :prefix-icon="Search"
+          @keydown.enter="submitSearch"
+        />
+      </div>
+      <!-- 搜尋 -->
+      <button type="button" class="btnItem search-btn" @click="toggleSearch">
+        <Icon
+          name="mdi:magnify"
+          class="icon"
+          :class="{ active: showSearch === true }"
+        />
+      </button>
+    </div>
+
     <!-- 登入 -->
-    <button type="button" class="btnitem login-btn">
+    <button type="button" class="btnItem setItem login-btn">
       <Icon name="mdi:account-circle" class="icon" />
       <!-- 以登入 -->
       <!-- <Icon
@@ -14,7 +31,7 @@
         /> -->
     </button>
     <!-- 購物車 -->
-    <button type="button" class="btnitem cart-btn">
+    <button type="button" class="btnItem setItem cart-btn">
       <Icon name="meteor-icons:cart-shopping" class="icon" />
       <!-- 商品數量 -->
       <!-- <span v-if="cartCount > 0" class="cart-quantity"> {{ cartCount }} </span> -->
@@ -22,64 +39,127 @@
   </aside>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
+import { Search } from "@element-plus/icons-vue";
+import type { InputInstance } from "element-plus";
+//顯示搜尋框
+const showSearch = ref(false);
+//搜尋關鍵字
+const keyword = ref("");
+// 取得el-input 實例
+const inputRef = ref<InputInstance | null>(null);
+
+const closeSearch = () => {
+  showSearch.value = false;
+};
+//搜尋功能
+const submitSearch = () => {
+  if (!keyword.value.trim()) return;
+  closeSearch();
+  //   navigateTo(`/search?keyword=${keyword.value}`);
+  console.log(`搜尋關鍵字：${keyword.value} 並跳轉到商品頁`);
+};
+const toggleSearch = async () => {
+  showSearch.value = !showSearch.value;
+};
+// ESC 關閉
+const onKeydown = (e: KeyboardEvent) => {
+  if (!showSearch.value) return;
+  if (e.key === "Escape") closeSearch();
+};
+onMounted(() => window.addEventListener("keydown", onKeydown));
+onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
+
+// 開啟時自動 focus
+watch(showSearch, async (v) => {
+  if (!v) return;
+  await nextTick();
+  inputRef.value?.focus?.();
+});
+</script>
 
 <style scoped lang="scss">
 .nav-right {
-  gap: 0.2vw;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-
-  .btnitem {
+  //   gap: 20px;
+  .setItem {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: $headerHeight;
-    width: 25%;
-    // height: 100%;
-    font-size: 12px;
-    // padding: 6px;
+  }
+  .btnItem {
     border-bottom: 4px solid transparent;
+    height: $headerHeight;
+    padding: 0px 8px;
     cursor: pointer;
-
+    @include baseTransition(0.4s);
+    &:hover .icon {
+      color: #a02fec;
+      // height: 100%;
+    }
     &:hover {
       border-color: $color-purple;
     }
     .icon {
       color: $color-white;
       font-size: clamp(22px, 2.2vw, 30px);
-    }
-    &:hover .icon {
-      color: #a02fec;
-      // height: 100%;
-    }
-    a {
-      color: $color-white;
-    }
-
-    &:hover svg {
-      color: #a02fec;
-      // height: 100%;
-    }
-
-    .cart-quantity {
-      height: 24px;
-      width: 24px;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 50%;
-      color: $color-white;
-      background-color: $color-purple;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      top: -24px;
-      right: 0px;
+      @include baseTransition(0.4s);
     }
   }
 
+  .search-area {
+    display: flex;
+    margin: auto 0;
+    .search-input {
+      display: flex;
+      align-items: center;
+      max-height: $headerHeight;
+      opacity: 0;
+      border-bottom: 0 solid transparent;
+
+      @include baseTransition(0.4s);
+      transform: translateX(4px);
+      .el-input {
+        width: 180px;
+      }
+      .close {
+        cursor: pointer;
+        .icon {
+          font-size: clamp(24px, 2vw, 30px);
+          color: $color-white;
+        }
+      }
+    }
+    .search-input.isOpen {
+      opacity: 1;
+      transform: translateX(0px);
+    }
+    .search-btn {
+      margin-left: 8px;
+      .icon.active {
+        color: #a02fec;
+      }
+    }
+  }
+
+  .cart-quantity {
+    height: 24px;
+    width: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 50%;
+    color: $color-white;
+    background-color: $color-purple;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -24px;
+    right: 0px;
+  }
   .cart-show {
     // display: none;
     color: $color-darkgery;

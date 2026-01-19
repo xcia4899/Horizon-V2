@@ -28,7 +28,7 @@
   position: sticky;
   position: relative;
   top: 0;
-  //  background-color: #e9e9e9;
+   background-color: #888787;
   // background-color: #fff;
   /* 內層：置中 + max-width */
   z-index: 100;

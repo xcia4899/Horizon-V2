@@ -17,7 +17,7 @@
     <div
       v-show="menu.items.length > 0"
       class="dropdown"
-      :class="{ 'is-open': openMenu === menu.ID }"
+      :class="{ isOpen: openMenu === menu.ID }"
     >
       <ul class="dropdown-inner">
         <li
@@ -158,7 +158,7 @@ const hasItems = computed(() => {
       }
     }
   }
-  .dropdown.is-open {
+  .dropdown.isOpen {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
