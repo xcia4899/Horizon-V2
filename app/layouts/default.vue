@@ -28,19 +28,18 @@
   position: sticky;
   position: relative;
   top: 0;
-   background-color: #888787;
-  // background-color: #fff;
+  // background-color: $color-white;
+ 
+
   /* 內層：置中 + max-width */
   z-index: 100;
   .header-inner {
     position: relative;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 32px;
+    // padding: 0 32px;
+    padding: 0 clamp(8px, 1.5vw, 16px);
     @include baseTransition;
-    @media screen and (max-width: 670px) {
-      padding: 0 16px;
-    }
   }
 }
 

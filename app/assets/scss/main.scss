@@ -29,12 +29,12 @@ body {
         /* Android / fallback Chinese */
         /* System fallback */
         sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 1.6;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.4;
     transition:
-        color 0.5s,
-        background-color 0.5s;
+        color 0.4s,
+        background-color 0.4s;
 }
 
 h2,
@@ -95,28 +95,31 @@ a {
 button {
     background: none;
     border: 0;
-    border: 0;
     padding: 0;
 }
 
 .btn {
-    width: 160px;
+    // width: 160px;
+    width: clamp(120px, 16vw, 160px);
     height: 44px;
-    font-size: 14px;
-    font-weight: 500;
+
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 400;
+
     color: $color-white;
-    border: 2px solid transparent;
     background-color: $color-purple;
+    border: 2px solid transparent;
     border-radius: 4px;
-    letter-spacing: 0px;
+    letter-spacing: 1px;
+
     transition: all 0.4s ease;
     cursor: pointer;
 
     &:hover {
         font-weight: 600;
         // color: lighten($color-purple, 30%);
-        color: color.adjust($color-purple, $lightness: 30%);
-        background: none;
+        color: color.adjust($color-purple, $lightness: -10%);
+        background: transparent;
         background-color: transparent;
         border-color: $color-purple;
     }

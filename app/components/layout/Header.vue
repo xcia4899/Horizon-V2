@@ -6,28 +6,19 @@
     <!-- LOGO -->
     <div class="logo">Horizon</div>
     <!-- Navber-menu -->
-    <ul ref="menuRef" class="navbar">
-      <HeaderNavbarMenu
-        v-for="menu in menus"
-        :key="menu.ID"
-        :menu="menu"
-        :openMenu="openMenu"
-        :setOpenMenu="setOpenMenu"
-        :toggleMenu="toggleMenu"
-      />
-    </ul>
+    <HeaderNavbarMenu :menus="menus" />
     <!-- Navber-Right -->
     <HeaderNavbarRight />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from "vue";
+// import { ref, onMounted, onBeforeUnmount } from "vue";
 //element-plus/icons
 
 // 下拉選單邏輯 ==================
 //menu 型別
-import type { MenuKey, OpenMenu, SetMenu } from "@/types/ui/menu";
+import type { SetMenu } from "@/types/ui/menu";
 
 // 所有導覽列選單資料
 const menus: SetMenu[] = [
@@ -72,34 +63,6 @@ const menus: SetMenu[] = [
     items: [],
   },
 ];
-// 導覽列ref，用來判斷是否點擊到外部
-const menuRef = ref<HTMLElement | null>(null);
-// 目前開啟的dropdown的ID
-const openMenu = ref<OpenMenu>(null);
-const setOpenMenu = (name: OpenMenu) => {
-  openMenu.value = name;
-};
-
-//dropdown 開關切換
-function toggleMenu(name: MenuKey) {
-  openMenu.value = openMenu.value === name ? null : name;
-}
-// 點擊選單外部時關閉所有選單
-function handleClickOutside(e: MouseEvent) {
-  if (!menuRef.value) return;
-  if (!menuRef.value.contains(e.target as Node)) {
-    openMenu.value = null;
-  }
-}
-// console.log("SSR:", import.meta.server);
-// 掛載時註冊全域點擊事件
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
-// 卸載時移除事件
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
 </script>
 
 <style scoped lang="scss">
@@ -110,7 +73,7 @@ onBeforeUnmount(() => {
   top: 0;
   height: auto;
   margin: 0 auto;
-
+  
   @include baseTransition(0.6s);
 
   // a {
@@ -150,10 +113,6 @@ onBeforeUnmount(() => {
 
   .navbar {
     display: flex;
-    justify-content: center;
-    gap: 1vw;
-    max-width: 400px;
-    margin: auto auto;
   }
 }
 </style>

@@ -1,61 +1,93 @@
 <template>
-  <li
-    class="navbar-item"
-    :class="{ active: openMenu === menu.ID && hasItems }"
-    @mouseenter="setOpenMenu(menu.ID)"
-  >
-    <!-- label -->
-    <button
-      type="button"
-      class="navbar-title"
-      :class="{ active: openMenu === menu.ID && hasItems }"
-      @click="toggleMenu(menu.ID)"
+  <ul ref="menuRef" class="navbar">
+    <li
+      v-for="menu in menus"
+      :key="menu.ID"
+      class="navbar-item"
+      :class="{ active: openMenu === menu.ID && menu.items.length > 0 }"
+      @mouseenter="setOpenMenu(menu.ID)"
     >
-      {{ menu.label }}
-    </button>
-    <!-- 下拉選單 -->
-    <div
-      v-show="menu.items.length > 0"
-      class="dropdown"
-      :class="{ isOpen: openMenu === menu.ID }"
-    >
-      <ul class="dropdown-inner">
-        <li
-          v-for="item in menu.items"
-          :key="item.text"
-          class="dropdown-content"
-        >
-          <div class="card">
-            <div class="item-pic">
-              <img :src="item.img" alt="" />
+      <!-- label -->
+      <button
+        type="button"
+        class="navbar-title"
+        :class="{ active: openMenu === menu.ID && menu.items.length > 0 }"
+        @click="toggleMenu(menu.ID)"
+      >
+        {{ menu.label }}
+      </button>
+      <!-- 下拉選單 -->
+      <div
+        v-show="menu.items.length > 0"
+        class="dropdown"
+        :class="{ isOpen: openMenu === menu.ID }"
+      >
+        <ul class="dropdown-inner">
+          <li
+            v-for="item in menu.items"
+            :key="item.text"
+            class="dropdown-content"
+          >
+            <div class="card">
+              <div class="item-pic">
+                <img :src="item.img" alt="" />
+              </div>
+              <div class="item-text">
+                <h3>{{ item.text }}</h3>
+              </div>
             </div>
-            <div class="item-text">
-              <h3>{{ item.text }}</h3>
-            </div>
-          </div>
-        </li>
-      </ul>
-    </div>
-  </li>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
 import type { MenuKey, OpenMenu, SetMenu } from "@/types/ui/menu";
-
-const props = defineProps<{
-  menu: SetMenu;
-  openMenu: OpenMenu;
-  setOpenMenu: (key: OpenMenu) => void;
-  toggleMenu: (key: MenuKey) => void;
+defineProps<{
+  menus: SetMenu[];
 }>();
-const hasItems = computed(() => {
-  return props.menu.items.length > 0;
+
+// 導覽列ref，用來判斷是否點擊到外部
+const menuRef = ref<HTMLElement | null>(null);
+// 目前開啟的dropdown的ID
+const openMenu = ref<OpenMenu>(null);
+const setOpenMenu = (name: OpenMenu) => {
+  openMenu.value = name;
+};
+//dropdown 開關切換
+function toggleMenu(name: MenuKey) {
+  openMenu.value = openMenu.value === name ? null : name;
+}
+// 點擊選單外部時關閉所有選單
+function handleClickOutside(e: MouseEvent) {
+  if (!menuRef.value) return;
+  if (!menuRef.value.contains(e.target as Node)) {
+    openMenu.value = null;
+  }
+}
+// console.log("SSR:", import.meta.server);
+// 掛載時註冊全域點擊事件
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+// 卸載時移除事件
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
 
 <style scoped lang="scss">
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+  max-width: 400px;
+  margin: auto auto;
+}
 .navbar-item {
   position: relative;
   display: flex;
