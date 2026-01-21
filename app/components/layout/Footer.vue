@@ -78,10 +78,11 @@ const footerLinks = [
 .footer-top {
   max-width: 600px;
   margin: 0 auto;
-  padding: 32px 0px;
+  padding: 16px 0px ;
 
   .title {
     text-align: center;
+    padding: 16px 0px;
   }
 
   .input {
@@ -117,7 +118,8 @@ const footerLinks = [
     }
   }
   .text {
-    margin-top: 8px;
+
+    padding: 8px 0px;
     span {
       color: $color-purple;
     }
