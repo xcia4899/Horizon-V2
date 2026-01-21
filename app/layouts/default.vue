@@ -43,33 +43,31 @@ useSeoMeta({
   flex-direction: column;
   position: relative;
   isolation: isolate;
-  
 }
-
 /* 外層：滿版 sticky + 背景 + 層級 */
 .header {
   position: sticky;
-  // position: relative;
   top: 0;
-  // width: 100%;
-  background-color: transparent;
+  background: rgba(20, 18, 18, 0.6);
   backdrop-filter: blur(20px);
-  // overflow: hidden;
+  overflow-x: clip;
+  width: 100%;
   /* 內層：置中 + max-width */
-  padding: 0 clamp(8px, 1.5vw, 16px);
+
   z-index: 100;
   .header-inner {
     position: relative;
-    max-width: 1400px;
+    max-width: 1440px;
     margin: 0 auto;
     // padding: 0 32px;
-
+    padding: 0 clamp(8px, 1.5vw, 16px);
     @include baseTransition;
   }
 }
 .container {
   flex: 1;
   max-width: 1280px;
+  min-height: 400px;
   margin: 0 auto;
   // padding: 16px;
   // z-index: 1;
@@ -77,13 +75,13 @@ useSeoMeta({
 .footer {
   position: relative;
   z-index: 10;
-
+  background: $color-black;
   .footer-inner {
     position: relative;
-    max-width: 1400px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 clamp(8px, 1.5vw, 16px);
-    @include baseTransition;
+    padding: 16px clamp(8px, 1.5vw, 16px);
+    // @include baseTransition;
   }
 }
 </style>
