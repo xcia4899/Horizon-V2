@@ -7,7 +7,6 @@
           ref="inputRef"
           v-model="keyword"
           placeholder="搜尋商品..."
-          :prefix-icon="Search"
           @keydown.enter="submitSearch"
         />
       </div>
@@ -64,8 +63,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref,computed, nextTick, watch, onMounted, onBeforeUnmount } from "vue";
-import { Search } from "@element-plus/icons-vue";
+import {
+  ref,
+  computed,
+  nextTick,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+} from "vue";
+// import { Search } from "@element-plus/icons-vue";
 import type { InputInstance } from "element-plus";
 //顯示搜尋框
 const showSearch = ref(false);
@@ -103,7 +109,7 @@ watch(showSearch, async (value) => {
   inputRef.value?.focus?.();
 });
 
-//購物車
+//購物車原始資料
 const cartItems = ref([
   {
     id: "RAZER-1000",
@@ -134,9 +140,10 @@ const cartItems = ref([
     images: "./images/pic-detal/RAZER-1000/10001.jpg",
   },
 ]);
-const cartView =computed(()=>{
-  return cartItems.value.map(item =>({...item}))
-})
+//購物車顯示資料
+const cartView = computed(() => {
+  return cartItems.value.map((item) => ({ ...item }));
+});
 </script>
 
 <style scoped lang="scss">
@@ -170,11 +177,15 @@ const cartView =computed(()=>{
     }
   }
   .search-area {
+    position: relative;
     display: flex;
     margin: auto 0;
     .search-input {
+      position: absolute;
       display: flex;
       align-items: center;
+      right: 0px;
+
       max-height: $headerHeight;
       opacity: 0;
       margin-right: 4px;
@@ -183,7 +194,10 @@ const cartView =computed(()=>{
       @include baseTransition(0.4s);
       transform: translateX(4px);
       .el-input {
-        width: 140px;
+        width: 160px;
+        height: 36px;
+        --el-input-bg-color: #f0f0f0;
+        // --el-input-border-color:#700741;
       }
       .close {
         cursor: pointer;
@@ -228,7 +242,7 @@ const cartView =computed(()=>{
 
     max-height: 00px;
     width: clamp(360px, 40vw, 400px);
-    margin-right: clamp(8px, 1.5vw, 16px);
+    // margin-right: clamp(8px, 1.5vw, 16px);
     color: $color-darkgery;
     background-color: $color-white;
     border-radius: 0 0 4px 4px;
@@ -254,7 +268,7 @@ const cartView =computed(()=>{
       padding: 8px 4px;
       border-bottom: 1px solid $color-middlekgery;
       .item-img {
-        margin: auto 0 ;
+        margin: auto 0;
         img {
           max-width: 60px;
         }
@@ -278,10 +292,12 @@ const cartView =computed(()=>{
       .delete {
         position: relative;
         cursor: pointer;
-        padding: 16px 0px;
-         margin: auto 0 ;
+        padding: 16px 0px 0px;
+        margin: auto 0;
         .icon {
           font-size: clamp(36px, 3vw, 40px);
+          display: grid;
+          place-items: center;
         }
         &:hover .icon {
           background-color: $color-purple;
@@ -289,20 +305,23 @@ const cartView =computed(()=>{
         }
 
         &::after {
+          content: "刪除";
+          position: absolute;
+          top: -8px;
+          font-size: 12px;
+          right: 0; 
+          left: auto;
+
+          transform: translate(0px,0px); 
+          white-space: nowrap; 
+          width: auto; 
+          padding: 2px 4px;
+
           opacity: 0;
           visibility: hidden;
-          content: "刪除?";
-          top: -5px;
-          left: -2px;
-          font-size: 12px;
-          position: absolute;
-          display: block;
-          text-align: center;
-          width: 36px;
-          // width: 100%;
           border: 1px solid $color-darkgery;
-          border-radius: 4px;
-          padding: 1px;
+          border-radius: 6px;
+          background: #fff;
         }
 
         &:hover::after {

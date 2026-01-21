@@ -73,21 +73,14 @@ const menus: SetMenu[] = [
   top: 0;
   height: auto;
   margin: 0 auto;
-  
   @include baseTransition(0.6s);
-
-  // a {
-  //   color: $color-white;
-  // }
-
   .logo,
   .nav-right,
   .navbar {
     flex: 1;
-    max-width: 300px;
+    // max-width: 300px;
     align-items: baseline;
   }
-
   .logo {
     font-size: 40px;
     text-align: left;
@@ -96,7 +89,6 @@ const menus: SetMenu[] = [
     color: $color-purple;
     cursor: pointer;
   }
-
   .menu-toggle {
     display: none;
     position: absolute;
@@ -112,7 +104,9 @@ const menus: SetMenu[] = [
   }
 
   .navbar {
+    flex: 2;
     display: flex;
+    margin: auto auto;
   }
 }
 </style>

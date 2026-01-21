@@ -84,9 +84,7 @@ onBeforeUnmount(() => {
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 1vw;
-  max-width: 400px;
-  margin: auto auto;
+  gap: clamp(0px, 1%, 8px);
 }
 .navbar-item {
   position: relative;
@@ -94,7 +92,7 @@ onBeforeUnmount(() => {
   justify-content: center;
   align-items: center;
   height: $headerHeight;
-  padding: 0 16px;
+  padding: 0 clamp(8px, 1.6vw, 16px);;
   background-color: transparent;
   border-bottom: 4px solid transparent;
   cursor: pointer;
