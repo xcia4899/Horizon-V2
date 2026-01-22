@@ -115,7 +115,7 @@ onBeforeUnmount(() => {
     position: fixed;
     top: $headerHeight;
     left: 1%;
-    width: 98vw;
+    width: 98%;
     padding: 16px;
     background-color: $color-lightgrey;
     border-radius: 8px;

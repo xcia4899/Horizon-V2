@@ -7,13 +7,24 @@
           ref="inputRef"
           v-model="keyword"
           placeholder="搜尋商品..."
+          class="input-box"
+          @blur="closeSearch"
           @keydown.enter="submitSearch"
-        />
+        >
+          <template #prefix>
+            <Icon name="mdi:magnify" class="icon" size="24" />
+          </template>
+        </el-input>
       </div>
       <!-- 搜尋 -->
-      <button type="button" class="btnItem search-btn" @click="toggleSearch">
+      <button
+        type="button"
+        class="btnItem search-btn"
+        @mousedown.prevent
+        @click="toggleSearch"
+      >
         <Icon
-          name="mdi:magnify"
+          :name="showSearch ? 'mdi:close' : 'mdi:magnify'"
           class="icon"
           :class="{ active: showSearch === true }"
         />
@@ -32,9 +43,11 @@
     <!-- 購物車 -->
     <button type="button" class="btnItem setItem cart-btn">
       <Icon name="meteor-icons:cart-shopping" class="icon" />
-      <!-- 商品數量 -->
-      <!-- <span v-if="cartCount > 0" class="cart-quantity"> {{ cartCount }} </span> -->
+      <span v-if="cartCount > 0" class="cart-badge">
+        {{ cartCount > 99 ? "99+" : cartCount }}
+      </span>
     </button>
+
     <!-- 迷你購物車顯示 -->
     <div class="miniCart">
       <div class="cart-view">
@@ -71,28 +84,29 @@ import {
   onMounted,
   onBeforeUnmount,
 } from "vue";
+
 // import { Search } from "@element-plus/icons-vue";
 import type { InputInstance } from "element-plus";
-//顯示搜尋框
-const showSearch = ref(false);
+
 //搜尋關鍵字
 const keyword = ref("");
 // 取得el-input 實例
 const inputRef = ref<InputInstance | null>(null);
-//搜尋功能
-const submitSearch = () => {
-  if (!keyword.value.trim()) return;
-  closeSearch();
-  //   navigateTo(`/search?keyword=${keyword.value}`);
-  console.log(`搜尋關鍵字：${keyword.value} 並跳轉到商品頁`);
-};
+
+//顯示搜尋框
+const showSearch = ref(false);
+//keyword是否有值，用來判斷是否關閉搜尋框
+const canClose = computed(() => !keyword.value?.trim());
 
 //開關搜尋框
 const toggleSearch = async () => {
+  keyword.value = "";
   showSearch.value = !showSearch.value;
+  console.log("執行 showSearch", showSearch.value);
 };
 //關閉搜尋框
 const closeSearch = () => {
+  if (!canClose.value) return;
   showSearch.value = false;
 };
 // ESC 關閉
@@ -109,6 +123,15 @@ watch(showSearch, async (value) => {
   inputRef.value?.focus?.();
 });
 
+//搜尋功能
+const submitSearch = () => {
+  if (!keyword.value.trim()) return;
+  closeSearch();
+  //   navigateTo(`/search?keyword=${keyword.value}`);
+  console.log(`搜尋關鍵字：${keyword.value} 並跳轉到商品頁`);
+};
+
+//購物車程式碼---------
 //購物車原始資料
 const cartItems = ref([
   {
@@ -140,6 +163,7 @@ const cartItems = ref([
     images: "./images/pic-detal/RAZER-1000/10001.jpg",
   },
 ]);
+const cartCount = computed(() => cartItems.value.length);
 //購物車顯示資料
 const cartView = computed(() => {
   return cartItems.value.map((item) => ({ ...item }));
@@ -160,7 +184,7 @@ const cartView = computed(() => {
   .btnItem {
     border-bottom: 4px solid transparent;
     height: $headerHeight;
-    padding: 0px 8px;
+    padding: 4px 8px 0px;
     cursor: pointer;
     @include baseTransition(0.4s);
     &:hover .icon {
@@ -182,34 +206,23 @@ const cartView = computed(() => {
     margin: auto 0;
     .search-input {
       position: absolute;
-      display: flex;
-      align-items: center;
-      right: 0px;
-
-      max-height: $headerHeight;
+      right: 0;
+      width: 40px;
       opacity: 0;
-      margin-right: 4px;
-      border-bottom: 0 solid transparent;
-
-      @include baseTransition(0.4s);
-      transform: translateX(4px);
-      .el-input {
-        width: 160px;
-        height: 36px;
-        --el-input-bg-color: #f0f0f0;
-        // --el-input-border-color:#700741;
+      @include baseTransition(0.6s);
+      // transform: translateX(4px);
+      &.isOpen {
+        width: 200px;
+        opacity: 1;
       }
-      .close {
-        cursor: pointer;
-        .icon {
-          font-size: clamp(24px, 2vw, 30px);
-          color: $color-white;
-        }
+      :deep(.el-input__wrapper) {
+        box-shadow: none;
+        padding: 4px 0;
+        // background-color: #ffffff;
       }
-    }
-    .search-input.isOpen {
-      opacity: 1;
-      transform: translateX(0px);
+      .icon {
+        margin: 0 8px;
+      }
     }
     .search-btn {
       .icon.active {
@@ -217,21 +230,29 @@ const cartView = computed(() => {
       }
     }
   }
+  .cart-btn {
+    position: relative;
+    .cart-badge {
+      position: absolute;
+      top: 12px;
+      right: -2px;
 
-  .cart-quantity {
-    height: 24px;
-    width: 24px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 50%;
-    color: $color-white;
-    background-color: $color-purple;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: -24px;
-    right: 0px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+
+      color: $color-white;
+      background-color: $color-purple;
+      pointer-events: none; // 不干擾點擊
+    }
   }
 
   .miniCart {
@@ -242,7 +263,7 @@ const cartView = computed(() => {
 
     max-height: 00px;
     width: clamp(360px, 40vw, 400px);
-    // margin-right: clamp(8px, 1.5vw, 16px);
+    margin-right: clamp(8px, 1.5vw, 16px);
     color: $color-darkgery;
     background-color: $color-white;
     border-radius: 0 0 4px 4px;
@@ -309,12 +330,12 @@ const cartView = computed(() => {
           position: absolute;
           top: -8px;
           font-size: 12px;
-          right: 0; 
+          right: 0;
           left: auto;
 
-          transform: translate(0px,0px); 
-          white-space: nowrap; 
-          width: auto; 
+          transform: translate(0px, 0px);
+          white-space: nowrap;
+          width: auto;
           padding: 2px 4px;
 
           opacity: 0;

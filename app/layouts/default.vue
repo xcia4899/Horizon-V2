@@ -50,7 +50,7 @@ useSeoMeta({
   top: 0;
   background: rgba(20, 18, 18, 0.6);
   backdrop-filter: blur(20px);
-  overflow-x: clip;
+  // overflow-x: clip;
   width: 100%;
   /* 內層：置中 + max-width */
 
