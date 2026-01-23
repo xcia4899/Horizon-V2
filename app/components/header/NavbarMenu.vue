@@ -67,7 +67,7 @@ function toggleMenu(name: MenuKey) {
 
 // 點擊選單外部時關閉所有選單
 function handleClickOutside(e: MouseEvent) {
-  if (!isTouch.value) return;
+  if (isTouch.value) return;
   if (!menuRef.value) return;
   if (!menuRef.value.contains(e.target as Node)) {
     openMenu.value = null;
