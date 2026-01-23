@@ -50,19 +50,19 @@ h5 {
 
 /* 大標題 */
 h2 {
-    font-size: clamp(28px, 4vw, 42px);
+    font-size: clamp(30px, 4vw, 42px);
     font-weight: 700;
 }
 
 /* 次標題 */
 h3 {
-    font-size: clamp(22px, 3vw, 30px);
+    font-size: clamp(20px, 3vw, 30px);
     font-weight: 600;
 }
 
 /* 小標題 */
 h4 {
-    font-size: clamp(18px, 2vw, 20px);
+    font-size: clamp(16px, 2vw, 20px);
     font-weight: 600;
 }
 
@@ -78,7 +78,7 @@ p {
     padding: 0;
     line-height: 1.4;
     letter-spacing: 1px;
-    font-size: clamp(14px, 1.5vw, 16px);
+    font-size: clamp(16px, 1.5vw, 16px);
     font-weight: 400;
     overflow-wrap: break-word;
 }

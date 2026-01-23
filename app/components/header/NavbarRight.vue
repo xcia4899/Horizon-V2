@@ -102,7 +102,7 @@ const canClose = computed(() => !keyword.value?.trim());
 const toggleSearch = async () => {
   keyword.value = "";
   showSearch.value = !showSearch.value;
-  console.log("執行 showSearch", showSearch.value);
+  // console.log("執行 showSearch", showSearch.value);
 };
 //關閉搜尋框
 const closeSearch = () => {
@@ -124,7 +124,7 @@ watch(showSearch, async (value) => {
 });
 
 //搜尋功能
-const submitSearch = () => {
+const submitSearch = () => { 
   if (!keyword.value.trim()) return;
   closeSearch();
   //   navigateTo(`/search?keyword=${keyword.value}`);

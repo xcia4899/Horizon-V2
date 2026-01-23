@@ -5,14 +5,14 @@
       :key="menu.ID"
       class="navbar-item"
       :class="{ active: openMenu === menu.ID && menu.items.length > 0 }"
-      @mouseenter="setOpenMenu(menu.ID)"
+      @mouseenter="isDesktop && setOpenMenu(menu.ID)"
     >
       <!-- label -->
       <button
         type="button"
         class="navbar-title"
         :class="{ active: openMenu === menu.ID && menu.items.length > 0 }"
-        @click="toggleMenu(menu.ID)"
+        @click="isTouch && toggleMenu(menu.ID)"
       >
         {{ menu.label }}
       </button>
@@ -47,6 +47,8 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
 import type { MenuKey, OpenMenu, SetMenu } from "@/types/ui/menu";
+//螢幕、手機模式判斷
+const { isDesktop, isTouch } = useInteractionMode();
 defineProps<{
   menus: SetMenu[];
 }>();
@@ -62,8 +64,10 @@ const setOpenMenu = (name: OpenMenu) => {
 function toggleMenu(name: MenuKey) {
   openMenu.value = openMenu.value === name ? null : name;
 }
+
 // 點擊選單外部時關閉所有選單
 function handleClickOutside(e: MouseEvent) {
+  if (!isTouch.value) return;
   if (!menuRef.value) return;
   if (!menuRef.value.contains(e.target as Node)) {
     openMenu.value = null;
@@ -72,12 +76,18 @@ function handleClickOutside(e: MouseEvent) {
 // console.log("SSR:", import.meta.server);
 // 掛載時註冊全域點擊事件
 onMounted(() => {
+
+
+
   document.addEventListener("click", handleClickOutside);
 });
 // 卸載時移除事件
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
+
+
+
 </script>
 
 <style scoped lang="scss">
