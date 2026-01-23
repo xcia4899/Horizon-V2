@@ -1,12 +1,17 @@
 <template>
-  <div class="header-container">
-    <button type="button" class="menu-toggle">
-      <Icon name="mdi:menu" class="menu-icon" size="24" />
+  <div
+    class="header-container"
+    :class="{ 'mobile-isOpen': isMenuOpen === true }"
+  >
+    <button type="button" class="menu-toggle" @click="toggleMenu">
+      <Icon name="mdi:menu" class="icon" />
     </button>
     <!-- LOGO -->
     <div class="logo">Horizon</div>
     <!-- Navber-menu -->
-    <HeaderNavbarMenu :menus="menus" />
+    <section class="navbar" :class="{ 'mobile-isOpen': isMenuOpen === true }">
+      <HeaderNavbarMenu :menus="menus" :isMenuOpen="isMenuOpen" />
+    </section>
     <!-- Navber-Right -->
     <HeaderNavbarRight />
   </div>
@@ -63,6 +68,10 @@ const menus: SetMenu[] = [
     items: [],
   },
 ];
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
+};
+const isMenuOpen = ref(false);
 </script>
 
 <style scoped lang="scss">
@@ -73,6 +82,7 @@ const menus: SetMenu[] = [
   top: 0;
   height: auto;
   margin: 0 auto;
+  padding: 0 clamp(8px, 1.5vw, 16px);
   @include baseTransition(0.6s);
   .logo,
   .nav-right,
@@ -81,6 +91,7 @@ const menus: SetMenu[] = [
     // max-width: 300px;
     align-items: baseline;
   }
+
   .logo {
     font-size: 40px;
     text-align: left;
@@ -91,113 +102,91 @@ const menus: SetMenu[] = [
   }
   .menu-toggle {
     display: none;
-    position: absolute;
-    top: 80px;
-    left: 32px;
+    // position: absolute;
+    // top: 0px;
+    // left: 32px;
     height: $headerHeight;
     align-items: center;
-    .menu-icon {
-      font-size: clamp(22px, 2.2vw, 30px);
-      color: #fffec2; // fill="currentColor" 會跟著變
+    cursor: pointer;
+    .icon {
+      font-size: 36px;
+      color: #fffed7; // fill="currentColor" 會跟著變
       cursor: pointer;
     }
   }
-
   .navbar {
     flex: 2;
-    display: flex;
-    margin: auto auto;
+    @include baseTransition(max-height, 0.6s);
   }
 }
 
 @media screen and (max-width: 920px) {
-
-  #header-inner {
-    height: 74px;
-    background-color: $color-white;
-    color: $color-darkgery;
-
-    padding-bottom: 0px;
-    justify-content: flex-start;
-    align-items: flex-end;
+  .header-container {
+    height: $headerHeight;
+  
     
-    // align-content: flex-start;
-    flex-direction: column;
-    // flex-wrap: wrap;
-    transition: all 0.3s ease;
-    overflow: hidden;
+    background-color: #333;
+    // max-height: $headerHeight;
+    // color: $color-darkgery;
+    // align-items: flex-end;
+    align-content: flex-start;
+    // flex-direction: column;
+    flex-wrap: wrap;
+    // transition: all 0.3s ease;
+    // overflow: hidden;
 
+    @include baseTransition(height, 0.6s);
     .logo {
-      position: absolute;
-      top: 0px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50%;
+      // position: absolute;
+      // top: 0px;
+      // left: 50%;
+      // transform: translateX(-50%);
+      // width: 50%;
       text-align: center;
-
       // max-width: 300px;
-      a {
-        color: $color-purple;
-      }
+      order: 1;
     }
 
     .menu-toggle {
+      flex: 1;
       display: flex;
-      cursor: pointer;
+      order: 0;
     }
 
     .navbar {
-      opacity: 0;
-      visibility: hidden;
-      max-width: 100%;
-      width: 100%;
-      margin: 0;
-      padding: 32px 0;
-      color: $color-darkgery ;
-      transition: all 0.3s ease;
+      flex: 0 0 100%;
       order: 3;
-
-      ul {
+      // color: $color-darkgery;
+      background-color: #474747;
+      max-height: 0;
+      opacity: 0;
+      @include baseTransition(max-height, 0.4s);
+      overflow: hidden;
+      .nav-list {
         width: 100%;
         display: flex;
         justify-content: start;
         align-items: flex-start;
         flex-direction: column;
-        padding: 0;
-        margin: 0;
+        // padding: 0;
+        padding: 8px 0;
+        // margin: 0;
         gap: 8px;
 
-        li {
-          justify-content: flex-start;
-          width: 100%;
-          height: 50px;
-          border-bottom: 2px solid;
-        }
-
-        a {
-          color: $color-darkgery;
-          font-size: 24px;
-        }
+        // li {
+        //   justify-content: flex-start;
+        //   width: 100%;
+        //   height: 50px;
+        //   border-bottom: 2px solid;
+        // }
       }
     }
-
-    .mobile-nav {
+    .navbar.mobile-isOpen {
       opacity: 1;
-      visibility: visible;
+      max-height: 100vh;
     }
-
     .nav-right {
-      .btnitem {
-        width: 36px;
-        a {
-          color: $color-darkgery;
-        }
-      }
-
-      .cart-show {
-        display: none;
-      }
-
+      order: 2;
     }
 
     .header-content {
@@ -248,44 +237,44 @@ const menus: SetMenu[] = [
       }
     }
   }
-}
-
-@media screen and (max-width: 670px) {
-  #header-inner {
-    
-
-    .logo {
-      font-size: 28px;
-      width: 100%;
-    }
-
-    .menu-toggle {
-      transform: scale(0.8);
-      left: 16px;
-    }
-
-    .navbar {
-      ul {
-        a {
-          font-size: 20px;
-        }
-      }
-    }
-
-
-    .header-content {
-      .hcol {
-        .card {
-          width: 130px;
-        }
-
-        .item-text {
-          h3 {
-            font-size: 16px;
-          }
-        }
-      }
-    }
+  .header-container.mobile-isOpen{
+    height: 100vh;
   }
 }
+
+// @media screen and (max-width: 670px) {
+//   #header-inner {
+//     .logo {
+//       font-size: 28px;
+//       width: 100%;
+//     }
+
+//     .menu-toggle {
+//       transform: scale(0.8);
+//       left: 16px;
+//     }
+
+//     .navbar {
+//       ul {
+//         a {
+//           font-size: 20px;
+//         }
+//       }
+//     }
+
+//     .header-content {
+//       .hcol {
+//         .card {
+//           width: 130px;
+//         }
+
+//         .item-text {
+//           h3 {
+//             font-size: 16px;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
 </style>

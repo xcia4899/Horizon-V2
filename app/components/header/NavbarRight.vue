@@ -87,7 +87,8 @@ import {
 
 // import { Search } from "@element-plus/icons-vue";
 import type { InputInstance } from "element-plus";
-
+//螢幕、手機模式判斷
+const { isDesktop, isTouch } = useInteractionMode();
 //搜尋關鍵字
 const keyword = ref("");
 // 取得el-input 實例
@@ -111,6 +112,7 @@ const closeSearch = () => {
 };
 // ESC 關閉
 const onKeydown = (e: KeyboardEvent) => {
+  if(!isDesktop.value) return;
   if (!showSearch.value) return;
   if (e.key === "Escape") closeSearch();
 };

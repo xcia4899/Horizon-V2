@@ -1,5 +1,5 @@
 <template>
-  <ul ref="menuRef" class="navbar">
+  <ul ref="menuRef" class="nav-list">
     <li
       v-for="menu in menus"
       :key="menu.ID"
@@ -51,6 +51,7 @@ import type { MenuKey, OpenMenu, SetMenu } from "@/types/ui/menu";
 const { isDesktop, isTouch } = useInteractionMode();
 defineProps<{
   menus: SetMenu[];
+  isMenuOpen: boolean;
 }>();
 
 // 導覽列ref，用來判斷是否點擊到外部
@@ -76,25 +77,20 @@ function handleClickOutside(e: MouseEvent) {
 // console.log("SSR:", import.meta.server);
 // 掛載時註冊全域點擊事件
 onMounted(() => {
-
-
-
   document.addEventListener("click", handleClickOutside);
 });
 // 卸載時移除事件
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
-
-
-
 </script>
 
 <style scoped lang="scss">
-.navbar {
+.nav-list {
   display: flex;
   justify-content: center;
-  gap: clamp(0px, 1%, 8px);
+  gap: 8px;
+  margin: auto auto;
 }
 .navbar-item {
   position: relative;
@@ -102,9 +98,14 @@ onBeforeUnmount(() => {
   justify-content: center;
   align-items: center;
   height: $headerHeight;
-  padding: 0 clamp(8px, 1.6vw, 16px);;
+  padding: 0 clamp(8px, 1.6vw, 16px);
   background-color: transparent;
   border-bottom: 4px solid transparent;
+  @media screen and (max-width: 920px) {
+    display: block;
+    height: auto;
+    padding: 0;
+  }
   cursor: pointer;
   .navbar-title {
     border-style: none;
@@ -133,9 +134,20 @@ onBeforeUnmount(() => {
     visibility: hidden;
     transform: translateY(8px);
     pointer-events: none;
-    @include baseTransition(0.6s);
     cursor: default;
-
+    transition:
+      opacity 1s ease,
+      transform 0.4s ease,
+      transform 0.3s ease;
+    @media screen and (max-width: 920px) {
+      position: sticky;
+      top: 0;
+      max-height: 0px;
+      padding: 0px;
+      width: 100%;
+      left: 0%;
+      background-color: $color-lightgrey;
+    }
     .dropdown-inner {
       max-width: 1280px; // 只限制內容
       margin: 0 auto; // 內容置中
@@ -203,6 +215,9 @@ onBeforeUnmount(() => {
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
+    @media screen and (max-width: 920px) {
+      max-height: 1000px;
+    }
   }
   &:hover {
     border-color: $color-purple;

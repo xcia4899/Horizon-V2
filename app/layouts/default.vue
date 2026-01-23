@@ -50,7 +50,7 @@ useSeoMeta({
   top: 0;
   background: rgba(20, 18, 18, 0.6);
   backdrop-filter: blur(20px);
-  // overflow-x: clip;
+  overflow-x: clip;
   width: 100%;
   /* 內層：置中 + max-width */
 
@@ -59,9 +59,9 @@ useSeoMeta({
     position: relative;
     max-width: 1440px;
     margin: 0 auto;
-    // padding: 0 32px;
-    padding: 0 clamp(8px, 1.5vw, 16px);
-    @include baseTransition;
+    padding: 0 0px;
+    // padding: 0 clamp(8px, 1.5vw, 16px);
+    // @include baseTransition;
   }
 }
 .container {

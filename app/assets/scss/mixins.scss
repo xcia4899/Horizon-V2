@@ -12,6 +12,6 @@
     flex-direction: $direction;
 }
 
-@mixin baseTransition($time: 0.4s, $ease: ease, $property: all) {
+@mixin baseTransition($property: all, $time: 0.4s, $ease: ease) {
     transition: $property $time $ease;
 }
