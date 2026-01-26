@@ -3,44 +3,84 @@ $white: #fff;
 $black: #181818;
 $indigo: #2c3e50;
 
-$color-black: #0a0a0a; // 接近黑（主文字）
-$color-white: #fafafa; // 接近白（page background）
+// Neutral
+$color-white: #fafafa;
+$color-black: #0a0a0a;
 
-$color-gray-100: #f2f2f2; // 區塊背景 / 分隔區
-$color-gray-200: #e2e2e2; // border / divider
+$color-gray-50: #f7f7f7;
+$color-gray-100: #f2f2f2;
+$color-gray-200: #e2e2e2;
 $color-gray-500: #808080;
-$color-gray-800: #2f2f2f; // 深色文字 / header
+$color-gray-700: #2f2f2f;
+$color-gray-800: #2f2f2f;
+$color-gray-900: #1a1a1a;
 
-// $color-blue: #a02fec;
-$color-blue: #00b8fc;
+// Brand
 $color-purple-300: #cb8cf5;
 $color-purple-500: #a02fec;
 $color-purple-700: #690fa6;
 
+$color-blue: #00b8fc;
 $color-red: #e71818;
-$header-color: #000000;
-$header-bgcolor: #eeeeee;
 
-$row01-margin-top: 64px;
-$r5-text-area-left-right: 60px;
+
 $shadow-set: 0px 0px 6px 1px rgba(22, 22, 22, 0.4);
-
 //header高度設定
 $headerHeight: 70px;
 //間距大小設定
 $ClampRWD: clamp(8px, 1.5vw, 16px);
 
-/* CSS 變數預設值（全域語意色） */
+/* CSS 變數預設值 */
+//  一般淺色背景使用 
 :root {
-    /* light mode */
-    --color-title: #{$color-gray-800};
-    --color-text: #{$color-gray-200};
+    //  ========== Text =========
+    --text-primary: #{$color-gray-800}; // 主要文字（標題 / 內文）
+    --text-secondary: #{$color-gray-500}; // 次要文字（說明 / 輔助）
+    --text-inverse: #{$color-white}; // 深色背景上的文字
+    //    ========== Background =========
+    --bg-page: #{$color-white}; // 整頁背景（body / main）
+    --bg-header: #{$color-gray-900}; // Header / Navbar 背景
+    --bg-surface: #{$color-gray-100}; // 一般內容區 / 卡片
+    --bg-surface-soft: #f7f7f7; // 內容內層（更亮）
+    --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
+    // ========== Border =========
+    --border-default: #{$color-gray-200}; // 一般邊框
+    //  ========== Brand =========
+    --brand: #{$color-purple-500}; // 品牌主色
+    --brand-hover: #{$color-purple-700}; // hover / active
+    --brand-soft: #{$color-purple-300}; // 淡色背景 / badge
+    // ========== Action =========
+    --action-primary: var(--brand); // 主 CTA
+    --action-primary-hover: var(--brand-hover);
+    --action-primary-soft: var(--brand-soft);
+    //  ========== State =========
+    --state-danger: #{$color-red}; // 錯誤 / 刪除
 }
 
+//    深色背景使用 
 @media (prefers-color-scheme: dark) {
     :root {
-        /* dark mode */
-        --color-title: #{$color-white};
-        --color-text: #{$color-gray-200};
+        // ========== Text =========
+        --text-primary: #{$color-white}; // 主要文字
+        --text-secondary: #{$color-gray-200}; // 次要文字
+        --text-inverse: #{$color-gray-900}; // 淺色背景上的文字
+        //  ========== Background =========
+        --bg-page: #{$color-black}; // 整頁最底背景
+        --bg-header: #000000; // Header / Navbar（最深）
+        --bg-surface: #{$color-gray-900}; // 一般內容區
+        --bg-surface-soft: #{$color-gray-800}; // 內容內層（較亮）
+        --bg-surface-strong: #{$color-gray-700}; // 分區 / 強調區（較暗）
+        /* ========== Border ========= */
+        --border-default: #{$color-gray-800}; // 邊框（避免過亮）
+        //   ========== Brand =========
+        --brand: #{$color-purple-500}; // 品牌主色
+        --brand-hover: #{$color-purple-300}; // hover / active（更亮）
+        --brand-soft: #{$color-purple-700}; // 淡色 / 背景用途
+        //  ========== Action ========= 
+        --action-primary: var(--brand);
+        --action-primary-hover: var(--brand-hover);
+        --action-primary-soft: var(--brand-soft);
+        // /========== State ========= 
+        --state-danger: #{$color-red}; // 錯誤
     }
 }

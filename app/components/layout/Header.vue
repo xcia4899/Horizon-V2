@@ -7,7 +7,9 @@
       <Icon name="mdi:menu" class="icon" />
     </button>
     <!-- LOGO -->
-    <div class="logo">Horizon</div>
+    <div class="nav-left">
+      <button type="button" class="logo">Horizon</button>
+    </div>
     <!-- Navber-menu -->
     <section class="navbar" :class="{ 'mobile-isOpen': isMenuOpen === true }">
       <HeaderNavbarMenu :menus="menus" :isMenuOpen="isMenuOpen" />
@@ -78,28 +80,34 @@ const isMenuOpen = ref(false);
 .header-container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  top: 0;
-  height: auto;
-  margin: 0 auto;
+  align-items: center;
+  // top: 0;
+  // height: auto;
+  // margin: 0 auto;
   padding: 0 clamp(8px, 1.5vw, 16px);
-  @include baseTransition(0.6s);
-  .logo,
+  @include baseTransition(height, 0.6s);
+  .nav-left,
   .nav-right,
   .navbar {
     flex: 1;
     // max-width: 300px;
     align-items: baseline;
   }
+  .nav-left {
+    display: grid;
+    place-items: center start;
 
-  .logo {
-    font-size: 40px;
-    text-align: left;
-    font-weight: bolder;
-    line-height: $headerHeight;
-    color: $color-purple-500;
-    cursor: pointer;
+    .logo {
+      font-size: 40px;
+      // text-align: left;
+      font-weight: bolder;
+      // line-height: $headerHeight;
+
+      color: $color-purple-500;
+      cursor: pointer;
+    }
   }
+
   .menu-toggle {
     display: none;
     height: $headerHeight;
@@ -136,8 +144,8 @@ const isMenuOpen = ref(false);
       flex: 1;
       display: flex;
     }
-    .logo {
-      text-align: center;
+    .nav-left {
+      place-items: center;
     }
     .navbar {
       flex: 0 0 100%;

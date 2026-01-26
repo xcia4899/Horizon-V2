@@ -3,7 +3,7 @@
     <h3 class="title">訂閱最新消息</h3>
     <div class="input">
       <input class="input-field" type="text" placeholder="請輸入Email" />
-      <button class="btn input-btn"><h5>GO!</h5></button>
+      <button class="btn input-btn">GO!</button>
     </div>
     <p class="text">
       點擊“<span>Go!</span>”即表示您同意接收 Horizon
@@ -109,7 +109,9 @@ const footerLinks = [
       border-radius: 0px 4px 4px 0px;
       background-color: $color-purple-500;
       color: $color-white;
-      @include baseTransition;
+      transition:
+        background-color 0.3s ease,
+        width 0.3s ease;
       border-style: none;
       @media (hover: hover) and (pointer: fine) {
         &:hover {

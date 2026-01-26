@@ -220,9 +220,6 @@ const cartView = computed(() => {
   .btnItem:active {
     transform: scale(0.9);
     opacity: 0.85;
-    .icon {
-      color: $color-purple-300;
-    }
   }
   .search-area {
     position: relative;
@@ -237,11 +234,9 @@ const cartView = computed(() => {
         width 0.6s ease,
         opacity 0.4s ease;
       // transform: translateX(4px);
-      @media (hover: hover) and (pointer: fine) {
-        &.isOpen {
-          width: 200px;
-          opacity: 1;
-        }
+      &.isOpen {
+        width: 200px;
+        opacity: 1;
       }
       :deep(.el-input__wrapper) {
         box-shadow: none;
@@ -250,6 +245,9 @@ const cartView = computed(() => {
       }
       .icon {
         margin: 0 8px;
+      }
+      @media (hover: hover) and (pointer: coarse) {
+        display: none;
       }
     }
     .search-btn {
@@ -302,6 +300,11 @@ const cartView = computed(() => {
     display: flex;
 
     flex-direction: column;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        max-height: 600px;
+      }
+    }
 
     .cart-view {
       padding: 16px 16px 16px;
