@@ -103,7 +103,7 @@ const isMenuOpen = ref(false);
       font-weight: bolder;
       // line-height: $headerHeight;
 
-      color: $color-purple-500;
+      color: var(--brand);
       cursor: pointer;
     }
   }
@@ -115,7 +115,7 @@ const isMenuOpen = ref(false);
     cursor: pointer;
     .icon {
       font-size: 36px;
-      color: #fffed7; // fill="currentColor" 會跟著變
+      color: var(--text-on-header); // fill="currentColor" 會跟著變
       cursor: pointer;
     }
     &:active {
@@ -136,7 +136,7 @@ const isMenuOpen = ref(false);
 @media screen and (max-width: 768px) {
   .header-container {
     height: $headerHeight;
-    background-color: #333;
+    background-color: var(--bg-header);
     align-content: flex-start;
     flex-wrap: wrap;
     @include baseTransition(height, 0.6s);
@@ -151,7 +151,7 @@ const isMenuOpen = ref(false);
       flex: 0 0 100%;
       order: 3;
       // color: $color-gray-800;
-      background-color: #333;
+      background-color: var(--bg-header);
       max-height: 0;
       opacity: 0;
       @include baseTransition(max-height, 0.4s);

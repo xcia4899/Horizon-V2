@@ -48,7 +48,7 @@ useSeoMeta({
 .header {
   position: fixed;
   top: 0;
-  background: rgba(20, 18, 18, 0.3);
+  background: var(--bg-header-translucent);
   backdrop-filter: blur(8px);
   overflow-x: clip;
   width: 100%;
@@ -75,7 +75,7 @@ useSeoMeta({
 .footer {
   position: relative;
   z-index: 10;
-  background: $color-black;
+  background: var(--bg-surface-strong);
   .footer-inner {
     position: relative;
     max-width: 1280px;

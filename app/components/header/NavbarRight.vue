@@ -203,16 +203,16 @@ const cartView = computed(() => {
       border-color 0.4s ease;
     @media (hover: hover) and (pointer: fine) {
       &:hover .icon {
-        color: #a02fec;
+        color: var(--brand);
         // height: 100%;
       }
       &:hover {
-        border-color: $color-purple-500;
+        border-color: var(--brand);
       }
     }
 
     .icon {
-      color: $color-white;
+      color: var(--text-on-header);
       font-size: clamp(22px, 2.2vw, 30px);
       @include baseTransition(color, 0.4s);
     }
@@ -252,7 +252,7 @@ const cartView = computed(() => {
     }
     .search-btn {
       .icon.active {
-        color: #a02fec;
+        color: var(--brand);
       }
     }
   }
@@ -275,8 +275,8 @@ const cartView = computed(() => {
       font-weight: 700;
       line-height: 1;
 
-      color: $color-white;
-      background-color: $color-purple-500;
+      color: var(--text-on-brand);
+      background-color: var(--action-primary);
       pointer-events: none; // 不干擾點擊
     }
   }
@@ -290,10 +290,10 @@ const cartView = computed(() => {
     max-height: 00px;
     width: clamp(360px, 40vw, 400px);
     margin-right: clamp(8px, 1.5vw, 16px);
-    color: $color-gray-800;
-    background-color: $color-white;
+    color: var(--text-primary);
+    background-color: var(--bg-surface);
     border-radius: 0 0 4px 4px;
-    box-shadow: 0px 2px 2px 0px rgba(22, 22, 22, 0.4);
+    box-shadow: var(--shadow-float);
 
     @include baseTransition(max-height, 0.6s);
     overflow: hidden;
@@ -319,7 +319,7 @@ const cartView = computed(() => {
       justify-content: space-between;
       align-items: flex-end;
       padding: 8px 4px;
-      border-bottom: 1px solid $color-gray-200;
+      border-bottom: 1px solid var(--border-default);
       .item-img {
         margin: auto 0;
         img {
@@ -353,7 +353,7 @@ const cartView = computed(() => {
           place-items: center;
         }
         &:hover .icon {
-          background-color: $color-purple-500;
+          background-color: var(--brand);
           border: 2px solid transparent;
         }
 
@@ -372,9 +372,9 @@ const cartView = computed(() => {
 
           opacity: 0;
           visibility: hidden;
-          border: 1px solid $color-gray-800;
+          border: 1px solid var(--text-primary);
           border-radius: 6px;
-          background: #fff;
+          background: var(--bg-surface);
         }
 
         &:hover::after {
@@ -389,7 +389,7 @@ const cartView = computed(() => {
       justify-content: space-between;
 
       padding: 16px 16px 16px;
-      background-color: $color-white;
+      background-color: var(--bg-surface);
       h4 {
         font-weight: 900;
         // letter-spacing: 0px;

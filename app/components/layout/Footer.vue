@@ -91,15 +91,17 @@ const footerLinks = [
       width: 100%;
       height: 40px;
       border-radius: 4px 0px 0px 4px;
+      background-color: var(--bg-surface);
+      color: var(--text-primary);
       transition: border-color 0.3s ease;
 
       &:hover {
-        background-color: #ffffff;
+        background-color: var(--bg-surface);
       }
 
       &:focus {
-        background-color: #ffffff;
-        outline: #c54242;
+        background-color: var(--bg-surface);
+        outline: 1px solid var(--state-danger);
       }
     }
 
@@ -107,8 +109,8 @@ const footerLinks = [
       width: 80px;
       height: 40px;
       border-radius: 0px 4px 4px 0px;
-      background-color: $color-purple-500;
-      color: $color-white;
+      background-color: var(--action-primary);
+      color: var(--text-on-brand);
       transition:
         background-color 0.3s ease,
         width 0.3s ease;
@@ -116,19 +118,19 @@ const footerLinks = [
       @media (hover: hover) and (pointer: fine) {
         &:hover {
           width: 100px;
-          background-color: $color-purple-300;
+          background-color: var(--action-primary-soft);
         }
       }
       &:active {
         width: 100px;
-        background-color: $color-purple-300;
+        background-color: var(--action-primary-soft);
       }
     }
   }
   .text {
     padding: 8px 0px;
     span {
-      color: $color-purple-500;
+      color: var(--brand);
     }
   }
 }
@@ -164,12 +166,12 @@ const footerLinks = [
       cursor: pointer;
       @media (hover: hover) and (pointer: fine) {
         &:hover {
-          color: $color-purple-300;
+          color: var(--brand-soft);
         }
       }
       &:active {
         transform: scale(0.99);
-        color: $color-purple-300;
+        color: var(--brand-soft);
       }
     }
   }
@@ -185,7 +187,7 @@ const footerLinks = [
         font-size: 30px;
         @media (hover: hover) and (pointer: fine) {
           &:hover {
-            color: $color-purple-300;
+            color: var(--brand-soft);
           }
         }
       }

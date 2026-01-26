@@ -104,17 +104,17 @@ onBeforeUnmount(() => {
   cursor: pointer;
   @media (hover: hover) and (pointer: fine) {
     &:hover {
-      border-color: $color-purple-500;
+      border-color: var(--brand);
     }
     &:hover .navbar-title {
-      color: $color-purple-300;
+      color: var(--brand-soft);
     }
   }
   &.active {
-    border-color: $color-purple-500;
+    border-color: var(--brand);
   }
   &:active {
-    border-color: $color-purple-500;
+    border-color: var(--brand);
   }
   .navbar-title {
     border-style: none;
@@ -137,10 +137,10 @@ onBeforeUnmount(() => {
     &:active {
       transform: scale(0.95);
       opacity: 0.85;
-      color: $color-purple-300;
+      color: var(--brand-soft);
     }
     &.active {
-      color: $color-purple-300;
+      color: var(--brand-soft);
     }
   }
 
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
     left: 1%;
     width: 98%;
     padding: 16px;
-    background-color: $color-gray-100;
+    background-color: var(--bg-surface);
     border-radius: 8px;
     opacity: 0;
     visibility: hidden;
@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
       display: flex;
       flex-direction: column;
       border-radius: 6px;
-      color: $color-gray-800;
+      color: var(--text-primary);
       z-index: 1;
       cursor: pointer;
       * {
@@ -199,7 +199,7 @@ onBeforeUnmount(() => {
         aspect-ratio: 1/1;
         border-radius: 6px;
         overflow: hidden;
-        background: $color-white;
+        background: var(--bg-surface-soft);
         img {
           height: 100%;
           width: 100%;
@@ -219,7 +219,7 @@ onBeforeUnmount(() => {
       inset: 0 0 0 0;
       transform: scaleY(0);
       transform-origin: top;
-      background: $color-white;
+      background: var(--bg-surface-soft);
       @include baseTransition(transform, 0.3s);
       z-index: 0;
     }
@@ -227,7 +227,7 @@ onBeforeUnmount(() => {
       .card:hover::after {
         transform: scaleY(1);
 
-        box-shadow: $shadow-set;
+        box-shadow: var(--shadow-default);
       }
     }
   }
@@ -250,9 +250,9 @@ onBeforeUnmount(() => {
     height: auto;
     padding: 0;
     width: 100%;
-    border-bottom: 2px solid $color-gray-500;
+    border-bottom: 2px solid var(--text-secondary);
     &.active {
-      border-color: $color-purple-500;
+      border-color: var(--brand);
     }
     .dropdown {
       position: relative;
@@ -278,7 +278,7 @@ onBeforeUnmount(() => {
       .card {
         display: flex;
         flex-direction: column;
-        color: $color-gray-200;
+        color: var(--text-on-header);
         .item-pic {
           padding: 8px;
           background: transparent;
@@ -291,7 +291,7 @@ onBeforeUnmount(() => {
       .card::after {
         content: "";
         transform: scaleY(1);
-        background: $color-gray-800;
+        background: var(--bg-header);
       }
     }
   }
