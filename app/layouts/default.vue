@@ -46,10 +46,10 @@ useSeoMeta({
 }
 /* 外層：滿版 sticky + 背景 + 層級 */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  background: rgba(20, 18, 18, 0.6);
-  backdrop-filter: blur(20px);
+  background: rgba(20, 18, 18, 0.3);
+  backdrop-filter: blur(8px);
   overflow-x: clip;
   width: 100%;
   /* 內層：置中 + max-width */
@@ -68,7 +68,7 @@ useSeoMeta({
   flex: 1;
   max-width: 1280px;
   min-height: 400px;
-  margin: 0 auto;
+  margin: 70px auto;
   // padding: 16px;
   // z-index: 1;
 }

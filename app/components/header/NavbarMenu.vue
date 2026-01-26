@@ -89,7 +89,7 @@ onBeforeUnmount(() => {
 .nav-list {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  // gap: 8px;
   margin: auto auto;
 }
 .navbar-item {
@@ -98,29 +98,26 @@ onBeforeUnmount(() => {
   justify-content: center;
   align-items: center;
   height: $headerHeight;
-  padding: 0 clamp(8px, 1.6vw, 16px);
+  padding: 0 8px;
   background-color: transparent;
   border-bottom: 4px solid transparent;
-  @media screen and (max-width: 920px) {
-    display: block;
-    height: auto;
-    padding: 0;
-  }
   cursor: pointer;
   .navbar-title {
     border-style: none;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
-    letter-spacing: 1pz;
+
+    letter-spacing: 1px;
     font-size: clamp(14px, 2.5vw, 18px);
     white-space: nowrap;
     background-color: transparent;
     color: $color-white;
+    padding: 8px 8px;
     cursor: pointer;
   }
   .navbar-title.active {
-    color: $color-purple;
+    color: $color-purple-500;
   }
   .dropdown {
     position: fixed;
@@ -135,19 +132,8 @@ onBeforeUnmount(() => {
     transform: translateY(8px);
     pointer-events: none;
     cursor: default;
-    transition:
-      opacity 1s ease,
-      transform 0.4s ease,
-      transform 0.3s ease;
-    @media screen and (max-width: 920px) {
-      position: sticky;
-      top: 0;
-      max-height: 0px;
-      padding: 0px;
-      width: 100%;
-      left: 0%;
-      background-color: $color-lightgrey;
-    }
+    transition: all 0.4s ease;
+
     .dropdown-inner {
       max-width: 1280px; // 只限制內容
       margin: 0 auto; // 內容置中
@@ -167,21 +153,6 @@ onBeforeUnmount(() => {
         color: $color-darkgery;
         z-index: 1;
         cursor: pointer;
-        &::after {
-          content: "";
-          position: absolute;
-          border-radius: 6px;
-          inset: 0 0 0 0;
-          transform: scaleY(0);
-          transform-origin: top;
-          background: $color-white;
-          @include baseTransition(0.3s);
-          z-index: -1;
-        }
-        &:hover::after {
-          transform: scaleY(1);
-          box-shadow: $shadow-set;
-        }
         * {
           position: relative;
           z-index: 1;
@@ -208,6 +179,24 @@ onBeforeUnmount(() => {
           }
         }
       }
+      .card::after {
+        content: "";
+        position: absolute;
+        border-radius: 6px;
+        inset: 0 0 0 0;
+        transform: scaleY(0);
+        transform-origin: top;
+        background: $color-white;
+        @include baseTransition(transform, 0.3s);
+        z-index: 0;
+      }
+      @media (hover: hover) and (pointer: fine) {
+        .card:hover::after {
+          transform: scaleY(1);
+
+          box-shadow: $shadow-set;
+        }
+      }
     }
   }
   .dropdown.isOpen {
@@ -215,18 +204,54 @@ onBeforeUnmount(() => {
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-    @media screen and (max-width: 920px) {
+    @media screen and (max-width: 768px) {
       max-height: 1000px;
     }
   }
-  &:hover {
-    border-color: $color-purple;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: $color-purple-500;
+    }
+    &:hover .navbar-title {
+      color: $color-purple-500;
+    }
+    &.active {
+      border-color: $color-purple-500;
+    }
   }
-  &:hover .navbar-title {
-    color: $color-purple;
+}
+
+/* ===== mobile ===== */
+@media screen and (max-width: 768px) {
+  .nav-list {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 8px 0;
+    gap: 8px;
   }
-  &.active {
-    border-color: $color-purple;
+  .navbar-item {
+    display: block;
+    height: auto;
+    padding: 0;
+
+    // border-bottom: 2px solid $color-lightgrey;
+    .dropdown {
+      position: sticky;
+      top: 0;
+      max-height: 0px;
+      padding: 0px;
+      width: 100%;
+      left: 0%;
+      background-color: transparent;
+      // background-color: $color-lightgrey;
+      // overflow: hidden;
+    }
+    .dropdown.isOpen {
+      max-height: 1000px;
+    }
   }
 }
 </style>

@@ -78,7 +78,7 @@ const footerLinks = [
 .footer-top {
   max-width: 600px;
   margin: 0 auto;
-  padding: 16px 0px ;
+  padding: 16px 0px;
 
   .title {
     text-align: center;
@@ -107,21 +107,21 @@ const footerLinks = [
       width: 80px;
       height: 40px;
       border-radius: 0px 4px 4px 0px;
-      background-color: $color-purple;
+      background-color: $color-purple-500;
       color: $color-white;
       @include baseTransition;
       border-style: none;
-      &:hover {
-        width: 100px;
-        background-color: $color-purple;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: $color-purple-700;
+        }
       }
     }
   }
   .text {
-
     padding: 8px 0px;
     span {
-      color: $color-purple;
+      color: $color-purple-500;
     }
   }
 }
@@ -176,7 +176,7 @@ const footerLinks = [
   padding: 16px 0px 16px;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 768px) {
   .footer-main {
     flex-wrap: wrap;
     .main-left {
@@ -198,7 +198,7 @@ const footerLinks = [
   }
 }
 
-@media screen and (max-width: 670px) {
+@media screen and (max-width: 425px) {
   .footer-main {
     .main-left {
       flex-direction: column;

@@ -107,7 +107,7 @@ button {
     font-weight: 400;
 
     color: $color-white;
-    background-color: $color-purple;
+    background-color: $color-purple-500;
     border: 2px solid transparent;
     border-radius: 4px;
     letter-spacing: 1px;
@@ -117,11 +117,10 @@ button {
 
     &:hover {
         font-weight: 600;
-        // color: lighten($color-purple, 30%);
-        color: color.adjust($color-purple, $lightness: -10%);
+        color: $color-purple-500;
         background: transparent;
         background-color: transparent;
-        border-color: $color-purple;
+        border-color: $color-purple-500;
     }
 }
 
@@ -227,11 +226,11 @@ button {
 
     border-radius: 5px;
     background-color: transparent;
-    color: $color-purple !important;
+    color: $color-purple-500 !important;
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        // color: color.adjust($color-purple, $lightness: -10%) !important;
+        color: $color-purple-300 !important;
         background-color: $color-white;
         transform: scale(1.2);
         box-shadow: $shadow-set;
@@ -239,12 +238,12 @@ button {
 }
 
 input[type="checkbox"] {
-    accent-color: $color-purple;
+    accent-color: $color-purple-500;
     /* 你想要的顏色（藍色示範） */
 }
 
 input {
-    caret-color: $color-purple;
+    caret-color: $color-purple-500;
     outline: none;
     border-width: 1px;
     padding: 0px 8px;

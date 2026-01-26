@@ -194,7 +194,7 @@ const cartView = computed(() => {
       // height: 100%;
     }
     &:hover {
-      border-color: $color-purple;
+      border-color: $color-purple-500;
     }
     .icon {
       color: $color-white;
@@ -252,7 +252,7 @@ const cartView = computed(() => {
       line-height: 1;
 
       color: $color-white;
-      background-color: $color-purple;
+      background-color: $color-purple-500;
       pointer-events: none; // 不干擾點擊
     }
   }
@@ -323,7 +323,7 @@ const cartView = computed(() => {
           place-items: center;
         }
         &:hover .icon {
-          background-color: $color-purple;
+          background-color: $color-purple-500;
           border: 2px solid transparent;
         }
 
