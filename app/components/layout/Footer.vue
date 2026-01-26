@@ -113,8 +113,13 @@ const footerLinks = [
       border-style: none;
       @media (hover: hover) and (pointer: fine) {
         &:hover {
-          background-color: $color-purple-700;
+          width: 100px;
+          background-color: $color-purple-300;
         }
+      }
+      &:active {
+        width: 100px;
+        background-color: $color-purple-300;
       }
     }
   }
@@ -149,9 +154,21 @@ const footerLinks = [
     .title {
       font-size: clamp(20px, 1.5vw, 24px);
       margin-bottom: 8px;
+      cursor: default;
     }
     .text {
       font-size: clamp(14px, 1.5vw, 16px);
+      @include baseTransition(color, 0.4s);
+      cursor: pointer;
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: $color-purple-300;
+        }
+      }
+      &:active {
+        transform: scale(0.99);
+        color: $color-purple-300;
+      }
     }
   }
   .main-right {
@@ -164,6 +181,11 @@ const footerLinks = [
       gap: 8px;
       .icon {
         font-size: 30px;
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            color: $color-purple-300;
+          }
+        }
       }
     }
   }

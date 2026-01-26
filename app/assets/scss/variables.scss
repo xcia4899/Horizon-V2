@@ -3,18 +3,19 @@ $white: #fff;
 $black: #181818;
 $indigo: #2c3e50;
 
-$color-black: #0a0a0a;
-$color-white: #fafafa;
+$color-black: #0a0a0a; // 接近黑（主文字）
+$color-white: #fafafa; // 接近白（page background）
 
-$color-lightgrey: #f0f0f0;
-$color-middlekgery: #e0e0e0;
-$color-darkgery: #2c2c2c;
+$color-gray-100: #f2f2f2; // 區塊背景 / 分隔區
+$color-gray-200: #e2e2e2; // border / divider
+$color-gray-500: #808080;
+$color-gray-800: #2f2f2f; // 深色文字 / header
 
 // $color-blue: #a02fec;
 $color-blue: #00b8fc;
-$color-purple-300: #d9a8ff;
+$color-purple-300: #cb8cf5;
 $color-purple-500: #a02fec;
-$color-purple-700: #6b1fa3;
+$color-purple-700: #690fa6;
 
 $color-red: #e71818;
 $header-color: #000000;
@@ -27,4 +28,19 @@ $shadow-set: 0px 0px 6px 1px rgba(22, 22, 22, 0.4);
 //header高度設定
 $headerHeight: 70px;
 //間距大小設定
-$ClampRWD:clamp(8px, 1.5vw, 16px);
+$ClampRWD: clamp(8px, 1.5vw, 16px);
+
+/* CSS 變數預設值（全域語意色） */
+:root {
+    /* light mode */
+    --color-title: #{$color-gray-800};
+    --color-text: #{$color-gray-200};
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* dark mode */
+        --color-title: #{$color-white};
+        --color-text: #{$color-gray-200};
+    }
+}

@@ -21,7 +21,7 @@
         type="button"
         class="btnItem search-btn"
         @mousedown.prevent
-        @click="toggleSearch"
+        @click="onSearchClick"
       >
         <Icon
           :name="showSearch ? 'mdi:close' : 'mdi:magnify'"
@@ -98,6 +98,15 @@ const inputRef = ref<InputInstance | null>(null);
 const showSearch = ref(false);
 //keyword是否有值，用來判斷是否關閉搜尋框
 const canClose = computed(() => !keyword.value?.trim());
+//搜尋按鈕邏輯
+const onSearchClick = () => {
+  if (isTouch.value) {
+    console.log("手機模式跳轉搜尋頁");
+    // navigateTo("/"); // 手機：跳搜尋頁
+  } else {
+    toggleSearch(); // 桌機：展開搜尋框
+  }
+};
 
 //開關搜尋框
 const toggleSearch = async () => {
@@ -112,7 +121,7 @@ const closeSearch = () => {
 };
 // ESC 關閉
 const onKeydown = (e: KeyboardEvent) => {
-  if(!isDesktop.value) return;
+  if (!isDesktop.value) return;
   if (!showSearch.value) return;
   if (e.key === "Escape") closeSearch();
 };
@@ -126,7 +135,7 @@ watch(showSearch, async (value) => {
 });
 
 //搜尋功能
-const submitSearch = () => { 
+const submitSearch = () => {
   if (!keyword.value.trim()) return;
   closeSearch();
   //   navigateTo(`/search?keyword=${keyword.value}`);
@@ -183,23 +192,36 @@ const cartView = computed(() => {
     justify-content: center;
     align-items: center;
   }
+
   .btnItem {
     border-bottom: 4px solid transparent;
     height: $headerHeight;
     padding: 4px 8px 0px;
     cursor: pointer;
-    @include baseTransition(0.4s);
-    &:hover .icon {
-      color: #a02fec;
-      // height: 100%;
+    transform:
+      color 0.4s ease,
+      border-color 0.4s ease;
+    @media (hover: hover) and (pointer: fine) {
+      &:hover .icon {
+        color: #a02fec;
+        // height: 100%;
+      }
+      &:hover {
+        border-color: $color-purple-500;
+      }
     }
-    &:hover {
-      border-color: $color-purple-500;
-    }
+
     .icon {
       color: $color-white;
       font-size: clamp(22px, 2.2vw, 30px);
-      @include baseTransition(0.4s);
+      @include baseTransition(color, 0.4s);
+    }
+  }
+  .btnItem:active {
+    transform: scale(0.9);
+    opacity: 0.85;
+    .icon {
+      color: $color-purple-300;
     }
   }
   .search-area {
@@ -211,11 +233,15 @@ const cartView = computed(() => {
       right: 0;
       width: 40px;
       opacity: 0;
-      @include baseTransition(0.6s);
+      transition:
+        width 0.6s ease,
+        opacity 0.4s ease;
       // transform: translateX(4px);
-      &.isOpen {
-        width: 200px;
-        opacity: 1;
+      @media (hover: hover) and (pointer: fine) {
+        &.isOpen {
+          width: 200px;
+          opacity: 1;
+        }
       }
       :deep(.el-input__wrapper) {
         box-shadow: none;
@@ -266,14 +292,15 @@ const cartView = computed(() => {
     max-height: 00px;
     width: clamp(360px, 40vw, 400px);
     margin-right: clamp(8px, 1.5vw, 16px);
-    color: $color-darkgery;
+    color: $color-gray-800;
     background-color: $color-white;
     border-radius: 0 0 4px 4px;
     box-shadow: 0px 2px 2px 0px rgba(22, 22, 22, 0.4);
 
-    @include baseTransition(1s);
+    @include baseTransition(max-height, 0.6s);
     overflow: hidden;
     display: flex;
+
     flex-direction: column;
 
     .cart-view {
@@ -289,7 +316,7 @@ const cartView = computed(() => {
       justify-content: space-between;
       align-items: flex-end;
       padding: 8px 4px;
-      border-bottom: 1px solid $color-middlekgery;
+      border-bottom: 1px solid $color-gray-200;
       .item-img {
         margin: auto 0;
         img {
@@ -342,7 +369,7 @@ const cartView = computed(() => {
 
           opacity: 0;
           visibility: hidden;
-          border: 1px solid $color-darkgery;
+          border: 1px solid $color-gray-800;
           border-radius: 6px;
           background: #fff;
         }
@@ -352,10 +379,6 @@ const cartView = computed(() => {
           visibility: visible;
         }
       }
-    }
-
-    &:hover {
-      max-height: 600px;
     }
     .bottom-area {
       display: flex;
@@ -374,10 +397,11 @@ const cartView = computed(() => {
       }
     }
   }
-
-  .cart-btn:hover + .miniCart {
-    max-height: 600px;
-    // background-color: #cf7e7e;
+  @media (hover: hover) and (pointer: fine) {
+    .cart-btn:hover + .miniCart {
+      max-height: 600px;
+      // background-color: #cf7e7e;
+    }
   }
 }
 </style>

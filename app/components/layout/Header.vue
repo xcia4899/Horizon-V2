@@ -102,9 +102,6 @@ const isMenuOpen = ref(false);
   }
   .menu-toggle {
     display: none;
-    // position: absolute;
-    // top: 0px;
-    // left: 32px;
     height: $headerHeight;
     align-items: center;
     cursor: pointer;
@@ -112,6 +109,13 @@ const isMenuOpen = ref(false);
       font-size: 36px;
       color: #fffed7; // fill="currentColor" 會跟著變
       cursor: pointer;
+    }
+    &:active {
+      .icon {
+        transform: scale(0.9);
+        opacity: 0.85;
+        // color: $color-purple-500;
+      }
     }
   }
   .navbar {
@@ -128,7 +132,7 @@ const isMenuOpen = ref(false);
     align-content: flex-start;
     flex-wrap: wrap;
     @include baseTransition(height, 0.6s);
-     .menu-toggle {
+    .menu-toggle {
       flex: 1;
       display: flex;
     }
@@ -138,25 +142,22 @@ const isMenuOpen = ref(false);
     .navbar {
       flex: 0 0 100%;
       order: 3;
-      // color: $color-darkgery;
+      // color: $color-gray-800;
       background-color: #333;
       max-height: 0;
       opacity: 0;
       @include baseTransition(max-height, 0.4s);
       overflow: hidden;
-     
     }
     .navbar.mobile-isOpen {
       opacity: 1;
-      max-height: 100vh;
+      max-height: 700px;
     }
     .nav-right {
       order: 2;
     }
-
-
   }
-  .header-container.mobile-isOpen{
+  .header-container.mobile-isOpen {
     height: 100vh;
   }
 }

@@ -33,7 +33,7 @@
                 <img :src="item.img" alt="" />
               </div>
               <div class="item-text">
-                <h3>{{ item.text }}</h3>
+                <h4>{{ item.text }}</h4>
               </div>
             </div>
           </li>
@@ -102,9 +102,23 @@ onBeforeUnmount(() => {
   background-color: transparent;
   border-bottom: 4px solid transparent;
   cursor: pointer;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      border-color: $color-purple-500;
+    }
+    &:hover .navbar-title {
+      color: $color-purple-300;
+    }
+  }
+  &.active {
+    border-color: $color-purple-500;
+  }
+  &:active {
+    border-color: $color-purple-500;
+  }
   .navbar-title {
     border-style: none;
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
     display: flex;
     align-items: center;
 
@@ -112,111 +126,109 @@ onBeforeUnmount(() => {
     font-size: clamp(14px, 2.5vw, 18px);
     white-space: nowrap;
     background-color: transparent;
-    color: $color-white;
+    // color: $color-white;
+    color: var(--color-title);
     padding: 8px 8px;
     cursor: pointer;
+    @media (pointer: coarse) {
+      min-height: 44px;
+      padding: 8px 12px;
+    }
+    &:active {
+      transform: scale(0.95);
+      opacity: 0.85;
+      color: $color-purple-300;
+    }
+    &.active {
+      color: $color-purple-300;
+    }
   }
-  .navbar-title.active {
-    color: $color-purple-500;
-  }
+
   .dropdown {
     position: fixed;
     top: $headerHeight;
     left: 1%;
     width: 98%;
     padding: 16px;
-    background-color: $color-lightgrey;
+    background-color: $color-gray-100;
     border-radius: 8px;
     opacity: 0;
     visibility: hidden;
     transform: translateY(8px);
     pointer-events: none;
     cursor: default;
-    transition: all 0.4s ease;
-
-    .dropdown-inner {
-      max-width: 1280px; // 只限制內容
-      margin: 0 auto; // 內容置中
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .dropdown-content {
-      .card {
-        position: relative;
-        width: 160px;
-        display: flex;
-        flex-direction: column;
-        border-radius: 6px;
-        color: $color-darkgery;
-        z-index: 1;
-        cursor: pointer;
-        * {
-          position: relative;
-          z-index: 1;
-        }
-        .item-pic {
-          padding: 8px;
-          aspect-ratio: 1/1;
-          border-radius: 6px;
-          overflow: hidden;
-          background: $color-white;
-          img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-          }
-        }
-        .item-text {
-          padding: 16px 8px 16px;
-          text-align: center;
-          overflow-wrap: break-word;
-          color: $color-darkgery;
-          h3 {
-            font-size: 20px;
-          }
-        }
-      }
-      .card::after {
-        content: "";
-        position: absolute;
-        border-radius: 6px;
-        inset: 0 0 0 0;
-        transform: scaleY(0);
-        transform-origin: top;
-        background: $color-white;
-        @include baseTransition(transform, 0.3s);
-        z-index: 0;
-      }
-      @media (hover: hover) and (pointer: fine) {
-        .card:hover::after {
-          transform: scaleY(1);
-
-          box-shadow: $shadow-set;
-        }
-      }
-    }
+    overflow: hidden;
+    transition:
+      max-height 0.4s ease,
+      inset 0.4s ease,
+      opacity 0.4s ease,
+      transform 0.4s ease,
+      visibility 0.4s ease;
   }
   .dropdown.isOpen {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
     pointer-events: auto;
-    @media screen and (max-width: 768px) {
-      max-height: 1000px;
-    }
   }
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      border-color: $color-purple-500;
+  .dropdown-inner {
+    max-width: 1280px; // 只限制內容
+    margin: 0 auto; // 內容置中
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .dropdown-content {
+    .card {
+      position: relative;
+      width: clamp(120px, 25vw, 160px);
+      display: flex;
+      flex-direction: column;
+      border-radius: 6px;
+      color: $color-gray-800;
+      z-index: 1;
+      cursor: pointer;
+      * {
+        position: relative;
+        z-index: 1;
+      }
+      .item-pic {
+        padding: 8px;
+        aspect-ratio: 1/1;
+        border-radius: 6px;
+        overflow: hidden;
+        background: $color-white;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+      .item-text {
+        padding: 16px 8px 16px;
+        text-align: center;
+        overflow-wrap: break-word;
+      }
     }
-    &:hover .navbar-title {
-      color: $color-purple-500;
+    .card::after {
+      content: "";
+      position: absolute;
+      border-radius: 6px;
+      inset: 0 0 0 0;
+      transform: scaleY(0);
+      transform-origin: top;
+      background: $color-white;
+      @include baseTransition(transform, 0.3s);
+      z-index: 0;
     }
-    &.active {
-      border-color: $color-purple-500;
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover::after {
+        transform: scaleY(1);
+
+        box-shadow: $shadow-set;
+      }
     }
   }
 }
@@ -231,26 +243,56 @@ onBeforeUnmount(() => {
     flex-direction: column;
     padding: 8px 0;
     gap: 8px;
+    // overflow-y: auto;
   }
   .navbar-item {
     display: block;
     height: auto;
     padding: 0;
-
-    // border-bottom: 2px solid $color-lightgrey;
+    width: 100%;
+    border-bottom: 2px solid $color-gray-500;
+    &.active {
+      border-color: $color-purple-500;
+    }
     .dropdown {
-      position: sticky;
+      position: relative;
       top: 0;
+      left: 0;
+      padding: 0;
       max-height: 0px;
-      padding: 0px;
+      // padding: 0px;
       width: 100%;
-      left: 0%;
+      border-radius: 0px;
       background-color: transparent;
-      // background-color: $color-lightgrey;
-      // overflow: hidden;
+      transform: translateY(0px);
     }
     .dropdown.isOpen {
-      max-height: 1000px;
+      max-height: 600px;
+    }
+    .dropdown-inner {
+      gap: 16px 16px;
+      padding: 16px;
+      justify-content: center;
+    }
+    .dropdown-content {
+      .card {
+        display: flex;
+        flex-direction: column;
+        color: $color-gray-200;
+        .item-pic {
+          padding: 8px;
+          background: transparent;
+        }
+        .item-text {
+          padding: 4px;
+          text-align: center;
+        }
+      }
+      .card::after {
+        content: "";
+        transform: scaleY(1);
+        background: $color-gray-800;
+      }
     }
   }
 }
