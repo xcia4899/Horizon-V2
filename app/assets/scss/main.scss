@@ -10,7 +10,7 @@ body {
     margin: 0;
     padding: 0;
     letter-spacing: 1px;
-    //    background-color: $color-lightgrey;
+    //    background-color: $color-gray-100;
 }
 
 body {
@@ -89,7 +89,7 @@ p {
 
 a {
     text-decoration: none;
-    color: $color-darkgery;
+    color: $color-gray-800;
 }
 
 button {
@@ -166,7 +166,7 @@ button {
         transition: all 0.3s ease;
         background-color: rgba($color-white, 0.7); // 加 50% 透明度
         backdrop-filter: blur(2px);
-        color: $color-darkgery;
+        color: $color-gray-800;
     }
 
     &::after {
@@ -250,7 +250,7 @@ input {
     border-style: none;
 
     &::placeholder {
-        color: $color-darkgery;
+        color: $color-gray-800;
         opacity: 0.7;
     }
 }
