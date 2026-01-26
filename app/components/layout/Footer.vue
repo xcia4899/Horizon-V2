@@ -118,7 +118,7 @@ const footerLinks = [
       @media (hover: hover) and (pointer: fine) {
         &:hover {
           width: 100px;
-          background-color: var(--action-primary-soft);
+          background-color: var(--action-primary-hover);
         }
       }
       &:active {

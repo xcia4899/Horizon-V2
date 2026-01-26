@@ -107,7 +107,7 @@ onBeforeUnmount(() => {
       border-color: var(--brand);
     }
     &:hover .navbar-title {
-      color: var(--brand-soft);
+      color: var(--brand-hover);
     }
   }
   &.active {
@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
     white-space: nowrap;
     background-color: transparent;
     // color: $color-white;
-    color: var(--color-title);
+    color: var(--color-primary);
     padding: 8px 8px;
     cursor: pointer;
     @media (pointer: coarse) {
@@ -140,7 +140,7 @@ onBeforeUnmount(() => {
       color: var(--brand-soft);
     }
     &.active {
-      color: var(--brand-soft);
+      color: var(--brand-hover);
     }
   }
 
@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
       display: flex;
       flex-direction: column;
       border-radius: 6px;
-      color: var(--text-primary);
+      color: var(--text-secondary);
       z-index: 1;
       cursor: pointer;
       * {
@@ -227,7 +227,7 @@ onBeforeUnmount(() => {
       .card:hover::after {
         transform: scaleY(1);
 
-        box-shadow: var(--shadow-default);
+        box-shadow: var(--shadow-float);
       }
     }
   }
@@ -250,7 +250,7 @@ onBeforeUnmount(() => {
     height: auto;
     padding: 0;
     width: 100%;
-    border-bottom: 2px solid var(--text-secondary);
+    border-bottom: 2px solid var(--border-default);
     &.active {
       border-color: var(--brand);
     }

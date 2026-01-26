@@ -203,7 +203,7 @@ const cartView = computed(() => {
       border-color 0.4s ease;
     @media (hover: hover) and (pointer: fine) {
       &:hover .icon {
-        color: var(--brand);
+        color: var(--brand-hover);
         // height: 100%;
       }
       &:hover {
@@ -212,7 +212,7 @@ const cartView = computed(() => {
     }
 
     .icon {
-      color: var(--text-on-header);
+      color: var(--text-primary);
       font-size: clamp(22px, 2.2vw, 30px);
       @include baseTransition(color, 0.4s);
     }
@@ -282,33 +282,36 @@ const cartView = computed(() => {
   }
 
   .miniCart {
+    display: flex;
     // display: none;
     position: absolute;
-    top: $headerHeight;
+    top: $headerHeight ;
     right: 0px;
 
-    max-height: 00px;
+    max-height: 0px;
     width: clamp(360px, 40vw, 400px);
     margin-right: clamp(8px, 1.5vw, 16px);
     color: var(--text-primary);
     background-color: var(--bg-surface);
     border-radius: 0 0 4px 4px;
-    box-shadow: var(--shadow-float);
+     box-shadow: var(--shadow-default);
 
     @include baseTransition(max-height, 0.6s);
     overflow: hidden;
-    display: flex;
+    
 
     flex-direction: column;
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         max-height: 600px;
+           
       }
     }
 
     .cart-view {
       padding: 16px 16px 16px;
-      overflow-y: auto;
+     
+      overflow-y: scroll;
       // padding-bottom: 60px;
     }
 

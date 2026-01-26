@@ -115,7 +115,7 @@ const isMenuOpen = ref(false);
     cursor: pointer;
     .icon {
       font-size: 36px;
-      color: var(--text-on-header); // fill="currentColor" 會跟著變
+      color: var(--inverse); // fill="currentColor" 會跟著變
       cursor: pointer;
     }
     &:active {

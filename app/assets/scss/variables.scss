@@ -7,13 +7,17 @@ $indigo: #2c3e50;
 $color-white: #fafafa;
 $color-black: #0a0a0a;
 
-$color-gray-50: #f7f7f7;
-$color-gray-100: #f2f2f2;
-$color-gray-200: #e2e2e2;
-$color-gray-500: #808080;
-$color-gray-700: #2f2f2f;
-$color-gray-800: #2f2f2f;
-$color-gray-900: #1a1a1a;
+$color-gray-50: #f7f7f7; // 幾乎白，用於背景
+$color-gray-100: #f2f2f2; // surface / 卡片
+$color-gray-200: #e2e2e2; // border / divider
+$color-gray-300: #cccccc; // 次要邊框（可選）
+$color-gray-400: #a6a6a6; // placeholder（可選）
+$color-gray-500: #808080; // 次要文字
+$color-gray-600: #5f5f5f; // 輔助文字（補階）
+$color-gray-700: #3f3f3f; // 主要文字（淺底）
+$color-gray-800: #2f2f2f; // 深色文字
+$color-gray-900: #1a1a1a; // 最深背景
+
 
 // Brand
 $color-purple-300: #cb8cf5;
@@ -33,23 +37,25 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
 /* CSS 變數預設值 */
 //  一般淺色背景使用 
 :root {
+    --primary: #{$color-white}; // 70
+    --secondary: #{$color-gray-200}; // 20
+    --inverse: #{$color-black}; // 10
     //  ========== Text =========
     --text-primary: #{$color-black}; // 主要文字（標題 / 內文）
-    --text-secondary: #{$color-gray-500}; // 次要文字（說明 / 輔助）
+    --text-secondary: #{$color-gray-700}; // 次要文字（說明 / 輔助）
     --text-inverse: #{$color-white}; // 深色背景上的文字
     --text-on-brand: #{$white};
     --text-on-header: #{$white};
     --color-title: var(--text-on-header);
     //    ========== Background =========
-    --bg-page: #{$white}; // 整頁背景（body / main）
-    --bg-header: #{$color-gray-900}; // Header / Navbar 背景
+    --bg-page: #{$color-gray-200}; // 整頁背景（body / main）
+    --bg-header: var(--primary); // Header / Navbar 背景
     --bg-surface: #{$color-gray-100}; // 一般內容區 / 卡片
     --bg-surface-soft: #{$color-gray-50}; // 內容內層（更亮）
     --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
-    --bg-header-translucent: rgba(#{$color-gray-900}, 0.3);
     --bg-surface-glass: rgba(#{$white}, 0.7);
     // ========== Border =========
-    --border-default: #{$color-gray-200}; // 一般邊框
+    --border-default: #{$color-gray-400}; // 一般邊框
     //  ========== Brand =========
     --brand: #{$color-purple-500}; // 品牌主色
     --brand-hover: #{$color-purple-700}; // hover / active
@@ -67,20 +73,23 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
 //    深色背景使用 
 @media (prefers-color-scheme: dark) {
     :root {
+        // ========== base =========
+        --primary: #{$color-black}; // 70
+        --secondary: #{$color-gray-800}; // 20
+        --inverse: #{$color-white}; // 10
         // ========== Text =========
         --text-primary: #{$color-white}; // 主要文字
         --text-secondary: #{$color-gray-200}; // 次要文字
         --text-inverse: #{$color-gray-900}; // 淺色背景上的文字
         //  ========== Background =========
-        --bg-page: #{$color-black}; // 整頁最底背景
-        --bg-header: #{$color-black}; // Header / Navbar（最深）
+        --bg-page: #{$color-gray-800}; // 整頁最底背景
+        --bg-header: var(--primary); // Header / Navbar 背景
         --bg-surface: #{$color-gray-900}; // 一般內容區
         --bg-surface-soft: #{$color-gray-800}; // 內容內層（較亮）
-        --bg-surface-strong: #{$color-gray-700}; // 分區 / 強調區（較暗）
-        --bg-header-translucent: rgba(#{$color-black}, 0.3);
+        --bg-surface-strong: #{$color-black}; // 分區 / 強調區（較暗）
         --bg-surface-glass: rgba(#{$color-gray-900}, 0.7);
         /* ========== Border ========= */
-        --border-default: #{$color-gray-800}; // 邊框（避免過亮）
+        --border-default: #{$color-gray-600}; // 邊框（避免過亮）
         //   ========== Brand =========
         --brand: #{$color-purple-500}; // 品牌主色
         --brand-hover: #{$color-purple-300}; // hover / active（更亮）
@@ -89,6 +98,12 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --action-primary: var(--brand);
         --action-primary-hover: var(--brand-hover);
         --action-primary-soft: var(--brand-soft);
+        --shadow-default: 0px 0px 6px 1px rgba(0, 0, 0, 0.4);
+        /* 浮起元件 / Dropdown / Modal */
+        --shadow-float:
+            0 4px 12px rgba(15, 15, 15, 0.863),
+            0 2px 4px rgba(27, 27, 27, 0.5),
+            0 0 0 1px rgba(255, 255, 255, 0.05);
         // /========== State ========= 
         --state-danger: #{$color-red}; // 錯誤
     }
