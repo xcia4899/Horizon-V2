@@ -188,6 +188,7 @@ onBeforeUnmount(() => {
       flex-direction: column;
       border-radius: 6px;
       color: var(--text-secondary);
+      
       z-index: 1;
       cursor: pointer;
       * {
@@ -226,7 +227,6 @@ onBeforeUnmount(() => {
     @media (hover: hover) and (pointer: fine) {
       .card:hover::after {
         transform: scaleY(1);
-
         box-shadow: var(--shadow-float);
       }
     }
@@ -251,9 +251,6 @@ onBeforeUnmount(() => {
     padding: 0;
     width: 100%;
     border-bottom: 2px solid var(--border-default);
-    &.active {
-      border-color: var(--brand);
-    }
     .dropdown {
       position: relative;
       top: 0;
@@ -278,7 +275,7 @@ onBeforeUnmount(() => {
       .card {
         display: flex;
         flex-direction: column;
-        color: var(--text-on-header);
+   
         .item-pic {
           padding: 8px;
           background: transparent;
@@ -291,7 +288,6 @@ onBeforeUnmount(() => {
       .card::after {
         content: "";
         transform: scaleY(1);
-        background: var(--bg-header);
       }
     }
   }

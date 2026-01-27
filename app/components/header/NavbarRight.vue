@@ -186,7 +186,6 @@ const cartView = computed(() => {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  //   gap: 20px;
   .setItem {
     display: flex;
     justify-content: center;
@@ -197,6 +196,7 @@ const cartView = computed(() => {
     border-bottom: 4px solid transparent;
     height: $headerHeight;
     padding: 4px 8px 0px;
+    color: var(--text-primary);
     cursor: pointer;
     transform:
       color 0.4s ease,
@@ -204,20 +204,17 @@ const cartView = computed(() => {
     @media (hover: hover) and (pointer: fine) {
       &:hover .icon {
         color: var(--brand-hover);
-        // height: 100%;
       }
       &:hover {
         border-color: var(--brand);
       }
     }
-
     .icon {
-      color: var(--text-primary);
       font-size: clamp(22px, 2.2vw, 30px);
-      @include baseTransition(color, 0.4s);
+      @include baseTransition(color, 0.3s);
     }
   }
-  .btnItem:active {
+  .btnItem:active .icon {
     transform: scale(0.9);
     opacity: 0.85;
   }
@@ -233,7 +230,6 @@ const cartView = computed(() => {
       transition:
         width 0.6s ease,
         opacity 0.4s ease;
-      // transform: translateX(4px);
       &.isOpen {
         width: 200px;
         opacity: 1;
@@ -275,7 +271,7 @@ const cartView = computed(() => {
       font-weight: 700;
       line-height: 1;
 
-      color: var(--text-on-brand);
+      color: var(--text-primary);
       background-color: var(--action-primary);
       pointer-events: none; // 不干擾點擊
     }
@@ -285,36 +281,30 @@ const cartView = computed(() => {
     display: flex;
     // display: none;
     position: absolute;
-    top: $headerHeight ;
+    flex-direction: column;
+    top: $headerHeight;
     right: 0px;
 
     max-height: 0px;
     width: clamp(360px, 40vw, 400px);
     margin-right: clamp(8px, 1.5vw, 16px);
-    color: var(--text-primary);
+    color: var(--text-secondary);
     background-color: var(--bg-surface);
+    box-shadow: var(--shadow-default);
+    
     border-radius: 0 0 4px 4px;
-     box-shadow: var(--shadow-default);
-
     @include baseTransition(max-height, 0.6s);
     overflow: hidden;
     
-
-    flex-direction: column;
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         max-height: 600px;
-           
       }
     }
-
     .cart-view {
       padding: 16px 16px 16px;
-     
       overflow-y: scroll;
-      // padding-bottom: 60px;
     }
-
     .cart-item {
       // width: 100%;
       min-height: 90px;
