@@ -49,8 +49,8 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --bg-header: var(--primary); // Header / Navbar 背景
     --bg-footer: #{$color-gray-200}; // footer 背景
     --bg-surface: #{$color-gray-100}; // 一般內容區 / 卡片
-    --bg-surface-soft: #{$color-gray-50}; // 內容內層（更亮）
-    --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
+    --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
+    --bg-surface-strong: #{$color-gray-300}; // 分區 / 強調區（更暗）
     --bg-surface-glass: rgba(var(--primary-rgb), 0.7);
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
@@ -83,7 +83,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --bg-page: #{$color-gray-900}; // 整頁最底背景
         --bg-header: var(--primary); // Header / Navbar 背景
         --bg-footer: #{$color-black}; // footer 背景
-        --bg-surface: #{$color-gray-800}; // 一般內容區
+        --bg-surface: #{$color-gray-900}; // 一般內容區
         --bg-surface-soft: #{$color-gray-700}; // 內容內層（較亮）
         --bg-surface-strong: #{$color-black}; // 分區 / 強調區（較暗）
         --bg-surface-glass: rgba(#{--primary}, 0.7);

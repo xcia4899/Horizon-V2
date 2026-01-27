@@ -1,7 +1,8 @@
+feature-content
 <template>
   <div>
     <section class="home-hero">home-hero</section>
-    <section class="home-feature ">
+    <section class="home-feature">
       <div class="feature-inner container">
         <div class="feature-intro">
           <h2>打造你的理想戰場</h2>
@@ -11,61 +12,25 @@
           </p>
         </div>
         <div class="feature-content">
-          <div class="feature-actions button-group">
-            <button class="item secnod-item-01">專業級操作</button>
-            <button class="item secnod-item-02">電競制霸</button>
-            <button class="item secnod-item-03">提高您的生產力</button>
-            <button class="item secnod-item-04">自在生活靈感</button>
+          <div class="feature-actions">
+            <button type="button" class="actions-item">專業級操作</button>
+            <button type="button" class="actions-item">電競制霸</button>
+            <button type="button" class="actions-item">提高您的生產力</button>
+            <button type="button" class="actions-item">自在生活靈感</button>
           </div>
           <div class="feature-panel">
-            <div class="sec-row-area">
-              <div class="r3-col r3-col-01">
-                <div>
-                  <img src="./images/pictrue/row-second-item-01.jpg" alt="" />
+            <div class="panel-inner">
+              <div class="panel-card">
+                <div class="card-media">
+                  <img src="/images/pictrue/row-second-item-01.jpg" alt="" />
                 </div>
-                <div>
-                  <h3>專為專業人士而設計。專為勝利而生。</h3>
-                  <p>
+                <div class="card-content">
+                  <h3 class="card-title">專為專業人士而設計。專為勝利而生。</h3>
+                  <p class="card-desc">
                     要發揮最佳狀態，您需要最好的裝備。這些產品與世界上最好的職業玩家合作設計，提供性能和功能，讓您專注於重要的事情：勝利。
                   </p>
                 </div>
               </div>
-              <!-- <div class="r3-col r3-col-02">
-                <div>
-                  <img src="./images/pictrue/row-second-item-02.jpg" alt="" />
-                  
-                </div>
-                <div>
-                  <h3>專業競技，無懈可擊。</h3>
-                  <p>
-                    想要主宰戰場，就需要頂尖的裝備。這些產品與菁英職業選手共同開發，融合極致效能與精準操控，讓你全神貫注，只為贏得勝利。
-                  </p>
-                </div>
-              </div>
-              <div class="r3-col r3-col-03">
-                <div>
-                  <img src="./images/pictrue/row-second-item-04.jpg" alt="" />
-                 
-                </div>
-                <div>
-                  <h3>提高您的生產力。</h3>
-                  <p>
-                    用專為人體工學穩定性和支撐力所設計的工具，在長時間編寫程式碼的過程中保持舒適和專注。
-                  </p>
-                </div>
-              </div>
-              <div class="r3-col r3-col-04">
-                <div>
-                  <img src="./images/pictrue/row-second-item-03.webp" alt="" />
-              
-                </div>
-                <div>
-                  <h3>生活，不必複雜。</h3>
-                  <p>
-                    將設計融入日常，讓你在平凡中找到從容與靈感。自在，不是選擇，而是一種生活方式。
-                  </p>
-                </div>
-              </div> -->
             </div>
           </div>
         </div>
@@ -98,58 +63,74 @@
     flex-direction: column;
     align-items: center;
     gap: 24px;
-
     text-align: center;
     max-width: 600px;
   }
-  .feature-actions {
-    // width: 100%;
+  .feature-content {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .item {
-      width: 100%;
-
-      padding: 16px 16px;
-    
-      font-size: clamp(16px, 2vw, 20px);
-      font-weight: 600;
-      color:var(--text-secondary);
-      border-bottom: 4px solid var(--border-default);
-      // transition: all 0.3s ease;
-      cursor: pointer;
-      &:hover {
-        border-color: var(--brand-hover);
+    flex-direction: column;
+    .feature-actions {
+      // width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // flex-direction: column;
+      // flex-wrap: wrap;
+      .actions-item {
+        flex: 1;
+        width: 100%;
+        padding: 16px 16px;
+        font-size: clamp(16px, 2vw, 20px);
+        font-weight: 600;
+        color: var(--text-secondary);
+        border-bottom: 4px solid var(--border-default);
+        // transition: all 0.3s ease;
+        cursor: pointer;
+        @media (hover: hover) and (pointer: fine) {
+          &:not(.active):hover {
+            border-color: var(--brand-hover);
+          }
+        }
+        &:active,
+        &.active {
+          color: var(--brand-hover);
+          border-color: var(--brand);
+          // font-weight: 500;
+        }
       }
     }
 
-    //按鈕CSS
-    .item-color {
-      color: var(--brand-hover);
-      border-color: var(--brand-hover);
-      // font-weight: 500;
-    }
-  }
-
-  .feature-panel {
-    // margin: 32px 0px;
-    // background-color: #fff;
-    padding-block: 64px;
-    // overflow: hidden;
-
-    .sec-row-area {
+    .feature-panel {
       display: flex;
-      justify-content: flex-start;
-      // width: 400%;
-      left: 0%;
-      // transition: all 0.3s ease;
-    }
+      flex-direction: column;
+      padding-block: 32px;
+      // overflow: hidden;
+      .panel-inner {
+        display: flex;
+        // justify-content: flex-start;
 
-    .r3-col {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 3%;
+        // transition: all 0.3s ease;
+      }
+      .panel-card {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: clamp(16px, 3vw, 32px);
+        .card-media {
+          flex: 0 0 55%;
+          img {
+            width: 100%;
+            // height: 100%;
+            object-fit: cover;
+          }
+        }
+        .card-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+        }
+      }
     }
   }
 }

@@ -45,7 +45,7 @@ h5 {
     padding: 0;
     line-height: 1.4;
     letter-spacing: 1px;
-    white-space: nowrap;
+    // white-space: nowrap;
     cursor: default;
 }
 
@@ -79,7 +79,7 @@ p {
     padding: 0;
     line-height: 1.4;
     letter-spacing: 1px;
-    font-size: clamp(16px, 1.5vw, 16px);
+    font-size: clamp(14px, 2vw, 16px);
     font-weight: 400;
     overflow-wrap: break-word;
     cursor: default;

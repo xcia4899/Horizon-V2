@@ -103,17 +103,14 @@ onBeforeUnmount(() => {
   border-bottom: 4px solid transparent;
   cursor: pointer;
   @media (hover: hover) and (pointer: fine) {
-    &:hover {
+    &:not(.active):hover {
       border-color: var(--brand);
     }
-    &:hover .navbar-title {
+    &:not(.active):hover .navbar-title {
       color: var(--brand-hover);
     }
   }
   &.active {
-    border-color: var(--brand);
-  }
-  &:active {
     border-color: var(--brand);
   }
   .navbar-title {
@@ -137,7 +134,6 @@ onBeforeUnmount(() => {
     &:active {
       transform: scale(0.95);
       opacity: 0.85;
-      color: var(--brand-soft);
     }
     &.active {
       color: var(--brand-hover);
@@ -150,7 +146,7 @@ onBeforeUnmount(() => {
     left: 1%;
     // right: auto;
     width: 98%;
-    
+
     padding: 16px;
     background-color: var(--bg-surface);
     border-radius: 8px;
@@ -190,7 +186,7 @@ onBeforeUnmount(() => {
       flex-direction: column;
       border-radius: 6px;
       color: var(--text-secondary);
-      
+
       z-index: 1;
       cursor: pointer;
       * {
@@ -213,8 +209,8 @@ onBeforeUnmount(() => {
         padding: 16px 8px 16px;
         text-align: center;
         overflow-wrap: break-word;
-        h4{
-           cursor: pointer;
+        h4 {
+          cursor: pointer;
         }
       }
     }
@@ -280,7 +276,7 @@ onBeforeUnmount(() => {
       .card {
         display: flex;
         flex-direction: column;
-   
+
         .item-pic {
           padding: 8px;
           background: transparent;
