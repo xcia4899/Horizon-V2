@@ -6,7 +6,7 @@
       </div>
     </header>
 
-    <main class="container">
+    <main class="main">
       <slot></slot>
     </main>
 
@@ -62,11 +62,11 @@ useSeoMeta({
     // @include baseTransition;
   }
 }
-.container {
+.main {
   flex: 1;
-  max-width: 1280px;
-  min-height: 400px;
-  margin: 70px auto;
+  // max-width: 1280px;
+  // min-height: 400px;
+  // margin: 70px auto;
   // padding: 16px;
   // z-index: 1;
 }
