@@ -237,7 +237,14 @@ const cartView = computed(() => {
       :deep(.el-input__wrapper) {
         box-shadow: none;
         padding: 4px 0;
-        // background-color: #ffffff;
+        background-color: var(--bg-surface-strong);
+
+        @media (hover: hover) and (pointer: fine) {
+          &:hover,&:focus-within {
+            background-color: var(--bg-surface);
+            outline: 2px solid var(--brand);
+          }
+        }
       }
       .icon {
         margin: 0 8px;
@@ -271,7 +278,7 @@ const cartView = computed(() => {
       font-weight: 700;
       line-height: 1;
 
-      color: var(--text-primary);
+      color: $color-white;
       background-color: var(--action-primary);
       pointer-events: none; // 不干擾點擊
     }
@@ -286,24 +293,24 @@ const cartView = computed(() => {
     right: 0px;
 
     max-height: 0px;
-    width: clamp(360px, 40vw, 400px);
+    width: 400px;
     margin-right: clamp(8px, 1.5vw, 16px);
     color: var(--text-secondary);
     background-color: var(--bg-surface);
     box-shadow: var(--shadow-default);
-    
+
     border-radius: 0 0 4px 4px;
     @include baseTransition(max-height, 0.6s);
     overflow: hidden;
-    
+
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         max-height: 600px;
       }
     }
     .cart-view {
-      padding: 16px 16px 16px;
-      overflow-y: scroll;
+      padding: 16px;
+      overflow-y: auto;
     }
     .cart-item {
       // width: 100%;
@@ -313,6 +320,7 @@ const cartView = computed(() => {
       align-items: flex-end;
       padding: 8px 4px;
       border-bottom: 1px solid var(--border-default);
+
       .item-img {
         margin: auto 0;
         img {
@@ -323,12 +331,12 @@ const cartView = computed(() => {
       .item-name {
         max-width: 100px;
         white-space: wrap;
-
         font-weight: 600;
+        font-size: 14px;
       }
       .item-detal {
         p {
-          font-weight: 600;
+          font-size: 14px;
         }
         .price {
           min-width: 90px;
@@ -337,16 +345,17 @@ const cartView = computed(() => {
 
       .delete {
         position: relative;
-        cursor: pointer;
         padding: 16px 0px 0px;
         margin: auto 0;
+        color:var(--text-secondary);
+        cursor: pointer;
         .icon {
-          font-size: clamp(36px, 3vw, 40px);
+          font-size: 36px;
           display: grid;
           place-items: center;
         }
         &:hover .icon {
-          background-color: var(--brand);
+          background-color: var(--state-danger);
           border: 2px solid transparent;
         }
 
@@ -365,9 +374,10 @@ const cartView = computed(() => {
 
           opacity: 0;
           visibility: hidden;
-          border: 1px solid var(--text-primary);
+          border: 1px solid var(----state-danger);
           border-radius: 6px;
-          background: var(--bg-surface);
+          color: var(--inverse);
+          background: var(--bg-surface-soft);
         }
 
         &:hover::after {
@@ -380,16 +390,12 @@ const cartView = computed(() => {
       display: flex;
       align-items: flex-end;
       justify-content: space-between;
-
-      padding: 16px 16px 16px;
-      background-color: var(--bg-surface);
+      padding: 8px 16px 16px;
       h4 {
         font-weight: 900;
-        // letter-spacing: 0px;
       }
-
       .btn {
-        height: 30px;
+        height: 32px;
       }
     }
   }

@@ -108,19 +108,18 @@ button {
     font-size: clamp(14px, 1.5vw, 16px);
     font-weight: 400;
 
-    color: var(--text-on-brand);
+    color: $color-white;
     background-color: var(--action-primary);
     border: 2px solid transparent;
     border-radius: 4px;
     letter-spacing: 1px;
-
     transition: all 0.4s ease;
     cursor: pointer;
 
     &:hover {
         font-weight: 600;
         color: var(--action-primary-hover);
-        background: transparent;
+
         background-color: transparent;
         border-color: var(--action-primary);
     }
@@ -255,6 +254,11 @@ input {
         color: var(--text-secondary);
         opacity: 0.7;
     }
+    //顏色設定
+    // &:hover,&:focus {
+    //     background-color: var(--bg-surface-soft);
+    //     outline: 2px solid var(--brand);
+    //   }
 }
 
 .strike {

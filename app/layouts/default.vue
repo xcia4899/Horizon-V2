@@ -11,9 +11,7 @@
     </main>
 
     <footer class="footer">
-      <div class="footer-inner">
-        <layoutFooter />
-      </div>
+      <layoutFooter />
     </footer>
   </div>
 </template>
@@ -48,7 +46,7 @@ useSeoMeta({
 .header {
   position: fixed;
   top: 0;
-  background: var(--bg-header);
+  background: rgba(var(--bg-header) ,0.8);
   backdrop-filter: blur(8px);
   overflow-x: clip;
   width: 100%;
@@ -75,13 +73,13 @@ useSeoMeta({
 .footer {
   position: relative;
   z-index: 10;
-  background: var(--primary);
-  .footer-inner {
-    position: relative;
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 16px clamp(8px, 1.5vw, 16px);
-    // @include baseTransition;
-  }
+
+  // .footer-inner {
+  //   position: relative;
+  //   max-width: 1280px;
+  //   margin: 0 auto;
+  //   padding: 16px clamp(8px, 1.5vw, 16px);
+  //   // @include baseTransition;
+  // }
 }
 </style>
