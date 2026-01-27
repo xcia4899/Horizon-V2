@@ -274,3 +274,9 @@ li {
     margin: 0;
     list-style: none;
 }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline:clamp(16px, 4vw, 32px);
+}

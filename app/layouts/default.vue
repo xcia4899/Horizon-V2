@@ -1,12 +1,12 @@
 <template>
   <div class="layout">
     <header class="header">
-      <div class="header-inner">
+      <div class="header-container">
         <layoutHeader />
       </div>
     </header>
 
-    <main class="container">
+    <main class="main">
       <slot></slot>
     </main>
 
@@ -51,35 +51,20 @@ useSeoMeta({
   overflow-x: clip;
   width: 100%;
   /* 內層：置中 + max-width */
-
   z-index: 100;
-  .header-inner {
+  .header-container {
     position: relative;
     max-width: 1440px;
     margin: 0 auto;
     padding: 0 0px;
-    // padding: 0 clamp(8px, 1.5vw, 16px);
-    // @include baseTransition;
+
   }
 }
-.container {
+.main {
   flex: 1;
-  max-width: 1280px;
-  min-height: 400px;
-  margin: 70px auto;
-  // padding: 16px;
-  // z-index: 1;
 }
 .footer {
   position: relative;
   z-index: 10;
-
-  // .footer-inner {
-  //   position: relative;
-  //   max-width: 1280px;
-  //   margin: 0 auto;
-  //   padding: 16px clamp(8px, 1.5vw, 16px);
-  //   // @include baseTransition;
-  // }
 }
 </style>

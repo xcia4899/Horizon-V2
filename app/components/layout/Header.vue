@@ -1,6 +1,6 @@
 <template>
   <div
-    class="header-container"
+    class="header-inner"
     :class="{ 'mobile-isOpen': isMenuOpen === true }"
   >
     <button type="button" class="menu-toggle" @click="toggleMenu">
@@ -77,14 +77,15 @@ const isMenuOpen = ref(false);
 </script>
 
 <style scoped lang="scss">
-.header-container {
+.header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
   // top: 0;
   // height: auto;
-  // margin: 0 auto;
-  padding: 0 clamp(8px, 1.5vw, 16px);
+  margin: 0 auto;
+  padding: 0 clamp(16px, 4vw, 32px);
+
   @include baseTransition(height, 0.6s);
   .nav-left,
   .nav-right,
@@ -134,7 +135,7 @@ const isMenuOpen = ref(false);
 
 /* ===== mobile ===== */
 @media screen and (max-width: 768px) {
-  .header-container {
+  .header-inner {
     height: $headerHeight;
     background-color: var(--bg-header);
     align-content: flex-start;
@@ -165,7 +166,7 @@ const isMenuOpen = ref(false);
       order: 2;
     }
   }
-  .header-container.mobile-isOpen {
+  .header-inner.mobile-isOpen {
     height: 100vh;
   }
 }

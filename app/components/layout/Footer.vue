@@ -1,6 +1,6 @@
 <template>
   <section class="footer-top">
-    <div class="footer-inner">
+    <div class="footer-inner container">
       <h3 class="title">訂閱最新消息</h3>
       <div class="input">
         <input class="input-field" type="text" placeholder="請輸入Email" />
@@ -13,7 +13,7 @@
     </div>
   </section>
   <section class="footer-main">
-    <div class="footer-inner">
+    <div class="footer-inner container">
       <div class="main-left">
         <ul v-for="(items, index) in footerLinks" :key="index" class="item">
           <li class="title">
@@ -38,7 +38,7 @@
     </div>
   </section>
   <section class="footer-other">
-    <div class="footer-inner">
+    <div class="footer-inner container">
       <p>支援 ID：77183a7ea63dc837</p>
       <div class="language">
         <p>English</p>
@@ -84,10 +84,9 @@ const footerLinks = [
 <style scoped lang="scss">
 .footer-top {
   background: var(--bg-surface-soft);
-  padding: 16px;
   .footer-inner {
-    margin: 0 auto;
     max-width: 600px;
+    padding-block: 16px ;
   }
 
   .title {
@@ -140,13 +139,12 @@ const footerLinks = [
   }
 }
 .footer-main {
-  padding: 16px 16px 32px;
   background: var(--bg-footer);
   .footer-inner {
-    margin: 0 auto;
-    max-width: 1280px;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    padding-block: 32px ;
     gap: 10vw;
     width: 100%;
   }
@@ -204,19 +202,20 @@ const footerLinks = [
 }
 
 .footer-other {
-  padding: 16px 16px 16px;
   background: var(--bg-footer);
   .footer-inner {
-    margin: 0 auto;
-    max-width: 1280px;
     display: flex;
     justify-content: space-between;
     width: 100%;
+    padding-block: 32px ;
   }
   .language {
     display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
     gap: 16px;
     p {
+      
       cursor: pointer;
       &:hover {
         text-decoration: underline;
