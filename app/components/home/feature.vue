@@ -135,13 +135,11 @@ const panelStyle = computed(() => ({
     flex-direction: column;
     padding-block: 32px;
     overflow: hidden;
-
     .panel-inner {
       display: flex;
       width: calc(100% + 2px);
       transition: transform 0.6s ease;
       will-change: transform;
-
     }
     .panel-card {
       flex: 0 0 100%;
