@@ -41,7 +41,8 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --inverse: #{$color-black}; // 10
     //  ========== Text =========
     --text-primary: #{$color-black}; // 主要文字（標題 / 內文）
-    --text-secondary: #{$color-gray-700}; // 次要文字（說明 / 輔助）
+    --text-secondary: #{$color-gray-800}; // 次要文字（說明 / 輔助）
+    --text-tertiary: #{$color-gray-600}; // 次要輔助文字
     --text-inverse: #{$color-white}; // 深色背景上的文字
 
     //    ========== Background =========
@@ -50,7 +51,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --bg-footer: #{$color-gray-200}; // footer 背景
     --bg-surface: #{$color-gray-100}; // 一般內容區 / 卡片
     --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
-    --bg-surface-strong: #{$color-gray-300}; // 分區 / 強調區（更暗）
+    --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
     --bg-surface-glass: rgba(var(--primary-rgb), 0.7);
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
@@ -77,7 +78,8 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --inverse: #{$color-white}; // 10
         // ========== Text =========
         --text-primary: #{$color-white}; // 主要文字
-        --text-secondary: #{$color-gray-300}; // 次要文字
+        --text-secondary: #{$color-gray-200}; // 次要文字
+        --text-tertiary: #{$color-gray-400}; // 次要輔助文字
         --text-inverse: #{$color-gray-900}; // 淺色背景上的文字
         //  ========== Background =========
         --bg-page: #{$color-gray-900}; // 整頁最底背景
