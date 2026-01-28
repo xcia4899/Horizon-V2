@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
     align-items: center;
 
     letter-spacing: 1px;
-    font-size: clamp(14px, 2.5vw, 18px);
+    font-size: clamp(14px, 2vw, 18px);
     white-space: nowrap;
     background-color: transparent;
     // color: $color-white;
