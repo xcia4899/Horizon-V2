@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="header-inner"
-    :class="{ 'mobile-isOpen': isMenuOpen === true }"
-  >
+  <div class="header-inner" :class="{ 'mobile-isOpen': isMenuOpen === true }">
     <button type="button" class="menu-toggle" @click="toggleMenu">
       <Icon name="mdi:menu" class="icon" />
     </button>
@@ -15,7 +12,9 @@
       <HeaderNavbarMenu :menus="menus" :isMenuOpen="isMenuOpen" />
     </section>
     <!-- Navber-Right -->
-    <HeaderNavbarRight />
+    <aside class="nav-right">
+      <HeaderNavbarRight />
+    </aside>
   </div>
 </template>
 
@@ -46,7 +45,11 @@ const menus: SetMenu[] = [
       { text: "滑鼠", img: "./images/picture/fourth-row2-01.png", href: "" },
       { text: "鍵盤", img: "./images/picture/fourth-row2-06.png", href: "" },
       { text: "耳機", img: "./images/pic-detal/PRO-1007/10007.png", href: "" },
-      { text: "麥克風", img: "./images/pic-detal/ROG-1005/10003.png", href: "" },
+      {
+        text: "麥克風",
+        img: "./images/pic-detal/ROG-1005/10003.png",
+        href: "",
+      },
     ],
   },
   {
@@ -94,21 +97,6 @@ const isMenuOpen = ref(false);
     // max-width: 300px;
     align-items: baseline;
   }
-  .nav-left {
-    display: grid;
-    place-items: center start;
-
-    .logo {
-      font-size: 40px;
-      // text-align: left;
-      font-weight: bolder;
-      // line-height: $headerHeight;
-
-      color: var(--brand);
-      cursor: pointer;
-    }
-  }
-
   .menu-toggle {
     display: none;
     height: $headerHeight;
@@ -127,9 +115,28 @@ const isMenuOpen = ref(false);
       }
     }
   }
+  .nav-left {
+    display: grid;
+    place-items: center start;
+    .logo {
+      font-size: 40px;
+      // text-align: left;
+      font-weight: bolder;
+      // line-height: $headerHeight;
+
+      color: var(--brand);
+      cursor: pointer;
+    }
+  }
+
   .navbar {
     flex: 2;
     @include baseTransition(max-height, 0.6s);
+  }
+  .nav-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
 }
 
@@ -147,6 +154,9 @@ const isMenuOpen = ref(false);
     }
     .nav-left {
       place-items: center;
+      .logo {
+        font-size: clamp(24px, 6vw, 40px);
+      }
     }
     .navbar {
       flex: 0 0 100%;
@@ -171,7 +181,7 @@ const isMenuOpen = ref(false);
   }
 }
 
-// @media screen and (max-width: 425px) {
+// @media screen and (max-width: 500px) {
 //   #header-inner {
 //     .logo {
 //       font-size: 28px;

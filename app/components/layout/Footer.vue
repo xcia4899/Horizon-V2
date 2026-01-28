@@ -247,7 +247,7 @@ const footerLinks = [
   }
 }
 
-@media screen and (max-width: 425px) {
+@media screen and (max-width: 500px) {
   .footer-main {
     .main-left {
       flex-direction: column;

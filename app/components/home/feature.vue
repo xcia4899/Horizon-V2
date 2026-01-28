@@ -86,7 +86,6 @@ const panelStyle = computed(() => ({
 </script>
 
 <style scoped lang="scss">
-
 .feature-intro {
   display: flex;
   flex-direction: column;
@@ -94,6 +93,9 @@ const panelStyle = computed(() => ({
   gap: 24px;
   text-align: center;
   max-width: 600px;
+  @media (max-width: 500px) {
+    padding-inline: clamp(16px, 2vw, 32px);
+  }
 }
 .feature-content {
   display: flex;
@@ -106,16 +108,17 @@ const panelStyle = computed(() => ({
     // flex-direction: column;
     // flex-wrap: wrap;
     .actions-item {
-      flex: 1;
+      width: 0 0 50%;
       width: 100%;
       padding: 16px 16px;
-      font-size: clamp(16px, 2vw, 20px);
+      font-size: clamp(18px, 2vw, 20px);
       font-weight: 400;
       color: var(--text-tertiary);
-      border-bottom: 4px solid var(--border-default);
+      border-bottom: 2px solid var(--border-default);
       // transition: all 0.3s ease;
       cursor: pointer;
       @media (hover: hover) and (pointer: fine) {
+        border-width: 4px;
         &:not(.active):hover {
           color: var(--text-secondary);
           border-color: var(--brand-hover);
@@ -127,6 +130,11 @@ const panelStyle = computed(() => ({
         border-color: var(--brand);
         font-weight: 500;
       }
+    }
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      padding-inline: clamp(16px, 2vw, 32px);
     }
   }
 
@@ -150,18 +158,25 @@ const panelStyle = computed(() => ({
       // margin-inline:16px ;
       .card-media {
         flex: 0 0 55%;
+        width: 100%;
         img {
           width: 100%;
-          // height: 100%;
           object-fit: cover;
+        }
+        @media (max-width: 500px) {
+          // flex: 0 0 100%;
         }
       }
       .card-content {
         flex: 1;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 24px;
         padding: clamp(16px, 2vw, 32px);
+      }
+      @media (max-width: 500px) {
+        flex-direction: column;
       }
     }
   }

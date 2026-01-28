@@ -1,78 +1,76 @@
 <template>
-  <aside class="nav-right">
-    <div class="setItem search-area">
-      <!-- 搜尋 Modal -->
-      <div class="search-input" :class="{ isOpen: showSearch }">
-        <el-input
-          ref="inputRef"
-          v-model="keyword"
-          placeholder="搜尋商品..."
-          class="input-box"
-          @blur="closeSearch"
-          @keydown.enter="submitSearch"
-        >
-          <template #prefix>
-            <Icon name="mdi:magnify" class="icon" size="24" />
-          </template>
-        </el-input>
-      </div>
-      <!-- 搜尋 -->
-      <button
-        type="button"
-        class="btnItem search-btn"
-        @mousedown.prevent
-        @click="onSearchClick"
+  <div class="setItem search-area">
+    <!-- 搜尋 Modal -->
+    <div class="search-input" :class="{ isOpen: showSearch }">
+      <el-input
+        ref="inputRef"
+        v-model="keyword"
+        placeholder="搜尋商品..."
+        class="input-box"
+        @blur="closeSearch"
+        @keydown.enter="submitSearch"
       >
-        <Icon
-          :name="showSearch ? 'mdi:close' : 'mdi:magnify'"
-          class="icon"
-          :class="{ active: showSearch === true }"
-        />
-      </button>
+        <template #prefix>
+          <Icon name="mdi:magnify" class="icon" size="24" />
+        </template>
+      </el-input>
     </div>
+    <!-- 搜尋 -->
+    <button
+      type="button"
+      class="btnItem search-btn"
+      @mousedown.prevent
+      @click="onSearchClick"
+    >
+      <Icon
+        :name="showSearch ? 'mdi:close' : 'mdi:magnify'"
+        class="icon"
+        :class="{ active: showSearch === true }"
+      />
+    </button>
+  </div>
 
-    <!-- 登入 -->
-    <button type="button" class="btnItem setItem login-btn">
-      <Icon name="mdi:account-circle" class="icon" />
-      <!-- 以登入 -->
-      <!-- <Icon
+  <!-- 登入 -->
+  <button type="button" class="btnItem setItem login-btn">
+    <Icon name="mdi:account-circle" class="icon" />
+    <!-- 以登入 -->
+    <!-- <Icon
           :name="isLogin ? 'mdi:account-circle' : 'mdi:account-outline'"
           class="icon"
         /> -->
-    </button>
-    <!-- 購物車 -->
-    <button type="button" class="btnItem setItem cart-btn">
-      <Icon name="meteor-icons:cart-shopping" class="icon" />
-      <span v-if="cartCount > 0" class="cart-badge">
-        {{ cartCount > 99 ? "99+" : cartCount }}
-      </span>
-    </button>
+  </button>
+  <!-- 購物車 -->
+  <button type="button" class="btnItem setItem cart-btn">
+    <Icon name="meteor-icons:cart-shopping" class="icon" />
+    <span v-if="cartCount > 0" class="cart-badge">
+      {{ cartCount > 99 ? "99+" : cartCount }}
+    </span>
+  </button>
 
-    <!-- 迷你購物車顯示 -->
-    <div class="miniCart">
-      <div class="cart-view">
-        <div v-for="item in cartView" :key="item.id" class="cart-item">
-          <div class="item-img">
-            <img :src="item.images" :alt="item.name" />
-            <!-- <p>{{ item.brand }}</p> -->
-          </div>
-          <p class="item-name">{{ item.name }}</p>
-          <!-- <div>單價：{{ item.price }}</div> -->
-          <div class="item-detal">
-            <p>數量：2</p>
-            <p class="price">小計：1992${{}}</p>
-          </div>
-          <div class="delete" @click="''">
-            <Icon name="mdi:delete-circle-outline" class="icon" />
-          </div>
+  <!-- 迷你購物車顯示 -->
+  <div class="miniCart">
+    <div class="cart-view">
+      <div v-for="item in cartView" :key="item.id" class="cart-item">
+        <div class="item-img">
+          <img :src="item.images" :alt="item.name" />
+          <!-- <p>{{ item.brand }}</p> -->
+        </div>
+        <p class="item-name">{{ item.name }}</p>
+        <!-- <div>單價：{{ item.price }}</div> -->
+        <div class="item-detal">
+          <p>數量：2</p>
+          <p class="price">小計：1992${{}}</p>
+        </div>
+        <div class="delete" @click="''">
+          <Icon name="mdi:delete-circle-outline" class="icon" />
         </div>
       </div>
-      <div class="bottom-area">
-        <h4>總金額：4450{{}}元</h4>
-        <button class="btn">結帳</button>
-      </div>
     </div>
-  </aside>
+    <div class="bottom-area">
+      <h4>總金額：4450{{}}元</h4>
+      <button class="btn">結帳</button>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -182,228 +180,227 @@ const cartView = computed(() => {
 </script>
 
 <style scoped lang="scss">
-.nav-right {
+.setItem {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  .setItem {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+}
+.btnItem {
+  border-bottom: 4px solid transparent;
+  height: $headerHeight;
+  padding-block: 4px 0px;
+  padding-inline: clamp(0px, 1vw, 8px);
+  color: var(--text-primary);
+  cursor: pointer;
+  transform:
+    color 0.4s ease,
+    border-color 0.4s ease;
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .icon {
+      color: var(--brand-hover);
+    }
+    &:hover {
+      border-color: var(--brand);
+    }
   }
+  .icon {
+    font-size: clamp(22px, 2.2vw, 30px);
+    @include baseTransition(color, 0.3s);
+  }
+  // @media (max-width:500px) {
 
-  .btnItem {
-    border-bottom: 4px solid transparent;
-    height: $headerHeight;
-    padding: 4px 8px 0px;
-    color: var(--text-primary);
-    cursor: pointer;
-    transform:
-      color 0.4s ease,
-      border-color 0.4s ease;
-    @media (hover: hover) and (pointer: fine) {
-      &:hover .icon {
-        color: var(--brand-hover);
-      }
-      &:hover {
-        border-color: var(--brand);
+  // }
+}
+.btnItem:active .icon {
+  transform: scale(0.9);
+  opacity: 0.85;
+}
+.search-area {
+  position: relative;
+  display: flex;
+  margin: auto 0;
+  .search-input {
+    position: absolute;
+    right: 0;
+    width: 40px;
+    opacity: 0;
+    transition:
+      width 0.6s ease,
+      opacity 0.4s ease;
+    &.isOpen {
+      width: 200px;
+      opacity: 1;
+    }
+    :deep(.el-input__wrapper) {
+      box-shadow: none;
+      padding: 4px 0;
+      background-color: var(--bg-surface-strong);
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover,
+        &:focus-within {
+          background-color: var(--bg-surface);
+          outline: 2px solid var(--brand);
+        }
       }
     }
     .icon {
-      font-size: clamp(22px, 2.2vw, 30px);
-      @include baseTransition(color, 0.3s);
+      margin: 0 8px;
+    }
+    @media (hover: hover) and (pointer: coarse) {
+      display: none;
     }
   }
-  .btnItem:active .icon {
-    transform: scale(0.9);
-    opacity: 0.85;
-  }
-  .search-area {
-    position: relative;
-    display: flex;
-    margin: auto 0;
-    .search-input {
-      position: absolute;
-      right: 0;
-      width: 40px;
-      opacity: 0;
-      transition:
-        width 0.6s ease,
-        opacity 0.4s ease;
-      &.isOpen {
-        width: 200px;
-        opacity: 1;
-      }
-      :deep(.el-input__wrapper) {
-        box-shadow: none;
-        padding: 4px 0;
-        background-color: var(--bg-surface-strong);
-
-        @media (hover: hover) and (pointer: fine) {
-          &:hover,&:focus-within {
-            background-color: var(--bg-surface);
-            outline: 2px solid var(--brand);
-          }
-        }
-      }
-      .icon {
-        margin: 0 8px;
-      }
-      @media (hover: hover) and (pointer: coarse) {
-        display: none;
-      }
-    }
-    .search-btn {
-      .icon.active {
-        color: var(--brand);
-      }
+  .search-btn {
+    .icon.active {
+      color: var(--brand);
     }
   }
-  .cart-btn {
-    position: relative;
-    .cart-badge {
-      position: absolute;
-      top: 12px;
-      right: -2px;
-
-      min-width: 20px;
-      height: 20px;
-      padding: 0 6px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 700;
-      line-height: 1;
-
-      color: $color-white;
-      background-color: var(--action-primary);
-      pointer-events: none; // 不干擾點擊
-    }
-  }
-
-  .miniCart {
-    display: flex;
-    // display: none;
+}
+.cart-btn {
+  position: relative;
+  .cart-badge {
     position: absolute;
-    flex-direction: column;
-    top: $headerHeight;
-    right: 0px;
+    top: 12px;
+    right: -2px;
 
-    max-height: 0px;
-    width: 400px;
-    margin-right: clamp(8px, 1.5vw, 16px);
-    color: var(--text-secondary);
-    background-color: var(--bg-surface);
-    box-shadow: var(--shadow-default);
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
 
-    border-radius: 0 0 4px 4px;
-    @include baseTransition(max-height, 0.6s);
-    overflow: hidden;
+    display: grid;
+    place-items: center;
 
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        max-height: 600px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+
+    color: $color-white;
+    background-color: var(--action-primary);
+    pointer-events: none; // 不干擾點擊
+  }
+}
+
+.miniCart {
+  display: flex;
+  // display: none;
+  position: absolute;
+  flex-direction: column;
+  top: $headerHeight;
+  right: 0px;
+
+  max-height: 0px;
+  width: 400px;
+  margin-right: clamp(8px, 1.5vw, 16px);
+  color: var(--text-secondary);
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-default);
+
+  border-radius: 0 0 4px 4px;
+  @include baseTransition(max-height, 0.6s);
+  overflow: hidden;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      max-height: 600px;
+    }
+  }
+  .cart-view {
+    padding: 16px;
+    overflow-y: auto;
+  }
+  .cart-item {
+    // width: 100%;
+    min-height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--border-default);
+
+    .item-img {
+      margin: auto 0;
+      img {
+        max-width: 60px;
       }
     }
-    .cart-view {
-      padding: 16px;
-      overflow-y: auto;
+
+    .item-name {
+      max-width: 100px;
+      white-space: wrap;
+      font-weight: 600;
+      font-size: 14px;
     }
-    .cart-item {
-      // width: 100%;
-      min-height: 90px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 8px 4px;
-      border-bottom: 1px solid var(--border-default);
-
-      .item-img {
-        margin: auto 0;
-        img {
-          max-width: 60px;
-        }
-      }
-
-      .item-name {
-        max-width: 100px;
-        white-space: wrap;
-        font-weight: 600;
+    .item-detal {
+      p {
         font-size: 14px;
       }
-      .item-detal {
-        p {
-          font-size: 14px;
-        }
-        .price {
-          min-width: 90px;
-        }
-      }
-
-      .delete {
-        position: relative;
-        padding: 16px 0px 0px;
-        margin: auto 0;
-        color:var(--text-secondary);
-        cursor: pointer;
-        .icon {
-          font-size: 36px;
-          display: grid;
-          place-items: center;
-        }
-        &:hover .icon {
-          background-color: var(--state-danger);
-          border: 2px solid transparent;
-        }
-
-        &::after {
-          content: "刪除";
-          position: absolute;
-          top: -8px;
-          font-size: 12px;
-          right: 0;
-          left: auto;
-
-          transform: translate(0px, 0px);
-          white-space: nowrap;
-          width: auto;
-          padding: 2px 4px;
-
-          opacity: 0;
-          visibility: hidden;
-          border: 1px solid var(----state-danger);
-          border-radius: 6px;
-          color: var(--inverse);
-          background: var(--bg-surface-soft);
-        }
-
-        &:hover::after {
-          opacity: 0.6;
-          visibility: visible;
-        }
+      .price {
+        min-width: 90px;
       }
     }
-    .bottom-area {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 8px 16px 16px;
-      h4 {
-        font-weight: 900;
+
+    .delete {
+      position: relative;
+      padding: 16px 0px 0px;
+      margin: auto 0;
+      color: var(--text-secondary);
+      cursor: pointer;
+      .icon {
+        font-size: 36px;
+        display: grid;
+        place-items: center;
       }
-      .btn {
-        height: 32px;
+      &:hover .icon {
+        background-color: var(--state-danger);
+        border: 2px solid transparent;
+      }
+
+      &::after {
+        content: "刪除";
+        position: absolute;
+        top: -8px;
+        font-size: 12px;
+        right: 0;
+        left: auto;
+
+        transform: translate(0px, 0px);
+        white-space: nowrap;
+        width: auto;
+        padding: 2px 4px;
+
+        opacity: 0;
+        visibility: hidden;
+        border: 1px solid var(----state-danger);
+        border-radius: 6px;
+        color: var(--inverse);
+        background: var(--bg-surface-soft);
+      }
+
+      &:hover::after {
+        opacity: 0.6;
+        visibility: visible;
       }
     }
   }
-  @media (hover: hover) and (pointer: fine) {
-    .cart-btn:hover + .miniCart {
-      max-height: 600px;
-      // background-color: #cf7e7e;
+  .bottom-area {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 8px 16px 16px;
+    h4 {
+      font-weight: 900;
     }
+    .btn {
+      height: 32px;
+    }
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .cart-btn:hover + .miniCart {
+    max-height: 600px;
+    // background-color: #cf7e7e;
   }
 }
 </style>
