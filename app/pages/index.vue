@@ -36,15 +36,19 @@ feature-content
               :key="item.id"
               class="showcase-card"
             >
-              <div class="card-media">
+              <div class="card-media" @click="gotoWebsit(item.link)">
                 <img :src="item.image" alt="" />
               </div>
-              <h4 class="card-subtitle">{{ item.subtitle }}</h4>
-              <h3 class="card-title">{{ item.title }}</h3>
+              <h4 class="card-subtitle">
+                {{ item.subtitle }}
+              </h4>
+              <h3 class="card-title">
+                {{ item.title }}
+              </h3>
               <p class="card-text">
                 {{ item.text }}
               </p>
-              <h4 class="card-more">更多資訊</h4>
+              <h4 class="card-more" @click="gotoWebsit(item.link)">更多資訊</h4>
             </article>
           </div>
         </div>
@@ -101,6 +105,10 @@ const showcaseCardContent = [
     link: "https://3c.ltn.com.tw/news/61567",
   },
 ];
+
+const gotoWebsit = (link: string) => {
+  window.open(link, "_blank", "noopener,noreferrer");
+};
 </script>
 
 <style scoped lang="scss">
@@ -118,7 +126,7 @@ const showcaseCardContent = [
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-block: 64px;
+    padding-block: 76px 64px;
     gap: clamp(32px, 5vw, 48px);
   }
 }
@@ -131,8 +139,8 @@ const showcaseCardContent = [
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding-block: 48px;
-    gap: 24px;
+    padding-block: 76px 64px;
+    gap: 48px;
   }
   .showcase-intro {
     display: flex;
@@ -147,17 +155,10 @@ const showcaseCardContent = [
     justify-content: space-between;
     flex-direction: column;
     gap: 20px;
-    h3,
-    h4 {
-      cursor: pointer;
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          text-decoration: underline;
-        }
-      }
-    }
+
     .showcase-hero {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       border-radius: 4px;
       overflow: hidden;
@@ -167,26 +168,37 @@ const showcaseCardContent = [
         flex: 0 0 50%;
         overflow: hidden;
         img {
-          height: 100%;
           max-height: 400px;
-          object-fit: cover;
+          height: 100%;
+          object-fit: contain;
         }
       }
       .hero-content {
-        flex: 0 0 50%;
+        flex: 1;
         padding: 48px;
         display: flex;
         flex-direction: column;
+
         gap: 16px;
         .hero-text {
+          color:var(--text-inverse-soft);
           @include line-clamp(4);
+        }
+        .hero-more {
+          cursor: pointer;
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              text-decoration: underline;
+              color:var(--action-primary-hover)
+            }
+          }
         }
       }
     }
     .showcase-cards {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      // align-items: center;
       gap: 20px;
       .showcase-card {
         // flex: 0 0 25%;
@@ -200,6 +212,7 @@ const showcaseCardContent = [
           img {
             width: 100%;
             object-fit: cover;
+            transition: transform 0.4s ease;
           }
           @media (hover: hover) and (pointer: fine) {
             &:hover img {
@@ -207,13 +220,22 @@ const showcaseCardContent = [
             }
           }
         }
-        .card-subtitle,
-        .card-more {
+        .card-subtitle {
           color: var(--action-primary);
         }
         .card-text {
           min-height: 0;
           @include line-clamp(3);
+        }
+        .card-more,
+        .card-media {
+          cursor: pointer;
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              text-decoration: underline;
+              color: var(--action-primary);
+            }
+          }
         }
       }
     }

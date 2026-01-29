@@ -1,7 +1,8 @@
 // _variables.scss
 $white: #fff;
 $black: #181818;
-$indigo: #2c3e50;
+$indigo: #0b0e11;
+$indigo11: #2c3e50;
 
 // Neutral
 $color-white: #fafafa;
@@ -44,7 +45,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --text-secondary: #{$color-gray-800}; // 次要文字（說明 / 輔助）
     --text-tertiary: #{$color-gray-600}; // 次要輔助文字
     --text-inverse: #{$color-gray-100}; // 深色背景上的文字
-
+    --text-inverse-soft: #{$color-gray-200}; // 淺色背景上的文
     //    ========== Background =========
     --bg-page: #{$color-gray-200}; // 整頁背景（body / main）
     --bg-header: var(--primary); // Header / Navbar 背景
@@ -53,7 +54,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --bg-surface-card: #{$color-gray-50}; // 卡片
     --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
     --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
-    --bg-surface-contrast: #{$color-gray-800}; // 對比的 surface
+    --bg-surface-contrast: #{$color-gray-900}; // 對比的 surface
     --bg-surface-glass: rgba(var(--primary-rgb), 0.7);
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
@@ -83,6 +84,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --text-secondary: #{$color-gray-200}; // 次要文字
         --text-tertiary: #{$color-gray-400}; // 次要輔助文字
         --text-inverse: #{$color-gray-800}; // 淺色背景上的文字
+        --text-inverse-sort: #{$color-gray-700}; // 淺色背景上的文
         //  ========== Background =========
         --bg-page: #{$color-gray-900}; // 整頁最底背景
         --bg-header: var(--primary); // Header / Navbar 背景
