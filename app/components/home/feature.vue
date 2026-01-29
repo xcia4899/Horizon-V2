@@ -86,6 +86,9 @@ const panelStyle = computed(() => ({
 </script>
 
 <style scoped lang="scss">
+p {
+  color: var(--text-secondary);
+}
 .feature-intro {
   display: flex;
   flex-direction: column;

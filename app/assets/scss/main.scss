@@ -83,8 +83,14 @@ p {
     font-weight: 400;
     overflow-wrap: break-word;
     cursor: default;
-    color: var(--text-secondary);
+    // color: var(--text-secondary);
 }
+// .card-desc {
+//   display: -webkit-box;
+//   -webkit-line-clamp: 2;
+//   -webkit-box-orient: vertical;
+//   overflow: hidden;
+// }
 
 // white-space: nowrap;
 // overflow: hidden;
