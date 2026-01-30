@@ -85,6 +85,7 @@ p {
     cursor: default;
     // color: var(--text-secondary);
 }
+
 // .card-desc {
 //   display: -webkit-box;
 //   -webkit-line-clamp: 2;
@@ -109,7 +110,6 @@ button {
 }
 
 .btn {
-    // width: 160px;
     width: clamp(120px, 16vw, 160px);
     height: 44px;
 
@@ -121,10 +121,12 @@ button {
     border: 2px solid transparent;
     border-radius: 4px;
     letter-spacing: 1px;
-    transition: all 0.4s ease;
     cursor: pointer;
-
-    @media (hover:hover) and (pointer:fine) {
+    transition:
+        color 0.3s ease,
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+    @media (hover: hover) and (pointer: fine) {
         &:hover {
             font-weight: 600;
             color: var(--action-primary-hover);
@@ -132,8 +134,8 @@ button {
             border-color: var(--action-primary);
         }
     }
-
 }
+
 
 .point {
     position: absolute;
@@ -287,7 +289,7 @@ li {
 }
 
 .container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding-inline:clamp(16px, 4vw, 32px);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-inline: clamp(16px, 4vw, 32px);
 }
