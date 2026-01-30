@@ -204,7 +204,6 @@ const gotoWebsit = (link: string) => {
     }
   }
   @media (max-width: 550px) {
-  
     .showcase-hero {
       justify-content: space-between;
       flex-direction: column;
@@ -231,11 +230,11 @@ const gotoWebsit = (link: string) => {
     }
     .showcase-cards {
       flex-direction: column;
-      margin-top: 44px;
-      gap: 64px;
+      margin-top: calc(32px - 20px);
+      gap: 32px;
       .showcase-card {
         width: 100%;
-        .card-media{
+        .card-media {
           width: 100%;
           border-radius: 0;
         }
