@@ -130,6 +130,7 @@ const gotoWebsit = (link: string) => {
       padding: 48px;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       gap: 16px;
       .hero-subtitle {
         display: none;
@@ -160,6 +161,7 @@ const gotoWebsit = (link: string) => {
       width: calc(50% - 10px);
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       gap: 16px;
       .card-media {
         overflow: hidden;
@@ -202,6 +204,7 @@ const gotoWebsit = (link: string) => {
     }
   }
   @media (max-width: 550px) {
+  
     .showcase-hero {
       justify-content: space-between;
       flex-direction: column;
@@ -221,16 +224,21 @@ const gotoWebsit = (link: string) => {
           @include line-clamp(3);
         }
         .hero-more {
-          text-align: right;
+          align-self: flex-end;
           color: var(--brand);
         }
       }
     }
     .showcase-cards {
       flex-direction: column;
+      margin-top: 44px;
+      gap: 64px;
       .showcase-card {
         width: 100%;
-
+        .card-media{
+          width: 100%;
+          border-radius: 0;
+        }
         .card-title,
         .card-subtitle,
         .card-text,
@@ -238,7 +246,7 @@ const gotoWebsit = (link: string) => {
           padding: 0px 16px;
         }
         .card-more {
-          text-align: right;
+          align-self: flex-end;
           color: var(--brand);
         }
       }
