@@ -96,7 +96,7 @@ p {
   gap: 24px;
   text-align: center;
   max-width: 600px;
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
     padding-inline: clamp(16px, 2vw, 32px);
   }
 }
@@ -135,7 +135,7 @@ p {
       }
     }
 
-    @media (max-width: 500px) {
+    @media (max-width: 550px) {
       flex-direction: column;
       padding-inline: clamp(16px, 2vw, 32px);
     }
@@ -166,9 +166,6 @@ p {
           width: 100%;
           object-fit: cover;
         }
-        @media (max-width: 500px) {
-          // flex: 0 0 100%;
-        }
       }
       .card-content {
         flex: 1;
@@ -178,7 +175,7 @@ p {
         gap: 24px;
         padding: clamp(16px, 2vw, 32px);
       }
-      @media (max-width: 500px) {
+      @media (max-width: 550px) {
         flex-direction: column;
       }
     }

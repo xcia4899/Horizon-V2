@@ -80,6 +80,9 @@ const isMenuOpen = ref(false);
 </script>
 
 <style scoped lang="scss">
+//header高度設定
+// $headerHeight: 70px;
+
 .header-inner {
   display: flex;
   justify-content: space-between;
@@ -181,7 +184,7 @@ const isMenuOpen = ref(false);
   }
 }
 
-// @media screen and (max-width: 500px) {
+// @media screen and (max-width: 550px) {
 //   #header-inner {
 //     .logo {
 //       font-size: 28px;

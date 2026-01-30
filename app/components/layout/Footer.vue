@@ -168,12 +168,14 @@ const footerLinks = [
       cursor: default;
     }
     .text {
+      color: var(--text-secondary);
       font-size: clamp(14px, 1.5vw, 16px);
       @include baseTransition(color, 0.4s);
       cursor: pointer;
       @media (hover: hover) and (pointer: fine) {
         &:hover {
           color: var(--action-primary-hover);
+          text-decoration: underline;
         }
       }
       &:active {
@@ -247,7 +249,7 @@ const footerLinks = [
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .footer-main {
     .main-left {
       flex-direction: column;
