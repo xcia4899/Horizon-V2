@@ -26,10 +26,10 @@ const bannerList = [
 // 隨機 index（只算一次）
 const randomIndex = ref<number | null>(null);
 
-const randomAgain = () => {
-  randomIndex.value = Math.floor(Math.random() * bannerList.length);
-  console.log("執行一次", randomIndex.value);
-};
+// const randomAgain = () => {
+//   randomIndex.value = Math.floor(Math.random() * bannerList.length);
+//   console.log("執行一次", randomIndex.value);
+// };
 onMounted(() => {
   randomIndex.value = Math.floor(Math.random() * bannerList.length);
 });
