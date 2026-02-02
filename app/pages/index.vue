@@ -17,7 +17,9 @@ feature-content
     <section class="home-promo">
       <HomePromo />
     </section>
-    <section class="home-brands">home-brands</section>
+    <section class="home-ad">
+      <BannerPromoBanner />
+    </section>
   </div>
 </template>
 
@@ -31,7 +33,7 @@ feature-content
     padding-inline: 0px;
   }
 }
-//--home-feature---------------
+//分類---------------
 .home-feature {
   background-color: var(--bg-surface-strong);
   .feature-inner {
@@ -41,13 +43,13 @@ feature-content
     align-items: center;
     padding-block: 76px 64px;
     gap: clamp(32px, 5vw, 48px);
-    @media (max-width:550px) {
+    @media (max-width: 550px) {
       padding-block: 64px 32px;
       // gap: 36px;
     }
   }
 }
-//--home-showcase---------------
+//最新消息---------------
 .home-showcase {
   // width: 100%;
   color: var(--text-inverse);
@@ -58,16 +60,21 @@ feature-content
     width: 100%;
     padding-block: 76px 64px;
     gap: 48px;
-    @media (max-width:550px) {
+    @media (max-width: 550px) {
       padding-block: 64px 32px;
       gap: 36px;
     }
   }
 }
-//home-promo
+//樣品廣告
 .home-promo {
   display: flex;
   flex-direction: column;
   background: radial-gradient(var(--bg-surface), var(--bg-surface-strong));
+}
+//橫式宣傳圖----------
+.home-ad {
+  max-height: 400px;
+  overflow: hidden;
 }
 </style>
