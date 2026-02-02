@@ -27,12 +27,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    // 只有在部署到 GitHub Pages 時才啟用靜態輸出
-    preset:
-      process.env.NUXT_PUBLIC_DEPLOY_TARGET === "gh"
-        ? "github_pages"
-        : undefined,
-
     prerender: {
       // 讓 Nuxt 在 build 時預先產生 HTML
       crawlLinks: true,
