@@ -144,7 +144,7 @@ p {
   .feature-panel {
     display: flex;
     flex-direction: column;
-    padding-block: 32px;
+    padding-block: 32px 0;
     overflow: hidden;
     .panel-inner {
       display: flex;

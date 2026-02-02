@@ -16,14 +16,17 @@ feature-content
           :modules="[Pagination, Navigation]"
           :slides-per-view="2"
           :space-between="32"
-          :pagination="{ el: '.carousel-pagination', clickable: false }"
+          :pagination="{
+            el: '.recommend-carousel-pagination',
+            clickable: true,
+          }"
           :navigation="{
-            nextEl: '.carousel-btnNext',
-            prevEl: '.carousel-btnPrev',
+            nextEl: '.recommend-carousel-btnNext',
+            prevEl: '.recommend-carousel-btnPrev',
           }"
           :breakpoints="{
-            550: { slidesPerView: 2 },
-            920: { slidesPerView: 3 },
+            550: { slidesPerView: 3 },
+            920: { slidesPerView: 4 },
           }"
         >
           <SwiperSlide v-for="i in 6" :key="i" class="carousel-card">
@@ -38,9 +41,11 @@ feature-content
           </SwiperSlide>
         </Swiper>
 
-        <div class="carousel-pagination"></div>
-        <button type="button" class="carousel-btnPrev">Prev</button>
-        <button type="button" class="carousel-btnNext">Next</button>
+        <div class="carousel-control">
+          <div class="recommend-carousel-pagination"></div>
+          <button type="button" class="recommend-carousel-btnPrev">Prev</button>
+          <button type="button" class="recommend-carousel-btnNext">Next</button>
+        </div>
       </div>
     </section>
 
@@ -117,71 +122,107 @@ import "swiper/css/navigation";
   overflow: hidden;
 }
 .home-recommend {
-  // display: flex;
-  // flex-direction: column;
-  padding-block: 64px;
-
+  background: var(--bg-surface);
+  .container {
+    padding-inline: clamp(16px, 4vw, 32px);
+  }
   .recommend-inner {
-    // display: grid;
-    // flex-direction: column;
     position: relative;
   }
   .recommend-intro {
     display: grid;
     place-content: center;
-    padding: 48px;
+    padding: 32px;
   }
   .carousel {
     //Swiper 預設按鈕
     // width: 100%;
+    :deep(.swiper-slide) {
+      height: auto;
+    }
     .carousel-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       position: relative;
-
-      border: 2px solid var(--brand);
-      padding: 8px;
-      background-color: #333333;
-      transition: transform 0.1s ease 0.2s;
+      border: 2px solid var(--border-default);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--bg-surface-card);
+      transition: border-color 0.4s ease;
       .card-media {
         aspect-ratio: 1 / 1;
         width: 100%;
         overflow: hidden;
-        transition: transform 0.3s ease;
-        // border: 2px solid #cecece;
         .image {
           display: block;
           width: 100%;
           height: 100%;
           object-fit: contain;
+          transition: transform 0.4s ease-out;
+          transform: scale(1);
+          transform-origin: center;
         }
       }
       .card-title {
         position: absolute;
-        bottom: 16px;
+        width: 100%;
+        bottom: 0px;
+        padding: 8px;
+        text-align: center;
+        transition: color 0.3s ease-out 0.1s;
+        &::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          background: var(--brand);
+          transform: translateY(100%);
+          transition: transform 0.3s ease-out 0.1s;
+        }
       }
+
       @media (hover: hover) and (pointer: fine) {
-        &:hover .card-media {
-          transform: scale(1.1);
+        &:hover {
+          border-color: var(--brand);
+          .image {
+            transform: scale(1.1);
+          }
+          .card-title {
+            color: $color-white;
+          }
+          .card-title::after {
+            transform: translateY(calc(0% + 1px));
+          }
         }
       }
     }
-    :deep(.swiper-slide) {
-      height: auto;
+  }
+  .carousel-control {
+    :deep(.recommend-carousel-btnPrev),
+    :deep(.recommend-carousel-btnNext) {
+      background-color: #615a5a;
     }
-    :deep(.carousel-btnPrev),
-    :deep(.carousel-btnNext) {
-      color: rgb(12, 12, 12);
-      background-color: #9c9c9c;
-      // height: 40px;
-      // width: 40px;
-    }
-
     /* pagination 控制區 */
-    :deep(.carousel-pagination) {
-      margin-top: 16px;
-      text-align: center;
+    :deep(.recommend-carousel-pagination) {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      .swiper-pagination-bullet {
+        border: none;
+        border-radius: 0;
+        background: var(--bg-surface-contrast);
+        margin: 0px;
+        width: 120px;
+        height: 8px;
+        &.swiper-pagination-bullet-active {
+          background: var(--action-primary);
+        }
+        &:hover:not(.swiper-pagination-bullet-active) {
+          background: var(--action-primary-hover);
+          opacity: 0.8;
+        }
+      }
     }
   }
 }
