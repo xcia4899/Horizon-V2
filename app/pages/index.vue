@@ -43,8 +43,12 @@ feature-content
 
         <div class="carousel-control">
           <div class="recommend-carousel-pagination"></div>
-          <button type="button" class="recommend-carousel-btnPrev">Prev</button>
-          <button type="button" class="recommend-carousel-btnNext">Next</button>
+          <button type="button" class="swiper-btn recommend-carousel-btnPrev">
+            Prev
+          </button>
+          <button type="button" class="swiper-btn recommend-carousel-btnNext">
+            Next
+          </button>
         </div>
       </div>
     </section>
@@ -201,8 +205,22 @@ import "swiper/css/navigation";
   .carousel-control {
     :deep(.recommend-carousel-btnPrev),
     :deep(.recommend-carousel-btnNext) {
-      background-color: #615a5a;
-    }
+       width: 60px ;
+      height: 60px ;
+      border-radius: 5px;
+      color: var(--brand) ;
+      background: var(--bg-surface-contrast);
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: var(--brand-soft) ;
+        background: var(--bg-surface);
+        // transform: scale(1.2);
+        // box-shadow: var(--shadow-default);
+      }
+
+    } 
+   
     /* pagination 控制區 */
     :deep(.recommend-carousel-pagination) {
       margin-top: 32px;

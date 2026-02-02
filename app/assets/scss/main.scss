@@ -232,23 +232,7 @@ button {
 
 }
 
-.swiper-btn {
-    width: 40px !important;
-    height: 60px !important;
-    opacity: 0 !important;
 
-    border-radius: 5px;
-    background-color: transparent;
-    color: var(--brand) !important;
-    transition: all 0.3s ease-in-out;
-
-    &:hover {
-        color: var(--brand-soft) !important;
-        background-color: var(--bg-surface);
-        transform: scale(1.2);
-        box-shadow: var(--shadow-default);
-    }
-}
 
 input[type="checkbox"] {
     accent-color: var(--brand);
