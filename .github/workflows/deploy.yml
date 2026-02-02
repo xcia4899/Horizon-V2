@@ -1,4 +1,3 @@
-
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow
 name: Deploy Nuxt to GitHub Pages
 
@@ -35,19 +34,16 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build (Nuxt 4 + github_pages preset)
+      - name: Build Nuxt (github_pages preset)
         run: npx nuxi build --preset github_pages
         env:
-          # 重要：改成你的 repo 名稱，例如 NUXT_APP_BASE_URL: /Horizon-V2/
+          # ✅ 必須是 /<repo>/
           NUXT_APP_BASE_URL: /Horizon-V2/
 
-      - name: Inspect output
-        run: ls -la .output && ls -la .output/public
-
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./.output/public
+          path: .output/public
 
   deploy:
     runs-on: ubuntu-latest
