@@ -40,14 +40,14 @@ feature-content
             <h4 class="card-title">PRO-精密調整電競滑鼠</h4>
           </SwiperSlide>
         </Swiper>
-
+        <div class="recommend-carousel-pagination"></div>
         <div class="carousel-control">
-          <div class="recommend-carousel-pagination"></div>
           <button type="button" class="swiper-btn recommend-carousel-btnPrev">
-            Prev
+            <Icon name="ep:arrow-left" class="icon" />
           </button>
+
           <button type="button" class="swiper-btn recommend-carousel-btnNext">
-            Next
+            <Icon name="ep:arrow-right" class="icon" />
           </button>
         </div>
       </div>
@@ -202,46 +202,46 @@ import "swiper/css/navigation";
       }
     }
   }
-  .carousel-control {
-    :deep(.recommend-carousel-btnPrev),
-    :deep(.recommend-carousel-btnNext) {
-       width: 60px ;
-      height: 60px ;
-      border-radius: 5px;
-      color: var(--brand) ;
+  /* pagination 控制區 */
+  :deep(.recommend-carousel-pagination) {
+    // margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    padding-block: 48px 64px;
+    .swiper-pagination-bullet {
+      border: none;
+      border-radius: 0;
       background: var(--bg-surface-contrast);
-      transition: all 0.3s ease-in-out;
-
-      &:hover {
-        color: var(--brand-soft) ;
-        background: var(--bg-surface);
-        // transform: scale(1.2);
-        // box-shadow: var(--shadow-default);
+      margin: 0px;
+      width: clamp(40px, 10vw, 120px);
+      height: 8px;
+      &.swiper-pagination-bullet-active {
+        background: var(--action-primary);
       }
-
-    } 
-   
-    /* pagination 控制區 */
-    :deep(.recommend-carousel-pagination) {
-      margin-top: 32px;
-      display: flex;
-      justify-content: center;
-      .swiper-pagination-bullet {
-        border: none;
-        border-radius: 0;
-        background: var(--bg-surface-contrast);
-        margin: 0px;
-        width: 120px;
-        height: 8px;
-        &.swiper-pagination-bullet-active {
-          background: var(--action-primary);
-        }
-        &:hover:not(.swiper-pagination-bullet-active) {
-          background: var(--action-primary-hover);
-          opacity: 0.8;
-        }
+      &:hover:not(.swiper-pagination-bullet-active) {
+        background: var(--action-primary-hover);
+        opacity: 0.8;
       }
     }
+  }
+  .carousel-control {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    // top:20%;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 24px);
+    height: 60px;
+    z-index: 2;
+    // :deep(.recommend-carousel-btnPrev),
+    // :deep(.recommend-carousel-btnNext) {
+    //   border-radius: 5px;
+    //   color: var(--text-inverse);
+    //   background: var(--bg-surface-glass);
+    // }
   }
 }
 </style>

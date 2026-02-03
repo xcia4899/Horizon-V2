@@ -55,7 +55,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
     --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
     --bg-surface-contrast: #{$color-gray-800}; // 對比的 surface
-    --bg-surface-glass: rgba(var(--primary), 0.7);
+    --bg-surface-glass: rgba(2, 2, 3, 0.7); // 對比的 surface
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
     //  ========== Brand =========
@@ -64,7 +64,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --brand-soft: #{$color-purple-300}; // 淡色背景 / badge
     // ========== Action =========
     --action-primary: var(--brand); // 主 CTA
-    --action-primary-hover: var(--brand-hover);
+    --action-primary-hover: var(--brand-soft);
     --action-primary-soft: var(--brand-soft);
     --shadow-default: 0px 3px 4px 0px rgba(22, 22, 22, 0.4);
     --shadow-float: 0px 2px 6px 2px rgba(22, 22, 22, 0.4);
@@ -94,7 +94,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --bg-surface-soft: #{$color-gray-700}; // 內容內層（較亮）
         --bg-surface-strong: #{$color-black}; // 分區 / 強調區（較暗）
         --bg-surface-contrast: #{$color-gray-100}; // 對比的 surface
-        --bg-surface-glass: rgba(#{--primary}, 0.7);
+        --bg-surface-glass: rgba(255, 255, 255, 0.6); // 對比的 surface
         /* ========== Border ========= */
         --border-default: #{$color-gray-600}; // 邊框（避免過亮）
         //   ========== Brand =========

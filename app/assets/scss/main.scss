@@ -126,6 +126,18 @@ button {
         color 0.3s ease,
         background-color 0.3s ease,
         border-color 0.3s ease;
+
+    &:active:not(:disabled) {
+        color: $color-white;
+        background-color: var(--action-primary-hover);
+        border-color: var(--action-primary-hover);
+    }
+
+    &:disabled {
+        cursor: default;
+        opacity: 0.3;
+    }
+
     @media (hover: hover) and (pointer: fine) {
         &:hover {
             font-weight: 600;
@@ -133,9 +145,44 @@ button {
             background-color: transparent;
             border-color: var(--action-primary);
         }
+
+
     }
 }
 
+.swiper-btn {
+    border-radius: 5px;
+    color: var(--text-inverse);
+    background: var(--bg-surface-glass);
+    border: 2px solid transparent;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out, border-color 0.3s ease-out;
+    cursor: pointer;
+
+    // padding: 8px;
+    .icon {
+        width: clamp(40px, 4vw, 60px);
+        height: clamp(40px, 4vw, 60px);
+    }
+
+    &:active:not(:disabled) {
+        color: $color-white;
+        background: var(--brand);
+        border-color: var(--action-primary-hover);
+    }
+
+    &:disabled {
+        cursor: default;
+        opacity: 0.3;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        &:hover:not(:disabled) {
+            color: $color-white;
+            background: var(--brand);
+            border-color: var(--action-primary-hover);
+        }
+    }
+}
 
 .point {
     position: absolute;
