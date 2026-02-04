@@ -8,11 +8,11 @@ feature-content
       </div>
     </section>
 
-    <!-- <section class="home-recommend">
+    <section class="home-recommend">
       <div class="container recommend-inner">
         <CommonRecommend/>
       </div>
-    </section> -->
+    </section>
 
     <section class="home-showcase">
       <div class="container showcase-inner">

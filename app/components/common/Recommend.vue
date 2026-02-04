@@ -18,11 +18,15 @@
       920: { slidesPerView: 4 },
     }"
   >
-    <SwiperSlide v-for="i in 6" :key="i" class="carousel-card">
+    <SwiperSlide
+      v-for="item in recommendList"
+      :key="item.id"
+      class="carousel-card"
+    >
       <div class="card-media">
-        <img class="image" src="./images/pic-detal/PRO-1001/10003.png" alt="" />
+        <img class="image" :src="item.image.src" :alt="item.image.alt" />
       </div>
-      <h4 class="card-title">PRO-精密調整電競滑鼠</h4>
+      <h4 class="card-title">{{ item.title }}</h4>
     </SwiperSlide>
   </Swiper>
   <div class="recommend-carousel-pagination"></div>
@@ -43,6 +47,57 @@ import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+
+const recommendList = [
+  {
+    id: 1,
+    title: "PRO 輕量滑鼠",
+    image: {
+      src: "./images/pic-detal/PRO-1001/10003.png",
+      alt: "PRO 輕量滑鼠",
+    },
+  },
+  {
+    id: 2,
+    title: "PRO X TKL ",
+    image: {
+      src: "./images/pic-detal/PRO-1002/10003.png",
+      alt: "PRO X TKL ",
+    },
+  },
+  {
+    id: 3,
+    title: "Razer V3 Mini",
+    image: {
+      src: "./images/pic-detal/Razer-1011/10002.png",
+      alt: "Razer V3 Mini",
+    },
+  },
+  {
+    id: 4,
+    title: "GM08 電競滑鼠",
+    image: {
+      src: "./images/pic-detal/MSI-1008/10003.png",
+      alt: "GM08 電競滑鼠",
+    },
+  },
+  {
+    id: 5,
+    title: "G522 無線耳機",
+    image: {
+      src: "./images/pic-detal/PRO-1007/10001.png",
+      alt: "G522 無線耳機",
+    },
+  },
+  {
+    id: 6,
+    title: "GH50 電競耳機",
+    image: {
+      src: "./images/pic-detal/MSI-1003/10002.png",
+      alt: "GH50 電競耳機",
+    },
+  },
+];
 </script>
 
 <style scoped lang="scss">
@@ -66,26 +121,12 @@ import "swiper/css/navigation";
     transition:
       border-color 0.4s ease,
       background-color 0.4s ease;
-    --title-height: 40px;
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      height: var(--title-height);
-      background: var(--inverse);
-      transform: translateY(100%);
-      transition: transform 0.3s ease-out 0.1s;
-      z-index: 0;
-    }
     .card-media {
       aspect-ratio: 1 / 1;
       width: 100%;
       overflow: hidden;
-      padding: 16px;
+      padding: 20px;
       transform: translateY(-16px);
-
       .image {
         display: block;
         width: 100%;
@@ -98,15 +139,26 @@ import "swiper/css/navigation";
     }
     .card-title {
       position: absolute;
-      bottom: 0;
+      bottom: 0px;
       width: 100%;
-      height: var(--title-height);
       padding: 8px;
+
       text-align: center;
-      line-height: calc(var(--title-height) - 16px);
+      font-size: clamp(14px, 2vw, 20px);
       color: var(--text-primary);
       transition: color 0.3s ease-out 0.1s;
-      z-index: 1;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: var(--inverse);
+        transform: translateY(100%);
+        transition: transform 0.3s ease-out 0.1s;
+      }
     }
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -118,7 +170,7 @@ import "swiper/css/navigation";
         .card-title {
           color: var(--text-inverse);
         }
-        &::after {
+        .card-title::after {
           transform: translateY(0%);
         }
       }
@@ -138,12 +190,12 @@ import "swiper/css/navigation";
   }
 }
 /* pagination 控制區 */
-:deep(.recommend-carousel-pagination) {
+.recommend-carousel-pagination {
   // margin-top: 32px;
   display: flex;
   justify-content: center;
   padding-block: 48px 64px;
-  .swiper-pagination-bullet {
+  :deep(.swiper-pagination-bullet) {
     border: none;
     border-radius: 0;
     background: var(--bg-surface-contrast);
