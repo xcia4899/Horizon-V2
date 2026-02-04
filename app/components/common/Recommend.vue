@@ -5,14 +5,18 @@
     :modules="[Pagination, Navigation]"
     :slides-per-view="2"
     :space-between="32"
-    :pagination="{ el: paginationEl, clickable: true }"
-    :navigation="{ nextEl, prevEl }"
+    :pagination="{
+      el: '.recommend-carousel-pagination',
+      clickable: true,
+    }"
+    :navigation="{
+      nextEl: '.recommend-carousel-btnNext',
+      prevEl: '.recommend-carousel-btnPrev',
+    }"
     :breakpoints="{
       550: { slidesPerView: 3 },
       920: { slidesPerView: 4 },
     }"
-      @before-init="onBeforeInit"
-   
   >
     <SwiperSlide
       v-for="item in recommendList"
@@ -25,34 +29,25 @@
       <h4 class="card-title">{{ item.title }}</h4>
     </SwiperSlide>
   </Swiper>
-  <div ref="paginationEl" class="recommend-carousel-pagination"></div>
+  <div class="recommend-carousel-pagination"></div>
   <div class="carousel-control">
-    <button
-      ref="prevEl"
-      type="button"
-      class="swiper-btn recommend-carousel-btnPrev"
-    >
+    <button type="button" class="swiper-btn recommend-carousel-btnPrev">
       <Icon name="ep:arrow-left" class="icon" />
     </button>
 
-    <button
-      ref="nextEl"
-      type="button"
-      class="swiper-btn recommend-carousel-btnNext"
-    >
+    <button type="button" class="swiper-btn recommend-carousel-btnNext">
       <Icon name="ep:arrow-right" class="icon" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Swiper as SwiperClass } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import { ref } from "vue";
+
 const recommendList = [
   {
     id: 1,
@@ -103,24 +98,6 @@ const recommendList = [
     },
   },
 ];
-
-const prevEl = ref<HTMLElement | null>(null);
-const nextEl = ref<HTMLElement | null>(null);
-const paginationEl = ref<HTMLElement | null>(null);
-
-const onBeforeInit = (swiper: SwiperClass) => {
-  swiper.params.navigation = {
-    ...(swiper.params.navigation as SwiperClass),
-    prevEl: prevEl.value,
-    nextEl: nextEl.value,
-  };
-
-  swiper.params.pagination = {
-    ...(swiper.params.pagination as SwiperClass),
-    el: paginationEl.value,
-    clickable: true,
-  };
-};
 </script>
 
 <style scoped lang="scss">
