@@ -292,7 +292,7 @@ const cartView = computed(() => {
 
   max-height: 0px;
   width: 400px;
-  margin-right: clamp(8px, 1.5vw, 16px);
+  margin-right: $padding-RWD;
   color: var(--text-secondary);
   background-color: var(--bg-surface);
   box-shadow: var(--shadow-default);

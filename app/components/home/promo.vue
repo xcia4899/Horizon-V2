@@ -75,8 +75,8 @@ const gotoLink = (id: string, link: string) => {
       flex-direction: column;
       gap: 24px;
       max-width: 640px;
-      padding: clamp(16px, 5vw, 32px);
-      padding-left: clamp(32px, 5vw, 64px);
+      padding: $padding-RWD;
+      padding-left: clamp(32px, 4vw, 64px);
     }
     .promo-text {
       color: var(--text-secondary);
@@ -88,7 +88,7 @@ const gotoLink = (id: string, link: string) => {
   .promo-content {
     justify-content: flex-end;
     .promo-content-inner {
-      padding-right: clamp(32px, 5vw, 64px);
+      padding-right: clamp(32px, 4vw, 64px);
     }
   }
 }

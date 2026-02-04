@@ -32,7 +32,7 @@ $shadow-set: 0px 0px 6px 1px rgba(22, 22, 22, 0.4);
 //header高度設定
 $headerHeight: 70px;
 //間距大小設定
-$ClampRWD: clamp(8px, 1.5vw, 16px);
+$padding-RWD: clamp(16px, 4vw, 32px);
 
 /* CSS 變數預設值 */
 //  一般淺色背景使用 
@@ -51,9 +51,9 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --bg-header: 250, 250, 250; // Header / Navbar 背景
     --bg-footer: #{$color-gray-200}; // footer 背景
     --bg-surface: #{$color-gray-100}; // 一般內容區 
-    --bg-surface-card: #{$color-gray-50}; // 卡片
     --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
     --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
+    --bg-surface-card: #{$color-gray-50}; // 卡片
     --bg-surface-contrast: #{$color-gray-800}; // 對比的 surface
     --bg-surface-glass: rgba(2, 2, 3, 0.7); // 對比的 surface
     // ========== Border =========
@@ -67,7 +67,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
     --action-primary-hover: var(--brand-soft);
     --action-primary-soft: var(--brand-soft);
     --shadow-default: 0px 3px 4px 0px rgba(22, 22, 22, 0.4);
-    --shadow-float: 0px 2px 6px 2px rgba(22, 22, 22, 0.4);
+    --shadow-focus: 0 0px 4px 1px rgba(31, 31, 31, 0.4);
     //  ========== State =========
     --state-danger: #{$color-red}; // 錯誤 / 刪除
 }
@@ -90,9 +90,9 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --bg-header:10, 10, 10; // Header / Navbar 背景
         --bg-footer: #{$color-black}; // footer 背景
         --bg-surface: #{$color-gray-900}; // 一般內容區
-        --bg-surface-card: #{$color-gray-800}; //卡片
         --bg-surface-soft: #{$color-gray-700}; // 內容內層（較亮）
         --bg-surface-strong: #{$color-black}; // 分區 / 強調區（較暗）
+        --bg-surface-card: #{$color-gray-800}; //卡片
         --bg-surface-contrast: #{$color-gray-100}; // 對比的 surface
         --bg-surface-glass: rgba(255, 255, 255, 0.6); // 對比的 surface
         /* ========== Border ========= */
@@ -107,7 +107,7 @@ $ClampRWD: clamp(8px, 1.5vw, 16px);
         --action-primary-soft: var(--brand-soft);
         --shadow-default: 0px 3px 4px 0px rgba(12, 12, 12, 0.4);
         /* 浮起元件 / Dropdown / Modal */
-        --shadow-float: 0 2px 6px 2px rgba(12, 12, 12, 0.8);
+        --shadow-focus: 0 0px 4px 1px rgba(36, 36, 36, 0.4);
 
         // /========== State ========= 
         --state-danger: #{$color-red}; // 錯誤

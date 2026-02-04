@@ -153,34 +153,35 @@ button {
 .swiper-btn {
     border-radius: 5px;
     color: var(--text-inverse);
-    background: var(--bg-surface-glass);
+    background: var(--action-primary);
     border: 2px solid transparent;
-    transition: background-color 0.3s ease-out, color 0.3s ease-out, border-color 0.3s ease-out;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out, opacity 0.3s ease-out,box-shadow 0.3s ease-in-out;
+    opacity: 0.8;
+    box-shadow: transparent;
     cursor: pointer;
 
-    // padding: 8px;
     .icon {
-        width: clamp(40px, 4vw, 60px);
-        height: clamp(40px, 4vw, 60px);
+        width: clamp(36px, 4vw, 52px);
+        height: clamp(36px, 4vw, 52px);
     }
 
     &:active:not(:disabled) {
         color: $color-white;
-        background: var(--brand);
-        border-color: var(--action-primary-hover);
     }
 
     &:disabled {
         cursor: default;
+        background: var(--action-primary-soft);
         opacity: 0.3;
     }
 
     @media (hover: hover) and (pointer: fine) {
         &:hover:not(:disabled) {
+            opacity: 1;
+            box-shadow: var(--shadow-focus);
             color: $color-white;
-            background: var(--brand);
-            border-color: var(--action-primary-hover);
         }
+
     }
 }
 
@@ -322,5 +323,5 @@ li {
 .container {
     max-width: 1280px;
     margin: 0 auto;
-    padding-inline: clamp(16px, 4vw, 32px);
+    padding-inline: $padding-RWD;
 }

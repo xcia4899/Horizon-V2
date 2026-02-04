@@ -90,7 +90,7 @@ const isMenuOpen = ref(false);
   // top: 0;
   // height: auto;
   margin: 0 auto;
-  padding: 0 clamp(16px, 4vw, 32px);
+  padding-inline: $padding-RWD;
 
   @include baseTransition(height, 0.6s);
   .nav-left,

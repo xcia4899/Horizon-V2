@@ -97,7 +97,7 @@ p {
   text-align: center;
   max-width: 600px;
   @media (max-width: 550px) {
-    padding-inline: clamp(16px, 2vw, 32px);
+    padding-inline: $padding-RWD;
   }
 }
 .feature-content {
@@ -137,7 +137,7 @@ p {
 
     @media (max-width: 550px) {
       flex-direction: column;
-      padding-inline: clamp(16px, 2vw, 32px);
+      padding-inline: $padding-RWD;
     }
   }
 
@@ -173,7 +173,7 @@ p {
         display: flex;
         flex-direction: column;
         gap: 24px;
-        padding: clamp(16px, 2vw, 32px);
+        padding: $padding-RWD;
       }
       @media (max-width: 550px) {
         flex-direction: column;
