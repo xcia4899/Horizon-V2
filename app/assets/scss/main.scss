@@ -125,12 +125,15 @@ button {
     transition:
         color 0.3s ease,
         background-color 0.3s ease,
-        border-color 0.3s ease;
+        border-color 0.3s ease,
+        transform 0.3s ease;
 
     &:active:not(:disabled) {
         color: $color-white;
-        background-color: var(--action-primary-hover);
+        background-color: var(--action-primary-soft);
         border-color: var(--action-primary-hover);
+        transform: scale(0.98);
+
     }
 
     &:disabled {
@@ -151,11 +154,12 @@ button {
 }
 
 .swiper-btn {
-    border-radius: 5px;
+    border-radius: 4px;
     color: var(--text-inverse);
     background: var(--action-primary);
     border: 2px solid transparent;
-    transition: background-color 0.3s ease-out, color 0.3s ease-out, opacity 0.3s ease-out,box-shadow 0.3s ease-in-out;
+    box-shadow: none;
+    transition: background-color 0.3s ease-out, color 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease;
     opacity: 0.8;
     box-shadow: transparent;
     cursor: pointer;
@@ -165,9 +169,7 @@ button {
         height: clamp(36px, 4vw, 52px);
     }
 
-    &:active:not(:disabled) {
-        color: $color-white;
-    }
+
 
     &:disabled {
         cursor: default;
@@ -180,8 +182,14 @@ button {
             opacity: 1;
             box-shadow: var(--shadow-focus);
             color: $color-white;
+            transform: scale(1.06);
         }
 
+    }
+
+    &:active:not(:disabled) {
+        color: $color-white;
+        transform: scale(0.96);
     }
 }
 

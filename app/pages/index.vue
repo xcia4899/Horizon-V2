@@ -12,8 +12,8 @@ feature-content
           :autoplay="{ delay: 6000, disableOnInteraction: false }"
           :pagination="{ el: '.home-hero-pagination', clickable: true }"
           :navigation="{
-            nextEl: '.hero-swiper-btn-next',
-            prevEl: '.hero-swiper-btn-prev',
+            nextEl: '.home-hero-swiper-btn-next',
+            prevEl: '.home-hero-swiper-btn-prev',
           }"
           @swiper="onSwiper"
           @slide-change-transition-start="onSlideStart"
@@ -36,12 +36,12 @@ feature-content
 
           <div class="swiper-pagination home-hero-pagination"></div>
           <div class="hero-btnControl">
-            <div class="swiper-btn hero-swiper-btn-prev">
+            <button type="button" class="swiper-btn home-hero-swiper-btn-prev">
               <Icon name="ep:arrow-left" class="icon" />
-            </div>
-            <div class="swiper-btn hero-swiper-btn-next">
+            </button>
+            <button type="button" class="swiper-btn home-hero-swiper-btn-next">
               <Icon name="ep:arrow-right" class="icon" />
-            </div>
+            </button>
           </div>
         </Swiper>
       </div>
@@ -89,7 +89,7 @@ function getBullets(swiper: SwiperClass): HTMLElement[] {
   const bullets = swiper.pagination?.bullets ?? [];
   return bullets.filter((el): el is HTMLElement => el instanceof HTMLElement);
 }
-
+//重啟動畫
 function restartBulletProgress(swiper: SwiperClass) {
   const bullets = getBullets(swiper);
   if (!bullets.length) return;
@@ -105,12 +105,12 @@ function restartBulletProgress(swiper: SwiperClass) {
     active.classList.add("progress");
   });
 }
-
+//清除動畫
 function clearBulletProgress(swiper: SwiperClass) {
   const bullets = getBullets(swiper);
   bullets.forEach((b) => b.classList.remove("progress"));
 }
-
+//綁定事件
 function onSwiper(swiper: SwiperClass) {
   swiperIns.value = swiper;
 
@@ -145,8 +145,10 @@ function onSlideEnd(swiper: SwiperClass) {
       display: flex;
       justify-content: center;
       align-items: center;
+      height: 100%;
       .slide-image {
         width: 100%;
+        height: 100%;
         .image {
           display: block;
           width: 100%;
@@ -158,6 +160,23 @@ function onSlideEnd(swiper: SwiperClass) {
       }
       .slide-content {
         position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+        top: clamp(24%, 50vw, 50%);
+        transform: translateY(-50%);
+        left: max(16px, 12%);
+        right: max(16px, 12%);
+        .slide-text {
+          color: $color-gray-200;
+        }
+        @media (max-width: 550px) {
+          align-items: center;
+          .slide-title,.slide-text{
+            text-align: center;
+          }
+        }
       }
     }
     .hero-btnControl {
@@ -181,7 +200,7 @@ function onSlideEnd(swiper: SwiperClass) {
       justify-content: flex-start;
       left: $padding-RWD;
       right: $padding-RWD;
-      bottom: clamp(40px, 4vw, 100px);
+      bottom: clamp(40px, 5vw, 10%);
       border-radius: 1px;
       // height: 6px;
       :deep(.swiper-pagination-bullet) {
