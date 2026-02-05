@@ -27,7 +27,6 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-
     prerender: {
       // 讓 Nuxt 在 build 時預先產生 HTML
       crawlLinks: true,
@@ -64,4 +63,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@element-plus/nuxt",
   ],
+  image: {
+    provider: "none",
+  },
 });

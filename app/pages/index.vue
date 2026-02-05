@@ -6,7 +6,6 @@ feature-content
         <HomeHero/>
       </div>
     </section>
-
     <section class="home-feature">
       <div class="feature-inner container">
         <HomeFeature />

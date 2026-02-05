@@ -15,14 +15,27 @@
     @slide-change-transition-start="onSlideStart"
     @slide-change-transition-end="onSlideEnd"
   >
-    <SwiperSlide v-for="i in 3" :key="i" class="hero-slide">
+    <SwiperSlide
+      v-for="slide in heroSlides"
+      :key="slide.id"
+      class="hero-slide"
+    >
       <div class="slide-image">
-        <img class="image" src="/images/bg/index-first-bg-01.jpg" alt="" />
+        <NuxtImg
+          :src="slide.image.src"
+          :alt="slide.image.alt"
+          sizes="100vw"
+          format="webp"
+          quality="80"
+          class="image"
+        />
       </div>
+
       <div class="slide-content">
-        <h3 class="slide-title">始終電力十足。隨時待命。{{ i }}</h3>
-        <p class="slide-text">認識 POWERPLAY 2。無限力量，化繁為簡。</p>
+        <h3 class="slide-title">{{ slide.title }}</h3>
+        <p class="slide-text">{{ slide.text }}</p>
         <button class="btn slide-btn">立即購買</button>
+      
       </div>
     </SwiperSlide>
 
@@ -46,11 +59,10 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import type { Swiper as SwiperClass } from "swiper";
 
 const swiperIns = ref<SwiperClass | null>(null);
-
+//獲得swiper-bullets
 function getBullets(swiper: SwiperClass): HTMLElement[] {
   // Swiper 的 bullets 型別實際是 HTMLElement[] | null | undefined
   const bullets = swiper.pagination?.bullets ?? [];
@@ -84,14 +96,44 @@ function onSwiper(swiper: SwiperClass) {
   // Swiper 建好後，pagination 可能還在建立中，延後一幀更穩
   requestAnimationFrame(() => restartBulletProgress(swiper));
 }
-
+//事件開始
 function onSlideStart(swiper: SwiperClass) {
   clearBulletProgress(swiper);
 }
-
+//事件結束
 function onSlideEnd(swiper: SwiperClass) {
   restartBulletProgress(swiper);
 }
+
+const heroSlides = [
+  {
+    id: "powerplay-1",
+    title: "始終電力十足。隨時待命",
+    text: "認識 POWERPLAY 2。無限力量，化繁為簡。",
+    image: {
+      src: "/images/home/hero/hero-bg-01.jpg",
+      alt: "POWERPLAY 2",
+    },
+  },
+  {
+    id: "powerplay-2",
+    title: "智慧供電，簡單就是力量",
+    text: "POWERPLAY 2，打造真正無感充電體驗。",
+    image: {
+      src: "/images/home/hero/hero-bg-02.jpg",
+      alt: "POWERPLAY 桌面展示",
+    },
+  },
+  {
+    id: "powerplay-3",
+    title: "穩定供電，從不間斷",
+    text: "POWERPLAY 2，專為專注與持久打造。",
+    image: {
+      src: "/images/home/hero/hero-bg-03.jpg",
+      alt: "POWERPLAY 桌面展示",
+    },
+  },
+];
 </script>
 
 <style scoped lang="scss">
@@ -115,6 +157,9 @@ function onSlideEnd(swiper: SwiperClass) {
         // max-height: 960px;
         object-fit: cover;
         object-position: bottom;
+        @media (max-width:550px) {
+            object-position: 80% 100%;
+        }
       }
     }
     .slide-content {
