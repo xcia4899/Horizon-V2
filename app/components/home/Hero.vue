@@ -15,11 +15,7 @@
     @slide-change-transition-start="onSlideStart"
     @slide-change-transition-end="onSlideEnd"
   >
-    <SwiperSlide
-      v-for="slide in heroSlides"
-      :key="slide.id"
-      class="hero-slide"
-    >
+    <SwiperSlide v-for="slide in heroSlides" :key="slide.id" class="hero-slide">
       <div class="slide-image">
         <NuxtImg
           :src="slide.image.src"
@@ -35,7 +31,6 @@
         <h3 class="slide-title">{{ slide.title }}</h3>
         <p class="slide-text">{{ slide.text }}</p>
         <button class="btn slide-btn">立即購買</button>
-      
       </div>
     </SwiperSlide>
 
@@ -157,8 +152,8 @@ const heroSlides = [
         // max-height: 960px;
         object-fit: cover;
         object-position: bottom;
-        @media (max-width:550px) {
-            object-position: 80% 100%;
+        @media (max-width: 550px) {
+          object-position: 80% 100%;
         }
       }
     }
@@ -194,8 +189,23 @@ const heroSlides = [
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease-out;
     .swiper-btn {
       pointer-events: auto;
+      // color: var(--barnd);
+      background: transparent;
+      .icon {
+        color: var(--brand);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background: var(--action-primary);
+          .icon {
+            color: $color-white;
+          }
+        }
+      }
     }
   }
   .home-hero-pagination {
@@ -237,6 +247,11 @@ const heroSlides = [
       to {
         transform: scaleX(1);
       }
+    }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    &:hover .hero-btnControl {
+      opacity: 1;
     }
   }
 }

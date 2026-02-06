@@ -28,6 +28,18 @@
         >
           <div class="card-media">
             <img :src="item.media" alt="" />
+            <div
+              v-for="value in item.pointerItems"
+              :key="value.title"
+              class="linkPoint"
+              :style="{
+                left: value.position.left,
+                top: value.position.top,
+              }"
+            >
+              <button class="point"></button>
+              <p class="text">{{ value.title }}</p>
+            </div>
           </div>
           <div class="card-content">
             <h3 class="card-title">{{ item.title }}</h3>
@@ -51,6 +63,16 @@ const featureContent = [
     text: "為了在高強度使用情境下維持穩定表現，這些產品以實際需求為核心設計，兼顧效能與可靠性，讓你能專注於真正重要的事。",
     media: "./images/home/feature/feature-01.jpg",
     href: "",
+    pointerItems: [
+      {
+        title: "G522 LIGHT",
+        href: "",
+        position: {
+          left: "26%",
+          top: "22%",
+        },
+      },
+    ],
   },
   {
     label: "電競制霸",
@@ -58,6 +80,32 @@ const featureContent = [
     text: "從操作回饋到整體手感，每一個細節都為即時反應而生。透過精密調校與實戰驗證，帶來穩定且一致的操控體驗。",
     media: "./images/home/feature/feature-02.jpg",
     href: "",
+    pointerItems: [
+      {
+        title: "G522 LIGHT",
+        href: "",
+        position: {
+          left: "8%",
+          top: "60%",
+        },
+      },
+      {
+        title: "PRO X TKL RAPID",
+        href: "",
+        position: {
+          left: "36%",
+          top: "52%",
+        },
+      },
+      {
+        title: "GM08 滑鼠",
+        href: "",
+        position: {
+          left: "73%",
+          top: "64%",
+        },
+      },
+    ],
   },
   {
     label: "提高您的生產力",
@@ -65,6 +113,24 @@ const featureContent = [
     text: "以人體工學為核心，提供良好的支撐與穩定性，減少長時間使用帶來的負擔，讓工作與創作都能保持流暢節奏。",
     media: "./images/home/feature/feature-03.jpg",
     href: "",
+    pointerItems: [
+      {
+        title: "G522 LIGHT",
+        href: "",
+        position: {
+          left: "72%",
+          top: "4%",
+        },
+      },
+      {
+        title: "G915 X LIGHTSPEED",
+        href: "",
+        position: {
+          left: "32%",
+          top: "66%",
+        },
+      },
+    ],
   },
   {
     label: "自在生活靈感",
@@ -72,6 +138,16 @@ const featureContent = [
     text: "簡潔而不失質感的設計語言，融入生活中的每一個場景，讓使用變得自然，讓風格成為日常的一部分。",
     media: "./images/home/feature/feature-04.webp",
     href: "",
+    pointerItems: [
+      {
+        title: "Cetra True 藍牙耳機",
+        href: "",
+        position: {
+          left: "50%",
+          top: "10%",
+        },
+      },
+    ],
   },
 ];
 // 預設為第一個
@@ -160,11 +236,33 @@ p {
       // gap: clamp(16px, 3vw, 32px);
       // margin-inline:16px ;
       .card-media {
+        position: relative;
         flex: 0 0 55%;
         width: 100%;
         img {
           width: 100%;
           object-fit: cover;
+        }
+      }
+      .linkPoint {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        .text {
+          color: $color-black;
+          background-color: rgba($color-white, 0.7);
+          padding: 4px 8px;
+          border-radius: 4px;
+          transition: transform 0.3s ease-out;
+        }
+        .point:hover+.text {
+          transform: translateY(-8px)scale(1.2);
+          background-color: rgba($color-white, 1);
         }
       }
       .card-content {

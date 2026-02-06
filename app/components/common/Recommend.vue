@@ -118,6 +118,7 @@ const recommendList = [
     border-radius: 12px;
     overflow: hidden;
     background: var(--bg-surface-card);
+    cursor: pointer;
     transition:
       border-color 0.4s ease,
       background-color 0.4s ease;
@@ -163,7 +164,7 @@ const recommendList = [
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         border-color: var(--inverse);
-        background: var(--bg-surface-soft);
+        // background: var(--bg-surface-soft);
         .image {
           transform: scale(1.2);
         }
@@ -231,6 +232,8 @@ const recommendList = [
   justify-content: space-between;
   z-index: 2;
   pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
   :deep(.recommend-carousel-btnPrev),
   :deep(.recommend-carousel-btnNext) {
     pointer-events: auto;
@@ -240,6 +243,11 @@ const recommendList = [
     right: $padding-RWD;
     bottom: calc(0% + clamp(36px, 4vw, 60px) / 2 - 14px);
     margin-bottom: 64px;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .home-recommend:hover .carousel-control {
+    opacity: 1;
   }
 }
 </style>

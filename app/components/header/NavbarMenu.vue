@@ -155,7 +155,7 @@ onBeforeUnmount(() => {
     transform: translateY(8px);
     pointer-events: none;
     cursor: default;
-    overflow: hidden;
+    // overflow: hidden;
     transition:
       max-height 0.4s ease,
       inset 0.4s ease,
@@ -181,7 +181,7 @@ onBeforeUnmount(() => {
   .dropdown-content {
     .card {
       position: relative;
-      width: clamp(120px, 25vw, 160px);
+      width: clamp(72px, 12vw, 160px);
       display: flex;
       flex-direction: column;
       border-radius: 6px;
@@ -211,6 +211,8 @@ onBeforeUnmount(() => {
         overflow-wrap: break-word;
         h4 {
           cursor: pointer;
+          font-size: clamp(12px, 2vw, 20px);
+          white-space: nowrap;
         }
       }
     }
