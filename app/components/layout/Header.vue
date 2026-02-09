@@ -5,7 +5,7 @@
     </button>
     <!-- LOGO -->
     <div class="nav-left">
-      <button type="button" class="logo">Horizon</button>
+      <button type="button" class="logo" @click="goHome">Horizon</button>
     </div>
     <!-- Navber-menu -->
     <section class="navbar" :class="{ 'mobile-isOpen': isMenuOpen === true }">
@@ -25,6 +25,8 @@
 // 下拉選單邏輯 ==================
 //menu 型別
 import type { SetMenu } from "@/types/ui/menu";
+import { looding } from "@/composables/useFetchState"
+const router = useRouter();
 
 // 所有導覽列選單資料
 const menus: SetMenu[] = [
@@ -32,36 +34,25 @@ const menus: SetMenu[] = [
     ID: "product",
     label: "商品",
     items: [
-      {
-        text: "新品上市",
-        img: "/images/pic-detal/RAZER-1000/10001.jpg",
-        href: "",
-      },
-      {
-        text: "特價商品",
-        img: "/images/pic-detal/PRO-1002/10001.png",
-        href: "",
-      },
-      { text: "滑鼠", img: "./images/picture/fourth-row2-01.png", href: "" },
-      { text: "鍵盤", img: "./images/picture/fourth-row2-06.png", href: "" },
-      { text: "耳機", img: "./images/pic-detal/PRO-1007/10007.png", href: "" },
-      {
-        text: "麥克風",
-        img: "./images/pic-detal/ROG-1005/10003.png",
-        href: "",
-      },
+      { text: "新品上市", img: "./images/pic-detal/RAZER-1000/10001.jpg" },
+      { text: "特價商品", img: "./images/pic-detal/PRO-1002/10001.png" },
+      { text: "滑鼠", img: "./images/picture/fourth-row2-01.png", tag: "mouse" },
+      { text: "鍵盤", img: "./images/picture/fourth-row2-06.png", tag: "keyboard" },
+      { text: "耳機", img: "./images/pic-detal/PRO-1007/10007.png", tag: "headset" },
+      { text: "麥克風", img: "./images/pic-detal/ROG-1005/10003.png", tag: "mic" },
     ],
   },
   {
     ID: "brand",
     label: "品牌",
     items: [
-      { text: "MSI", img: "./images/logo/MSI.png", href: "" },
-      { text: "Logitech", img: "./images/logo/LOGI.png", href: "" },
-      { text: "Razer", img: "./images/logo/RAZER.png", href: "" },
-      { text: "ROG", img: "./images/logo/ROG.png", href: "" },
+      { text: "MSI", img: "./images/logo/MSI.png", tag: "msi" },
+      { text: "Logitech", img: "./images/logo/LOGI.png", tag: "logitech" },
+      { text: "Razer", img: "./images/logo/RAZER.png", tag: "razer" },
+      { text: "ROG", img: "./images/logo/ROG.png", tag: "rog" },
     ],
   },
+
   {
     ID: "event",
     label: "活動",
@@ -77,6 +68,12 @@ const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
 };
 const isMenuOpen = ref(false);
+
+const goHome = async () => {
+  await looding(300);
+  router.push({ path: "/" })
+}
+
 </script>
 
 <style scoped lang="scss">

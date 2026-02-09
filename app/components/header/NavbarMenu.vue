@@ -28,7 +28,7 @@
             :key="item.text"
             class="dropdown-content"
           >
-            <div class="card">
+            <div class="card" @click="goProducts(item)">
               <div class="item-pic">
                 <img :src="item.img" alt="" />
               </div>
@@ -46,7 +46,10 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
-import type { MenuKey, OpenMenu, SetMenu } from "@/types/ui/menu";
+import type { MenuKey, MenuItem, OpenMenu, SetMenu } from "@/types/ui/menu";
+
+const router = useRouter();
+
 //螢幕、手機模式判斷
 const { isDesktop, isTouch } = useInteractionMode();
 defineProps<{
@@ -83,6 +86,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
+
+//跳轉商品頁 可代參數
+const goProducts = async (item: MenuItem) => {
+  await looding(300)
+  router.push({
+    path: "/products",
+    query: item ? {} : {},
+  });
+};
 </script>
 
 <style scoped lang="scss">

@@ -7,7 +7,7 @@ export  type OpenMenu = MenuKey | null;
 export  interface MenuItem {
   text: string;
   img: string;
-  href: string;
+  tag?: string;
 }
 // 主選單結構
 export  interface SetMenu {
