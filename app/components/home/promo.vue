@@ -60,7 +60,6 @@ const gotoLink = (id: string, link: string) => {
   align-items: center;
   .promo-media {
     flex: 0 0 50%;
-    // width: 50%;
     height: auto;
     aspect-ratio: 1 / 1;
     img {

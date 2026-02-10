@@ -25,6 +25,7 @@
               v-for="(section, index) in sidebarList"
               :key="section.title"
               class="sidebar-group"
+              :class="{ underline: isSectionOpen(index) }"
             >
               <div class="sidebar-group-title" @click="toggleSection(index)">
                 <h4 class="title">{{ section.title }}</h4>
@@ -43,7 +44,12 @@
                   class="options-item"
                 >
                   <label class="checkbox-area">
-                    <input class="checkbox" type="checkbox" :value="item" />
+                    <input
+                      v-model="selectTags"
+                      class="checkbox"
+                      type="checkbox"
+                      :value="item"
+                    />
                     {{ item }}
                   </label>
                 </li>
@@ -68,16 +74,17 @@
         </section>
         <section class="main-products">
           <div class="filter-selected">
-            <button class="selected-allClear">
+            <button class="selected-allClear" @click="clearTag">
               清除篩選條件
               <Icon class="icon" name="iconoir:cancel" size="24" />
             </button>
             <button
-              v-for="(item, index) in 4"
+              v-for="(item, index) in selectTags"
               :key="index"
               class="selected-clearBtn"
+              @click="removeTag(item)"
             >
-              TAG{{ item }}
+              {{ item }}
               <Icon class="icon" name="iconoir:cancel" size="24" />
             </button>
           </div>
@@ -164,6 +171,17 @@ const toggleSection = (index: number) => {
   const idx = openSections.value.indexOf(index);
   if (idx > -1) openSections.value.splice(idx, 1);
   else openSections.value.push(index);
+  console.log(selectTags.value);
+};
+//依照商品TAG 搜尋
+const selectTags = ref<string[]>([]);
+
+//filter-selected 刪除TAG
+const removeTag = (tag: string) => {
+  return (selectTags.value = selectTags.value.filter((t) => t !== tag));
+};
+const clearTag = () => {
+  return (selectTags.value = []);
 };
 </script>
 
@@ -229,7 +247,7 @@ const toggleSection = (index: number) => {
     .sidebar-group {
       padding: 4px 0px;
       margin-bottom: 4px;
-      border-bottom: 1px dashed;
+      border-bottom: 1px dashed var(--border-default);
       .sidebar-group-title {
         padding: 8px 6px;
         display: flex;
@@ -281,6 +299,10 @@ const toggleSection = (index: number) => {
         &.onOpen {
           max-height: 400px;
         }
+      }
+      &.underline {
+        border-bottom-style: solid;
+        border-color: var(--border-soft);
       }
     }
   }

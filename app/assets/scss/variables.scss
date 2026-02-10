@@ -59,6 +59,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --bg-surface-glass: rgba(2, 2, 3, 0.7); // 對比的 surface
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
+    --border-soft: #{$color-gray-800}; // 一般邊框
     //  ========== Brand =========
     --brand: #{$color-purple-500}; // 品牌主色
     --brand-hover: #{$color-purple-500}; // hover / active
@@ -98,6 +99,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --bg-surface-glass: rgba(255, 255, 255, 0.6); // 對比的 surface
         /* ========== Border ========= */
         --border-default: #{$color-gray-600}; // 邊框（避免過亮）
+        --border-soft: #{$color-gray-200}; // 邊框（避免過亮）
         //   ========== Brand =========
         --brand: #{$color-purple-500}; // 品牌主色
         --brand-hover: #{$color-purple-300}; // hover / active（更亮）
