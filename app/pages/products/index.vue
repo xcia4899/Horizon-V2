@@ -22,19 +22,24 @@
           <div class="sidebar-title">篩選</div>
           <ul class="sidebar-groups">
             <li
-              v-for="section in sidebarList"
+              v-for="(section, index) in sidebarList"
               :key="section.title"
               class="sidebar-group"
             >
-              <div class="sidebar-group-itile">
+              <div class="sidebar-group-title" @click="toggleSection(index)">
                 <h4 class="title">{{ section.title }}</h4>
-                <icon class="icon" name="material-symbols:add" size="24" />
+                <icon
+                  class="icon"
+                  :class="{ rotate: isSectionOpen(index) }"
+                  name="icon-park-solid:up-c"
+                  size="24"
+                />
               </div>
 
-              <ul class="sidebar-group-options">
+              <ul v-show="isSectionOpen(index)" class="sidebar-group-options">
                 <li
-                  v-for="(item, index) in section.options"
-                  :key="index"
+                  v-for="(item, i) in section.options"
+                  :key="i"
                   class="options-item"
                 >
                   <label class="checkbox-area">
@@ -152,6 +157,14 @@ const sidebarList = [
     options: ["⭐⭐⭐⭐⭐", "⭐⭐⭐⭐ 以上", "⭐⭐⭐ 以上"],
   },
 ];
+//sidbar的Sections展開關閉
+const openSections = ref<number[]>([]);
+const isSectionOpen = (index: number) => openSections.value.includes(index);
+const toggleSection = (index: number) => {
+  const idx = openSections.value.indexOf(index);
+  if (idx > -1) openSections.value.splice(idx, 1);
+  else openSections.value.push(index);
+};
 </script>
 
 <style scoped lang="scss">
@@ -177,10 +190,13 @@ const sidebarList = [
     color: var(--text-secondary);
     background-color: transparent;
     cursor: pointer;
-    &:hover {
-      background: var(--bg-surface-contrast);
-      color: var(--text-inverse-soft);
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--bg-surface-contrast);
+        color: var(--text-inverse-soft);
+      }
     }
+
     .icon {
       transition: transform 0.3s ease;
     }
@@ -214,25 +230,32 @@ const sidebarList = [
       padding: 4px 0px;
       margin-bottom: 4px;
       border-bottom: 1px dashed;
-      .sidebar-group-itile {
+      .sidebar-group-title {
         padding: 8px 6px;
         display: flex;
         justify-content: space-between;
+        align-items: center;
         cursor: pointer;
         .title {
           cursor: pointer;
         }
         .icon {
-          border-radius: 50%;
+          color: var(--brand-soft);
+          transition: transform 0.3s ease;
         }
-        &:hover {
-          .icon {
-            color: var(--brand);
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            .icon {
+              color: var(--brand);
+            }
           }
+        }
+        .icon.rotate {
+          color: var(--brand);
+          transform: rotate(180deg);
         }
       }
       .sidebar-group-options {
-    
         .options-item {
           display: flex;
           align-items: center;
@@ -248,9 +271,11 @@ const sidebarList = [
           .checkbox {
             cursor: pointer;
           }
-          &:hover {
-            background: var(--bg-surface-soft);
-            color: var(--brand-hover);
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              background: var(--bg-surface-soft);
+              color: var(--brand-hover);
+            }
           }
         }
         &.onOpen {
@@ -376,8 +401,8 @@ const sidebarList = [
         justify-content: space-between;
         flex-direction: column;
         align-items: flex-start;
-        padding: 6px 8px 8px;
-        gap: 4px;
+        padding: 8px;
+        gap: 8px;
 
         .card-title,
         .card-text {
@@ -414,9 +439,11 @@ const sidebarList = [
           margin-top: 4px;
         }
       }
-      &:hover::after {
-        height: 100%;
-        box-shadow: var(--shadow-focus);
+      @media (hover: hover) and (pointer: fine) {
+        &:hover::after {
+          height: 100%;
+          box-shadow: var(--shadow-focus);
+        }
       }
     }
   }
@@ -472,9 +499,12 @@ const sidebarList = [
       border-radius: 6px;
       transition: all 0.3s ease;
     }
-    & button:hover:not(.active) {
-      color: #222;
+    @media (hover: hover) and (pointer: fine) {
+      & button:hover:not(.active) {
+        color: #222;
+      }
     }
+
     & button.active {
       color: white;
       font-weight: bold;
