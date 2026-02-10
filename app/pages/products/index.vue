@@ -3,7 +3,7 @@
     <section class="product-cursoul">
       <BannerPromoBanner />
     </section>
-    <div class="filter-toolbar">
+    <div class="sidebar-toolbar">
       <div class="container">
         <button class="filter-toggle" @click="toggleFilter">
           關閉篩選條件
@@ -76,23 +76,23 @@
               <Icon class="icon" name="iconoir:cancel" size="24" />
             </button>
           </div>
-          <div class="listrow">
-            <div v-for="product in 6" :key="product" class="card">
-              <div class="item-pic">
-                <div class="pic">
+          <div class="products-view">
+            <div v-for="product in 6" :key="product" class="product-card">
+              <div class="card-media">
+                <div class="card-image">
                   <img src="/images/pic-detal/RAZER-1000/10001.jpg" alt="" />
                 </div>
-                <div class="card-title">product.brand</div>
+                <div class="card-barnd">product.brand</div>
               </div>
-              <div class="item-text">
-                <h4>product.name</h4>
-                <h5>product.description</h5>
+              <div class="card-content">
+                <h4 class="card-title">product.name</h4>
+                <h5 class="card-text">product.description</h5>
 
-                <div class="productprice">
-                  <p>特價$ 660g()</p>
-                  <p>NT$ 880()</p>
+                <div class="card-price">
+                  <p class="discount onSale">特價$ 660g()</p>
+                  <p class="price strike">NT$ 880()</p>
                 </div>
-                <button class="btn">加入購物車</button>
+                <button class="card-add btn">加入購物車</button>
               </div>
             </div>
           </div>
@@ -161,9 +161,9 @@ const sidebarList = [
 .product-cursoul {
   max-height: 480px;
 }
-.filter-toolbar {
-  padding: 16px 0px;
-  background: var(--bg-surface-strong);
+.sidebar-toolbar {
+  padding: 8px 0px;
+  background: var(--bg-surface);
 
   .filter-toggle {
     display: flex;
@@ -189,16 +189,20 @@ const sidebarList = [
     }
   }
 }
-.product-main-inner {
-  display: flex;
-  width: 100%;
-  gap: 8px;
+.product-main {
+  background: var(--bg-surface-strong);
+  .product-main-inner {
+    display: flex;
+    width: 100%;
+    gap: 32px;
+  }
 }
+
 .main-sidebar {
   // flex: 0 0 40%;
   padding: 16px 8px;
   min-width: 186px;
-  width: clamp(186px, 25% ,240px);
+  width: clamp(186px, 25%, 240px);
   border: 1px solid white;
   .sidebar-groups {
     padding: 0px;
@@ -320,12 +324,10 @@ const sidebarList = [
 }
 .main-products {
   flex: 1;
-  border: 1px solid white;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  .listrow {
-    border: 1px solid ;
+  .products-view {
+    // border: 1px solid;
     width: 100%;
     display: grid;
     // grid-template-columns: repeat(3, 1fr); /* 建立三欄，每欄 1fr 寬 */
@@ -334,48 +336,48 @@ const sidebarList = [
     /* 自動高度 */
     margin: 0 auto;
     gap: 32px 24px;
+    padding: 8px;
     justify-items: flex-start;
     justify-content: center;
-    .card {
+    .product-card {
+      position: relative;
       height: 100%;
+      width: 100%;
       min-width: 200px;
       max-width: 300px;
-      width: 100%;
-      padding-bottom: 0px;
-      justify-content: space-between;
-
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      > * {
+        position: relative;
+        z-index: 1;
+      }
       &::after {
         position: absolute;
         top: 0;
         left: 0;
+        right: 0;
+        border-radius: 6px;
         content: "";
-        height: 40%;
+        height: 20%;
+        width: 100%;
+        background: var(--bg-surface-card);
+        transition: height 0.4s ease-out;
+        box-shadow: transparent;
       }
-
-      &:hover::after {
-        height: 100%;
-      }
-
-      .item-pic {
+      .card-media {
         // flex: 1;
-
-        a {
+        position: relative;
+        background: var(--bg-surface-card);
+        border-radius: 6px;
+        .card-image {
           width: 100%;
-          height: 100%;
+          padding: 8px 8px 32px;
+          border-radius: 6px;
+          overflow: hidden;
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        .pic {
-          // height: 100%;
-          width: 100%;
-          padding: 16px;
-
-          display: flex;
-          align-items: center;
-          justify-content: center;
-
           img {
             width: 100%;
             object-fit: cover;
@@ -383,18 +385,16 @@ const sidebarList = [
             margin: auto auto;
           }
         }
-
-        .card-title {
-          // display: none;
+        .card-barnd {
           position: absolute;
           bottom: 8px;
           left: 8px;
           font-size: 14px;
           font-weight: 900;
+          color: var(--action-primary-hover);
         }
       }
-
-      .item-text {
+      .card-content {
         flex: 1;
         word-wrap: break-word;
         // color: $color-darkgery;;
@@ -405,38 +405,33 @@ const sidebarList = [
         padding: 6px 8px 8px;
         gap: 4px;
 
-        h4,
-        h5,
-        p {
-          margin: 0;
-          text-align: left;
+        .card-title,
+        .card-text {
+          @include line-clamp(1);
+          width: 100%;
         }
-
-        h4 {
-          font-weight: 900;
+        .card-text {
+          color: var(--text-secondary);
         }
-
-        h5 {
-          font-size: 16px;
-          font-weight: 400;
-        }
-
-        p {
-          font-size: 16px;
-          padding: 2px;
-          font-weight: 600;
-          // text-align: center;
-        }
-
-        .productprice {
+        .card-price {
           margin-top: 8px;
           width: 100%;
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
+          .discount.onSale {
+            color: var(--state-danger);
+            font-weight: bolder;
+          }
+          .price.strike {
+            text-decoration: line-through;
+            color: var(--text-secondary);
+            opacity: 0.8;
+            font-size: 14px;
+          }
         }
 
-        .btn {
+        .card-add {
           height: 36px;
           width: 100%;
           padding: 0;
@@ -445,64 +440,75 @@ const sidebarList = [
           margin-top: 4px;
         }
       }
+      &:hover::after {
+        height: 100%;
+        box-shadow: var(--shadow-focus);
+      }
     }
   }
-}
-
-.filter-selected {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  border: 1px solid;
-  padding: 8px;
-
-  .selected-allClear,
-  .selected-clearBtn {
+  //上方清除TAG
+  .filter-selected {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    padding: 4px 12px;
-    border-radius: 8px;
-    color: var(--text-secondary);
-    background: var(--bg-surface);
-    border: 2px solid var(--border-default);
-    cursor: pointer;
-    &:hover {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    .selected-allClear,
+    .selected-clearBtn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 8px;
       color: var(--text-secondary);
-      background: var(--bg-surface-soft);
-      border-color: var(--brand);
+      background: transparent;
+      border: 2px solid var(--border-default);
+      cursor: pointer;
+      .icon {
+        color: var(--brand-hover);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          color: var(--text-secondary);
+          background: var(--bg-surface-soft);
+          border-color: var(--brand);
+          .icon {
+            color: var(--state-danger);
+          }
+        }
+      }
     }
   }
-}
-.pagination {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
+  //換頁UI
+  .pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
 
-  flex-wrap: wrap;
-  & button {
-    padding: 6px 12px;
-    border: 1px solid #ddd;
-    background: white;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-  }
-  & button:hover:not(.active) {
-    color: #222;
-  }
-  & button.active {
-    color: white;
-    font-weight: bold;
-  }
-  & button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    flex-wrap: wrap;
+    & button {
+      padding: 6px 12px;
+      border: 1px solid #ddd;
+      background: white;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    & button:hover:not(.active) {
+      color: #222;
+    }
+    & button.active {
+      color: white;
+      font-weight: bold;
+    }
+    & button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
 </style>

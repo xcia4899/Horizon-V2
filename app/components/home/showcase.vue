@@ -134,7 +134,7 @@ const gotoWebsit = (link: string) => {
       gap: 16px;
       .hero-subtitle {
         display: none;
-        color: var(--action-primary);
+        color: var(--action-primary-hover);
       }
       .hero-text {
         color: var(--text-secondary);
@@ -179,7 +179,7 @@ const gotoWebsit = (link: string) => {
         }
       }
       .card-subtitle {
-        color: var(--action-primary);
+        color: var(--action-primary-hover);
       }
       .card-text {
         color: var(--text-inverse-soft);

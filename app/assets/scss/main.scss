@@ -70,7 +70,7 @@ h4 {
 /* 輔助標題 */
 h5 {
     font-size: clamp(16px, 1.5vw, 18px);
-    font-weight: 600;
+    font-weight: 400;
 }
 
 /* 內文 */
@@ -144,7 +144,7 @@ button {
     @media (hover: hover) and (pointer: fine) {
         &:hover {
             font-weight: 600;
-            color: var(--action-primary-hover);
+            color: var(--brand-hover);
             background-color: transparent;
             border-color: var(--action-primary);
         }
@@ -270,12 +270,7 @@ input {
     //   }
 }
 
-.strike {
-    text-decoration: line-through;
-    color: var(--text-secondary);
-    opacity: 0.8;
-    font-size: 14px;
-}
+
 
 ul,
 li {

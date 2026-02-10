@@ -117,7 +117,7 @@ const recommendList = [
     border: 3px solid var(--border-default);
     border-radius: 12px;
     overflow: hidden;
-    background: var(--bg-surface-card);
+    background: var(--bg-surface-soft);
     cursor: pointer;
     transition:
       border-color 0.4s ease,

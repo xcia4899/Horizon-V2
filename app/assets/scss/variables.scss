@@ -15,7 +15,7 @@ $color-gray-300: #c8c8c8; // disabled / 次要邊框
 $color-gray-400: #a0a0a0; // placeholder / icon-muted
 $color-gray-500: #787878; // 次要文字
 $color-gray-600: #5f5f5f; // 輔助文字（補階）
-$color-gray-700: #3f3f3f; // 主要文字（淺底）
+$color-gray-700: #333333; // 主要文字（淺底）
 $color-gray-800: #222222; // 深色文字
 $color-gray-900: #141414; // 最深背景
 
@@ -25,7 +25,8 @@ $color-purple-500: #a02fec;
 $color-purple-700: #690fa6;
 
 $color-blue: #00b8fc;
-$color-red: #e71818;
+$color-red-300: #ff5555;
+$color-red-500: #e71818;
 
 
 $shadow-set: 0px 0px 6px 1px rgba(22, 22, 22, 0.4);
@@ -54,7 +55,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
     --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
     --bg-surface-card: #{$color-gray-50}; // 卡片
-    --bg-surface-contrast: #{$color-gray-800}; // 對比的 surface
+    --bg-surface-contrast: #{$color-gray-900}; // 對比的 surface
     --bg-surface-glass: rgba(2, 2, 3, 0.7); // 對比的 surface
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
@@ -69,7 +70,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --shadow-default: 0px 3px 4px 0px rgba(22, 22, 22, 0.4);
     --shadow-focus: 0 0px 4px 1px rgba(31, 31, 31, 0.4);
     //  ========== State =========
-    --state-danger: #{$color-red}; // 錯誤 / 刪除
+    --state-danger: #{$color-red-500}; // 錯誤 / 刪除
 }
 
 //    深色背景使用 
@@ -86,13 +87,13 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --text-inverse: #{$color-gray-800}; // 淺色背景上的文字
         --text-inverse-soft: #{$color-gray-700}; // 淺色背景上的文
         //  ========== Background =========
-        --bg-page: #{$color-gray-900}; // 整頁最底背景
+        --bg-page: #{$color-gray-800}; // 整頁最底背景
         --bg-header:10, 10, 10; // Header / Navbar 背景
         --bg-footer: #{$color-black}; // footer 背景
         --bg-surface: #{$color-gray-900}; // 一般內容區
         --bg-surface-soft: #{$color-gray-800}; // 內容內層（較亮）
         --bg-surface-strong: #{$color-black}; // 分區 / 強調區（較暗）
-        --bg-surface-card: #{$color-gray-800}; //卡片
+        --bg-surface-card: #{$color-gray-700}; //卡片
         --bg-surface-contrast: #{$color-gray-100}; // 對比的 surface
         --bg-surface-glass: rgba(255, 255, 255, 0.6); // 對比的 surface
         /* ========== Border ========= */
@@ -103,13 +104,13 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --brand-soft: #{$color-purple-700}; // 淡色 / 背景用途
         //  ========== Action ========= 
         --action-primary: var(--brand);
-        --action-primary-hover: var(--brand-hover);
+        --action-primary-hover: var(--brand);
         --action-primary-soft: var(--brand-soft);
         --shadow-default: 0px 3px 4px 0px rgba(12, 12, 12, 0.4);
         /* 浮起元件 / Dropdown / Modal */
         --shadow-focus: 0 0px 4px 1px rgba(36, 36, 36, 0.4);
 
         // /========== State ========= 
-        --state-danger: #{$color-red}; // 錯誤
+        --state-danger: #{$color-red-300}; // 錯誤
     }
 }
