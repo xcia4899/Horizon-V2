@@ -4,8 +4,8 @@
     "brand": "RAZER ",
     "name": "RAZER 2 DEX RGB電競鍵盤",
     "subtitle": "穩定可靠，電競鍵盤的專業之選",
-    "price": 4490,
-    "originalPrice": 4990,
+    "discount": 4490,
+    "price": 4990,
     "onsale": true,
     "colorOptions": "黑色",
     "description": "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
@@ -23,14 +23,14 @@
         "content": [
           {
             "title": "開關與燈效",
-            "items": [
+            "text": [
               "機械軸：RAZER™ 機械開關，具有高響應與耐用性",
               "RGB 燈效：支援 Razer Chroma™ RGB，擁有超過 1,680 萬色彩選擇並可每鍵設定"
             ]
           },
           {
             "title": "設計與按鍵",
-            "items": [
+            "text": [
               "配置：Full-size 或 75%（視系列型號）",
               "材質：5052 鋁合金上蓋，雙射 ABS 鍵帽",
               "輪軸與媒體鍵：多功能滾輪 + 4個媒體鍵"
@@ -38,7 +38,7 @@
           },
           {
             "title": "其他性能",
-            "items": [
+            "text": [
               "回報率：最高 8000 Hz 輪詢率",
               "記憶體：支援多達 5 組設定檔（板載儲存）"
             ]
@@ -50,11 +50,11 @@
         "content": [
           {
             "title": "作業系統",
-            "items": ["Windows、macOS（需安裝 Razer Synapse）"]
+            "text": ["Windows、macOS（需安裝 Razer Synapse）"]
           },
           {
             "title": "連接方式",
-            "items": ["有線 USB-C 連接", "支援動態燈效同步"]
+            "text": ["有線 USB-C 連接", "支援動態燈效同步"]
           }
         ]
       },
@@ -63,7 +63,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "RAZER 2 DEX RGB 電競鍵盤",
               "USB-C 編織線",
               "可拆式皮革腕托",
@@ -77,7 +77,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "Razer Synapse 軟體下載",
               "產品註冊",
               "檢視常見問答 (FAQ)",
@@ -101,10 +101,10 @@
     "id": "PRO-1001",
     "brand": "Logitech",
     "name": "PRO 精密調整電競滑鼠",
-     "subtitle": "精密調整，帶來極致手感",
+    "subtitle": "精密調整，帶來極致手感",
     "color": "黑色",
-    "price": 3490,
-    "originalPrice": 3999,
+    "discount": 3490,
+    "price": 3999,
     "onsale": true,
     "description": "專為電競而打造的人體工學設計，完美貼合手型，提供長時間操作所需的穩定性與舒適性。即使在高壓、快節奏的賽事中，也能保持精準操控與迅速反應，幫助玩家維持最佳狀態，專注每一次出擊，打出關鍵勝利。",
     "images": {
@@ -121,7 +121,7 @@
         "content": [
           {
             "title": "尺寸",
-            "items": [
+            "text": [
               "長度: 125.8 毫米",
               "寬度: 67.7 毫米",
               "高度: 43.9 毫米",
@@ -130,7 +130,7 @@
           },
           {
             "title": "技術規格",
-            "items": [
+            "text": [
               "內建記憶體（進階功能需安裝 G HUB 軟體）",
               "5 個按鈕",
               "感應器: HERO 2",
@@ -144,19 +144,15 @@
           },
           {
             "title": "電池壽命",
-            "items": ["95 小時（依使用情況而異）"]
+            "text": ["95 小時（依使用情況而異）"]
           },
           {
             "title": "保固資訊",
-            "items": ["2 年有限硬體保固"]
+            "text": ["2 年有限硬體保固"]
           },
           {
             "title": "零件編號",
-            "items": [
-              "黑色: 910-007360",
-              "白燈: 910-007368",
-              "粉紅: 910-007376"
-            ]
+            "text": ["黑色: 910-007360", "白燈: 910-007368", "粉紅: 910-007376"]
           }
         ]
       },
@@ -165,15 +161,15 @@
         "content": [
           {
             "title": "作業系統",
-            "items": ["Windows 10 或更新版本", "macOS 12 或更新版本"]
+            "text": ["Windows 10 或更新版本", "macOS 12 或更新版本"]
           },
           {
             "title": "連接埠",
-            "items": ["USB 2.0"]
+            "text": ["USB 2.0"]
           },
           {
             "title": "軟體",
-            "items": ["羅技 G HUB（選用，需網際網路）"]
+            "text": ["羅技 G HUB（選用，需網際網路）"]
           }
         ]
       },
@@ -182,7 +178,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "PRO X SUPERLIGHT 2 DEX 無線遊戲滑鼠",
               "LIGHTSPEED 無線接收器",
               "USB-A 轉 USB-C 充電/資料連接線",
@@ -200,7 +196,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "開始使用",
               "註冊產品",
               "檢視常見問答集",
@@ -225,10 +221,10 @@
     "id": "PRO-1002",
     "brand": "Logitech",
     "name": "PRO X TKL RAPID ",
-    "subtitle":"PRO X 系列，專為遊戲打造的無線鍵盤",
+    "subtitle": "PRO X 系列，專為遊戲打造的無線鍵盤",
     "color": "金屬灰",
-    "price": 2999,
-    "originalPrice": 3499,
+    "discount": 2999,
+    "price": 3499,
     "onsale": true,
     "description": "PRO X TKL RAPID 是一款專為職業電競選手打造的無數字鍵盤，具備極低延遲的 1ms 回報率、LIGHTSPEED 無線技術、雙模連線功能與可熱插拔的機械軸設計，提供絕佳的手感與快速響應表現，滿足高速遊戲操作的需求。",
     "images": {
@@ -245,7 +241,7 @@
         "content": [
           {
             "title": "開關與性能",
-            "items": [
+            "text": [
               "可更換機械軸（GX Blue/Tactile/Linear 可選）",
               "LIGHTSPEED 無線技術，支援 1ms 超低延遲",
               "具備板載記憶體與巨集設定支援"
@@ -253,7 +249,7 @@
           },
           {
             "title": "設計與尺寸",
-            "items": [
+            "text": [
               "無數字區設計（Tenkeyless）",
               "鋁合金上蓋與懸浮式鍵帽設計",
               "重量：約 979 克（不含線材）"
@@ -266,11 +262,11 @@
         "content": [
           {
             "title": "作業系統",
-            "items": ["Windows® 10 以上", "macOS（僅限部分功能）"]
+            "text": ["Windows® 10 以上", "macOS（僅限部分功能）"]
           },
           {
             "title": "連接方式",
-            "items": ["LIGHTSPEED 無線", "藍牙", "USB Type-C 有線連接"]
+            "text": ["LIGHTSPEED 無線", "藍牙", "USB Type-C 有線連接"]
           }
         ]
       },
@@ -279,7 +275,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "PRO X TKL RAPID 無線鍵盤",
               "USB-C to USB-A 編織連接線",
               "LIGHTSPEED USB 接收器",
@@ -294,7 +290,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "下載 Logitech G HUB 軟體",
               "線上產品註冊",
               "常見問題與指南",
@@ -319,10 +315,10 @@
     "id": "MSI-1003",
     "brand": "MSI",
     "name": "GH50 電競耳機",
-    "subtitle":"舒適耐用，長時間遊戲不累",
+    "subtitle": "舒適耐用，長時間遊戲不累",
     "color": "粉紅",
-    "price": 1899,
-    "originalPrice": 2400,
+    "discount": 1899,
+    "price": 2400,
     "onsale": true,
     "description": "搭配 RGB 背光系統，視覺效果升級，具備虛擬 7.1 聲道與可拆卸麥克風，專為沉浸式遊戲體驗打造。",
     "images": {
@@ -339,15 +335,11 @@
         "content": [
           {
             "title": "音效技術",
-            "items": [
-              "虛擬 7.1 聲道環繞音效",
-              "40mm 驅動單體",
-              "可調整低音效果"
-            ]
+            "text": ["虛擬 7.1 聲道環繞音效", "40mm 驅動單體", "可調整低音效果"]
           },
           {
             "title": "設計與功能",
-            "items": [
+            "text": [
               "RGB 燈效可自訂",
               "金屬頭帶結構",
               "可拆卸式降噪麥克風",
@@ -361,11 +353,11 @@
         "content": [
           {
             "title": "作業系統",
-            "items": ["Windows 10 或更新版本"]
+            "text": ["Windows 10 或更新版本"]
           },
           {
             "title": "連接方式",
-            "items": ["USB 介面"]
+            "text": ["USB 介面"]
           }
         ]
       },
@@ -374,7 +366,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "GH50 電競耳機",
               "可拆卸式麥克風",
               "便攜收納包",
@@ -388,7 +380,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "驅動程式下載",
               "產品註冊",
               "常見問題",
@@ -412,10 +404,10 @@
     "id": "RAZER-1004",
     "brand": "Razer",
     "name": "Gigantus V2 滑鼠墊",
-     "subtitle":"頂級布面，滑順流暢體驗",
+    "subtitle": "頂級布面，滑順流暢體驗",
     "color": "紅色",
-    "price": 899,
-    "originalPrice": 1099,
+    "discount": 899,
+    "price": 1099,
     "onsale": true,
     "description": "人體工學設計，提升舒適與操作效率，提供穩定的滑鼠操控與廣闊表面，適合高 DPI 與低 DPI 玩家使用。",
     "images": {
@@ -432,7 +424,7 @@
         "content": [
           {
             "title": "材質與尺寸",
-            "items": [
+            "text": [
               "表面材質：布質編織面料",
               "底部材質：防滑橡膠底面",
               "尺寸：450 x 400 x 3 毫米"
@@ -440,7 +432,7 @@
           },
           {
             "title": "設計特點",
-            "items": [
+            "text": [
               "適用於各類滑鼠感應器技術",
               "邊緣縫線設計以防磨損",
               "柔軟可捲曲材質，方便攜帶與收納"
@@ -453,7 +445,7 @@
         "content": [
           {
             "title": "裝置",
-            "items": ["適用所有類型與品牌滑鼠"]
+            "text": ["適用所有類型與品牌滑鼠"]
           }
         ]
       },
@@ -462,7 +454,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": ["Gigantus V2 滑鼠墊 x1"]
+            "text": ["Gigantus V2 滑鼠墊 x1"]
           }
         ]
       },
@@ -471,7 +463,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "產品保固（1 年有限保固）",
               "使用與清潔指南",
               "客服與支援聯絡資訊"
@@ -495,10 +487,10 @@
     "id": "ROG-1005",
     "brand": "ROG",
     "name": "Carnyx 電容式麥克風 ",
-      "subtitle":"專為直播與錄音打造的音頻利器",
+    "subtitle": "專為直播與錄音打造的音頻利器",
     "color": "藍色",
-    "price": 8600,
-    "originalPrice": 9888,
+    "discount": 8600,
+    "price": 9888,
     "onsale": false,
     "description": "高解析錄音品質，適合直播、Podcast 及錄音室使用，具備清晰收音與雜音抑制功能。",
     "images": {
@@ -515,7 +507,7 @@
         "content": [
           {
             "title": "麥克風技術規格",
-            "items": [
+            "text": [
               "類型：電容式麥克風",
               "極性模式：心型指向",
               "頻率響應：20Hz – 20kHz",
@@ -525,7 +517,7 @@
           },
           {
             "title": "介面與控制",
-            "items": [
+            "text": [
               "輸出介面：USB-C",
               "實體控制：靜音按鈕、音量旋鈕",
               "LED 指示燈：工作狀態顯示"
@@ -538,7 +530,7 @@
         "content": [
           {
             "title": "系統需求",
-            "items": [
+            "text": [
               "Windows 10 或更新版本",
               "macOS 10.13 或更新版本",
               "USB 2.0 或以上連接埠"
@@ -551,7 +543,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "Carnyx 電容式麥克風 x1",
               "可調整支架 x1",
               "USB-C 連接線 x1",
@@ -565,7 +557,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "1 年有限硬體保固",
               "線上註冊與驅動程式下載",
               "FAQ 與使用教學",
@@ -589,10 +581,10 @@
     "id": "ROG-1006",
     "brand": "ROG",
     "name": "RX Profile 矮軸無線鍵盤",
-     "subtitle":"無線自由，專注每一次敲擊",
+    "subtitle": "無線自由，專注每一次敲擊",
     "color": "金屬灰",
-    "price": 3430,
-    "originalPrice": 3730,
+    "discount": 3430,
+    "price": 3730,
     "onsale": false,
     "description": "輕薄設計結合矮軸機械鍵，提供靈敏手感與優異便攜性，支援多設備連線與長效電池續航力。",
     "images": {
@@ -609,7 +601,7 @@
         "content": [
           {
             "title": "鍵盤技術規格",
-            "items": [
+            "text": [
               "鍵軸類型：矮軸機械軸",
               "按鍵壽命：5000 萬次敲擊",
               "回報率：1000Hz",
@@ -618,7 +610,7 @@
           },
           {
             "title": "連線與電力",
-            "items": [
+            "text": [
               "連線方式：藍牙 5.0 / 2.4GHz / USB-C 有線",
               "電池續航：最長可達 60 小時（視燈效與使用而定）"
             ]
@@ -630,7 +622,7 @@
         "content": [
           {
             "title": "系統需求",
-            "items": [
+            "text": [
               "Windows 10 或更新版本",
               "macOS 11 或更新版本",
               "支援藍牙或 USB 接口之設備"
@@ -643,7 +635,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "RX Profile 矮軸無線鍵盤 x1",
               "USB-C 連接線 x1",
               "2.4GHz 無線接收器 x1",
@@ -657,7 +649,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "2 年有限硬體保固",
               "技術支援與常見問題",
               "驅動程式與韌體更新",
@@ -682,10 +674,10 @@
     "id": "PRO-1007",
     "brand": "Logitech",
     "name": "G522 LIGHT 無線耳機",
-     "subtitle":"輕巧設計，全天候陪伴",
+    "subtitle": "輕巧設計，全天候陪伴",
     "color": "黑色",
-    "price": 4482,
-    "originalPrice": 4980,
+    "discount": 4482,
+    "price": 4980,
     "onsale": true,
     "description": "光速無線遊戲耳機配備光同步 RGB",
     "images": {
@@ -702,7 +694,7 @@
         "content": [
           {
             "title": "耳機技術規格",
-            "items": [
+            "text": [
               "驅動單體：50mm 高傳真驅動單體",
               "頻率響應：20Hz - 20kHz",
               "靈敏度：107dB SPL/mW",
@@ -713,7 +705,7 @@
           },
           {
             "title": "連線與電力",
-            "items": [
+            "text": [
               "連線方式：2.4GHz LIGHTSPEED 無線",
               "電池續航：最長達 29 小時",
               "充電接口：USB-C"
@@ -726,7 +718,7 @@
         "content": [
           {
             "title": "系統需求",
-            "items": [
+            "text": [
               "Windows 10 或更新版本",
               "macOS 10.15 或更新版本",
               "PlayStation 4 / PlayStation 5",
@@ -740,7 +732,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "G522 LIGHT 無線耳機 x1",
               "USB-C 充電線 x1",
               "LIGHTSPEED USB 接收器 x1",
@@ -754,7 +746,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "2 年有限硬體保固",
               "產品註冊與驅動程式下載",
               "常見問題與技術支援"
@@ -776,10 +768,10 @@
     "id": "MSI-1008",
     "brand": "MSI",
     "name": "GM08 電競滑鼠",
-    "subtitle":"RGB 燈效，炫酷戰鬥風",
+    "subtitle": "RGB 燈效，炫酷戰鬥風",
     "color": "黑色",
-    "price": 699,
-    "originalPrice": 899,
+    "discount": 699,
+    "price": 899,
     "onsale": true,
     "description": "PixArt PAW 3519 光學傳感器，具備高精度光學感應器與可自訂 DPI 設定。",
     "images": {
@@ -796,7 +788,7 @@
         "content": [
           {
             "title": "滑鼠技術規格",
-            "items": [
+            "text": [
               "感應器：高精度光學感應器",
               "DPI 範圍：200 - 4200 DPI 可調整",
               "按鍵數：6 個可自訂功能鍵",
@@ -813,7 +805,7 @@
         "content": [
           {
             "title": "系統需求",
-            "items": [
+            "text": [
               "Windows 10 或更新版本",
               "macOS 10.15 或更新版本",
               "USB 2.0 埠"
@@ -826,7 +818,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": ["GM08 電競滑鼠 x1", "產品文件 x1"]
+            "text": ["GM08 電競滑鼠 x1", "產品文件 x1"]
           }
         ]
       },
@@ -835,7 +827,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "1 年有限保固",
               "驅動程式與設定軟體下載",
               "常見問題與使用教學"
@@ -850,10 +842,10 @@
     "id": "PRO-1009",
     "brand": "Logitech",
     "name": "G915 X LIGHTSPEED",
-    "subtitle":"LIGHTSPEED 無線，穩定快速",
+    "subtitle": "LIGHTSPEED 無線，穩定快速",
     "color": "藍色",
-    "price": 2390,
-    "originalPrice": 2996,
+    "discount": 2390,
+    "price": 2996,
     "onsale": false,
     "description": "G915 X LIGHTSPEED 是一款無線低配置遊戲鍵盤，搭載 GL 機械軸與 LIGHTSPEED 技術，提供極速反應與穩定連線。具備自訂 RGB 燈光、金屬機身與多裝置連接支援，兼顧美觀與實用性，為高效能遊戲與專業工作者帶來優異體驗。。",
     "images": {
@@ -870,7 +862,7 @@
         "content": [
           {
             "title": "鍵盤技術規格",
-            "items": [
+            "text": [
               "類型：無線機械式鍵盤",
               "機械軸類型：GL Tactile、GL Clicky 或 GL Linear",
               "背光：LIGHTSYNC RGB",
@@ -887,7 +879,7 @@
         "content": [
           {
             "title": "系統需求",
-            "items": [
+            "text": [
               "Windows 10 或更新版本",
               "macOS 10.13 或更新版本",
               "USB 連接埠或藍牙"
@@ -900,7 +892,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "G915 X LIGHTSPEED 鍵盤 x1",
               "LIGHTSPEED 無線接收器 x1",
               "USB 延長線 x1",
@@ -915,7 +907,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "2 年有限保固",
               "支援網站與驅動程式下載",
               "常見問題與使用教學"
@@ -937,10 +929,10 @@
     "id": "ROG-1010",
     "brand": "ROG",
     "name": "Cetra True 藍牙耳機",
-     "subtitle":"前沿科技，沉浸式音樂享受",
+    "subtitle": "前沿科技，沉浸式音樂享受",
     "color": "紅色",
-    "price": 4999,
-    "originalPrice": 6200,
+    "discount": 4999,
+    "price": 6200,
     "onsale": false,
     "description": "Cetra True 藍牙耳機擁有高解析音質與低延遲傳輸，適合日常聆聽與遊戲娛樂，搭載主動降噪技術與環境音模式，提供沉浸式音效與清晰通話體驗。",
     "images": {
@@ -957,7 +949,7 @@
         "content": [
           {
             "title": "耳機技術規格",
-            "items": [
+            "text": [
               "類型：真無線藍牙耳機",
               "驅動單體：10mm 動圈單體",
               "連接方式：藍牙 5.0",
@@ -973,7 +965,7 @@
         "content": [
           {
             "title": "裝置支援",
-            "items": [
+            "text": [
               "iOS / Android 智慧型手機",
               "支援藍牙音訊裝置（筆電、平板等）"
             ]
@@ -985,7 +977,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "Cetra True 藍牙耳機 x1",
               "充電盒 x1",
               "USB-C 充電線 x1",
@@ -1000,7 +992,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "產品註冊",
               "下載韌體與應用程式",
               "常見問題解答",
@@ -1024,10 +1016,10 @@
     "id": "Razer-1011",
     "brand": "Razer",
     "name": "Razer Seiren V3 Mini",
-    "subtitle":"專為內容創作者打造的迷你麥克風",
+    "subtitle": "專為內容創作者打造的迷你麥克風",
     "color": "藍色",
-    "price": 1600,
-    "originalPrice": 1800,
+    "discount": 1600,
+    "price": 1800,
     "onsale": false,
     "description": "Razer Seiren V3 Mini 是一款專為串流與語音通話設計的 USB 麥克風，具備清晰收音、抗雜音功能及緊湊外型，能輕鬆整合進各種桌面配置中。",
     "images": {
@@ -1044,7 +1036,7 @@
         "content": [
           {
             "title": "麥克風技術規格",
-            "items": [
+            "text": [
               "收音模式：超心型指向",
               "連接方式：USB-C 至 USB-A",
               "頻率響應：20 Hz – 20 kHz",
@@ -1059,7 +1051,7 @@
         "content": [
           {
             "title": "支援平台",
-            "items": [
+            "text": [
               "Windows 10 或更新版本",
               "macOS 10.15 或更新版本",
               "支援 OBS、Discord 等主流應用"
@@ -1072,7 +1064,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "Razer Seiren V3 Mini 麥克風 x1",
               "可拆式底座 x1",
               "USB 連接線 x1",
@@ -1086,7 +1078,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "產品註冊",
               "驅動與應用程式下載",
               "常見問題解答",
@@ -1103,8 +1095,8 @@
     "brand": "Logitech",
     "name": "革命輕量設計，帶來極速精準的反饋體驗 ",
     "color": "粉紅",
-    "price": 3383,
-    "originalPrice": 3583,
+    "discount": 3383,
+    "price": 3583,
     "onsale": true,
     "description": "與世界上許多領先的電子競技專業人士合作精心設計，具備極致輕量化和高精準度，支援無線與有線雙模連接，並搭載先進的感應器技術，確保遊戲中的每次移動都迅速且精確。",
     "images": {
@@ -1121,7 +1113,7 @@
         "content": [
           {
             "title": "硬體規格",
-            "items": [
+            "text": [
               "重量：約 63 克",
               "感應器：HERO 25K",
               "DPI 範圍：100 - 25,600",
@@ -1136,7 +1128,7 @@
         "content": [
           {
             "title": "作業系統",
-            "items": ["Windows 10 或更新版本", "macOS 10.15 或更新版本"]
+            "text": ["Windows 10 或更新版本", "macOS 10.15 或更新版本"]
           }
         ]
       },
@@ -1145,7 +1137,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "PRO SUPER 無線滑鼠 x1",
               "LIGHTSPEED 無線接收器 x1",
               "USB-C 充電線 x1",
@@ -1159,7 +1151,7 @@
         "content": [
           {
             "title": "服務項目",
-            "items": ["產品註冊", "技術支援", "保固服務"]
+            "text": ["產品註冊", "技術支援", "保固服務"]
           }
         ]
       }
@@ -1179,8 +1171,8 @@
     "name": "MSI X 直播用麥克風",
     "subtitle": "高清收音，助力你的聲音表現",
     "color": "粉紅",
+    "discount": 3179,
     "price": 3179,
-    "originalPrice": 3179,
     "onsale": false,
     "description": "多種自定義功能，滿足不同遊戲需求，提供廣播級錄音品質與即時監聽功能，專為串流與錄音打造。",
     "images": {
@@ -1197,7 +1189,7 @@
         "content": [
           {
             "title": "錄音技術",
-            "items": [
+            "text": [
               "心型指向性收音模式",
               "內建防噴罩與減震架構",
               "支援 24-bit / 96kHz 錄音品質"
@@ -1205,7 +1197,7 @@
           },
           {
             "title": "控制與功能",
-            "items": [
+            "text": [
               "可自訂增益控制旋鈕",
               "靜音按鈕與耳機音量旋鈕",
               "內建即時耳機監聽孔"
@@ -1218,11 +1210,11 @@
         "content": [
           {
             "title": "作業系統",
-            "items": ["Windows 10 或更新版本", "macOS 10.15 或更新版本"]
+            "text": ["Windows 10 或更新版本", "macOS 10.15 或更新版本"]
           },
           {
             "title": "連接方式",
-            "items": ["USB 連接介面"]
+            "text": ["USB 連接介面"]
           }
         ]
       },
@@ -1231,7 +1223,7 @@
         "content": [
           {
             "title": "內容物",
-            "items": [
+            "text": [
               "PRO X 直播用麥克風",
               "USB 連接線",
               "可調整桌面支架",
@@ -1246,7 +1238,7 @@
         "content": [
           {
             "title": "項目",
-            "items": [
+            "text": [
               "驅動與軟體下載",
               "產品註冊",
               "使用手冊與教學影片",
@@ -1262,12 +1254,12 @@
     "id": "PRO-1014",
     "brand": "Logitech",
     "name": "PRO 精密調整電競滑鼠",
-     "subtitle": "精密調整，帶來極致手感",
+    "subtitle": "精密調整，帶來極致手感",
     "color": "粉色",
-    "price": 3791,
-    "originalPrice": 3991,
+    "discount": 3791,
+    "price": 3991,
     "onsale": true,
-   "description": "專為追求最高精度的玩家設計，擁有可調整的重量系統和靈敏感應器，確保滑鼠操作精準且流暢。",
+    "description": "專為追求最高精度的玩家設計，擁有可調整的重量系統和靈敏感應器，確保滑鼠操作精準且流暢。",
     "images": {
       "main": "./images/pic-detal/PRO-1014/10003.png",
       "thumbnails": [
@@ -1276,64 +1268,56 @@
         "./images/pic-detal/PRO-1014/10003.png"
       ]
     },
-     "details": [
-    {
-      "section": "規格與詳細資訊",
-      "content": [
-        {
-          "title": "硬體規格",
-          "items": [
-            "重量可調整：80-95 克",
-            "感應器：HERO 16K",
-            "DPI 範圍：100 - 16,000",
-            "按鍵數量：6",
-            "連接方式：有線 USB"
-          ]
-        }
-      ]
-    },
-    {
-      "section": "相容性",
-      "content": [
-        {
-          "title": "作業系統",
-          "items": [
-            "Windows 10 或更新版本",
-            "macOS 10.14 或更新版本"
-          ]
-        }
-      ]
-      
-    },
-    {
-      "section": "包裝內容物",
-      "content": [
-        {
-          "title": "內容物",
-          "items": [
-            "PRO 精密調整滑鼠 x1",
-            "可調重量砝碼套件",
-            "USB 連接線 x1",
-            "使用者文件 x1"
-          ]
-        }
-      ]
-    },
-    {
-      "section": "支援",
-      "content": [
-        {
-          "title": "服務項目",
-          "items": [
-            "產品註冊",
-            "技術支援",
-            "保固服務"
-          ]
-        }
-      ]
-    }
-  ],
-  "tags": [
+    "details": [
+      {
+        "section": "規格與詳細資訊",
+        "content": [
+          {
+            "title": "硬體規格",
+            "text": [
+              "重量可調整：80-95 克",
+              "感應器：HERO 16K",
+              "DPI 範圍：100 - 16,000",
+              "按鍵數量：6",
+              "連接方式：有線 USB"
+            ]
+          }
+        ]
+      },
+      {
+        "section": "相容性",
+        "content": [
+          {
+            "title": "作業系統",
+            "text": ["Windows 10 或更新版本", "macOS 10.14 或更新版本"]
+          }
+        ]
+      },
+      {
+        "section": "包裝內容物",
+        "content": [
+          {
+            "title": "內容物",
+            "text": [
+              "PRO 精密調整滑鼠 x1",
+              "可調重量砝碼套件",
+              "USB 連接線 x1",
+              "使用者文件 x1"
+            ]
+          }
+        ]
+      },
+      {
+        "section": "支援",
+        "content": [
+          {
+            "title": "服務項目",
+            "text": ["產品註冊", "技術支援", "保固服務"]
+          }
+        ]
+      }
+    ],
+    "tags": [
       "Logitech",
       "無線滑鼠",
       "電競滑鼠",
@@ -1347,10 +1331,10 @@
     "id": "PRO-1015",
     "brand": "Logitech",
     "name": "PRO 精密調整電競滑鼠",
-     "subtitle": "精密調整，帶來極致手感",
+    "subtitle": "精密調整，帶來極致手感",
     "color": "白色",
-    "price": 3791,
-    "originalPrice": 3991,
+    "discount": 3791,
+    "price": 3991,
     "onsale": true,
     "description": "人體工學設計，提升舒適與操作效率。",
     "images": {
@@ -1362,63 +1346,55 @@
       ]
     },
     "details": [
-    {
-      "section": "規格與詳細資訊",
-      "content": [
-        {
-          "title": "硬體規格",
-          "items": [
-            "重量可調整：80-95 克",
-            "感應器：HERO 16K",
-            "DPI 範圍：100 - 16,000",
-            "按鍵數量：6",
-            "連接方式：有線 USB"
-          ]
-        }
-      ]
-    },
-    {
-      "section": "相容性",
-      "content": [
-        {
-          "title": "作業系統",
-          "items": [
-            "Windows 10 或更新版本",
-            "macOS 10.14 或更新版本"
-          ]
-        }
-      ]
-      
-    },
-    {
-      "section": "包裝內容物",
-      "content": [
-        {
-          "title": "內容物",
-          "items": [
-            "PRO 精密調整滑鼠 x1",
-            "可調重量砝碼套件",
-            "USB 連接線 x1",
-            "使用者文件 x1"
-          ]
-        }
-      ]
-    },
-    {
-      "section": "支援",
-      "content": [
-        {
-          "title": "服務項目",
-          "items": [
-            "產品註冊",
-            "技術支援",
-            "保固服務"
-          ]
-        }
-      ]
-    }
-  ],
-  "tags": [
+      {
+        "section": "規格與詳細資訊",
+        "content": [
+          {
+            "title": "硬體規格",
+            "text": [
+              "重量可調整：80-95 克",
+              "感應器：HERO 16K",
+              "DPI 範圍：100 - 16,000",
+              "按鍵數量：6",
+              "連接方式：有線 USB"
+            ]
+          }
+        ]
+      },
+      {
+        "section": "相容性",
+        "content": [
+          {
+            "title": "作業系統",
+            "text": ["Windows 10 或更新版本", "macOS 10.14 或更新版本"]
+          }
+        ]
+      },
+      {
+        "section": "包裝內容物",
+        "content": [
+          {
+            "title": "內容物",
+            "text": [
+              "PRO 精密調整滑鼠 x1",
+              "可調重量砝碼套件",
+              "USB 連接線 x1",
+              "使用者文件 x1"
+            ]
+          }
+        ]
+      },
+      {
+        "section": "支援",
+        "content": [
+          {
+            "title": "服務項目",
+            "text": ["產品註冊", "技術支援", "保固服務"]
+          }
+        ]
+      }
+    ],
+    "tags": [
       "Logitech",
       "無線滑鼠",
       "電競滑鼠",
@@ -1433,8 +1409,8 @@
     "brand": "MSI",
     "name": "磁吸式 RGB 裝飾燈",
     "color": "藍色",
+    "discount": 5974,
     "price": 5974,
-    "originalPrice": 5974,
     "onsale": false,
     "description": "擁有極速觸發與精準控制，為專業玩家設計。",
     "images": {
@@ -1451,7 +1427,7 @@
         "content": [
           {
             "title": "",
-            "items": [""]
+            "text": [""]
           }
         ]
       },
@@ -1460,7 +1436,7 @@
         "content": [
           {
             "title": "",
-            "items": [""]
+            "text": [""]
           }
         ]
       },
@@ -1469,7 +1445,7 @@
         "content": [
           {
             "title": "",
-            "items": [""]
+            "text": [""]
           }
         ]
       },
@@ -1478,7 +1454,7 @@
         "content": [
           {
             "title": "",
-            "items": [""]
+            "text": [""]
           }
         ]
       }
