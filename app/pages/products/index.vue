@@ -28,7 +28,7 @@
             >
               <div class="sidebar-group-itile">
                 <h4 class="title">{{ section.title }}</h4>
-                <span class="icon"> </span>
+                <icon class="icon" name="material-symbols:add" size="24" />
               </div>
 
               <ul class="sidebar-group-options">
@@ -112,6 +112,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
+//sidebar開關
 const isSidebarOpen = ref(false);
 const toggleFilter = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
@@ -197,41 +198,49 @@ const sidebarList = [
     gap: 32px;
   }
 }
-
 .main-sidebar {
-  // flex: 0 0 40%;
   padding: 16px 8px;
   min-width: 186px;
   width: clamp(186px, 25%, 240px);
-  border: 1px solid white;
+  .sidebar-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: none;
+  }
   .sidebar-groups {
-    padding: 0px;
-    margin: 0px 0px 8px;
     .sidebar-group {
       padding: 4px 0px;
       margin-bottom: 4px;
-      vertical-align: top;
-      line-height: 100%;
-      div {
-        padding: 8px 0;
-        margin-bottom: 8px;
+      border-bottom: 1px dashed;
+      .sidebar-group-itile {
+        padding: 8px 6px;
+        display: flex;
+        justify-content: space-between;
         cursor: pointer;
-        h4 {
-          font-weight: 800;
+        .title {
+          cursor: pointer;
+        }
+        .icon {
+          border-radius: 50%;
+        }
+        &:hover {
+          .icon {
+            color: var(--brand);
+          }
         }
       }
       .sidebar-group-options {
+    
         .options-item {
           display: flex;
           align-items: center;
-          // flex-direction: row-reverse;
-          // justify-content: space-between;
+          max-height: 400px;
+          overflow: hidden;
           padding: 6px 8px;
           border-radius: 4px;
-          transition: all 0.3s ease;
-          &:hover {
-            background-color: #6b6b6b;
-          }
+          transition: background-color 0.2s ease-out;
           .checkbox-area {
             width: 100%;
           }
@@ -239,51 +248,16 @@ const sidebarList = [
           .checkbox {
             cursor: pointer;
           }
-        }
-      }
-      .sidebar-group-itile {
-        padding: 0 6px;
-        display: flex;
-        justify-content: space-between;
-        h4,
-        span {
-          vertical-align: top;
-        }
-        span {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          aspect-ratio: 1/1;
-          // padding: 3px;
-          width: 30px;
-          height: 30px;
-          border-radius: 50%;
-          border: 0.5px solid transparent;
-        }
-
-        &:hover {
-          span {
-            background-color: #fff;
+          &:hover {
+            background: var(--bg-surface-soft);
+            color: var(--brand-hover);
           }
         }
-      }
-
-      .sidebar-group-options {
-        max-height: 400px;
-        overflow: hidden;
-        transition: all 0.3s ease-out;
-      }
-
-      .sidebar-group-options.sidebar-group-options-open {
-        max-height: 400px;
+        &.onOpen {
+          max-height: 400px;
+        }
       }
     }
-  }
-  .sidebar-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 16px;
   }
   .mobile-Btn {
     position: fixed;
@@ -391,7 +365,7 @@ const sidebarList = [
           left: 8px;
           font-size: 14px;
           font-weight: 900;
-          color: var(--action-primary-hover);
+          color: var(--brand-hover);
         }
       }
       .card-content {
