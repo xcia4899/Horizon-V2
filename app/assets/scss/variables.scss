@@ -7,18 +7,16 @@ $indigo11: #2c3e50;
 // Neutral
 $color-white: rgb(250, 250, 250);
 $color-black: rgb(10, 10, 10);
-
 $color-gray-50:  #fafafa; // 幾乎白，page 背景
-$color-gray-100: #f0f0f0; // surface / 卡片
-$color-gray-200: #e0e0e0; // border / divider
-$color-gray-300: #c8c8c8; // disabled / 次要邊框
-$color-gray-400: #a0a0a0; // placeholder / icon-muted
+$color-gray-100: #f0f0f0; // surface 
+$color-gray-200: #e0e0e0; // border 
+$color-gray-300: #c8c8c8; // disabled 
+$color-gray-400: #a0a0a0; // placeholder 
 $color-gray-500: #787878; // 次要文字
-$color-gray-600: #5f5f5f; // 輔助文字（補階）
-$color-gray-700: #333333; // 主要文字（淺底）
+$color-gray-600: #5f5f5f; // 輔助文字
+$color-gray-700: #333333; // 主要文字
 $color-gray-800: #222222; // 深色文字
 $color-gray-900: #141414; // 最深背景
-
 // Brand
 $color-purple-300: #cb8cf5;
 $color-purple-500: #a02fec;
@@ -27,7 +25,6 @@ $color-purple-700: #690fa6;
 $color-blue: #00b8fc;
 $color-red-300: #ff5555;
 $color-red-500: #e71818;
-
 
 $shadow-set: 0px 0px 6px 1px rgba(22, 22, 22, 0.4);
 //header高度設定
@@ -94,7 +91,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --bg-surface: #{$color-gray-900}; // 一般內容區
         --bg-surface-soft: #{$color-gray-800}; // 內容內層（較亮）
         --bg-surface-strong: #{$color-black}; // 分區 / 強調區（較暗）
-        --bg-surface-card: #{$color-gray-700}; //卡片
+        --bg-surface-card: #{$color-gray-200}; //卡片
         --bg-surface-contrast: #{$color-gray-100}; // 對比的 surface
         --bg-surface-glass: rgba(255, 255, 255, 0.6); // 對比的 surface
         /* ========== Border ========= */
@@ -111,8 +108,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --shadow-default: 0px 3px 4px 0px rgba(12, 12, 12, 0.4);
         /* 浮起元件 / Dropdown / Modal */
         --shadow-focus: 0 0px 4px 1px rgba(36, 36, 36, 0.4);
-
         // /========== State ========= 
-        --state-danger: #{$color-red-300}; // 錯誤
+        --state-danger: #{$color-red-500}; // 錯誤
     }
 }

@@ -89,20 +89,24 @@
             </button>
           </div>
           <div class="products-view">
-            <div v-for="product in 6" :key="product" class="product-card">
+            <div
+              v-for="product in productListView"
+              :key="product.id"
+              class="product-card"
+            >
               <div class="card-media">
                 <div class="card-image">
-                  <img src="/images/pic-detal/RAZER-1000/10001.jpg" alt="" />
+                  <img :src="product.images.main" :alt="product.name" />
                 </div>
-                <div class="card-barnd">product.brand</div>
+                <div class="card-barnd">{{ product.brand }}</div>
               </div>
               <div class="card-content">
-                <h4 class="card-title">product.name</h4>
-                <h5 class="card-text">product.description</h5>
+                <h4 class="card-title">{{ product.name }}</h4>
+                <h5 class="card-text">{{ product.description }}</h5>
 
                 <div class="card-price">
-                  <p class="discount onSale">特價$ 660g()</p>
-                  <p class="price strike">NT$ 880()</p>
+                  <p class="discount onSale">特價$ {{ product.discount }}</p>
+                  <p class="price strike">NT$ {{ product.price }}</p>
                 </div>
                 <button class="card-add btn">加入購物車</button>
               </div>
@@ -123,6 +127,9 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
+//商品資料引入
+import { useProducts } from "@/composables/useProducts";
+const products = await useProducts();
 
 //sidebar開關
 const isSidebarOpen = ref(false);
@@ -183,6 +190,14 @@ const removeTag = (tag: string) => {
 const clearTag = () => {
   return (selectTags.value = []);
 };
+//main-products 商品資料
+
+// 顯示用資料：永遠由 computed 算出
+const productListView = computed(() => {
+  const list = [...products]; // 不污染原始陣列
+
+  return list;
+});
 </script>
 
 <style scoped lang="scss">
@@ -230,11 +245,12 @@ const clearTag = () => {
     display: flex;
     width: 100%;
     gap: 32px;
+    padding-block: 16px 32px;
   }
 }
 .main-sidebar {
-  padding: 16px 8px;
-  min-width: 186px;
+  // padding: 0px 8px;
+  // min-width: 186px;
   width: clamp(186px, 25%, 240px);
   .sidebar-title {
     text-align: center;
@@ -387,11 +403,12 @@ const clearTag = () => {
         box-shadow: transparent;
       }
       .card-media {
-        // flex: 1;
+        height: 100%;
         position: relative;
         background: var(--bg-surface-card);
         border-radius: 6px;
         .card-image {
+          height: 100%;
           width: 100%;
           padding: 8px 8px 32px;
           border-radius: 6px;
@@ -400,6 +417,7 @@ const clearTag = () => {
           align-items: center;
           justify-content: center;
           img {
+            height: 100%;
             width: 100%;
             object-fit: cover;
             object-position: center;
@@ -412,7 +430,7 @@ const clearTag = () => {
           left: 8px;
           font-size: 14px;
           font-weight: 900;
-          color: var(--brand-hover);
+          color: var(--brand);
         }
       }
       .card-content {
@@ -428,11 +446,16 @@ const clearTag = () => {
 
         .card-title,
         .card-text {
-          @include line-clamp(1);
+          
           width: 100%;
+          transition: color 0.4s ease;
+        }
+        .card-title{
+          @include line-clamp(1);
         }
         .card-text {
           color: var(--text-secondary);
+          @include line-clamp(2);
         }
         .card-price {
           margin-top: 8px;
@@ -449,6 +472,7 @@ const clearTag = () => {
             color: var(--text-secondary);
             opacity: 0.8;
             font-size: 14px;
+            transition: color 0.4s ease;
           }
         }
 
@@ -462,9 +486,25 @@ const clearTag = () => {
         }
       }
       @media (hover: hover) and (pointer: fine) {
-        &:hover::after {
-          height: 100%;
-          box-shadow: var(--shadow-focus);
+        &:hover {
+          &::after {
+            height: 100%;
+            box-shadow: var(--shadow-focus);
+          }
+          .card-content {
+            .card-title {
+              color: $color-black;
+            }
+            .card-text {
+              color: $color-gray-800;
+            }
+            .price{
+              color: $color-black;
+            }
+            .price.strike {
+              color: $color-gray-800;
+            }
+          }
         }
       }
     }

@@ -94,6 +94,7 @@ const goProducts = async (item: MenuItem) => {
     path: "/products",
     query: item ? {} : {},
   });
+  openMenu.value = null;
 };
 </script>
 
