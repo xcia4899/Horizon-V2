@@ -147,6 +147,7 @@ const clearSearch = async () => {
 const blurSearch = () => {
   if (hasKeyword.value) return;
   showSearch.value = false;
+  clearSearch();
 };
 // ESC 關閉
 const onKeydown = (e: KeyboardEvent) => {

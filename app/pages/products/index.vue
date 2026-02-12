@@ -129,6 +129,10 @@
 import { ref } from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
+import type { LocationQueryValue } from "vue-router";
+const route = useRoute();
+const router = useRouter();
+
 const products = await useProducts();
 
 //sidebar開關
@@ -224,48 +228,47 @@ const toggleSection = (index: number) => {
   // console.log(selectTags.value);
 };
 //依照商品TAG 搜尋
-const selectTags = ref<string[]>([]);
-
+const selectTags = ref<(string | number)[]>([]);
+//搜尋值
+const keyword = computed({
+  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
+  set: (val) => {
+    const query = { ...route.query };
+    if (!val) delete query.keyword;
+    else query.keyword = val;
+    router.replace({ query: query });
+  },
+});
 //filter-selected 刪除TAG
-const removeTag = (tag: string) => {
-  return (selectTags.value = selectTags.value.filter((t) => t !== tag));
+const removeTag = (tag: string | number) => {
+  selectTags.value = selectTags.value.filter((t) => t !== tag);
 };
+
 const clearTag = () => {
   return (selectTags.value = []);
 };
 //main-products 商品資料
 
-const route = useRoute();
-const keyword = computed(() => {
-  return String(route.query.keyword ?? "").trim();
-});
-
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
   const tags = selectTags.value;
-  //區分數字
-  const numberTags = tags.filter((tag) => typeof tag === "number");
+  const numberTags = tags.filter((t) => typeof t === "number");
+  // const kw = String(route.query.keyword ?? "");
 
-  const option = products.filter((product) => {
-    //點品牌分類
-    const matchBrand = tags.length === 0 || tags.includes(product.brand);
-    //點TAG分類
-    const matchTag =
-      tags.length === 0 || tags.some((tag) => product.tags.includes(tag));
-    //點價格分類
-    const matchPrice =
+  return products.filter((product) => {
+    const matchSidebarTag =
+      tags.length === 0 ||
+      tags.includes(product.brand) ||
+      tags.some((tag) => product.tags?.includes(tag as string));
+
+    const matchSidebarPrice =
       numberTags.length === 0 ||
       numberTags.some((price) => priceMatch(product.price, price));
-    return matchBrand && matchTag && matchPrice;
-  });
-  const searchKey = products.filter((product) => {
+
     const matchKeyword = !keyword.value || product.name.includes(keyword.value);
 
-    return matchKeyword;
+    return matchSidebarTag && matchSidebarPrice && matchKeyword;
   });
-
-  // console.log("結果", option);
-  return option && searchKey;
 });
 
 //計算價格區間
@@ -273,17 +276,54 @@ const priceMatch = (productPrice: number, maxPrice: number) => {
   if (maxPrice === Infinity) return productPrice >= 4000;
   return productPrice <= maxPrice;
 };
+//寫入 query
+watch(
+  selectTags,
+  (tags) => {
+    const stringTags = tags.filter((t) => typeof t === "string");
+    const numberTags = tags.filter((t) => typeof t === "number");
 
-//搜尋關鍵字
-// const keyword = computed({
-//   get: () => String(route.query.keyword ?? ""),
-//   set: (val: string) => {
-//     navigateTo({
-//       path: "/products",
-//       query: { ...route.query, keyword: val },
-//     });
-//   },
+    router.replace({
+      query: {
+        ...route.query,
+        tag: stringTags.length ? stringTags : undefined,
+        price: numberTags.length ? numberTags : undefined,
+      },
+    });
+  },
+  { deep: true },
+);
+//將值寫入selectTags陣列
+watch(
+  () => route.query,
+  (q) => {
+    const tags = toStrArray(q.tag); // string[]
+    const prices = toNumArray(q.price); // number[]
+    selectTags.value = [...tags, ...prices];
+  },
+  { immediate: true },
+);
+
+//query 變成可用陣列工具
+function toStrArray(
+  v: LocationQueryValue | LocationQueryValue[] | undefined,
+): string[] {
+  if (!v) return [];
+  const arr = Array.isArray(v) ? v : [v];
+  return arr.filter((x): x is string => typeof x === "string" && x.length > 0);
+}
+//query 變成可用陣列工具
+function toNumArray(
+  v: LocationQueryValue | LocationQueryValue[] | undefined,
+): number[] {
+  return toStrArray(v).map(Number).filter(Number.isFinite);
+}
+
+//搜尋query上的值
+// const keyword = computed(() => {
+//   return String(route.query.keyword ?? "").trim();
 // });
+
 </script>
 
 <style scoped lang="scss">
