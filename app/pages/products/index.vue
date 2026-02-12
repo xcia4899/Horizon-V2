@@ -73,7 +73,7 @@
           </div>
         </section>
         <section class="main-products">
-          <div class="filter-selected">
+          <div v-show="selectTags.length" class="filter-selected">
             <button class="selected-allClear" @click="clearTag">
               清除篩選條件
               <Icon class="icon" name="iconoir:cancel" size="24" />
@@ -189,7 +189,9 @@ const clearTag = () => {
 //main-products 商品資料
 
 //計算價格區間
-
+const priceMath = (price: number) => {
+  return products.filter(i => i.price <= price)
+}
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
   const tags = selectTags.value;
@@ -201,11 +203,13 @@ const productListView = computed(() => {
     //搜尋TAG
     const matchTag =
       tags.length === 0 || tags.some((tag) => product.tags.includes(tag));
-
+    const matchPrive = tags.length===0 || tags.some((tag) => product.tags.includes(tag));
+    
+    console.log("價格結果", matchPrive);
     return matchBrand || matchTag;
   });
 
-  console.log("結果", list);
+  // console.log("結果", list);
   return list;
 });
 </script>
