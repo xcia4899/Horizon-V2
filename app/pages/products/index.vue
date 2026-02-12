@@ -164,11 +164,7 @@ const sidebarList = [
   },
   {
     title: "價格",
-    options: ["$0–$1,000", "$1001–$2,000", "$2,001–$3,000", "$3,001+"],
-  },
-  {
-    title: "評價",
-    options: ["⭐⭐⭐⭐⭐", "⭐⭐⭐⭐ 以上", "⭐⭐⭐ 以上"],
+    options: ["$0–$2,000", "$2,001–$4,000", "$4,001+"],
   },
 ];
 //sidbar的Sections展開關閉
@@ -192,10 +188,24 @@ const clearTag = () => {
 };
 //main-products 商品資料
 
+//計算價格區間
+
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
-  const list = [...products]; // 不污染原始陣列
+  const tags = selectTags.value;
 
+  console.log("tags", tags);
+  const list = products.filter((product) => {
+    //搜尋品牌
+    const matchBrand = tags.length === 0 || tags.includes(product.brand);
+    //搜尋TAG
+    const matchTag =
+      tags.length === 0 || tags.some((tag) => product.tags.includes(tag));
+
+    return matchBrand || matchTag;
+  });
+
+  console.log("結果", list);
   return list;
 });
 </script>
@@ -385,6 +395,7 @@ const productListView = computed(() => {
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      cursor: pointer;
       > * {
         position: relative;
         z-index: 1;
@@ -431,6 +442,7 @@ const productListView = computed(() => {
           font-size: 14px;
           font-weight: 900;
           color: var(--brand);
+          cursor: pointer;
         }
       }
       .card-content {
@@ -446,11 +458,11 @@ const productListView = computed(() => {
 
         .card-title,
         .card-text {
-          
+          cursor: pointer;
           width: 100%;
           transition: color 0.4s ease;
         }
-        .card-title{
+        .card-title {
           @include line-clamp(1);
         }
         .card-text {
@@ -463,6 +475,10 @@ const productListView = computed(() => {
           display: flex;
           align-items: flex-end;
           justify-content: space-between;
+          .discount,
+          .strike {
+            cursor: pointer;
+          }
           .discount.onSale {
             color: var(--state-danger);
             font-weight: bolder;
@@ -498,7 +514,7 @@ const productListView = computed(() => {
             .card-text {
               color: $color-gray-800;
             }
-            .price{
+            .price {
               color: $color-black;
             }
             .price.strike {
