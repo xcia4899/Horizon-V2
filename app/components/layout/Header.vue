@@ -1,5 +1,5 @@
 <template>
-  <div class="header-inner" :class="{ 'mobile-isOpen': isMenuOpen === true }">
+  <div class="header-inner" :class="{ 'mobile-isOpen': isMenuOpenMobile === true }">
     <button type="button" class="menu-toggle" @click="toggleMenu">
       <Icon name="mdi:menu" class="icon" />
     </button>
@@ -8,12 +8,15 @@
       <button type="button" class="logo" @click="goHome">Horizon</button>
     </div>
     <!-- Navber-menu -->
-    <section class="navbar" :class="{ 'mobile-isOpen': isMenuOpen === true }">
-      <HeaderNavbarMenu :menus="menus" :isMenuOpen="isMenuOpen" />
+    <section class="navbar" :class="{ 'mobile-isOpen': isMenuOpenMobile === true }">
+      <HeaderNavbarMenu :menus="menus" :isMenuOpenMobile="isMenuOpenMobile" 
+      />
     </section>
     <!-- Navber-Right -->
-    <aside class="nav-right">
-      <HeaderNavbarRight />
+    <aside class="nav-right" :class="{ 'mobile-isOpen': isMenuOpenMobile === true }">
+      <HeaderNavbarRight
+       v-model:isMenuOpenMobile="isMenuOpenMobile"
+      />
     </aside>
   </div>
 </template>
@@ -25,8 +28,8 @@
 // 下拉選單邏輯 ==================
 //menu 型別
 import type { SetMenu } from "@/types/ui/menu";
-import { looding } from "@/composables/useFetchState"
-const router = useRouter();
+import { looding } from "@/composables/useFetchState";
+// const router = useRouter();
 
 // 所有導覽列選單資料
 const menus: SetMenu[] = [
@@ -36,10 +39,26 @@ const menus: SetMenu[] = [
     items: [
       { text: "新品上市", img: "./images/pic-detal/RAZER-1000/10001.jpg" },
       { text: "特價商品", img: "./images/pic-detal/PRO-1002/10001.png" },
-      { text: "滑鼠", img: "./images/picture/fourth-row2-01.png", tag: "mouse" },
-      { text: "鍵盤", img: "./images/picture/fourth-row2-06.png", tag: "keyboard" },
-      { text: "耳機", img: "./images/pic-detal/PRO-1007/10007.png", tag: "headset" },
-      { text: "麥克風", img: "./images/pic-detal/ROG-1005/10003.png", tag: "mic" },
+      {
+        text: "滑鼠",
+        img: "./images/picture/fourth-row2-01.png",
+        tag: "mouse",
+      },
+      {
+        text: "鍵盤",
+        img: "./images/picture/fourth-row2-06.png",
+        tag: "keyboard",
+      },
+      {
+        text: "耳機",
+        img: "./images/pic-detal/PRO-1007/10007.png",
+        tag: "headset",
+      },
+      {
+        text: "麥克風",
+        img: "./images/pic-detal/ROG-1005/10003.png",
+        tag: "mic",
+      },
     ],
   },
   {
@@ -65,15 +84,14 @@ const menus: SetMenu[] = [
   },
 ];
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
+  isMenuOpenMobile.value = !isMenuOpenMobile.value;
 };
-const isMenuOpen = ref(false);
+const isMenuOpenMobile = ref(false);
 
 const goHome = async () => {
   await looding(300);
-  router.push({ path: "/" })
-}
-
+  navigateTo("/");
+};
 </script>
 
 <style scoped lang="scss">
@@ -118,7 +136,10 @@ const goHome = async () => {
   .nav-left {
     display: grid;
     place-items: center start;
+    height: 100%;
+    max-height: 70px;
     .logo {
+      height: 100%;
       font-size: 40px;
       // text-align: left;
       font-weight: bolder;
@@ -149,31 +170,44 @@ const goHome = async () => {
     flex-wrap: wrap;
     @include baseTransition(height, 0.6s);
     .menu-toggle {
-      flex: 1;
+      // position: absolute;
+      flex: 0 0 auto;
       display: flex;
     }
     .nav-left {
-      place-items: center;
+      flex: 1;
+      // place-items: center;
+      position: absolute;
+      left: 50%;
+      top: 0px;
+      transform: translateX(-50%);
+      // transform: translateX(-50%);
       .logo {
         font-size: clamp(24px, 6vw, 40px);
       }
     }
     .navbar {
-      flex: 0 0 100%;
       order: 3;
+    }
+    .nav-right {
+      order: 2;
+    }
+    .navbar,
+    .nav-right {
+      flex: 0 0 100%;
       // color: $color-gray-800;
       background-color: var(--bg-header);
       max-height: 0;
       opacity: 0;
-      @include baseTransition(max-height, 0.4s);
+      transition:
+        max-height 0.4s ease,
+        opacity 0.2s ease 0.2s;
       overflow: hidden;
     }
-    .navbar.mobile-isOpen {
+    .navbar.mobile-isOpen,
+    .nav-right.mobile-isOpen {
       opacity: 1;
       max-height: 700px;
-    }
-    .nav-right {
-      order: 2;
     }
   }
   .header-inner.mobile-isOpen {

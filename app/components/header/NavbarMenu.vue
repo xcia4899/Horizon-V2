@@ -49,13 +49,18 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 import type { MenuKey, MenuItem, OpenMenu, SetMenu } from "@/types/ui/menu";
 
 const router = useRouter();
+//控制menuOPen 手機版本開關控制
+
+
+
 
 //螢幕、手機模式判斷
 const { isDesktop, isTouch } = useInteractionMode();
-defineProps<{
+ defineProps<{
   menus: SetMenu[];
-  isMenuOpen: boolean;
+  isMenuOpenMobile: boolean;
 }>();
+
 
 // 導覽列ref，用來判斷是否點擊到外部
 const menuRef = ref<HTMLElement | null>(null);

@@ -221,7 +221,7 @@ const toggleSection = (index: number) => {
   const idx = openSections.value.indexOf(index);
   if (idx > -1) openSections.value.splice(idx, 1);
   else openSections.value.push(index);
-  console.log(selectTags.value);
+  // console.log(selectTags.value);
 };
 //依照商品TAG 搜尋
 const selectTags = ref<string[]>([]);
@@ -235,14 +235,18 @@ const clearTag = () => {
 };
 //main-products 商品資料
 
+const route = useRoute();
+const keyword = computed(() => {
+  return String(route.query.keyword ?? "").trim();
+});
+
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
   const tags = selectTags.value;
   //區分數字
   const numberTags = tags.filter((tag) => typeof tag === "number");
 
-
-  const list = products.filter((product) => {
+  const option = products.filter((product) => {
     //點品牌分類
     const matchBrand = tags.length === 0 || tags.includes(product.brand);
     //點TAG分類
@@ -252,11 +256,16 @@ const productListView = computed(() => {
     const matchPrice =
       numberTags.length === 0 ||
       numberTags.some((price) => priceMatch(product.price, price));
-
-    return matchBrand || matchTag || matchPrice;
+    return matchBrand && matchTag && matchPrice;
   });
-  // console.log("結果", list);
-  return list;
+  const searchKey = products.filter((product) => {
+    const matchKeyword = !keyword.value || product.name.includes(keyword.value);
+
+    return matchKeyword;
+  });
+
+  // console.log("結果", option);
+  return option && searchKey;
 });
 
 //計算價格區間
@@ -264,6 +273,17 @@ const priceMatch = (productPrice: number, maxPrice: number) => {
   if (maxPrice === Infinity) return productPrice >= 4000;
   return productPrice <= maxPrice;
 };
+
+//搜尋關鍵字
+// const keyword = computed({
+//   get: () => String(route.query.keyword ?? ""),
+//   set: (val: string) => {
+//     navigateTo({
+//       path: "/products",
+//       query: { ...route.query, keyword: val },
+//     });
+//   },
+// });
 </script>
 
 <style scoped lang="scss">

@@ -1,13 +1,13 @@
 <template>
   <div class="setItem search-area">
     <!-- 搜尋 Modal -->
-    <div class="search-input" :class="{ isOpen: showSearch }">
+    <div class="search-input" :class="{ isOpen: showSearch || hasKeyword }">
       <el-input
         ref="inputRef"
         v-model="keyword"
         placeholder="搜尋商品..."
         class="input-box"
-        @blur="closeSearch"
+        @blur="blurSearch"
         @keydown.enter="submitSearch"
       >
         <template #prefix>
@@ -23,16 +23,17 @@
       @click="onSearchClick"
     >
       <Icon
-        :name="showSearch ? 'mdi:close' : 'mdi:magnify'"
+        :name="showSearch || hasKeyword ? 'mdi:close' : 'mdi:magnify'"
         class="icon"
-        :class="{ active: showSearch === true }"
+        :class="{ active: showSearch || hasKeyword }"
+        size="24"
       />
     </button>
   </div>
 
   <!-- 登入 -->
   <button type="button" class="btnItem setItem login-btn">
-    <Icon name="mdi:account-circle" class="icon" />
+    <Icon name="mdi:account-circle" class="icon" size="24" />
     <!-- 以登入 -->
     <!-- <Icon
           :name="isLogin ? 'mdi:account-circle' : 'mdi:account-outline'"
@@ -41,7 +42,7 @@
   </button>
   <!-- 購物車 -->
   <button type="button" class="btnItem setItem cart-btn">
-    <Icon name="meteor-icons:cart-shopping" class="icon" />
+    <Icon name="meteor-icons:cart-shopping" class="icon" size="24" />
     <span v-if="cartCount > 0" class="cart-badge">
       {{ cartCount > 99 ? "99+" : cartCount }}
     </span>
@@ -85,59 +86,104 @@ import {
 
 // import { Search } from "@element-plus/icons-vue";
 import type { InputInstance } from "element-plus";
-//螢幕、手機模式判斷
-const { isDesktop, isTouch } = useInteractionMode();
-//搜尋關鍵字
-const keyword = ref("");
+//接收props
+const props = defineProps<{
+  isMenuOpenMobile: boolean;
+}>();
+//傳出emit
+const emit = defineEmits<{
+  (e: 'update:isMenuOpenMobile', value: boolean): void
+}>()
+
+const toggleMenuMobile = () => {
+  emit('update:isMenuOpenMobile', !props.isMenuOpenMobile)
+}
+
+const route = useRoute();
 // 取得el-input 實例
 const inputRef = ref<InputInstance | null>(null);
+//螢幕、手機模式判斷
+const { isDesktop, isTouch } = useInteractionMode();
 
+//搜尋關鍵字
+const keyword = ref("");
 //顯示搜尋框
 const showSearch = ref(false);
 //keyword是否有值，用來判斷是否關閉搜尋框
-const canClose = computed(() => !keyword.value?.trim());
-//搜尋按鈕邏輯
-const onSearchClick = () => {
-  if (isTouch.value) {
-    console.log("手機模式跳轉搜尋頁");
-    // navigateTo("/"); // 手機：跳搜尋頁
-  } else {
-    toggleSearch(); // 桌機：展開搜尋框
+const hasKeyword = computed(() => !!keyword.value?.trim());
+//判斷是否在商品頁面
+const isOnProducts = computed(() => route.path === "/products");
+
+// 點擊搜尋/關閉按鈕
+const onSearchClick = async () => {
+  if (!showSearch.value) {
+    showSearch.value = true;
+    return;
   }
+  //在商品頁就關閉
+  if (isOnProducts.value) {
+    await clearSearch();
+    return;
+  }
+  // 不再商品頁但有關鍵字
+  if (hasKeyword.value) {
+    return;
+  }
+  showSearch.value = false;
+};
+//清除關鍵字關閉搜索框
+const clearSearch = async () => {
+  const newQuery = { ...route.query };
+  delete newQuery.keyword;
+  await navigateTo({
+    path: "/products",
+    query: newQuery,
+  });
+
+  keyword.value = "";
+  showSearch.value = false;
 };
 
-//開關搜尋框
-const toggleSearch = async () => {
-  keyword.value = "";
-  showSearch.value = !showSearch.value;
-  // console.log("執行 showSearch", showSearch.value);
-};
-//關閉搜尋框
-const closeSearch = () => {
-  if (!canClose.value) return;
+const blurSearch = () => {
+  if (hasKeyword.value) return;
   showSearch.value = false;
 };
 // ESC 關閉
 const onKeydown = (e: KeyboardEvent) => {
   if (!isDesktop.value) return;
   if (!showSearch.value) return;
-  if (e.key === "Escape") closeSearch();
+  if (e.key === "Escape") clearSearch();
 };
+
 onMounted(() => window.addEventListener("keydown", onKeydown));
 onBeforeUnmount(() => window.removeEventListener("keydown", onKeydown));
 // 開啟時自動 focus
+
 watch(showSearch, async (value) => {
   if (!value) return;
   await nextTick();
   inputRef.value?.focus?.();
 });
+// 當路由變動時：如果在 /products，就把 query.keyword 回填到 input
+watch(
+  () => [route.path, route.query.keyword],
+  ([path, q]) => {
+    if (path === "/products") {
+      keyword.value = String(q ?? "").trim();
+    }
+  },
+  { immediate: true },
+);
 
 //搜尋功能
-const submitSearch = () => {
-  if (!keyword.value.trim()) return;
-  closeSearch();
-  //   navigateTo(`/search?keyword=${keyword.value}`);
-  console.log(`搜尋關鍵字：${keyword.value} 並跳轉到商品頁`);
+const submitSearch = async () => {
+  const q = keyword.value.trim();
+  // closeSearch();
+  await navigateTo({
+    path: "/products",
+    query: { keyword: q },
+  });
+  toggleMenuMobile();
 };
 
 //購物車程式碼---------
@@ -189,7 +235,7 @@ const cartView = computed(() => {
   border-bottom: 4px solid transparent;
   height: $headerHeight;
   padding-block: 4px 0px;
-  padding-inline: clamp(0px, 1vw, 8px);
+  padding-inline: clamp(8px, 1vw, 16px);
   color: var(--text-primary);
   cursor: pointer;
   transform:
@@ -207,9 +253,6 @@ const cartView = computed(() => {
     font-size: clamp(22px, 2.2vw, 30px);
     @include baseTransition(color, 0.3s);
   }
-  // @media (max-width:500px) {
-
-  // }
 }
 .btnItem:active .icon {
   transform: scale(0.9);
@@ -223,7 +266,10 @@ const cartView = computed(() => {
     position: absolute;
     right: 0;
     width: 40px;
+
     opacity: 0;
+    // transform: scaleX(0) ;
+    // transform-origin: right;
     transition:
       width 0.6s ease,
       opacity 0.4s ease;
@@ -234,26 +280,44 @@ const cartView = computed(() => {
     :deep(.el-input__wrapper) {
       box-shadow: none;
       padding: 4px 0;
-      background-color: var(--bg-surface-strong);
+      background: var(--bg-surface-card);
 
       @media (hover: hover) and (pointer: fine) {
         &:hover,
         &:focus-within {
-          background-color: var(--bg-surface);
+          background: var(--bg-surface);
           outline: 2px solid var(--brand);
+        }
+      }
+      @media (pointer: coarse) {
+        height: 40px;
+        .el-input__inner {
+          height: 40px;
         }
       }
     }
     .icon {
       margin: 0 8px;
     }
-    @media (hover: hover) and (pointer: coarse) {
-      display: none;
-    }
   }
   .search-btn {
     .icon.active {
       color: var(--brand);
+    }
+  }
+  @media (max-width: 768px) {
+    flex: 1;
+    justify-content: flex-end;
+    gap: 8px;
+    .search-input {
+      position: relative;
+      right: 0;
+      opacity: 1;
+      width: 100%;
+      
+      &.isOpen {
+        width: 100%;
+      }
     }
   }
 }
@@ -262,7 +326,7 @@ const cartView = computed(() => {
   .cart-badge {
     position: absolute;
     top: 12px;
-    right: -2px;
+    right: 2px;
 
     min-width: 20px;
     height: 20px;
