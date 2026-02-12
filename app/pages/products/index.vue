@@ -22,13 +22,13 @@
           <div class="sidebar-title">篩選</div>
           <ul class="sidebar-groups">
             <li
-              v-for="(section, index) in sidebarList"
-              :key="section.title"
+              v-for="(item, index) in sidebarList"
+              :key="item.key"
               class="sidebar-group"
               :class="{ underline: isSectionOpen(index) }"
             >
               <div class="sidebar-group-title" @click="toggleSection(index)">
-                <h4 class="title">{{ section.title }}</h4>
+                <h4 class="title">{{ item.title }}</h4>
                 <icon
                   class="icon"
                   :class="{ rotate: isSectionOpen(index) }"
@@ -39,7 +39,7 @@
 
               <ul v-show="isSectionOpen(index)" class="sidebar-group-options">
                 <li
-                  v-for="(item, i) in section.options"
+                  v-for="(options, i) in item.options"
                   :key="i"
                   class="options-item"
                 >
@@ -48,9 +48,9 @@
                       v-model="selectTags"
                       class="checkbox"
                       type="checkbox"
-                      :value="item"
+                      :value="options.value"
                     />
-                    {{ item }}
+                    {{ options.label }}
                   </label>
                 </li>
               </ul>
@@ -140,33 +140,80 @@ const toggleFilter = () => {
 const sidebarList = [
   {
     title: "品牌",
-    options: ["Logitech", "Razer", "ROG", "MSI"],
+    key: "brand",
+    type: "multi",
+    options: [
+      { label: "Logitech", value: "Logitech" },
+      { label: "Razer", value: "Razer" },
+      { label: "ROG", value: "ROG" },
+      { label: "MSI", value: "MSI" },
+    ],
   },
   {
     title: "鍵盤",
-    options: ["機械鍵盤", "薄式鍵盤", "無線鍵盤", "RGB 鍵盤"],
+    key: "tags",
+    type: "multi",
+    options: [
+      { label: "機械鍵盤", value: "機械鍵盤" },
+      { label: "薄式鍵盤", value: "薄式鍵盤" },
+      { label: "無線鍵盤", value: "無線鍵盤" },
+      { label: "RGB 鍵盤", value: "RGB 鍵盤" },
+    ],
   },
   {
     title: "滑鼠",
-    options: ["有線滑鼠", "無線滑鼠", "電競滑鼠", "RGB 滑鼠"],
+    key: "tags",
+    type: "multi",
+    options: [
+      { label: "有線滑鼠", value: "有線滑鼠" },
+      { label: "無線滑鼠", value: "無線滑鼠" },
+      { label: "電競滑鼠", value: "電競滑鼠" },
+      { label: "RGB 滑鼠", value: "RGB 滑鼠" },
+    ],
   },
   {
     title: "耳機",
-    options: ["藍芽耳機", "有線耳機", "降噪耳機", "電競耳機"],
+    key: "tags",
+    type: "multi",
+    options: [
+      { label: "藍芽耳機", value: "藍芽耳機" },
+      { label: "有線耳機", value: "有線耳機" },
+      { label: "降噪耳機", value: "降噪耳機" },
+      { label: "電競耳機", value: "電競耳機" },
+    ],
   },
   {
     title: "麥克風",
-    options: ["USB 麥克風", "3.5mm 麥克風", "電容式麥克風"],
+    key: "tags",
+    type: "multi",
+    options: [
+      { label: "USB 麥克風", value: "USB 麥克風" },
+      { label: "3.5mm 麥克風", value: "3.5mm 麥克風" },
+      { label: "電容式麥克風", value: "電容式麥克風" },
+    ],
   },
   {
     title: "滑鼠墊",
-    options: ["小型滑鼠墊", "大型滑鼠墊", "RGB 滑鼠墊"],
+    key: "tags",
+    type: "multi",
+    options: [
+      { label: "小型滑鼠墊", value: "小型滑鼠墊" },
+      { label: "大型滑鼠墊", value: "大型滑鼠墊" },
+      { label: "RGB 滑鼠墊", value: "RGB 滑鼠墊" },
+    ],
   },
   {
     title: "價格",
-    options: ["$0–$2,000", "$2,001–$4,000", "$4,001+"],
+    key: "price",
+    type: "single",
+    options: [
+      { label: "$2,000以下", value: 2000 },
+      { label: "$4,000以下", value: 4000 },
+      { label: "$4,000以上", value: Infinity },
+    ],
   },
 ];
+
 //sidbar的Sections展開關閉
 const openSections = ref<number[]>([]);
 const isSectionOpen = (index: number) => openSections.value.includes(index);
@@ -188,30 +235,35 @@ const clearTag = () => {
 };
 //main-products 商品資料
 
-//計算價格區間
-const priceMath = (price: number) => {
-  return products.filter(i => i.price <= price)
-}
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
   const tags = selectTags.value;
+  //區分數字
+  const numberTags = tags.filter((tag) => typeof tag === "number");
 
-  console.log("tags", tags);
+
   const list = products.filter((product) => {
-    //搜尋品牌
+    //點品牌分類
     const matchBrand = tags.length === 0 || tags.includes(product.brand);
-    //搜尋TAG
+    //點TAG分類
     const matchTag =
       tags.length === 0 || tags.some((tag) => product.tags.includes(tag));
-    const matchPrive = tags.length===0 || tags.some((tag) => product.tags.includes(tag));
-    
-    console.log("價格結果", matchPrive);
-    return matchBrand || matchTag;
-  });
+    //點價格分類
+    const matchPrice =
+      numberTags.length === 0 ||
+      numberTags.some((price) => priceMatch(product.price, price));
 
+    return matchBrand || matchTag || matchPrice;
+  });
   // console.log("結果", list);
   return list;
 });
+
+//計算價格區間
+const priceMatch = (productPrice: number, maxPrice: number) => {
+  if (maxPrice === Infinity) return productPrice >= 4000;
+  return productPrice <= maxPrice;
+};
 </script>
 
 <style scoped lang="scss">
