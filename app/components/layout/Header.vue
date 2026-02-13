@@ -1,5 +1,8 @@
 <template>
-  <div class="header-inner" :class="{ 'mobile-isOpen': isMenuOpenMobile === true }">
+  <div
+    class="header-inner"
+    :class="{ 'mobile-isOpen': isMenuOpenMobile === true }"
+  >
     <button type="button" class="menu-toggle" @click="toggleMenu">
       <Icon name="mdi:menu" class="icon" />
     </button>
@@ -8,15 +11,18 @@
       <button type="button" class="logo" @click="goHome">Horizon</button>
     </div>
     <!-- Navber-menu -->
-    <section class="navbar" :class="{ 'mobile-isOpen': isMenuOpenMobile === true }">
-      <HeaderNavbarMenu :menus="menus" :isMenuOpenMobile="isMenuOpenMobile" 
-      />
+    <section
+      class="navbar"
+      :class="{ 'mobile-isOpen': isMenuOpenMobile === true }"
+    >
+      <HeaderNavbarMenu :menus="menus" :isMenuOpenMobile="isMenuOpenMobile" />
     </section>
     <!-- Navber-Right -->
-    <aside class="nav-right" :class="{ 'mobile-isOpen': isMenuOpenMobile === true }">
-      <HeaderNavbarRight
-       v-model:isMenuOpenMobile="isMenuOpenMobile"
-      />
+    <aside
+      class="nav-right"
+      :class="{ 'mobile-isOpen': isMenuOpenMobile === true }"
+    >
+      <HeaderNavbarRight v-model:isMenuOpenMobile="isMenuOpenMobile" />
     </aside>
   </div>
 </template>

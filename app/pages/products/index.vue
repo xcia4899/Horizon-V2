@@ -69,11 +69,12 @@ const router = useRouter();
 
 const products = await useProducts();
 
-//sidebar開關
+//控制開關sidebar的區域
 const isSidebarOpen = ref(false);
 const toggleFilter = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
+
 //sidebar項目
 const sidebarList: SidebarList[] = [
   {
@@ -153,7 +154,6 @@ const sidebarList: SidebarList[] = [
 ];
 //sidbar的Sections展開關閉
 const openSections = ref<number[]>([]);
-// const isSectionOpen = (index: number) => openSections.value.includes(index);
 const toggleSection = (index: number) => {
   const idx = openSections.value.indexOf(index);
   if (idx > -1) openSections.value.splice(idx, 1);
@@ -164,17 +164,6 @@ const toggleSection = (index: number) => {
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
 
-//搜尋值
-const keyword = computed({
-  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
-  set: (val) => {
-    const query = { ...route.query };
-    if (!val) delete query.keyword;
-    else query.keyword = val;
-    router.replace({ query: query });
-  },
-});
-
 //filter-selected 刪除TAG
 const removeTag = (tag: string | number) => {
   selectTags.value = selectTags.value.filter((t) => t !== tag);
@@ -184,7 +173,6 @@ const clearTag = () => {
 };
 
 //main-products 商品資料
-
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
   const tags = selectTags.value;
@@ -210,12 +198,23 @@ const productListView = computed(() => {
   });
 });
 
+//工具列******
+
+//搜尋值
+const keyword = computed({
+  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
+  set: (val) => {
+    const query = { ...route.query };
+    if (!val) delete query.keyword;
+    else query.keyword = val;
+    router.replace({ query: query });
+  },
+});
 // 價格區間（建議：Infinity 代表「4000+」）
 const priceMatch = (productPrice: number, maxPrice: number) => {
   if (maxPrice > 4000) return productPrice >= 4000;
   return productPrice <= maxPrice;
 };
-
 //寫入 query
 watch(
   selectTags,
@@ -243,7 +242,6 @@ watch(
   },
   { immediate: true },
 );
-
 //query 變成可用陣列工具
 function toStrArray(
   v: LocationQueryValue | LocationQueryValue[] | undefined,
@@ -318,158 +316,6 @@ function toNumArray(
   flex: 1;
   display: flex;
   flex-direction: column;
-  // .products-view {
-  //   // border: 1px solid;
-  //   width: 100%;
-  //   display: grid;
-  //   // grid-template-columns: repeat(3, 1fr); /* 建立三欄，每欄 1fr 寬 */
-  //   grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
-  //   grid-template-rows: auto-fit;
-  //   /* 自動高度 */
-  //   margin: 0 auto;
-  //   gap: 32px 24px;
-  //   padding: 8px;
-  //   justify-items: flex-start;
-  //   justify-content: center;
-  //   .product-card {
-  //     position: relative;
-  //     height: 100%;
-  //     width: 100%;
-  //     min-width: 200px;
-  //     max-width: 300px;
-  //     display: flex;
-  //     flex-direction: column;
-  //     justify-content: flex-start;
-  //     cursor: pointer;
-  //     > * {
-  //       position: relative;
-  //       z-index: 1;
-  //     }
-  //     &::after {
-  //       position: absolute;
-  //       top: 0;
-  //       left: 0;
-  //       right: 0;
-  //       border-radius: 6px;
-  //       content: "";
-  //       height: 20%;
-  //       width: 100%;
-  //       background: var(--bg-surface-card);
-  //       transition: height 0.4s ease-out;
-  //       box-shadow: transparent;
-  //     }
-  //     .card-media {
-  //       height: 100%;
-  //       position: relative;
-  //       background: var(--bg-surface-card);
-  //       border-radius: 6px;
-  //       .card-image {
-  //         height: 100%;
-  //         width: 100%;
-  //         padding: 8px 8px 32px;
-  //         border-radius: 6px;
-  //         overflow: hidden;
-  //         display: flex;
-  //         align-items: center;
-  //         justify-content: center;
-  //         img {
-  //           height: 100%;
-  //           width: 100%;
-  //           object-fit: cover;
-  //           object-position: center;
-  //           margin: auto auto;
-  //         }
-  //       }
-  //       .card-barnd {
-  //         position: absolute;
-  //         bottom: 8px;
-  //         left: 8px;
-  //         font-size: 14px;
-  //         font-weight: 900;
-  //         color: var(--brand);
-  //         cursor: pointer;
-  //       }
-  //     }
-  //     .card-content {
-  //       flex: 1;
-  //       word-wrap: break-word;
-  //       // color: $color-darkgery;;
-  //       display: flex;
-  //       justify-content: space-between;
-  //       flex-direction: column;
-  //       align-items: flex-start;
-  //       padding: 8px;
-  //       gap: 8px;
-
-  //       .card-title,
-  //       .card-text {
-  //         cursor: pointer;
-  //         width: 100%;
-  //         transition: color 0.4s ease;
-  //       }
-  //       .card-title {
-  //         @include line-clamp(1);
-  //       }
-  //       .card-text {
-  //         color: var(--text-secondary);
-  //         @include line-clamp(2);
-  //       }
-  //       .card-price {
-  //         margin-top: 8px;
-  //         width: 100%;
-  //         display: flex;
-  //         align-items: flex-end;
-  //         justify-content: space-between;
-  //         .discount,
-  //         .strike {
-  //           cursor: pointer;
-  //         }
-  //         .discount.onSale {
-  //           color: var(--state-danger);
-  //           font-weight: bolder;
-  //         }
-  //         .price.strike {
-  //           text-decoration: line-through;
-  //           color: var(--text-secondary);
-  //           opacity: 0.8;
-  //           font-size: 14px;
-  //           transition: color 0.4s ease;
-  //         }
-  //       }
-
-  //       .card-add {
-  //         height: 36px;
-  //         width: 100%;
-  //         padding: 0;
-
-  //         transition: all 0.3s ease;
-  //         margin-top: 4px;
-  //       }
-  //     }
-  //     @media (hover: hover) and (pointer: fine) {
-  //       &:hover {
-  //         &::after {
-  //           height: 100%;
-  //           box-shadow: var(--shadow-focus);
-  //         }
-  //         .card-content {
-  //           .card-title {
-  //             color: $color-black;
-  //           }
-  //           .card-text {
-  //             color: $color-gray-800;
-  //           }
-  //           .price {
-  //             color: $color-black;
-  //           }
-  //           .price.strike {
-  //             color: $color-gray-800;
-  //           }
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
   //上方清除TAG
   .filter-selected {
     display: flex;
