@@ -1,5 +1,5 @@
 <template>
-  <section v-show="!isSidebarOpen" class="main-sidebar">
+  <section v-show="!isSidebarClose" class="main-sidebar">
     <div class="sidebar-title">篩選</div>
     <ul class="sidebar-groups">
       <li
@@ -63,7 +63,7 @@ const props = defineProps<{
   sidebarList: SidebarList[];
   openSections: number[];
   selectTags: (string | number)[];
-  isSidebarOpen: boolean;
+  isSidebarClose: boolean;
 }>();
 
 const emit = defineEmits<{

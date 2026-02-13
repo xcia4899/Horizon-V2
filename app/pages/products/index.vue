@@ -9,7 +9,7 @@
           關閉篩選條件
           <icon
             class="icon"
-            :class="{ rotate: isSidebarOpen }"
+            :class="{ rotate: isSidebarClose }"
             name="famicons:filter"
             size="24"
           />
@@ -22,7 +22,7 @@
           v-model:selectTags="selectTags"
           :sidebarList="sidebarList"
           :openSections="openSections"
-          :isSidebarOpen="isSidebarOpen"
+          :isSidebarClose="isSidebarClose"
           @toggle-section="toggleSection"
         />
 
@@ -43,21 +43,10 @@
             </button>
           </div>
           <ProductsGrid :productListView="producPagedList" />
-          <div v-show="true" class="pagination">
-            <button :disabled="currentPage === 1" @click="prevPage">
-              上一頁
-            </button>
-            <button
-              v-for="page in totalPages"
-              :key="page"
-              @click="goToPage(page)"
-            >
-              {{ page }}
-            </button>
-            <button :disabled="currentPage === totalPages" @click="nextPage">
-              下一頁
-            </button>
-          </div>
+          <ProductsPagination
+          v-model:currentPage="currentPage"
+          :totalPages="totalPages"
+          />
         </section>
       </div>
     </main>
@@ -68,20 +57,21 @@
 import { ref, computed, watch } from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
-import { looding } from "@/composables/useFetchState";
+// import { looding } from "@/composables/useFetchState";
 import type { Product } from "@/composables/useProducts";
 import type { LocationQueryValue } from "vue-router";
 import type { SidebarList } from "@/types/ui/sidebar";
 const route = useRoute();
 const router = useRouter();
 
-const { isDesktop } = useInteractionMode()
+const { isDesktop } = useInteractionMode();
 const products = await useProducts();
 
 //控制開關sidebar的區域
-const isSidebarOpen = ref(false);
+const isSidebarClose = ref(false);
+
 const toggleFilter = () => {
-  isSidebarOpen.value = !isSidebarOpen.value;
+  isSidebarClose.value = !isSidebarClose.value;
 };
 
 //sidebar項目
@@ -182,7 +172,7 @@ const clearTag = () => {
 };
 
 //main-products 商品資料
-// 顯示用資料：永遠由 computed 算出
+// 計算後的用商品資料
 const productListView = computed(() => {
   const tags = selectTags.value;
 
@@ -211,12 +201,9 @@ const productListView = computed(() => {
 
 //分頁頁碼
 const currentPage = ref(1);
-// const itemsPage = 9;
-const itemsPage = computed(() => {
-  return isDesktop.value ? 9 : 6
-})
+const itemsPage = ref(9);
 
-//過濾分頁後的productListView
+//過濾分頁後的productListView 畫面顯示用
 const producPagedList = computed<Product[]>(() => {
   const start = (currentPage.value - 1) * itemsPage.value;
   const end = start + itemsPage.value;
@@ -226,18 +213,20 @@ const producPagedList = computed<Product[]>(() => {
 const totalPages = computed(() =>
   Math.max(1, Math.ceil(productListView.value.length / itemsPage.value)),
 );
-const goToPage = async (page: number) => {
-  await looding(100);
-  currentPage.value = page;
-};
-const prevPage = async () => {
-  await looding(100);
-  if (currentPage.value > 1) currentPage.value--;
-};
-const nextPage = async () => {
-  await looding(100);
-  if (currentPage.value < totalPages.value) currentPage.value++;
-};
+
+
+//讀取時判斷
+onMounted(() => {
+  watch(
+    isDesktop,
+    (v) => {
+      itemsPage.value = v ? 9 : 6;
+      isSidebarClose.value = !v; // 手機關、桌機開
+    },
+    { immediate: true }
+  );
+});
+
 //工具列******
 
 //搜尋值
@@ -391,37 +380,6 @@ function toNumArray(
       }
     }
   }
-  //換頁UI
-  .pagination {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-
-    flex-wrap: wrap;
-    & button {
-      padding: 6px 12px;
-      border: 1px solid #ddd;
-      background: white;
-      cursor: pointer;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-    @media (hover: hover) and (pointer: fine) {
-      & button:hover:not(.active) {
-        color: #222;
-      }
-    }
-
-    & button.active {
-      color: white;
-      font-weight: bold;
-    }
-    & button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
+ 
 }
 </style>
