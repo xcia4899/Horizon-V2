@@ -42,13 +42,21 @@
               <Icon class="icon" name="iconoir:cancel" size="24" />
             </button>
           </div>
-          <ProductsGrid :productListView="productListView" />
+          <ProductsGrid :productListView="producPagedList" />
           <div v-show="true" class="pagination">
-            <button>上一頁</button>
-            <button v-for="page in 3" :key="page">
+            <button :disabled="currentPage === 1" @click="prevPage">
+              上一頁
+            </button>
+            <button
+              v-for="page in totalPages"
+              :key="page"
+              @click="goToPage(page)"
+            >
               {{ page }}
             </button>
-            <button>下一頁</button>
+            <button :disabled="currentPage === totalPages" @click="nextPage">
+              下一頁
+            </button>
           </div>
         </section>
       </div>
@@ -57,16 +65,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
-
+import { looding } from "@/composables/useFetchState";
+import type { Product } from "@/composables/useProducts";
 import type { LocationQueryValue } from "vue-router";
 import type { SidebarList } from "@/types/ui/sidebar";
-
 const route = useRoute();
 const router = useRouter();
 
+const { isDesktop } = useInteractionMode()
 const products = await useProducts();
 
 //控制開關sidebar的區域
@@ -182,7 +191,7 @@ const productListView = computed(() => {
 
   const kw = keyword.value.trim();
 
-  return products.filter((product) => {
+  const list = products.filter((product) => {
     const matchSidebarTag =
       stringTags.length === 0 ||
       stringTags.includes(product.brand) ||
@@ -196,8 +205,39 @@ const productListView = computed(() => {
 
     return matchSidebarTag && matchSidebarPrice && matchKeyword;
   });
+
+  return list;
 });
 
+//分頁頁碼
+const currentPage = ref(1);
+// const itemsPage = 9;
+const itemsPage = computed(() => {
+  return isDesktop.value ? 9 : 6
+})
+
+//過濾分頁後的productListView
+const producPagedList = computed<Product[]>(() => {
+  const start = (currentPage.value - 1) * itemsPage.value;
+  const end = start + itemsPage.value;
+  return productListView.value.slice(start, end);
+});
+//計算分頁數量
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(productListView.value.length / itemsPage.value)),
+);
+const goToPage = async (page: number) => {
+  await looding(100);
+  currentPage.value = page;
+};
+const prevPage = async () => {
+  await looding(100);
+  if (currentPage.value > 1) currentPage.value--;
+};
+const nextPage = async () => {
+  await looding(100);
+  if (currentPage.value < totalPages.value) currentPage.value++;
+};
 //工具列******
 
 //搜尋值
