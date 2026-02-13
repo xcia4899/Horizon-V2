@@ -103,7 +103,7 @@ const route = useRoute();
 // 取得el-input 實例
 const inputRef = ref<InputInstance | null>(null);
 //螢幕、手機模式判斷
-const { isDesktop, isTouch } = useInteractionMode();
+const { isDesktop, } = useInteractionMode();
 
 //搜尋關鍵字
 const keyword = ref("");

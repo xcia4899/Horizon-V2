@@ -18,60 +18,14 @@
     </div>
     <main class="product-main">
       <div class="product-main-inner container">
-        <section v-show="!isSidebarOpen" class="main-sidebar">
-          <div class="sidebar-title">篩選</div>
-          <ul class="sidebar-groups">
-            <li
-              v-for="(item, index) in sidebarList"
-              :key="item.key"
-              class="sidebar-group"
-              :class="{ underline: isSectionOpen(index) }"
-            >
-              <div class="sidebar-group-title" @click="toggleSection(index)">
-                <h4 class="title">{{ item.title }}</h4>
-                <icon
-                  class="icon"
-                  :class="{ rotate: isSectionOpen(index) }"
-                  name="icon-park-solid:up-c"
-                  size="24"
-                />
-              </div>
+        <ProductsSidebar
+          v-model:selectTags="selectTags"
+          :sidebarList="sidebarList"
+          :openSections="openSections"
+          :isSidebarOpen="isSidebarOpen"
+          @toggle-section="toggleSection"
+        />
 
-              <ul v-show="isSectionOpen(index)" class="sidebar-group-options">
-                <li
-                  v-for="(options, i) in item.options"
-                  :key="i"
-                  class="options-item"
-                >
-                  <label class="checkbox-area">
-                    <input
-                      v-model="selectTags"
-                      class="checkbox"
-                      type="checkbox"
-                      :value="options.value"
-                    />
-                    {{ options.label }}
-                  </label>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <div class="mobile-Btn">
-            <div class="reset">
-              <h4>重置</h4>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <!-- 加號（+） -->
-                <path
-                  d="M12 5v14M5 12h14"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                />
-              </svg>
-            </div>
-            <button class="btn">確定</button>
-          </div>
-        </section>
         <section class="main-products">
           <div v-show="selectTags.length" class="filter-selected">
             <button class="selected-allClear" @click="clearTag">
@@ -130,6 +84,7 @@ import { ref } from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
 import type { LocationQueryValue } from "vue-router";
+import type { SidebarList } from "@/types/ui/sidebar";
 const route = useRoute();
 const router = useRouter();
 
@@ -141,7 +96,7 @@ const toggleFilter = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
 //sidebar項目
-const sidebarList = [
+const sidebarList: SidebarList[] = [
   {
     title: "品牌",
     key: "brand",
@@ -213,22 +168,23 @@ const sidebarList = [
     options: [
       { label: "$2,000以下", value: 2000 },
       { label: "$4,000以下", value: 4000 },
-      { label: "$4,000以上", value: Infinity },
+      { label: "$4,000以上", value: 4001 },
     ],
   },
 ];
-
 //sidbar的Sections展開關閉
 const openSections = ref<number[]>([]);
-const isSectionOpen = (index: number) => openSections.value.includes(index);
+// const isSectionOpen = (index: number) => openSections.value.includes(index);
 const toggleSection = (index: number) => {
   const idx = openSections.value.indexOf(index);
   if (idx > -1) openSections.value.splice(idx, 1);
   else openSections.value.push(index);
   // console.log(selectTags.value);
 };
+
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
+
 //搜尋值
 const keyword = computed({
   get: () => (route.query.keyword ? String(route.query.keyword) : ""),
@@ -239,43 +195,48 @@ const keyword = computed({
     router.replace({ query: query });
   },
 });
+
 //filter-selected 刪除TAG
 const removeTag = (tag: string | number) => {
   selectTags.value = selectTags.value.filter((t) => t !== tag);
 };
-
 const clearTag = () => {
   return (selectTags.value = []);
 };
+
 //main-products 商品資料
 
 // 顯示用資料：永遠由 computed 算出
 const productListView = computed(() => {
   const tags = selectTags.value;
-  const numberTags = tags.filter((t) => typeof t === "number");
-  // const kw = String(route.query.keyword ?? "");
+
+  const stringTags = tags.filter((t): t is string => typeof t === "string");
+  const numberTags = tags.filter((t): t is number => typeof t === "number");
+
+  const kw = keyword.value.trim();
 
   return products.filter((product) => {
     const matchSidebarTag =
-      tags.length === 0 ||
-      tags.includes(product.brand) ||
-      tags.some((tag) => product.tags?.includes(tag as string));
+      stringTags.length === 0 ||
+      stringTags.includes(product.brand) ||
+      stringTags.some((tag) => product.tags?.includes(tag));
 
     const matchSidebarPrice =
       numberTags.length === 0 ||
-      numberTags.some((price) => priceMatch(product.price, price));
+      numberTags.some((maxPrice) => priceMatch(product.price, maxPrice));
 
-    const matchKeyword = !keyword.value || product.name.includes(keyword.value);
+    const matchKeyword = !kw || product.name.includes(kw);
 
     return matchSidebarTag && matchSidebarPrice && matchKeyword;
   });
 });
 
-//計算價格區間
+// 價格區間（建議：Infinity 代表「4000+」）
 const priceMatch = (productPrice: number, maxPrice: number) => {
-  if (maxPrice === Infinity) return productPrice >= 4000;
+  if (maxPrice > 4000) return productPrice >= 4000;
   return productPrice <= maxPrice;
 };
+
 //寫入 query
 watch(
   selectTags,
@@ -323,7 +284,6 @@ function toNumArray(
 // const keyword = computed(() => {
 //   return String(route.query.keyword ?? "").trim();
 // });
-
 </script>
 
 <style scoped lang="scss">
@@ -374,117 +334,7 @@ function toNumArray(
     padding-block: 16px 32px;
   }
 }
-.main-sidebar {
-  // padding: 0px 8px;
-  // min-width: 186px;
-  width: clamp(186px, 25%, 240px);
-  .sidebar-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    display: none;
-  }
-  .sidebar-groups {
-    .sidebar-group {
-      padding: 4px 0px;
-      margin-bottom: 4px;
-      border-bottom: 1px dashed var(--border-default);
-      .sidebar-group-title {
-        padding: 8px 6px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        cursor: pointer;
-        .title {
-          cursor: pointer;
-        }
-        .icon {
-          color: var(--brand-soft);
-          transition: transform 0.3s ease;
-        }
-        @media (hover: hover) and (pointer: fine) {
-          &:hover {
-            .icon {
-              color: var(--brand);
-            }
-          }
-        }
-        .icon.rotate {
-          color: var(--brand);
-          transform: rotate(180deg);
-        }
-      }
-      .sidebar-group-options {
-        .options-item {
-          display: flex;
-          align-items: center;
-          max-height: 400px;
-          overflow: hidden;
-          padding: 6px 8px;
-          border-radius: 4px;
-          transition: background-color 0.2s ease-out;
-          .checkbox-area {
-            width: 100%;
-          }
-          .checkbox-area,
-          .checkbox {
-            cursor: pointer;
-          }
-          @media (hover: hover) and (pointer: fine) {
-            &:hover {
-              background: var(--bg-surface-soft);
-              color: var(--brand-hover);
-            }
-          }
-        }
-        &.onOpen {
-          max-height: 400px;
-        }
-      }
-      &.underline {
-        border-bottom-style: solid;
-        border-color: var(--border-soft);
-      }
-    }
-  }
-  .mobile-Btn {
-    position: fixed;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    left: 0;
-    bottom: 0;
 
-    width: 100%;
-    // height: 140px;
-    padding: 16px 0px 48px;
-    font-size: 16px;
-
-    .reset {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 24px;
-      // width: 90%;
-      border-radius: 4px;
-      text-align: center;
-      border: 1px solid transparent;
-      cursor: pointer;
-      h4 {
-        font-size: 16px;
-      }
-      svg {
-        transform: rotate(45deg);
-      }
-    }
-    .btn {
-      font-size: 16px;
-      width: 90%;
-    }
-  }
-}
 .main-products {
   flex: 1;
   display: flex;
