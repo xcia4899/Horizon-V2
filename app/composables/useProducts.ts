@@ -1,10 +1,42 @@
-import productList from '@/assets/data/json/productList.json'
+import productList from "@/assets/data/json/productList.json";
+
+export interface DetailContent {
+  title: string;
+  text: string[];
+}
+export interface ProductDetail {
+  section: string;
+  content: DetailContent[];
+}
+export interface ProductImages {
+  main: string;
+  thumbnails: string[];
+}
+export interface Product {
+  id: string;
+  brand: string;
+  name: string;
+  subtitle: string;
+  category: string;
+
+  discount: number;
+  price: number;
+  onsale: boolean;
+
+  color: string;
+  description: string;
+
+  images: ProductImages;
+  details: ProductDetail[];
+
+  tags: string[];
+}
 
 export const useProducts = async () => {
   // 現在：本地 JSON
-  return productList
+  return productList;
 
   // 未來：換成後端時，只改這裡
   // const config = useRuntimeConfig()
   // return await $fetch(`${config.public.apiBase}/products`)
-}
+};

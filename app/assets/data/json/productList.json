@@ -8,7 +8,7 @@
     "discount": 4490,
     "price": 4990,
     "onsale": true,
-    "colorOptions": "黑色",
+    "color": "黑色",
     "description": "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
     "images": {
       "main": "./images/pic-detal/RAZER-1000/10001.jpg",
@@ -1029,6 +1029,7 @@
     "id": "PRO-1012",
     "brand": "Logitech",
     "name": "革命輕量設計，帶來極速精準的反饋體驗 ",
+    "subtitle":"極限的操作",
     "category": "滑鼠",
     "color": "粉紅",
     "discount": 3383,
