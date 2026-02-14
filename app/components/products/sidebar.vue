@@ -40,15 +40,7 @@
     <div class="mobile-Btn">
       <div class="reset">
         <h4>重置</h4>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-          <!-- 加號（+） -->
-          <path
-            d="M12 5v14M5 12h14"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
+        <Icon class="icon" name="iconoir:cancel" size="24" />
       </div>
       <button class="btn">確定</button>
     </div>
@@ -88,11 +80,12 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
 .main-sidebar {
   width: clamp(186px, 25%, 240px);
   .sidebar-title {
-    text-align: center;
     font-size: 24px;
     font-weight: 600;
     margin-bottom: 16px;
     display: none;
+    justify-content: center;
+    align-items: center;
   }
   .sidebar-groups {
     .sidebar-group {
@@ -156,6 +149,17 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
         border-color: var(--border-soft);
       }
     }
+    @media (pointer: coarse) {
+      // display: flex;
+      // justify-content: center;
+      // flex-wrap: wrap;
+      gap: 8px;
+      // margin: 0 auto;
+      // width: 100%;
+      .sidebar-group {
+        flex: 0 0 20%;
+      }
+    }
   }
   .mobile-Btn {
     position: fixed;
@@ -170,7 +174,7 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
     // height: 140px;
     padding: 16px 0px 48px;
     font-size: 16px;
-
+    background-color: #727171;
     .reset {
       display: flex;
       align-items: center;
@@ -181,16 +185,43 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
       text-align: center;
       border: 1px solid transparent;
       cursor: pointer;
-      h4 {
-        font-size: 16px;
-      }
-      svg {
-        transform: rotate(45deg);
-      }
     }
     .btn {
-      font-size: 16px;
       width: 90%;
+    }
+  }
+  @media (pointer: coarse) {
+    position: fixed;
+    left: 0;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    height: 100%;
+    z-index: 200;
+    padding: 32px;
+    background-color: #030303;
+    .sidebar-title {
+      display: flex;
+    }
+    .sidebar-groups {
+      flex: 1;
+      overflow: scroll;
+      // display: flex;
+      // justify-content: center;
+      // flex-wrap: wrap;
+      gap: 8px;
+      // margin: 0 auto;
+      // width: 100%;
+      top: 0;
+      bottom: 120px;
+      .sidebar-group {
+        flex: 0 0 20%;
+      }
+    }
+    .mobile-Btn {
+      display: flex;
     }
   }
 }

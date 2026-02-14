@@ -25,27 +25,12 @@
           :isSidebarClose="isSidebarClose"
           @toggle-section="toggleSection"
         />
-
         <section class="main-products">
-          <div v-show="selectTags.length" class="filter-selected">
-            <button class="selected-allClear" @click="clearTag">
-              清除篩選條件
-              <Icon class="icon" name="iconoir:cancel" size="24" />
-            </button>
-            <button
-              v-for="(item, index) in selectTags"
-              :key="index"
-              class="selected-clearBtn"
-              @click="removeTag(item)"
-            >
-              {{ item }}
-              <Icon class="icon" name="iconoir:cancel" size="24" />
-            </button>
-          </div>
+          <ProductsSelectedFilters v-model:selectTags="selectTags" />
           <ProductsGrid :productListView="producPagedList" />
           <ProductsPagination
-          v-model:currentPage="currentPage"
-          :totalPages="totalPages"
+            v-model:currentPage="currentPage"
+            :totalPages="totalPages"
           />
         </section>
       </div>
@@ -163,14 +148,6 @@ const toggleSection = (index: number) => {
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
 
-//filter-selected 刪除TAG
-const removeTag = (tag: string | number) => {
-  selectTags.value = selectTags.value.filter((t) => t !== tag);
-};
-const clearTag = () => {
-  return (selectTags.value = []);
-};
-
 //main-products 商品資料
 // 計算後的用商品資料
 const productListView = computed(() => {
@@ -214,7 +191,6 @@ const totalPages = computed(() =>
   Math.max(1, Math.ceil(productListView.value.length / itemsPage.value)),
 );
 
-
 //讀取時判斷
 onMounted(() => {
   watch(
@@ -223,7 +199,7 @@ onMounted(() => {
       itemsPage.value = v ? 9 : 6;
       isSidebarClose.value = !v; // 手機關、桌機開
     },
-    { immediate: true }
+    { immediate: true },
   );
 });
 
@@ -338,6 +314,9 @@ function toNumArray(
     width: 100%;
     gap: 32px;
     padding-block: 16px 32px;
+    @media (pointer: coarse) {
+      flex-direction: column;
+    }
   }
 }
 
@@ -346,40 +325,5 @@ function toNumArray(
   display: flex;
   flex-direction: column;
   //上方清除TAG
-  .filter-selected {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    padding: 8px;
-    .selected-allClear,
-    .selected-clearBtn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 400;
-      letter-spacing: 1px;
-      padding: 4px 12px;
-      border-radius: 8px;
-      color: var(--text-secondary);
-      background: transparent;
-      border: 2px solid var(--border-default);
-      cursor: pointer;
-      .icon {
-        color: var(--brand-hover);
-      }
-      @media (hover: hover) and (pointer: fine) {
-        &:hover {
-          color: var(--text-secondary);
-          background: var(--bg-surface-soft);
-          border-color: var(--brand);
-          .icon {
-            color: var(--state-danger);
-          }
-        }
-      }
-    }
-  }
- 
 }
 </style>
