@@ -37,18 +37,18 @@
         </ul>
       </li>
     </ul>
-    <div class="mobile-Btn">
-      <div class="reset">
+    <div class="mobile-btnArea">
+      <div class="reset" @click="resetTags">
         <h4>重置</h4>
-        <Icon class="icon" name="iconoir:cancel" size="24" />
+        <Icon class="icon" name="iconoir:cancel" size="20" />
       </div>
-      <button class="btn">確定</button>
+      <button class="Submit btn" @click="toggleFilter">確定</button>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs } from "vue";
+import { computed, toRefs, nextTick } from "vue";
 import type { SidebarList } from "@/types/ui/sidebar";
 
 const props = defineProps<{
@@ -56,24 +56,38 @@ const props = defineProps<{
   openSections: number[];
   selectTags: (string | number)[];
   isSidebarClose: boolean;
+  toggleFilter: () => void;
+  closeFilter: () => void;
 }>();
 
 const emit = defineEmits<{
   (e: "update:selectTags", value: (string | number)[]): void;
-  (e: "toggleSection", index: number): void;
+  (e: "toggle-section", index: number): void;
 }>();
 
-const { sidebarList, openSections } = toRefs(props);
+const { sidebarList, openSections, toggleFilter, closeFilter } = toRefs(props);
 
+//子元件用 modelSelectTags 直接雙向綁定v-model:selectTags
 const modelSelectTags = computed({
+  // 讀取父元件傳下來
   get: () => props.selectTags,
+  // emit 回傳父元件更新 selectTags
   set: (val) => emit("update:selectTags", val),
 });
+// 通知父元件切換 sidebar 區塊開關
 const toggleSection = (index: number) => {
-  emit("toggleSection", index);
+  emit("toggle-section", index);
 };
-
+// 判斷某個 sidebar 區塊是否展開
 const isSectionOpen = (index: number) => openSections.value.includes(index);
+
+//清除TAGS 關閉sidebar 關閉sidebar所有展開
+const resetTags = async () => {
+  emit("update:selectTags", []);
+  await nextTick();
+  toggleFilter.value();
+  closeFilter.value();
+};
 </script>
 
 <style scoped lang="scss">
@@ -161,7 +175,7 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
       }
     }
   }
-  .mobile-Btn {
+  .mobile-btnArea {
     position: fixed;
     display: none;
     flex-direction: column;
@@ -169,28 +183,28 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
     gap: 16px;
     left: 0;
     bottom: 0;
-
     width: 100%;
-    // height: 140px;
     padding: 16px 0px 48px;
     font-size: 16px;
-    background-color: #727171;
     .reset {
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 24px;
+      padding: 8px 16px;
       // width: 90%;
+      border: 1px solid var(--border-default);
       border-radius: 4px;
       text-align: center;
-      border: 1px solid transparent;
       cursor: pointer;
+      h4 {
+        padding-inline: 3px;
+      }
     }
-    .btn {
+    .Submit {
       width: 90%;
     }
   }
-  @media (pointer: coarse) {
+  @media (pointer: coarse) and (max-width: 1024px) {
     position: fixed;
     left: 0;
     top: 0px;
@@ -208,19 +222,15 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
     .sidebar-groups {
       flex: 1;
       overflow: scroll;
-      // display: flex;
-      // justify-content: center;
-      // flex-wrap: wrap;
       gap: 8px;
-      // margin: 0 auto;
-      // width: 100%;
+      max-height: 400px;
       top: 0;
       bottom: 120px;
       .sidebar-group {
         flex: 0 0 20%;
       }
     }
-    .mobile-Btn {
+    .mobile-btnArea {
       display: flex;
     }
   }

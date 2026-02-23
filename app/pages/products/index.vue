@@ -23,6 +23,8 @@
           :sidebarList="sidebarList"
           :openSections="openSections"
           :isSidebarClose="isSidebarClose"
+          :toggleFilter="toggleFilter"
+          :closeFilter="closeFilter"
           @toggle-section="toggleSection"
         />
         <section class="main-products">
@@ -52,9 +54,9 @@ const router = useRouter();
 const { isDesktop } = useInteractionMode();
 const products = await useProducts();
 
-//控制開關sidebar的區域
+//sidebar 是否關閉
 const isSidebarClose = ref(false);
-
+// 切換 sidebar 開關
 const toggleFilter = () => {
   isSidebarClose.value = !isSidebarClose.value;
 };
@@ -144,7 +146,10 @@ const toggleSection = (index: number) => {
   else openSections.value.push(index);
   // console.log(selectTags.value);
 };
-
+//關閉sidebar的所有展開區域
+const closeFilter = () => {
+  openSections.value = [];
+};
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
 
