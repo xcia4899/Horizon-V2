@@ -103,7 +103,7 @@ const resetTags = async () => {
   opacity: 1;
 
   // color: var(--text-primary);
-  background-color: var(--bg-surface-strong);
+  background: var(--bg-surface-strong);
 
   @media (pointer: fine) {
     padding-right: 32px;
@@ -219,7 +219,7 @@ const resetTags = async () => {
     padding: 16px 0px 48px;
     font-size: 16px;
     opacity: 0;
-
+    visibility: hidden;
     .reset {
       display: flex;
       align-items: center;
@@ -251,7 +251,7 @@ const resetTags = async () => {
       padding-right: 0px;
     }
   }
-  @media (pointer: coarse) and (max-width: 1024px) {
+  @media (pointer: coarse) and (max-width: 1024px), (max-width: 768px) {
     position: fixed;
     left: 0;
     top: 0px;
@@ -285,51 +285,17 @@ const resetTags = async () => {
     .mobile-btnArea {
       display: flex;
       &.btnAreaShow {
+        // opacity: 0;
+        visibility: visible;
+        // z-index: 200;
         opacity: 1;
         transition: opacity 0.5s ease-out 0.3s;
       }
     }
     &.isClose {
       max-height: 0%;
-    }
-  }
-  @media (max-width: 768px) {
-    position: fixed;
-    left: 0;
-    top: 0px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 100%;
-    max-height: 100%;
-    height: 100%;
-    z-index: 200;
-    padding: 32px 48px;
-    overflow: hidden;
-    // background-color: #030303;
-    .sidebar-title {
-      display: flex;
-    }
-    .sidebar-groups {
-      flex: 1;
-      overflow-y: scroll;
-      gap: 8px;
-      max-height: 400px;
-      top: 0;
-      bottom: 120px;
-      .sidebar-group {
-        .sidebar-group-options {
-          .options-item {
-            padding-block: 10px;
-          }
-        }
-      }
-    }
-    .mobile-btnArea {
-      display: flex;
-    }
-    &.isClose {
-      max-height: 0%;
+      z-index: 10;
+      visibility: hidden;
     }
   }
 }

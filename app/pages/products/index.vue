@@ -71,7 +71,7 @@ const keyword = computed({
 });
 
 //sidebar 是否關閉
-const isSidebarClose = ref(false);
+const isSidebarClose = ref(true);
 // 切換 sidebar 開關
 const toggleFilter = async () => {
   await nextTick();
