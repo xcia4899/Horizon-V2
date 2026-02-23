@@ -51,16 +51,12 @@ import type { MenuKey, MenuItem, OpenMenu, SetMenu } from "@/types/ui/menu";
 const router = useRouter();
 //控制menuOPen 手機版本開關控制
 
-
-
-
 //螢幕、手機模式判斷
 const { isDesktop, isTouch } = useInteractionMode();
- defineProps<{
+const props = defineProps<{
   menus: SetMenu[];
-  isMenuOpenMobile: boolean;
+  closeMenuOpenMobile: () => void;
 }>();
-
 
 // 導覽列ref，用來判斷是否點擊到外部
 const menuRef = ref<HTMLElement | null>(null);
@@ -94,12 +90,13 @@ onBeforeUnmount(() => {
 
 //跳轉商品頁 可代參數
 const goProducts = async (item: MenuItem) => {
-  await looding(300)
+  await looding(200);
   router.push({
     path: "/products",
     query: item ? {} : {},
   });
   openMenu.value = null;
+  props.closeMenuOpenMobile()
 };
 </script>
 
@@ -147,10 +144,11 @@ const goProducts = async (item: MenuItem) => {
     cursor: pointer;
     @media (pointer: coarse) {
       min-height: 44px;
-      padding: 8px 12px;
+      padding: 16px 12px;
+      width: 100%;
     }
     &:active {
-      transform: scale(0.95);
+      // transform: translateY(-4px);
       opacity: 0.85;
     }
     &.active {

@@ -16,7 +16,7 @@
         </button>
       </div>
     </div>
-    <main class="product-main">
+    <main ref="productMainRef" class="product-main">
       <div class="product-main-inner container">
         <ProductsSidebar
           v-model:selectTags="selectTags"
@@ -28,11 +28,16 @@
           @toggle-section="toggleSection"
         />
         <section class="main-products">
-          <ProductsSelectedFilters v-model:selectTags="selectTags" />
+          <ProductsSelectedFilters
+            v-model:selectTags="selectTags"
+            :collapseAllSections="collapseAllSections"
+          />
+
           <ProductsGrid :productListView="producPagedList" />
           <ProductsPagination
             v-model:currentPage="currentPage"
             :totalPages="totalPages"
+            :scrollToProductsMainRef="scrollToProductsMainRef"
           />
         </section>
       </div>
@@ -41,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch ,nextTick} from "vue";
+import { ref, computed, watch, nextTick } from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
 import { looding } from "@/composables/useFetchState";
@@ -54,12 +59,23 @@ const router = useRouter();
 const { isDesktop } = useInteractionMode();
 const products = await useProducts();
 
+//keyword搜尋值
+const keyword = computed({
+  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
+  set: (val) => {
+    const query = { ...route.query };
+    if (!val) delete query.keyword;
+    else query.keyword = val;
+    router.replace({ query: query });
+  },
+});
+
 //sidebar 是否關閉
 const isSidebarClose = ref(false);
 // 切換 sidebar 開關
 const toggleFilter = async () => {
   await nextTick();
-  await looding(200);
+  await looding(100);
   isSidebarClose.value = !isSidebarClose.value;
 };
 
@@ -152,10 +168,13 @@ const toggleSection = (index: number) => {
 const collapseAllSections = () => {
   openSections.value = [];
 };
+
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
 
-//main-products 商品資料
+/*--main-products 商品資料--*/
+//建立productMainRef
+const productMainRef = ref<HTMLElement | null>(null);
 // 計算後的用商品資料
 const productListView = computed(() => {
   const tags = selectTags.value;
@@ -179,11 +198,30 @@ const productListView = computed(() => {
 
     return matchSidebarTag && matchSidebarPrice && matchKeyword;
   });
-
+  // scrollToProductsMainRef();
   return list;
 });
+//捲動到指定列表高度
+const scrollToProductsMainRef = () => {
+  if (!productMainRef.value) return;
+  const top =
+    productMainRef.value!.getBoundingClientRect().top + window.scrollY - 120;
+  // productMainRef.value.scrollIntoView({ behavior: "smooth" });
+  window.scrollTo({ top, behavior: "smooth" });
+};
+//頁碼改變時捲動
+// watch(
+//   productListView,
+//   async (newVal, oldVal) => {
+//     if (newVal === oldVal) return;
+//     await nextTick();
+//     await looding(100);
+//     scrollToProductsMainRef();
+//   },
+//   { flush: "post" }
+// );
 
-//分頁頁碼
+/*--分頁頁碼--*/
 const currentPage = ref(1);
 const itemsPage = ref(9);
 
@@ -197,31 +235,50 @@ const producPagedList = computed<Product[]>(() => {
 const totalPages = computed(() =>
   Math.max(1, Math.ceil(productListView.value.length / itemsPage.value)),
 );
-
-//讀取時判斷
-onMounted(() => {
-  watch(
-    isDesktop,
-    (v) => {
-      itemsPage.value = v ? 9 : 6;
-      isSidebarClose.value = !v; // 手機關、桌機開
-    },
-    { immediate: true },
-  );
-});
-
-//工具列******
-
-//搜尋值
-const keyword = computed({
-  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
-  set: (val) => {
-    const query = { ...route.query };
-    if (!val) delete query.keyword;
-    else query.keyword = val;
-    router.replace({ query: query });
+//productListView改變時回到第一頁
+watch(
+  selectTags,
+  async () => {
+    if (selectTags.value.length === 0) return;
+    await nextTick();
+    currentPage.value = 1;
+    scrollToProductsMainRef();
   },
-});
+  { flush: "post" },
+);
+//頁碼改變時捲動
+watch(
+  currentPage,
+  async () => {
+    await nextTick();
+    await looding(100);
+    scrollToProductsMainRef();
+  },
+  { flush: "post" },
+);
+
+/*--讀取時判斷--*/
+//讀取時判斷
+// onMounted(() => {
+//   watch(
+//     isDesktop,
+//     (v) => {
+//       itemsPage.value = v ? 9 : 6;
+//       if (isSidebarClose.value === false) isSidebarClose.value = true; // 手機關、桌機開
+//     },
+//     { immediate: true },
+//   );
+// });
+watch(
+  isDesktop,
+  (v) => {
+    itemsPage.value = v ? 9 : 6;
+    isSidebarClose.value = !v;
+  },
+  { immediate: true },
+);
+
+/*----工具列----*/
 // 價格區間（建議：Infinity 代表「4000+」）
 const priceMatch = (productPrice: number, maxPrice: number) => {
   if (maxPrice > 4000) return productPrice >= 4000;
@@ -291,17 +348,20 @@ function toNumArray(
     display: flex;
     align-items: center;
     gap: 2px;
-    font-size: 18px;
+    font-size: 20px;
     padding: 6px 16px;
     border-radius: 8px;
     letter-spacing: 2px;
-    color: var(--text-secondary);
-    background-color: transparent;
+    color: var(--text-tertiary);
+    background: transparent;
     cursor: pointer;
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        background: var(--bg-surface-contrast);
-        color: var(--text-inverse-soft);
+        background: var(--bg-surface-soft);
+        color: var(--text-primary);
+        .icon {
+          color: var(--brand-hover);
+        }
       }
     }
 
@@ -310,7 +370,11 @@ function toNumArray(
     }
 
     .icon.rotate {
+      color: var(--brand-hover);
       transform: rotateX(180deg);
+    }
+    &:active {
+      background: transparent;
     }
   }
 }
@@ -319,9 +383,12 @@ function toNumArray(
   .product-main-inner {
     display: flex;
     width: 100%;
-    gap: 32px;
+    // gap: 32px;
     padding-block: 16px 32px;
-    @media (pointer: coarse) {
+    @media  (pointer:coarse) and (max-width: 1024px) {
+      flex-direction: column;
+    }
+    @media   (max-width: 768px) {
       flex-direction: column;
     }
   }

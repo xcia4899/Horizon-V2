@@ -1,5 +1,5 @@
 <template>
-  <section v-show="!isSidebarClose" class="main-sidebar">
+  <section class="main-sidebar" :class="{ isClose: !isSidebarClose }">
     <div class="sidebar-title">篩選</div>
     <ul class="sidebar-groups">
       <li
@@ -40,7 +40,7 @@
         </ul>
       </li>
     </ul>
-    <div class="mobile-btnArea">
+    <div class="mobile-btnArea" :class="{ btnAreaShow: isSidebarClose }">
       <div class="reset" @click="resetTags">
         <h4>重置</h4>
         <Icon class="icon" name="iconoir:cancel" size="20" />
@@ -60,7 +60,7 @@ const props = defineProps<{
   selectTags: (string | number)[];
   isSidebarClose: boolean;
   toggleFilter: () => void;
-  collapseAllSections : () => void;
+  collapseAllSections: () => void;
 }>();
 
 const emit = defineEmits<{
@@ -68,7 +68,8 @@ const emit = defineEmits<{
   (e: "toggle-section", index: number): void;
 }>();
 
-const { sidebarList, openSections, toggleFilter, collapseAllSections  } = toRefs(props);
+const { sidebarList, openSections, toggleFilter, collapseAllSections } =
+  toRefs(props);
 
 //子元件用 modelSelectTags 直接雙向綁定v-model:selectTags
 const modelSelectTags = computed({
@@ -88,17 +89,34 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
 const resetTags = async () => {
   emit("update:selectTags", []);
   await nextTick();
-  await looding(200);
+  await looding(100);
   toggleFilter.value();
-  collapseAllSections .value();
+  collapseAllSections.value();
 };
 </script>
 
 <style scoped lang="scss">
 .main-sidebar {
-  width: clamp(186px, 25%, 240px);
+  width: clamp(186px, 25%, 280px);
+  max-width: 280px;
+  overflow: hidden;
+  opacity: 1;
+
   // color: var(--text-primary);
   background-color: var(--bg-surface-strong);
+
+  @media (pointer: fine) {
+    padding-right: 32px;
+    transition:
+      max-width 0.4s ease-out,
+      opacity 0.2s ease-out,
+      padding-right 0.2s ease-out 0.1s;
+  }
+  @media (pointer: coarse) {
+    transition:
+      max-height 0.4s ease-out,
+      opacity 0.3s ease-out;
+  }
   .sidebar-title {
     font-size: 24px;
     font-weight: 600;
@@ -113,7 +131,7 @@ const resetTags = async () => {
     gap: 8px;
     .sidebar-group {
       // margin-bottom: 4px;
-      border-bottom: 1px dashed var(--border-default);
+      border-bottom: 2px dashed var(--border-default);
       transition:
         border-style 0.4s ease-out,
         border-color 0.4s ease-out;
@@ -200,6 +218,8 @@ const resetTags = async () => {
     width: 100%;
     padding: 16px 0px 48px;
     font-size: 16px;
+    opacity: 0;
+
     .reset {
       display: flex;
       align-items: center;
@@ -213,10 +233,10 @@ const resetTags = async () => {
       h4 {
         padding-inline: 3px;
       }
-      .icon{
-        color:var(--state-danger);
+      .icon {
+        color: var(--state-danger);
       }
-      &:active{
+      &:active {
         transform: scale(0.95);
       }
     }
@@ -224,14 +244,22 @@ const resetTags = async () => {
       width: 90%;
     }
   }
-  @media (max-width: 1024px) {
+  &.isClose {
+    opacity: 0;
+    @media (pointer: fine) {
+      max-width: 0px;
+      padding-right: 0px;
+    }
+  }
+  @media (pointer: coarse) and (max-width: 1024px) {
     position: fixed;
     left: 0;
     top: 0px;
     display: flex;
     flex-direction: column;
-
     width: 100%;
+    max-width: 100%;
+    max-height: 100%;
     height: 100%;
     z-index: 200;
     padding: 32px 48px;
@@ -241,7 +269,7 @@ const resetTags = async () => {
     }
     .sidebar-groups {
       flex: 1;
-      overflow: scroll;
+      overflow-y: scroll;
       gap: 8px;
       max-height: 400px;
       top: 0;
@@ -256,6 +284,52 @@ const resetTags = async () => {
     }
     .mobile-btnArea {
       display: flex;
+      &.btnAreaShow {
+        opacity: 1;
+        transition: opacity 0.5s ease-out 0.3s;
+      }
+    }
+    &.isClose {
+      max-height: 0%;
+    }
+  }
+  @media (max-width: 768px) {
+    position: fixed;
+    left: 0;
+    top: 0px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    z-index: 200;
+    padding: 32px 48px;
+    overflow: hidden;
+    // background-color: #030303;
+    .sidebar-title {
+      display: flex;
+    }
+    .sidebar-groups {
+      flex: 1;
+      overflow-y: scroll;
+      gap: 8px;
+      max-height: 400px;
+      top: 0;
+      bottom: 120px;
+      .sidebar-group {
+        .sidebar-group-options {
+          .options-item {
+            padding-block: 10px;
+          }
+        }
+      }
+    }
+    .mobile-btnArea {
+      display: flex;
+    }
+    &.isClose {
+      max-height: 0%;
     }
   }
 }

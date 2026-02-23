@@ -24,11 +24,10 @@
 // import { ref, computed, watch } from "vue";
 import { looding } from "@/composables/useFetchState";
 
-const activeIndex = ref(1);
-
 const props = defineProps<{
   currentPage: number;
   totalPages: number;
+  scrollToProductsMainRef:()=> void;
 }>();
 const emit = defineEmits<{
   (e: "update:currentPage", value: number): void;
@@ -36,15 +35,17 @@ const emit = defineEmits<{
 const { currentPage, totalPages } = toRefs(props);
 
 const goToPage = async (page: number) => {
-  await looding(100);
+
+  // await looding(100);
   emit("update:currentPage", page);
+
 };
 const prevPage = async () => {
-  await looding(100);
+  // await looding(100);
   if (currentPage.value > 1) emit("update:currentPage", currentPage.value - 1);
 };
 const nextPage = async () => {
-  await looding(100);
+  // await looding(100);
   if (currentPage.value < totalPages.value)
     emit("update:currentPage", currentPage.value + 1);
 };

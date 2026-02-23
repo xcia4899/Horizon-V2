@@ -11,7 +11,9 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-
+const emit = defineEmits<{
+  (e: "ready"): void;
+}>();
 const bannerList = [
   {
     id: "banner-01",
@@ -31,8 +33,11 @@ const randomIndex = ref<number | null>(null);
 //   console.log("執行一次", randomIndex.value);
 // };
 onMounted(() => {
+
   randomIndex.value = Math.floor(Math.random() * bannerList.length);
+    emit("ready");
 });
+
 const currentbanner = computed(() => {
   if (randomIndex.value === null) return null;
   return bannerList[randomIndex.value];
@@ -42,9 +47,13 @@ const currentbanner = computed(() => {
 <style scoped lang="scss">
 .banner {
   display: flex;
-  //   transform: translateX(-100%);
+  width: 100%;
+  aspect-ratio: 16 / 6; /* 或固定高度 */
+  max-height: 500px;
+  overflow: hidden;
   .image {
     width: 100%;
+    height: 100%;
     object-fit: cover;
     @media (max-width: 550px) {
       width: 120%;

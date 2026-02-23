@@ -54,6 +54,7 @@ defineProps<{
     position: relative;
     height: 100%;
     width: 100%;
+
     min-width: 200px;
     max-width: 300px;
     display: flex;
@@ -86,17 +87,19 @@ defineProps<{
         height: 100%;
         width: 100%;
         padding: 8px 8px 32px;
-        border-radius: 6px;
+        // border-radius: 6px;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         img {
-          height: 100%;
+          // height: 100%;
           width: 100%;
+          height: 200px;
+          padding: 8px;
+          // overflow: hidden;
           object-fit: cover;
           object-position: center;
-          margin: auto auto;
         }
       }
       .card-barnd {
@@ -118,7 +121,7 @@ defineProps<{
       flex-direction: column;
       align-items: flex-start;
       padding: 8px;
-      gap: 8px;
+      gap: 4px;
 
       .card-title,
       .card-text {

@@ -15,7 +15,7 @@
       class="navbar"
       :class="{ 'mobile-isOpen': isMenuOpenMobile === true }"
     >
-      <HeaderNavbarMenu :menus="menus" :isMenuOpenMobile="isMenuOpenMobile" />
+      <HeaderNavbarMenu :menus="menus" :closeMenuOpenMobile="closeMenuOpenMobile" />
     </section>
     <!-- Navber-Right -->
     <aside
@@ -89,13 +89,16 @@ const menus: SetMenu[] = [
     items: [],
   },
 ];
+const isMenuOpenMobile = ref(false);
 const toggleMenu = () => {
   isMenuOpenMobile.value = !isMenuOpenMobile.value;
 };
-const isMenuOpenMobile = ref(false);
-
-const goHome = async () => {
+const closeMenuOpenMobile = async () => {
   await looding(300);
+  isMenuOpenMobile.value = false;
+};
+const goHome = async () => {
+  await looding(200);
   navigateTo("/");
 };
 </script>

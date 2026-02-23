@@ -20,20 +20,28 @@
 type Tag = string | number;
 const props = defineProps<{
   selectTags: Tag[];
+  collapseAllSections: () => void;
 }>();
 const emit = defineEmits<{
   (e: "update:selectTags", value: Tag[]): void;
 }>();
 //filter-selected 刪除TAG
-const removeTag = (tag: string | number) => {
+const removeTag = async (tag: string | number) => {
+  await nextTick();
+  await looding(100);
   emit(
     "update:selectTags",
     props.selectTags.filter((t) => t !== tag),
   );
+
   //   selectTags.value = selectTags.value.filter((t) => t !== tag);
 };
-const clearAll = () => {
+const clearAll = async () => {
+  await nextTick();
+  await looding(100);
+
   emit("update:selectTags", []);
+  props.collapseAllSections();
   //    return (selectTags.value = []);
 };
 </script>
@@ -70,6 +78,9 @@ const clearAll = () => {
           color: var(--state-danger);
         }
       }
+    }
+    &:active{
+      transform: scale(0.95);
     }
   }
 }
