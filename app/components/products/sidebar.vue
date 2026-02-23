@@ -18,7 +18,10 @@
           />
         </div>
 
-        <ul v-show="isSectionOpen(index)" class="sidebar-group-options">
+        <ul
+          class="sidebar-group-options"
+          :class="{ onOpen: isSectionOpen(index) }"
+        >
           <li
             v-for="(options, i) in item.options"
             :key="i"
@@ -57,7 +60,7 @@ const props = defineProps<{
   selectTags: (string | number)[];
   isSidebarClose: boolean;
   toggleFilter: () => void;
-  closeFilter: () => void;
+  collapseAllSections : () => void;
 }>();
 
 const emit = defineEmits<{
@@ -65,7 +68,7 @@ const emit = defineEmits<{
   (e: "toggle-section", index: number): void;
 }>();
 
-const { sidebarList, openSections, toggleFilter, closeFilter } = toRefs(props);
+const { sidebarList, openSections, toggleFilter, collapseAllSections  } = toRefs(props);
 
 //子元件用 modelSelectTags 直接雙向綁定v-model:selectTags
 const modelSelectTags = computed({
@@ -85,14 +88,17 @@ const isSectionOpen = (index: number) => openSections.value.includes(index);
 const resetTags = async () => {
   emit("update:selectTags", []);
   await nextTick();
+  await looding(200);
   toggleFilter.value();
-  closeFilter.value();
+  collapseAllSections .value();
 };
 </script>
 
 <style scoped lang="scss">
 .main-sidebar {
   width: clamp(186px, 25%, 240px);
+  // color: var(--text-primary);
+  background-color: var(--bg-surface-strong);
   .sidebar-title {
     font-size: 24px;
     font-weight: 600;
@@ -102,10 +108,26 @@ const resetTags = async () => {
     align-items: center;
   }
   .sidebar-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
     .sidebar-group {
-      padding: 4px 0px;
-      margin-bottom: 4px;
+      // margin-bottom: 4px;
       border-bottom: 1px dashed var(--border-default);
+      transition:
+        border-style 0.4s ease-out,
+        border-color 0.4s ease-out;
+      &.underline {
+        border-bottom-style: solid;
+        border-color: var(--border-soft);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          border-bottom-style: solid;
+          border-color: var(--border-soft);
+        }
+      }
+
       .sidebar-group-title {
         padding: 8px 6px;
         display: flex;
@@ -132,14 +154,17 @@ const resetTags = async () => {
         }
       }
       .sidebar-group-options {
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out;
         .options-item {
           display: flex;
           align-items: center;
-          max-height: 400px;
-          overflow: hidden;
           padding: 6px 8px;
+          margin-block: 4px;
           border-radius: 4px;
           transition: background-color 0.2s ease-out;
+          cursor: pointer;
           .checkbox-area {
             width: 100%;
           }
@@ -153,25 +178,14 @@ const resetTags = async () => {
               color: var(--brand-hover);
             }
           }
+          &:active {
+            background: var(--bg-surface-soft);
+            color: var(--brand-hover);
+          }
         }
         &.onOpen {
           max-height: 400px;
         }
-      }
-      &.underline {
-        border-bottom-style: solid;
-        border-color: var(--border-soft);
-      }
-    }
-    @media (pointer: coarse) {
-      // display: flex;
-      // justify-content: center;
-      // flex-wrap: wrap;
-      gap: 8px;
-      // margin: 0 auto;
-      // width: 100%;
-      .sidebar-group {
-        flex: 0 0 20%;
       }
     }
   }
@@ -199,12 +213,18 @@ const resetTags = async () => {
       h4 {
         padding-inline: 3px;
       }
+      .icon{
+        color:var(--state-danger);
+      }
+      &:active{
+        transform: scale(0.95);
+      }
     }
     .Submit {
       width: 90%;
     }
   }
-  @media (pointer: coarse) and (max-width: 1024px) {
+  @media (max-width: 1024px) {
     position: fixed;
     left: 0;
     top: 0px;
@@ -214,8 +234,8 @@ const resetTags = async () => {
     width: 100%;
     height: 100%;
     z-index: 200;
-    padding: 32px;
-    background-color: #030303;
+    padding: 32px 48px;
+    // background-color: #030303;
     .sidebar-title {
       display: flex;
     }
@@ -227,7 +247,11 @@ const resetTags = async () => {
       top: 0;
       bottom: 120px;
       .sidebar-group {
-        flex: 0 0 20%;
+        .sidebar-group-options {
+          .options-item {
+            padding-block: 10px;
+          }
+        }
       }
     }
     .mobile-btnArea {

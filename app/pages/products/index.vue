@@ -24,7 +24,7 @@
           :openSections="openSections"
           :isSidebarClose="isSidebarClose"
           :toggleFilter="toggleFilter"
-          :closeFilter="closeFilter"
+          :collapseAllSections="collapseAllSections"
           @toggle-section="toggleSection"
         />
         <section class="main-products">
@@ -41,10 +41,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, watch } from "vue";
+import { ref, computed, watch ,nextTick} from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
-// import { looding } from "@/composables/useFetchState";
+import { looding } from "@/composables/useFetchState";
 import type { Product } from "@/composables/useProducts";
 import type { LocationQueryValue } from "vue-router";
 import type { SidebarList } from "@/types/ui/sidebar";
@@ -57,7 +57,9 @@ const products = await useProducts();
 //sidebar 是否關閉
 const isSidebarClose = ref(false);
 // 切換 sidebar 開關
-const toggleFilter = () => {
+const toggleFilter = async () => {
+  await nextTick();
+  await looding(200);
   isSidebarClose.value = !isSidebarClose.value;
 };
 
@@ -147,7 +149,7 @@ const toggleSection = (index: number) => {
   // console.log(selectTags.value);
 };
 //關閉sidebar的所有展開區域
-const closeFilter = () => {
+const collapseAllSections = () => {
   openSections.value = [];
 };
 //依照商品TAG 搜尋

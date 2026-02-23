@@ -50,7 +50,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --bg-footer: #{$color-gray-200}; // footer 背景
     --bg-surface: #{$color-gray-100}; // 一般內容區 
     --bg-surface-soft: #{$color-white}; // 內容內層（更亮）
-    --bg-surface-strong: #{$color-gray-200}; // 分區 / 強調區（更暗）
+    --bg-surface-strong: #{$color-gray-200}; // 分區 更暗）
     --bg-surface-card: #{$color-gray-50}; // 卡片
     --bg-surface-contrast: #{$color-gray-900}; // 對比的 surface
     --bg-surface-glass: rgba(2, 2, 3, 0.7); // 對比的 surface
