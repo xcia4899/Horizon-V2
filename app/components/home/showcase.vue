@@ -1,46 +1,48 @@
 <template>
-  <div class="showcase-intro">
-    <h2>進入 Horizon 啟動新視野</h2>
-    <p>查看最新消息，並了解如何使用</p>
-  </div>
-  <div class="showcase-content">
-    <div class="showcase-hero">
-      <div class="hero-media">
-        <img :src="showcaseHero.image" alt="" />
-      </div>
-      <div class="hero-content">
-        <h4 class="hero-subtitle">
-          {{ showcaseHero.subtitle }}
-        </h4>
-        <h3 class="hero-title">
-          {{ showcaseHero.title }}
-        </h3>
-        <p class="hero-text">
-          {{ showcaseHero.text }}
-        </p>
-        <h4 class="hero-more">更多資訊</h4>
-      </div>
+  <div class="showcase-inner">
+    <div class="showcase-intro">
+      <h2>進入 Horizon 啟動新視野</h2>
+      <p>查看最新消息，並了解如何使用</p>
     </div>
-    <div class="showcase-cards">
-      <article
-        v-for="item in showcaseCardContent"
-        :key="item.id"
-        class="showcase-card"
-      >
-        <div class="card-media" @click="gotoWebsit(item.link)">
-          <img :src="item.image" alt="" />
+    <div class="showcase-content">
+      <div class="showcase-hero">
+        <div class="hero-media">
+          <img :src="showcaseHero.image" alt="" />
         </div>
-        <h4 class="card-subtitle">
-          {{ item.subtitle }}
-        </h4>
-        <h3 class="card-title">
-          {{ item.title }}
-        </h3>
-        <p class="card-text">
-          {{ item.text }}
-        </p>
-        <h4 class="card-more" @click="gotoWebsit(item.link)">更多資訊</h4>
-      </article>
+        <div class="hero-content">
+          <h4 class="hero-subtitle">
+            {{ showcaseHero.subtitle }}
+          </h4>
+          <h3 class="hero-title">
+            {{ showcaseHero.title }}
+          </h3>
+          <p class="hero-text">
+            {{ showcaseHero.text }}
+          </p>
+          <h4 class="hero-more">更多資訊</h4>
+        </div>
+      </div>
+      <div class="showcase-cards">
+        <article
+          v-for="item in showcaseCardContent"
+          :key="item.id"
+          class="showcase-card"
+        >
+          <div class="card-media" @click="gotoWebsit(item.link)">
+            <img :src="item.image" alt="" />
+          </div>
+          <h4 class="card-subtitle">
+            {{ item.subtitle }}
+          </h4>
+          <h3 class="card-title">
+            {{ item.title }}
+          </h3>
+          <p class="card-text">
+            {{ item.text }}
+          </p>
+          <h4 class="card-more" @click="gotoWebsit(item.link)">更多資訊</h4>
+        </article>
+      </div>
     </div>
   </div>
 </template>
@@ -95,6 +97,17 @@ const gotoWebsit = (link: string) => {
 </script>
 
 <style scoped lang="scss">
+.showcase-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-block: 76px 64px;
+  gap: 48px;
+  @media (max-width: 550px) {
+    padding-block: 64px 32px;
+    gap: 36px;
+  }
+}
 .showcase-intro {
   display: flex;
   justify-content: center;

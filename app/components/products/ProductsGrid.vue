@@ -153,7 +153,7 @@ defineProps<{
         }
         .price.strike {
           text-decoration: line-through;
-          color: var(--text-secondary);
+          color: var(--text-tertiary);
           opacity: 0.8;
           font-size: 14px;
         }

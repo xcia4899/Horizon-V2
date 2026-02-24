@@ -1,49 +1,51 @@
 <template>
-  <Swiper
-    class="hero-swiper-wrapper"
-    :modules="[Autoplay, Pagination, Navigation]"
-    :slides-per-view="1"
-    :space-between="0"
-    :loop="true"
-    :autoplay="{ delay: 6000, disableOnInteraction: false }"
-    :pagination="{ el: '.home-hero-pagination', clickable: true }"
-    :navigation="{
-      nextEl: '.home-hero-swiper-btn-next',
-      prevEl: '.home-hero-swiper-btn-prev',
-    }"
-    @swiper="onSwiper"
-    @slide-change-transition-start="onSlideStart"
-    @slide-change-transition-end="onSlideEnd"
-  >
-    <SwiperSlide v-for="slide in heroSlides" :key="slide.id" class="hero-slide">
-      <div class="slide-image">
-        <NuxtImg
-          :src="slide.image.src"
-          :alt="slide.image.alt"
-          sizes="100vw"
-          format="webp"
-          quality="80"
-          class="image"
-        />
+  <div class="hero-inner">
+    <Swiper
+      class="hero-swiper-wrapper"
+      :modules="[Autoplay, Pagination, Navigation]"
+      :slides-per-view="1"
+      :space-between="0"
+      :loop="true"
+      :autoplay="{ delay: 6000, disableOnInteraction: false }"
+      :pagination="{ el: '.home-hero-pagination', clickable: true }"
+      :navigation="{
+        nextEl: '.home-hero-swiper-btn-next',
+        prevEl: '.home-hero-swiper-btn-prev',
+      }"
+      @swiper="onSwiper"
+      @slide-change-transition-start="onSlideStart"
+      @slide-change-transition-end="onSlideEnd"
+    >
+      <SwiperSlide v-for="slide in heroSlides" :key="slide.id" class="hero-slide">
+        <div class="slide-image">
+          <NuxtImg
+            :src="slide.image.src"
+            :alt="slide.image.alt"
+            sizes="100vw"
+            format="webp"
+            quality="80"
+            class="image"
+          />
+        </div>
+  
+        <div class="slide-content">
+          <h3 class="slide-title">{{ slide.title }}</h3>
+          <p class="slide-text">{{ slide.text }}</p>
+          <button class="btn slide-btn">立即購買</button>
+        </div>
+      </SwiperSlide>
+  
+      <div class="swiper-pagination home-hero-pagination"></div>
+      <div class="hero-btnControl">
+        <button type="button" class="swiper-btn home-hero-swiper-btn-prev">
+          <Icon name="ep:arrow-left" class="icon" />
+        </button>
+        <button type="button" class="swiper-btn home-hero-swiper-btn-next">
+          <Icon name="ep:arrow-right" class="icon" />
+        </button>
       </div>
-
-      <div class="slide-content">
-        <h3 class="slide-title">{{ slide.title }}</h3>
-        <p class="slide-text">{{ slide.text }}</p>
-        <button class="btn slide-btn">立即購買</button>
-      </div>
-    </SwiperSlide>
-
-    <div class="swiper-pagination home-hero-pagination"></div>
-    <div class="hero-btnControl">
-      <button type="button" class="swiper-btn home-hero-swiper-btn-prev">
-        <Icon name="ep:arrow-left" class="icon" />
-      </button>
-      <button type="button" class="swiper-btn home-hero-swiper-btn-next">
-        <Icon name="ep:arrow-right" class="icon" />
-      </button>
-    </div>
-  </Swiper>
+    </Swiper>
+  </div>
 </template>
 
 <script setup lang="ts">

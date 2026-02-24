@@ -68,7 +68,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --shadow-default: 0px 3px 4px 0px rgba(22, 22, 22, 0.4);
     --shadow-focus: 0 0px 4px 1px rgba(31, 31, 31, 0.4);
     //  ========== State =========
-    --state-danger: #{$color-red-500}; // 錯誤 / 刪除
+    --state-danger: #{$color-red-500}; // 
 }
 
 //    深色背景使用 
@@ -109,6 +109,6 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         /* 浮起元件 / Dropdown / Modal */
         --shadow-focus: 0 0px 4px 1px rgba(36, 36, 36, 0.4);
         // /========== State ========= 
-        --state-danger: #{$color-red-500}; // 錯誤
+        --state-danger: #{$color-red-500}; //
     }
 }

@@ -54,6 +54,7 @@ useSeoMeta({
 }
 .main {
   flex: 1;
+  position: relative;
 }
 .footer {
   position: relative;

@@ -1,43 +1,45 @@
 <template>
-  <h2 class="recommend-intro">熱門推薦</h2>
-  <Swiper
-    class="carousel"
-    :modules="[Pagination, Navigation]"
-    :slides-per-view="2"
-    :space-between="32"
-    :pagination="{
-      el: '.recommend-carousel-pagination',
-      clickable: true,
-    }"
-    :navigation="{
-      nextEl: '.recommend-carousel-btnNext',
-      prevEl: '.recommend-carousel-btnPrev',
-    }"
-    :breakpoints="{
-      550: { slidesPerView: 3 },
-      920: { slidesPerView: 4 },
-    }"
-  >
-    <SwiperSlide
-      v-for="item in recommendList"
-      :key="item.id"
-      class="carousel-card"
+  <div class="recommend-inner">
+    <h2 class="recommend-intro">熱門推薦</h2>
+    <Swiper
+      class="carousel"
+      :modules="[Pagination, Navigation]"
+      :slides-per-view="2"
+      :space-between="32"
+      :pagination="{
+        el: '.recommend-carousel-pagination',
+        clickable: true,
+      }"
+      :navigation="{
+        nextEl: '.recommend-carousel-btnNext',
+        prevEl: '.recommend-carousel-btnPrev',
+      }"
+      :breakpoints="{
+        550: { slidesPerView: 3 },
+        920: { slidesPerView: 4 },
+      }"
     >
-      <div class="card-media">
-        <img class="image" :src="item.image.src" :alt="item.image.alt" />
-      </div>
-      <h4 class="card-title">{{ item.title }}</h4>
-    </SwiperSlide>
-  </Swiper>
-  <div class="recommend-carousel-pagination"></div>
-  <div class="carousel-control">
-    <button type="button" class="swiper-btn recommend-carousel-btnPrev">
-      <Icon name="ep:arrow-left" class="icon" />
-    </button>
+      <SwiperSlide
+        v-for="item in recommendList"
+        :key="item.id"
+        class="carousel-card"
+      >
+        <div class="card-media">
+          <img class="image" :src="item.image.src" :alt="item.image.alt" />
+        </div>
+        <h4 class="card-title">{{ item.title }}</h4>
+      </SwiperSlide>
+    </Swiper>
+    <div class="recommend-carousel-pagination"></div>
+    <div class="carousel-control">
+      <button type="button" class="swiper-btn recommend-carousel-btnPrev">
+        <Icon name="ep:arrow-left" class="icon" />
+      </button>
 
-    <button type="button" class="swiper-btn recommend-carousel-btnNext">
-      <Icon name="ep:arrow-right" class="icon" />
-    </button>
+      <button type="button" class="swiper-btn recommend-carousel-btnNext">
+        <Icon name="ep:arrow-right" class="icon" />
+      </button>
+    </div>
   </div>
 </template>
 
@@ -53,7 +55,7 @@ const recommendList = [
     id: 1,
     title: "PRO 輕量滑鼠",
     image: {
-      src: "./images/pic-detal/PRO-1001/10003.png",
+      src: "/images/pic-detal/PRO-1001/10003.png",
       alt: "PRO 輕量滑鼠",
     },
   },
@@ -61,7 +63,7 @@ const recommendList = [
     id: 2,
     title: "PRO X TKL ",
     image: {
-      src: "./images/pic-detal/PRO-1002/10003.png",
+      src: "/images/pic-detal/PRO-1002/10003.png",
       alt: "PRO X TKL ",
     },
   },
@@ -69,7 +71,7 @@ const recommendList = [
     id: 3,
     title: "Razer V3 Mini",
     image: {
-      src: "./images/pic-detal/Razer-1011/10002.png",
+      src: "/images/pic-detal/Razer-1011/10002.png",
       alt: "Razer V3 Mini",
     },
   },
@@ -77,7 +79,7 @@ const recommendList = [
     id: 4,
     title: "GM08 電競滑鼠",
     image: {
-      src: "./images/pic-detal/MSI-1008/10003.png",
+      src: "/images/pic-detal/MSI-1008/10003.png",
       alt: "GM08 電競滑鼠",
     },
   },
@@ -85,7 +87,7 @@ const recommendList = [
     id: 5,
     title: "G522 無線耳機",
     image: {
-      src: "./images/pic-detal/PRO-1007/10001.png",
+      src: "/images/pic-detal/PRO-1007/10001.png",
       alt: "G522 無線耳機",
     },
   },
@@ -93,7 +95,7 @@ const recommendList = [
     id: 6,
     title: "GH50 電競耳機",
     image: {
-      src: "./images/pic-detal/MSI-1003/10002.png",
+      src: "/images/pic-detal/MSI-1003/10002.png",
       alt: "GH50 電競耳機",
     },
   },
@@ -101,6 +103,9 @@ const recommendList = [
 </script>
 
 <style scoped lang="scss">
+.recommend-inner {
+    position: relative;
+  }
 .recommend-intro {
   display: grid;
   place-content: center;
@@ -246,7 +251,7 @@ const recommendList = [
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  .home-recommend:hover .carousel-control {
+  .recommend-inner:hover .carousel-control {
     opacity: 1;
   }
 }

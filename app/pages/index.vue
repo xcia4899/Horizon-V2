@@ -2,22 +2,20 @@ feature-content
 <template>
   <div>
     <section class="home-hero">
-      <div class="hero-inner">
-        <HomeHero/>
-      </div>
+      <HomeHero />
     </section>
     <section class="home-feature">
-      <div class="feature-inner container">
+      <div class="container">
         <HomeFeature />
       </div>
     </section>
     <section class="home-recommend">
-      <div class="container recommend-inner">
+      <div class="container">
         <CommonRecommend />
       </div>
     </section>
     <section class="home-showcase">
-      <div class="container showcase-inner">
+      <div class="container">
         <HomeShowcase />
       </div>
     </section>
@@ -45,18 +43,6 @@ feature-content
 //打造你的理想戰場---------------
 .home-feature {
   background-color: var(--bg-surface-strong);
-  .feature-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-block: 76px 64px;
-    gap: clamp(32px, 5vw, 48px);
-    @media (max-width: 550px) {
-      padding-block: 64px 32px;
-      // gap: 36px;
-    }
-  }
 }
 //熱門推薦
 .home-recommend {
@@ -64,26 +50,11 @@ feature-content
   .container {
     padding-inline: clamp(16px, 4vw, 32px);
   }
-  .recommend-inner {
-    position: relative;
-  }
 }
 //進入 Horizon 啟動新視野---------------
 .home-showcase {
-  // width: 100%;
   color: var(--text-inverse);
   background: var(--bg-surface-contrast);
-  .showcase-inner {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding-block: 76px 64px;
-    gap: 48px;
-    @media (max-width: 550px) {
-      padding-block: 64px 32px;
-      gap: 36px;
-    }
-  }
 }
 //樣品廣告
 .home-promo {

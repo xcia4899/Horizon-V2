@@ -1,51 +1,53 @@
 <template>
-  <div class="feature-intro">
-    <h2>打造你的理想戰場</h2>
-    <p>
-      探索專屬於你的桌面配置，從精準操作到沉浸體驗，找到最適合你的裝備組合。無論是激戰時刻或日常創作，Horizon
-      都為你準備好進化所需。
-    </p>
-  </div>
-  <div class="feature-content">
-    <div class="feature-actions">
-      <button
-        v-for="(item, index) in featureContent"
-        :key="item.label"
-        type="button"
-        class="actions-item"
-        :class="{ active: activeIndex === index }"
-        @click="clickAction(index)"
-      >
-        {{ item.label }}
-      </button>
+  <div class="feature-inner">
+    <div class="feature-intro">
+      <h2>打造你的理想戰場</h2>
+      <p>
+        探索專屬於你的桌面配置，從精準操作到沉浸體驗，找到最適合你的裝備組合。無論是激戰時刻或日常創作，Horizon
+        都為你準備好進化所需。
+      </p>
     </div>
-    <div class="feature-panel">
-      <div class="panel-inner" :style="panelStyle">
-        <div
-          v-for="item in featureContent"
-          :key="item.title"
-          class="panel-card"
+    <div class="feature-content">
+      <div class="feature-actions">
+        <button
+          v-for="(item, index) in featureContent"
+          :key="item.label"
+          type="button"
+          class="actions-item"
+          :class="{ active: activeIndex === index }"
+          @click="clickAction(index)"
         >
-          <div class="card-media">
-            <img :src="item.media" alt="" />
-            <div
-              v-for="value in item.pointerItems"
-              :key="value.title"
-              class="linkPoint"
-              :style="{
-                left: value.position.left,
-                top: value.position.top,
-              }"
-            >
-              <button class="point"></button>
-              <p class="text">{{ value.title }}</p>
+          {{ item.label }}
+        </button>
+      </div>
+      <div class="feature-panel">
+        <div class="panel-inner" :style="panelStyle">
+          <div
+            v-for="item in featureContent"
+            :key="item.title"
+            class="panel-card"
+          >
+            <div class="card-media">
+              <img :src="item.media" alt="" />
+              <div
+                v-for="value in item.pointerItems"
+                :key="value.title"
+                class="linkPoint"
+                :style="{
+                  left: value.position.left,
+                  top: value.position.top,
+                }"
+              >
+                <button class="point"></button>
+                <p class="text">{{ value.title }}</p>
+              </div>
             </div>
-          </div>
-          <div class="card-content">
-            <h3 class="card-title">{{ item.title }}</h3>
-            <p class="card-text">
-              {{ item.text }}
-            </p>
+            <div class="card-content">
+              <h3 class="card-title">{{ item.title }}</h3>
+              <p class="card-text">
+                {{ item.text }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -162,6 +164,19 @@ const panelStyle = computed(() => ({
 </script>
 
 <style scoped lang="scss">
+.feature-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-block: 76px 64px;
+    gap: clamp(32px, 5vw, 48px);
+    @media (max-width: 550px) {
+      padding-block: 64px 32px;
+      // gap: 36px;
+    }
+  }
+
 p {
   color: var(--text-secondary);
 }
