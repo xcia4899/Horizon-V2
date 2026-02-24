@@ -15,7 +15,10 @@
       class="navbar"
       :class="{ 'mobile-isOpen': isMenuOpenMobile === true }"
     >
-      <HeaderNavbarMenu :menus="menus" :closeMenuOpenMobile="closeMenuOpenMobile" />
+      <HeaderNavbarMenu
+        :menus="menus"
+        :closeMenuOpenMobile="closeMenuOpenMobile"
+      />
     </section>
     <!-- Navber-Right -->
     <aside
@@ -111,8 +114,9 @@ const goHome = async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // top: 0;
-  // height: auto;
+
+  position: relative;
+  max-width: 1440px;
   margin: 0 auto;
   padding-inline: $padding-RWD;
 

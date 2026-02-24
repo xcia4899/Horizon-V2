@@ -270,6 +270,7 @@ const resetTags = async () => {
     .sidebar-groups {
       flex: 1;
       overflow-y: scroll;
+      scrollbar-width: none; //隱藏滾輪
       gap: 8px;
       max-height: 400px;
       top: 0;

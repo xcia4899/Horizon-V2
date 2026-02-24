@@ -1,9 +1,7 @@
 <template>
   <div class="layout">
     <header class="header">
-      <div class="header-container">
-        <layoutHeader />
-      </div>
+      <layoutHeader />
     </header>
 
     <main class="main">
@@ -46,20 +44,13 @@ useSeoMeta({
 .header {
   position: fixed;
   top: 0;
-  background-color: rgba(var(--bg-header) ,0.8);
+  background-color: rgba(var(--bg-header), 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   overflow-x: clip;
   width: 100%;
   /* 內層：置中 + max-width */
   z-index: 100;
-  .header-container {
-    position: relative;
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: 0 0px;
-
-  }
 }
 .main {
   flex: 1;
