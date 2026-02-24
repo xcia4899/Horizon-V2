@@ -11,11 +11,11 @@
     "color": "黑色",
     "description": "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
     "images": {
-      "main": "./images/pic-detal/RAZER-1000/10001.jpg",
+      "main": "/images/pic-detal/RAZER-1000/10001.jpg",
       "thumbnails": [
-        "./images/pic-detal/RAZER-1000/10002.jpg",
-        "./images/pic-detal/RAZER-1000/10003.jpg",
-        "./images/pic-detal/RAZER-1000/10004.jpg"
+        "/images/pic-detal/RAZER-1000/10002.jpg",
+        "/images/pic-detal/RAZER-1000/10003.jpg",
+        "/images/pic-detal/RAZER-1000/10004.jpg"
       ]
     },
     "details": [
@@ -103,11 +103,11 @@
     "onsale": true,
     "description": "專為電競而打造的人體工學設計，完美貼合手型，提供長時間操作所需的穩定性與舒適性。即使在高壓、快節奏的賽事中，也能保持精準操控與迅速反應，幫助玩家維持最佳狀態，專注每一次出擊，打出關鍵勝利。",
     "images": {
-      "main": "./images/pic-detal/PRO-1001/10003.png",
+      "main": "/images/pic-detal/PRO-1001/10003.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1001/10001.png",
-        "./images/pic-detal/PRO-1001/10002.png",
-        "./images/pic-detal/PRO-1001/10003.png"
+        "/images/pic-detal/PRO-1001/10001.png",
+        "/images/pic-detal/PRO-1001/10002.png",
+        "/images/pic-detal/PRO-1001/10003.png"
       ]
     },
     "details": [
@@ -217,11 +217,11 @@
     "onsale": true,
     "description": "PRO X TKL RAPID 是一款專為職業電競選手打造的無數字鍵盤，具備極低延遲的 1ms 回報率、LIGHTSPEED 無線技術、雙模連線功能與可熱插拔的機械軸設計，提供絕佳的手感與快速響應表現，滿足高速遊戲操作的需求。",
     "images": {
-      "main": "./images/pic-detal/PRO-1002/10003.png",
+      "main": "/images/pic-detal/PRO-1002/10003.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1002/10001.png",
-        "./images/pic-detal/PRO-1002/10002.png",
-        "./images/pic-detal/PRO-1002/10003.png"
+        "/images/pic-detal/PRO-1002/10001.png",
+        "/images/pic-detal/PRO-1002/10002.png",
+        "/images/pic-detal/PRO-1002/10003.png"
       ]
     },
     "details": [
@@ -304,11 +304,11 @@
     "onsale": true,
     "description": "搭配 RGB 背光系統，視覺效果升級，具備虛擬 7.1 聲道與可拆卸麥克風，專為沉浸式遊戲體驗打造。",
     "images": {
-      "main": "./images/pic-detal/MSI-1003/10002.png",
+      "main": "/images/pic-detal/MSI-1003/10002.png",
       "thumbnails": [
-        "./images/pic-detal/MSI-1003/10001.png",
-        "./images/pic-detal/MSI-1003/10002.png",
-        "./images/pic-detal/MSI-1003/10003.png"
+        "/images/pic-detal/MSI-1003/10001.png",
+        "/images/pic-detal/MSI-1003/10002.png",
+        "/images/pic-detal/MSI-1003/10003.png"
       ]
     },
     "details": [
@@ -387,11 +387,11 @@
     "onsale": true,
     "description": "人體工學設計，提升舒適與操作效率，提供穩定的滑鼠操控與廣闊表面，適合高 DPI 與低 DPI 玩家使用。",
     "images": {
-      "main": "./images/pic-detal/RAZER-1004/10003.png",
+      "main": "/images/pic-detal/RAZER-1004/10003.png",
       "thumbnails": [
-        "./images/pic-detal/RAZER-1004/10001.png",
-        "./images/pic-detal/RAZER-1004/10002.png",
-        "./images/pic-detal/RAZER-1004/10003.png"
+        "/images/pic-detal/RAZER-1004/10001.png",
+        "/images/pic-detal/RAZER-1004/10002.png",
+        "/images/pic-detal/RAZER-1004/10003.png"
       ]
     },
     "details": [
@@ -462,11 +462,11 @@
     "onsale": false,
     "description": "高解析錄音品質，適合直播、Podcast 及錄音室使用，具備清晰收音與雜音抑制功能。",
     "images": {
-      "main": "./images/pic-detal/ROG-1005/10003.png",
+      "main": "/images/pic-detal/ROG-1005/10003.png",
       "thumbnails": [
-        "./images/pic-detal/ROG-1005/10001.png",
-        "./images/pic-detal/ROG-1005/10002.png",
-        "./images/pic-detal/ROG-1005/10003.png"
+        "/images/pic-detal/ROG-1005/10001.png",
+        "/images/pic-detal/ROG-1005/10002.png",
+        "/images/pic-detal/ROG-1005/10003.png"
       ]
     },
     "details": [
@@ -549,11 +549,11 @@
     "onsale": false,
     "description": "輕薄設計結合矮軸機械鍵，提供靈敏手感與優異便攜性，支援多設備連線與長效電池續航力。",
     "images": {
-      "main": "./images/pic-detal/ROG-1006/10001.png",
+      "main": "/images/pic-detal/ROG-1006/10001.png",
       "thumbnails": [
-        "./images/pic-detal/ROG-1006/10001.png",
-        "./images/pic-detal/ROG-1006/10002.jpg",
-        "./images/pic-detal/ROG-1006/10003.jpg"
+        "/images/pic-detal/ROG-1006/10001.png",
+        "/images/pic-detal/ROG-1006/10002.jpg",
+        "/images/pic-detal/ROG-1006/10003.jpg"
       ]
     },
     "details": [
@@ -634,11 +634,11 @@
     "onsale": true,
     "description": "光速無線遊戲耳機配備光同步 RGB",
     "images": {
-      "main": "./images/pic-detal/PRO-1007/10001.png",
+      "main": "/images/pic-detal/PRO-1007/10001.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1007/10001.png",
-        "./images/pic-detal/PRO-1007/10002.png",
-        "./images/pic-detal/PRO-1007/10003.png"
+        "/images/pic-detal/PRO-1007/10001.png",
+        "/images/pic-detal/PRO-1007/10002.png",
+        "/images/pic-detal/PRO-1007/10003.png"
       ]
     },
     "details": [
@@ -722,11 +722,11 @@
     "onsale": true,
     "description": "PixArt PAW 3519 光學傳感器，具備高精度光學感應器與可自訂 DPI 設定。",
     "images": {
-      "main": "./images/pic-detal/MSI-1008/10003.png",
+      "main": "/images/pic-detal/MSI-1008/10003.png",
       "thumbnails": [
-        "./images/pic-detal/MSI-1008/10001.png",
-        "./images/pic-detal/MSI-1008/10002.png",
-        "./images/pic-detal/MSI-1008/10003.png"
+        "/images/pic-detal/MSI-1008/10001.png",
+        "/images/pic-detal/MSI-1008/10002.png",
+        "/images/pic-detal/MSI-1008/10003.png"
       ]
     },
     "details": [
@@ -797,11 +797,11 @@
     "onsale": false,
     "description": "G915 X LIGHTSPEED 是一款無線低配置遊戲鍵盤，搭載 GL 機械軸與 LIGHTSPEED 技術，提供極速反應與穩定連線。具備自訂 RGB 燈光、金屬機身與多裝置連接支援，兼顧美觀與實用性，為高效能遊戲與專業工作者帶來優異體驗。。",
     "images": {
-      "main": "./images/pic-detal/PRO-1009/10003.png",
+      "main": "/images/pic-detal/PRO-1009/10003.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1009/10001.png",
-        "./images/pic-detal/PRO-1009/10002.png",
-        "./images/pic-detal/PRO-1009/10003.png"
+        "/images/pic-detal/PRO-1009/10001.png",
+        "/images/pic-detal/PRO-1009/10002.png",
+        "/images/pic-detal/PRO-1009/10003.png"
       ]
     },
     "details": [
@@ -878,11 +878,11 @@
     "onsale": false,
     "description": "Cetra True 藍牙耳機擁有高解析音質與低延遲傳輸，適合日常聆聽與遊戲娛樂，搭載主動降噪技術與環境音模式，提供沉浸式音效與清晰通話體驗。",
     "images": {
-      "main": "./images/pic-detal/ROG-1010/10001.png",
+      "main": "/images/pic-detal/ROG-1010/10001.png",
       "thumbnails": [
-        "./images/pic-detal/ROG-1010/10001.png",
-        "./images/pic-detal/ROG-1010/10002.png",
-        "./images/pic-detal/ROG-1010/10003.png"
+        "/images/pic-detal/ROG-1010/10001.png",
+        "/images/pic-detal/ROG-1010/10002.png",
+        "/images/pic-detal/ROG-1010/10003.png"
       ]
     },
     "details": [
@@ -958,11 +958,11 @@
     "onsale": false,
     "description": "Razer Seiren V3 Mini 是一款專為串流與語音通話設計的 USB 麥克風，具備清晰收音、抗雜音功能及緊湊外型，能輕鬆整合進各種桌面配置中。",
     "images": {
-      "main": "./images/pic-detal/Razer-1011/10002.png",
+      "main": "/images/pic-detal/Razer-1011/10002.png",
       "thumbnails": [
-        "./images/pic-detal/Razer-1011/10001.jpg",
-        "./images/pic-detal/Razer-1011/10002.png",
-        "./images/pic-detal/Razer-1011/10003.webp"
+        "/images/pic-detal/Razer-1011/10001.jpg",
+        "/images/pic-detal/Razer-1011/10002.png",
+        "/images/pic-detal/Razer-1011/10003.webp"
       ]
     },
     "details": [
@@ -1037,11 +1037,11 @@
     "onsale": true,
     "description": "與世界上許多領先的電子競技專業人士合作精心設計，具備極致輕量化和高精準度，支援無線與有線雙模連接，並搭載先進的感應器技術，確保遊戲中的每次移動都迅速且精確。",
     "images": {
-      "main": "./images/pic-detal/PRO-1012/10003.png",
+      "main": "/images/pic-detal/PRO-1012/10003.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1012/10001.png",
-        "./images/pic-detal/PRO-1012/10002.png",
-        "./images/pic-detal/PRO-1012/10003.png"
+        "/images/pic-detal/PRO-1012/10001.png",
+        "/images/pic-detal/PRO-1012/10002.png",
+        "/images/pic-detal/PRO-1012/10003.png"
       ]
     },
     "details": [
@@ -1107,11 +1107,11 @@
     "onsale": false,
     "description": "輕巧人體工學設計，長時間使用依然舒適；支援多段 DPI 調整與靜音按鍵，適合辦公、學習與日常使用。",
     "images": {
-      "main": "./images/pic-detal/MSI-1013/10001.png",
+      "main": "/images/pic-detal/MSI-1013/10001.png",
       "thumbnails": [
-        "./images/pic-detal/MSI-1013/10001.png",
-        "./images/pic-detal/MSI-1013/10002.png",
-        "./images/pic-detal/MSI-1013/10003.png"
+        "/images/pic-detal/MSI-1013/10001.png",
+        "/images/pic-detal/MSI-1013/10002.png",
+        "/images/pic-detal/MSI-1013/10003.png"
       ]
     },
     "details": [
@@ -1190,11 +1190,11 @@
     "onsale": true,
     "description": "專為追求最高精度的玩家設計，擁有可調整的重量系統和靈敏感應器，確保滑鼠操作精準且流暢。",
     "images": {
-      "main": "./images/pic-detal/PRO-1014/10003.png",
+      "main": "/images/pic-detal/PRO-1014/10003.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1014/10001.png",
-        "./images/pic-detal/PRO-1014/10002.png",
-        "./images/pic-detal/PRO-1014/10003.png"
+        "/images/pic-detal/PRO-1014/10001.png",
+        "/images/pic-detal/PRO-1014/10002.png",
+        "/images/pic-detal/PRO-1014/10003.png"
       ]
     },
     "details": [
@@ -1260,11 +1260,11 @@
     "onsale": true,
     "description": "人體工學設計，提升舒適與操作效率。",
     "images": {
-      "main": "./images/pic-detal/PRO-1015/10003.png",
+      "main": "/images/pic-detal/PRO-1015/10003.png",
       "thumbnails": [
-        "./images/pic-detal/PRO-1015/10001.png",
-        "./images/pic-detal/PRO-1015/10002.png",
-        "./images/pic-detal/PRO-1015/10003.png"
+        "/images/pic-detal/PRO-1015/10001.png",
+        "/images/pic-detal/PRO-1015/10002.png",
+        "/images/pic-detal/PRO-1015/10003.png"
       ]
     },
     "details": [

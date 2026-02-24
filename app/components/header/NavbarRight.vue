@@ -202,7 +202,7 @@ const cartItems = ref([
     colorOptions: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "./images/pic-detal/RAZER-1000/10001.jpg",
+    images: "/images/pic-detal/RAZER-1000/10001.jpg",
   },
   {
     id: "RAZER-1000",
@@ -216,7 +216,7 @@ const cartItems = ref([
     colorOptions: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "./images/pic-detal/RAZER-1000/10001.jpg",
+    images: "/images/pic-detal/RAZER-1000/10001.jpg",
   },
 ]);
 const cartCount = computed(() => cartItems.value.length);

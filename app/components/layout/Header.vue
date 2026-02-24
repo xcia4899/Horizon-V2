@@ -43,26 +43,26 @@ const menus: SetMenu[] = [
     ID: "product",
     label: "商品",
     items: [
-      { text: "新品上市", img: "./images/pic-detal/RAZER-1000/10001.jpg" },
-      { text: "特價商品", img: "./images/pic-detal/PRO-1002/10001.png" },
+      { text: "新品上市", img: "/images/pic-detal/RAZER-1000/10001.jpg" },
+      { text: "特價商品", img: "/images/pic-detal/PRO-1002/10001.png" },
       {
         text: "滑鼠",
-        img: "./images/picture/fourth-row2-01.png",
+        img: "/images/picture/fourth-row2-01.png",
         tag: "mouse",
       },
       {
         text: "鍵盤",
-        img: "./images/picture/fourth-row2-06.png",
+        img: "/images/picture/fourth-row2-06.png",
         tag: "keyboard",
       },
       {
         text: "耳機",
-        img: "./images/pic-detal/PRO-1007/10007.png",
+        img: "/images/pic-detal/PRO-1007/10007.png",
         tag: "headset",
       },
       {
         text: "麥克風",
-        img: "./images/pic-detal/ROG-1005/10003.png",
+        img: "/images/pic-detal/ROG-1005/10003.png",
         tag: "mic",
       },
     ],
@@ -71,10 +71,10 @@ const menus: SetMenu[] = [
     ID: "brand",
     label: "品牌",
     items: [
-      { text: "MSI", img: "./images/logo/MSI.png", tag: "msi" },
-      { text: "Logitech", img: "./images/logo/LOGI.png", tag: "logitech" },
-      { text: "Razer", img: "./images/logo/RAZER.png", tag: "razer" },
-      { text: "ROG", img: "./images/logo/ROG.png", tag: "rog" },
+      { text: "MSI", img: "/images/logo/MSI.png", tag: "msi" },
+      { text: "Logitech", img: "/images/logo/LOGI.png", tag: "logitech" },
+      { text: "Razer", img: "/images/logo/RAZER.png", tag: "razer" },
+      { text: "ROG", img: "/images/logo/ROG.png", tag: "rog" },
     ],
   },
 
