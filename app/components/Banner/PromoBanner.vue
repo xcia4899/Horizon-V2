@@ -27,37 +27,33 @@ const bannerList = [
 
 // 隨機 index（只算一次）
 const randomIndex = ref<number | null>(null);
-
-// const randomAgain = () => {
-//   randomIndex.value = Math.floor(Math.random() * bannerList.length);
-//   console.log("執行一次", randomIndex.value);
-// };
 onMounted(() => {
-
   randomIndex.value = Math.floor(Math.random() * bannerList.length);
     emit("ready");
 });
-
 const currentbanner = computed(() => {
   if (randomIndex.value === null) return null;
   return bannerList[randomIndex.value];
 });
+
 </script>
 
 <style scoped lang="scss">
+
 .banner {
   display: flex;
   width: 100%;
-  aspect-ratio: 16 / 6; /* 或固定高度 */
+  aspect-ratio: 16 / 6; 
   max-height: 500px;
   overflow: hidden;
   .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    /* 視覺置中 */
     @media (max-width: 550px) {
       width: 120%;
-      transform: translateX(-10%); // 視覺置中
+      transform: translateX(-10%); 
     }
   }
 }

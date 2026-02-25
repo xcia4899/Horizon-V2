@@ -164,7 +164,7 @@ const goProducts = async (item: MenuItem) => {
     width: 98%;
 
     padding: 16px;
-    background-color: var(--bg-surface);
+    background: var(--bg-surface);
     border-radius: 8px;
     opacity: 0;
     visibility: hidden;
@@ -172,11 +172,12 @@ const goProducts = async (item: MenuItem) => {
     pointer-events: none;
     cursor: default;
     // overflow: hidden;
+    box-shadow: var(--shadow-default);
     transition:
       max-height 0.4s ease,
       inset 0.4s ease,
       opacity 0.4s ease,
-      transform 0.4s ease,
+      transform 0.6s ease,
       visibility 0.4s ease;
   }
   .dropdown.isOpen {

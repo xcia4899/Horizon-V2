@@ -81,36 +81,27 @@
         </div>
       </section>
       <section class="product-features">
-        <div class="product-features-intro">
-          <h2>下一代進化的冠軍滑鼠</h2>
-        </div>
-        <div class="product-features-text">
-          <p>
-            受到冠軍的信任，憑藉我們的 HERO 2 感測器和閃電快速的 LIGHTFORCE
-            開關的強大和精準度，您永遠不會錯過目標。專業級，準備好比賽，並以同級最佳表現為後盾。
-          </p>
-        </div>
-        <div class="r3-3">
-          <div class="r3-col r3-col-1">
-            <div>
-              <img src="" alt="" />
+        <h2 class="product-features-intro">
+          {{ product.highlights.title }}
+        </h2>
+        <h4 class="product-features-text">
+          {{ product.highlights.description }}
+        </h4>
+        <div class="product-features-content">
+          <div
+            v-for="item in product.highlights.items"
+            :key="item.id"
+            class="content-item"
+          >
+            <div class="item-icon">
+              <img :src="item.icon" :alt="item.title + '圖示'" />
             </div>
-            <h4>HERO 2 <br />感應器</h4>
-            <p>最先進的遊戲感應器 <br />44K DPI, 888 IPS, 88</p>
-          </div>
-          <div class="r3-col">
-            <div>
-              <img src="" alt="" />
+            <h4>{{ item.title }} <br />{{ item.subtitle }}</h4>
+            <div class="desc">
+              <h5 v-for="desc in item.desc" :key="desc">
+                {{ desc }}
+              </h5>
             </div>
-            <h4>LIGHTSPEED <br />無線連接</h4>
-            <p>冠軍信賴的錦標賽級技術</p>
-          </div>
-          <div class="r3-col">
-            <div>
-              <img src="" alt="" />
-            </div>
-            <h4>LIGHTFORCE <br />混合微動</h4>
-            <p>光學精準 <br />機械觸感</p>
           </div>
         </div>
       </section>
@@ -123,14 +114,16 @@
     <section class="product-bottomBar">
       <div class="bottomBar-inner">
         <div class="bottomBar-info">
-          <h3 class="bottomBar-brand">product.brand 系列</h3>
+          <h3 class="bottomBar-brand">{{product.brand}} 系列</h3>
           <div class="bottomBar-price">
             <!-- 特價顯示（僅限有特價時） -->
-            <div class="discount">特價 $product.price.toLocaleString()</div>
+            <h3 v-if="product.onsale" class="discount">
+              特價 ${{ product.discount.toLocaleString() }}
+            </h3>
             <!-- 原價，若有特價則加上刪除線 -->
-            <div v-if="false" class="price">
-              NT$ product.originalPrice.toLocaleString()
-            </div>
+            <h3 class="price" :class="{ strike: product.onsale }">
+              NT$ {{ product.price.toLocaleString() }}
+            </h3>
           </div>
         </div>
         <div class="bottomBar-actions">
@@ -226,29 +219,29 @@ const productSeed: Product = {
   highlights: {
     title: "下一代進化的冠軍耳機",
     description:
-      "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+      "受到冠軍的信任，憑藉我們的 HERO 2 感測器和閃電快速的 LIGHTFORCE開關的強大和精準度，您永遠不會錯過目標。專業級，準備好比賽，並以同級最佳表現為後盾。",
 
     items: [
       {
         id: "surround71",
-        title: "7.1 聲道",
-        subtitle: "環繞音效",
-        icon: "/images/icons/surround.svg",
-        desc: ["虛擬 7.1 聲道", "精準定位敵人方向"],
+        title: "HERO 2",
+        subtitle: "感應器",
+        icon: "/images/icon/g502x-hero25k-icon 1.png",
+        desc: ["最先進的遊戲感應器", "44K DPI, 888 IPS, 88"],
       },
       {
         id: "rgb",
-        title: "RGB",
-        subtitle: "燈效系統",
-        icon: "/images/icons/rgb.svg",
-        desc: ["自訂燈光效果", "與 MSI Mystic Light 同步"],
+        title: "LIGHTSPEED",
+        subtitle: "無線連接",
+        icon: "/images/icon/g502x-lightspeed-icon 1.png",
+        desc: ["冠軍信賴的錦標賽級技術"],
       },
       {
         id: "mic",
-        title: "降噪麥克風",
-        subtitle: "可拆卸設計",
-        icon: "/images/icons/mic.svg",
-        desc: ["清晰收音", "方便攜帶"],
+        title: "LIGHTFORCE",
+        subtitle: "混合微動",
+        icon: "/images/icon/g502x-lightforce-icon 1.png",
+        desc: ["光學精準", "機械觸感"],
       },
     ],
   },
@@ -424,47 +417,46 @@ const product = computed<Product>(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--bg-surface-soft);
+    background: var(--bg-surface);
+    // gap: 32px;
+
     .product-features-intro,
     .product-features-text,
-    .r3-3 {
+    .product-features-content {
       padding: 32px;
       width: 80%;
       text-align: center;
     }
-
-    .product-features-text {
-      p {
-        margin: 0;
-        font-size: 20px;
-      }
-    }
-
-    .r3-3 {
+    .product-features-content {
       // width: 60%;
       display: flex;
       justify-content: space-around;
       gap: 24px;
 
-      .r3-col {
+      .content-item {
         display: flex;
         flex-direction: column;
+        align-items: center;
         width: 200px;
         gap: 16px;
-
-        div {
+        .item-icon {
           min-height: 200px;
           display: flex;
           align-items: center;
+          justify-content: center;
+          aspect-ratio: 1/1;
+          padding: 8px;
+          border-radius: 8px;
+          background: $color-gray-100;
+          img {
+            // width: 100%;
+            object-fit: cover;
+          }
         }
-
-        img {
-          width: 100%;
-          object-fit: cover;
-        }
-
-        p {
-          margin: 0;
+        .desc {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
         }
       }
     }
@@ -482,7 +474,7 @@ const product = computed<Product>(() => {
   // color: $color-darkgery;
   width: 100%;
   z-index: 100;
-  box-shadow: 0px 0px 6px 1px rgba(196, 196, 196, 0.4);
+  box-shadow: var(--shadow-focus);
   .bottomBar-inner {
     position: relative;
     max-width: 1440px;

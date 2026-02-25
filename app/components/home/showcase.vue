@@ -167,10 +167,10 @@ const gotoWebsit = (link: string) => {
   .showcase-cards {
     display: flex;
     justify-content: space-between;
-    // align-items: center;
+    /* align-items: center;*/
     gap: 20px;
     .showcase-card {
-      // flex: 0 0 25%;
+      /*  flex: 0 0 25%;*/
       width: calc(50% - 10px);
       display: flex;
       flex-direction: column;

@@ -40,7 +40,7 @@ export interface Product {
 
   images: ProductImages;
   details: ProductDetail[];
-  highlights?:highlights
+  highlights:highlights
 
   tags: string[];
 }

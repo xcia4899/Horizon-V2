@@ -16,7 +16,11 @@
       @slide-change-transition-start="onSlideStart"
       @slide-change-transition-end="onSlideEnd"
     >
-      <SwiperSlide v-for="slide in heroSlides" :key="slide.id" class="hero-slide">
+      <SwiperSlide
+        v-for="slide in heroSlides"
+        :key="slide.id"
+        class="hero-slide"
+      >
         <div class="slide-image">
           <NuxtImg
             :src="slide.image.src"
@@ -27,14 +31,14 @@
             class="image"
           />
         </div>
-  
+
         <div class="slide-content">
           <h3 class="slide-title">{{ slide.title }}</h3>
           <p class="slide-text">{{ slide.text }}</p>
           <button class="btn slide-btn">立即購買</button>
         </div>
       </SwiperSlide>
-  
+
       <div class="swiper-pagination home-hero-pagination"></div>
       <div class="hero-btnControl">
         <button type="button" class="swiper-btn home-hero-swiper-btn-prev">
@@ -138,7 +142,6 @@ const heroSlides = [
   position: relative;
 
   .hero-slide {
-    // min-height: 400px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -151,7 +154,7 @@ const heroSlides = [
         display: block;
         width: 100%;
         height: 100vh;
-        // max-height: 960px;
+        /* max-height: 960px; */
         object-fit: cover;
         object-position: bottom;
         @media (max-width: 550px) {

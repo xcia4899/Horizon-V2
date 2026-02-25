@@ -173,7 +173,7 @@ const panelStyle = computed(() => ({
     gap: clamp(32px, 5vw, 48px);
     @media (max-width: 550px) {
       padding-block: 64px 32px;
-      // gap: 36px;
+
     }
   }
 
@@ -195,12 +195,11 @@ p {
   display: flex;
   flex-direction: column;
   .feature-actions {
-    // width: 100%;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // flex-direction: column;
-    // flex-wrap: wrap;
+
     .actions-item {
       width: 0 0 50%;
       width: 100%;
@@ -209,7 +208,7 @@ p {
       font-weight: 400;
       color: var(--text-tertiary);
       border-bottom: 2px solid var(--border-default);
-      // transition: all 0.3s ease;
+ 
       cursor: pointer;
       @media (hover: hover) and (pointer: fine) {
         border-width: 4px;
@@ -248,8 +247,7 @@ p {
       width: 100%;
       display: flex;
       align-items: center;
-      // gap: clamp(16px, 3vw, 32px);
-      // margin-inline:16px ;
+
       .card-media {
         position: relative;
         flex: 0 0 55%;
