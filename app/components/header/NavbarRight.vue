@@ -92,18 +92,18 @@ const props = defineProps<{
 }>();
 //傳出emit
 const emit = defineEmits<{
-  (e: 'update:isMenuOpenMobile', value: boolean): void
-}>()
+  (e: "update:isMenuOpenMobile", value: boolean): void;
+}>();
 
 const toggleMenuMobile = () => {
-  emit('update:isMenuOpenMobile', !props.isMenuOpenMobile)
-}
+  emit("update:isMenuOpenMobile", !props.isMenuOpenMobile);
+};
 
 const route = useRoute();
 // 取得el-input 實例
 const inputRef = ref<InputInstance | null>(null);
 //螢幕、手機模式判斷
-const { isDesktop, } = useInteractionMode();
+const { isDesktop } = useInteractionMode();
 
 //搜尋關鍵字
 const keyword = ref("");
@@ -315,7 +315,7 @@ const cartView = computed(() => {
       right: 0;
       opacity: 1;
       width: 100%;
-      
+
       &.isOpen {
         width: 100%;
       }
@@ -363,7 +363,7 @@ const cartView = computed(() => {
   box-shadow: var(--shadow-default);
 
   border-radius: 0 0 4px 4px;
-  @include baseTransition(max-height, 0.6s);
+  transition: max-height 0.6s ease;
   overflow: hidden;
 
   @media (hover: hover) and (pointer: fine) {
@@ -417,9 +417,11 @@ const cartView = computed(() => {
         display: grid;
         place-items: center;
       }
-      &:hover .icon {
-        background-color: var(--state-danger);
-        border: 2px solid transparent;
+      @media (hover: hover) {
+        &:hover .icon {
+          background-color: var(--state-danger);
+          border: 2px solid transparent;
+        }
       }
 
       &::after {
@@ -442,10 +444,11 @@ const cartView = computed(() => {
         color: var(--inverse);
         background: var(--bg-surface-soft);
       }
-
-      &:hover::after {
-        opacity: 0.6;
-        visibility: visible;
+      @media (hover: hover) {
+        &:hover::after {
+          opacity: 0.6;
+          visibility: visible;
+        }
       }
     }
   }

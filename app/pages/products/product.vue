@@ -1,6 +1,7 @@
 <template>
   <div class="product">
     <main class="product-detailed">
+      <!-- Product Overview: media + information -->
       <section class="product-overview">
         <div class="container product-overview-inner">
           <div class="product-media">
@@ -12,6 +13,7 @@
                 v-for="(img, index) in product.images.thumbnails"
                 :key="index"
                 class="thumbnails-btn"
+                :class="{ active: currentImage === img }"
                 @click="currentImage = img"
               >
                 <img :src="img" alt="商品縮圖" />
@@ -41,27 +43,37 @@
               :key="index"
               class="info-section"
             >
-              <h4 class="section-title">
+              <h4 class="section-title" @click="toggleInfoSection(index)">
                 {{ item.section }}
+                <icon
+                  class="icon"
+                  :class="{ rotate: isOpenInfoSection(index) }"
+                  name="icon-park-solid:up-c"
+                  size="24"
+                />
               </h4>
 
               <div
                 v-for="(content, idx) in item.content"
-                :key="idx"
+                :key="content.title + idx"
                 class="section-content"
+                :class="{ isOpen: isOpenInfoSection(index) }"
               >
-                <div class="block-title">{{ content.title }}</div>
-                <ul class="block-list">
-                  <li v-for="text in content.text" :key="text">{{ text }}</li>
-                </ul>
+                <div class="section-content-inner">
+                  <div class="block-title">{{ content.title }}</div>
+                  <ul class="block-list">
+                    <li v-for="text in content.text" :key="text">{{ text }}</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
+      <!-- Product Video -->
       <section class="product-video">
         <div class="product-video-media">
-          <iframe
+          <!-- <iframe
             width="100%"
             height="auto"
             src="https://www.youtube.com/embed/vFZlgReIzOg"
@@ -77,9 +89,10 @@
             "
             allowfullscreen
           >
-          </iframe>
+          </iframe> -->
         </div>
       </section>
+      <!-- Product Features -->
       <section class="product-features">
         <h2 class="product-features-intro">
           {{ product.highlights.title }}
@@ -106,15 +119,17 @@
         </div>
       </section>
     </main>
+    <!-- Recommend -->
     <section class="recommend">
       <div class="container">
         <CommonRecommend />
       </div>
     </section>
+    <!-- Bottom Bar -->
     <section class="product-bottomBar">
       <div class="bottomBar-inner">
         <div class="bottomBar-info">
-          <h3 class="bottomBar-brand">{{product.brand}} 系列</h3>
+          <h3 class="bottomBar-brand">{{ product.brand }} 系列</h3>
           <div class="bottomBar-price">
             <!-- 特價顯示（僅限有特價時） -->
             <h3 v-if="product.onsale" class="discount">
@@ -138,7 +153,8 @@
 import { computed } from "vue";
 import CommonRecommend from "@/components/common/Recommend.vue";
 import type { Product } from "@/composables/useProducts";
-//商品來源
+
+//商品資料來源
 const productSeed: Product = {
   id: "MSI-1003",
   brand: "MSI",
@@ -247,13 +263,22 @@ const productSeed: Product = {
   },
   tags: ["藍芽耳機", "電競耳機", "⭐⭐⭐⭐"],
 };
+//主要大圖
+const currentImage = ref<string>(productSeed.images.main);
+
+const openInfoSections = ref<number[]>([]);
+//設定InfoSection點擊事件
+const toggleInfoSection = (index: number) => {
+  const idx = openInfoSections.value.indexOf(index);
+  if (idx > -1) openInfoSections.value.splice(idx, 1);
+  else openInfoSections.value.push(index);
+};
+//點擊後查詢有無值
+const isOpenInfoSection = (index: number) => {
+  return openInfoSections.value.includes(index);
+};
+
 //過濾後商品內容
-const currentImage = ref<string>("");
-
-onMounted(() => {
-  currentImage.value = productSeed.images.main;
-});
-
 const product = computed<Product>(() => {
   return productSeed;
 });
@@ -286,7 +311,6 @@ const product = computed<Product>(() => {
         flex: 0 0 50%;
         display: flex;
         justify-content: center;
-
         img {
           max-height: 480px;
           max-width: 720px;
@@ -299,7 +323,6 @@ const product = computed<Product>(() => {
         display: flex;
         justify-content: center;
         gap: 24px;
-
         .thumbnails-btn {
           display: flex;
           height: clamp(60px, 8vw, 80px);
@@ -314,8 +337,8 @@ const product = computed<Product>(() => {
             height: 100%;
             object-fit: cover;
           }
-          &:focus {
-            border-color: var(--brand); // 或其他高亮效果
+          &.active {
+            border-color: var(--brand);
           }
         }
       }
@@ -339,47 +362,65 @@ const product = computed<Product>(() => {
       .info-section {
         background-color: var(--bg-surface-strong);
         border-radius: 4px;
-        // border-bottom: 1px dashed lighten($color-darkgery, 20%);
-        padding: 4px 4px;
-        // border: 1px solid rgb(163, 126, 58);
+        padding: 8px;
+
         .section-title {
-          padding: 8px 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           cursor: pointer;
-          &:hover {
-            color: var(--brand);
+
+          .icon {
+            transition: transform 0.25s ease;
+            &.rotate {
+              transform: rotate(-180deg);
+            }
+          }
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              color: var(--brand-hover);
+            }
           }
         }
-
         .section-content {
-          max-height: 1400px;
+          display: grid;
+          grid-template-rows: 0fr;
           overflow: hidden;
+          padding: 0 8px;
+          opacity: 0;
+          transition:
+            grid-template-rows 0.3s ease,
+            opacity 0.6s ease 0.2s,
+            padding 0.2s ease;
 
-          // padding: 8px 4px;
-          // background-color: $color-white;
-          border-radius: 8px;
+          .section-content-inner {
+            overflow: hidden;
+            border-radius: 8px;
+          }
 
           .block-title {
             font-weight: bolder;
             font-size: 16px;
-            font-weight: bolder;
-            padding: 4px;
+            padding-block: 12px 4px;
             cursor: default;
           }
-
           .block-list {
-            padding: 0px 4px 12px;
             font-weight: lighter;
-            // margin-top: 2px;
-
-            li:hover {
-              color: var(--brand);
+            li {
+              padding-block: 2px;
               cursor: default;
             }
+            @media (hover: hover) and (pointer: fine) {
+              li:hover {
+                color: var(--brand-hover);
+              }
+            }
           }
-        }
-
-        .section-content.content-open {
-          max-height: 1400px;
+          &.isOpen {
+            opacity: 1;
+            grid-template-rows: 1fr;
+            padding: 8px 8px;
+          }
         }
       }
     }
@@ -388,10 +429,6 @@ const product = computed<Product>(() => {
   .product-video {
     background-color: #000;
     padding: 32px;
-    border: 1px solid;
-    * {
-      border: 1px solid;
-    }
     .product-video-media {
       position: relative;
       height: 0;
@@ -427,6 +464,9 @@ const product = computed<Product>(() => {
       width: 80%;
       text-align: center;
     }
+    .product-features-text {
+      color: var(--text-secondary);
+    }
     .product-features-content {
       // width: 60%;
       display: flex;
@@ -437,7 +477,7 @@ const product = computed<Product>(() => {
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 200px;
+        width: 240px;
         gap: 16px;
         .item-icon {
           min-height: 200px;
@@ -448,15 +488,21 @@ const product = computed<Product>(() => {
           padding: 8px;
           border-radius: 8px;
           background: $color-gray-100;
+          transition: background-color 0.6s ease;
           img {
-            // width: 100%;
             object-fit: cover;
+          }
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              background: $color-white;
+            }
           }
         }
         .desc {
           display: flex;
           flex-direction: column;
           align-items: center;
+          color: var(--text-secondary);
         }
       }
     }

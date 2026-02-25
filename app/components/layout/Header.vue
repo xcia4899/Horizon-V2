@@ -119,7 +119,7 @@ const goHome = async () => {
   max-width: 1440px;
   margin: 0 auto;
   padding-inline: $padding-RWD;
-  box-shadow: var(--shadow-default);
+
   @include baseTransition(height, 0.6s);
   .nav-left,
   .nav-right,

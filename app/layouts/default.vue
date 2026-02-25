@@ -47,6 +47,7 @@ useSeoMeta({
   background-color: rgba(var(--bg-header), 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+    box-shadow: var(--shadow-default);
   overflow-x: clip;
   width: 100%;
   /* 內層：置中 + max-width */
