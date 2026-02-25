@@ -176,7 +176,7 @@ const selectTags = ref<(string | number)[]>([]);
 //建立productMainRef
 const productMainRef = ref<HTMLElement | null>(null);
 // 計算後的用商品資料
-const productListView = computed(() => {
+const productListView = computed<Product[]>(() => {
   const tags = selectTags.value;
 
   const stringTags = tags.filter((t): t is string => typeof t === "string");

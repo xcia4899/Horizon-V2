@@ -13,6 +13,7 @@
     "images": {
       "main": "/images/pic-detal/RAZER-1000/10001.jpg",
       "thumbnails": [
+        "/images/pic-detal/RAZER-1000/10001.jpg",
         "/images/pic-detal/RAZER-1000/10002.jpg",
         "/images/pic-detal/RAZER-1000/10003.jpg",
         "/images/pic-detal/RAZER-1000/10004.jpg"
@@ -89,6 +90,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["滑鼠", "無線滑鼠", "PRO 系列", "⭐⭐⭐⭐⭐"]
   },
   {
@@ -203,6 +232,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["無線滑鼠", "電競滑鼠", "⭐⭐⭐"]
   },
   {
@@ -290,6 +347,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["機械鍵盤", "薄式鍵盤", "RPG鍵盤", "⭐⭐⭐⭐"]
   },
   {
@@ -373,6 +458,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["藍芽耳機", "電競耳機", "⭐⭐⭐⭐"]
   },
   {
@@ -448,6 +561,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["小型滑鼠墊", "大型滑鼠墊", "⭐⭐⭐⭐⭐"]
   },
   {
@@ -535,6 +676,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["電容式麥克風", "3.5mm 麥克風", "⭐⭐⭐⭐⭐"]
   },
   {
@@ -620,6 +789,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["薄式鍵盤", "無線鍵盤", "RGB 鍵盤", "⭐⭐⭐⭐⭐"]
   },
   {
@@ -708,6 +905,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["藍芽耳機", "電競耳機", "⭐⭐⭐"]
   },
   {
@@ -783,6 +1008,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["電競滑鼠", "有線滑鼠", "RGB 滑鼠", "⭐⭐⭐"]
   },
   {
@@ -864,6 +1117,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["薄式鍵盤", "RPG 鍵盤", "⭐⭐⭐⭐"]
   },
   {
@@ -944,6 +1225,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["藍芽耳機", "降噪耳機", "⭐⭐⭐⭐⭐"]
   },
   {
@@ -1023,13 +1332,41 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["電容式麥克風", "USB 麥克風", "⭐⭐⭐"]
   },
   {
     "id": "PRO-1012",
     "brand": "Logitech",
     "name": "革命輕量設計，帶來極速精準的反饋體驗 ",
-    "subtitle":"極限的操作",
+    "subtitle": "極限的操作",
     "category": "滑鼠",
     "color": "粉紅",
     "discount": 3383,
@@ -1093,6 +1430,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["無線滑鼠", "電競滑鼠", "⭐⭐⭐⭐"]
   },
   {
@@ -1175,9 +1540,36 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["無線滑鼠", "滑鼠", "⭐⭐⭐⭐"]
   },
-
   {
     "id": "PRO-1014",
     "brand": "Logitech",
@@ -1246,6 +1638,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["無線滑鼠", "電競滑鼠", "⭐⭐⭐⭐"]
   },
   {
@@ -1316,6 +1736,34 @@
         ]
       }
     ],
+    "highlights": {
+      "title": "下一代進化的冠軍耳機",
+      "description": "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+      "items": [
+        {
+          "id": "surround71",
+          "title": "7.1 聲道",
+          "subtitle": "環繞音效",
+          "icon": "/images/icons/surround.svg",
+          "desc": ["虛擬 7.1 聲道", "精準定位敵人方向"]
+        },
+        {
+          "id": "rgb",
+          "title": "RGB",
+          "subtitle": "燈效系統",
+          "icon": "/images/icons/rgb.svg",
+          "desc": ["自訂燈光效果", "與 MSI Mystic Light 同步"]
+        },
+        {
+          "id": "mic",
+          "title": "降噪麥克風",
+          "subtitle": "可拆卸設計",
+          "icon": "/images/icons/mic.svg",
+          "desc": ["清晰收音", "方便攜帶"]
+        }
+      ]
+    },
     "tags": ["無線滑鼠", "電競滑鼠", "⭐⭐⭐⭐⭐"]
   }
 ]

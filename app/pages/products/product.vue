@@ -5,63 +5,54 @@
         <div class="container product-overview-inner">
           <div class="product-media">
             <div class="product-media-main">
-              <img
-                :src="`/images/pic-detal/MSI-1013/10001.png`"
-                alt="商品大圖"
-              />
+              <img :src="currentImage" :alt="`${product.name}商品大圖`" />
             </div>
             <div class="product-media-thumbnails">
               <button
-                v-for="(img, index) in 4"
+                v-for="(img, index) in product.images.thumbnails"
                 :key="index"
                 class="thumbnails-btn"
+                @click="currentImage = img"
               >
-                <img
-                  :src="`/images/pic-detal/MSI-1013/1000${index + 1}.png`"
-                  alt="商品縮圖"
-                />
+                <img :src="img" alt="商品縮圖" />
               </button>
             </div>
           </div>
 
           <div class="product-information">
             <div class="information-title">
-              <h3 class="product-title">product.name</h3>
-              <p class="product-subtitle">product.subtitle</p>
+              <h3 class="product-title">{{ product.name }}</h3>
+              <p class="product-subtitle">{{ product.subtitle }}</p>
             </div>
             <div class="information-color">
               <h4>顏色</h4>
-              <span>product.color</span>
+              <h5>{{ product.color }}</h5>
             </div>
             <div class="information-shipping">
               <h4>免費運送</h4>
             </div>
             <div class="information-text">
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-                itaque, illum quas quaerat dolor sit non error ab voluptatum,
-                corrupti optio, rem beatae doloremque dolores amet accusamus.
-                Voluptate, velit qui!
+                {{ product.description }}
               </p>
             </div>
-            <div v-for="index in 4" :key="index" class="info-section">
+            <div
+              v-for="(item, index) in product.details"
+              :key="index"
+              class="info-section"
+            >
               <h4 class="section-title">
-                section.section detailedcontentopen {{ index }}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <!-- 加號（+） -->
-                  <path
-                    d="M12 5v14M5 12h14"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
+                {{ item.section }}
               </h4>
 
-              <div v-for="idx in 4" :key="idx" class="section-content">
-                <div class="block-title">block.title</div>
+              <div
+                v-for="(content, idx) in item.content"
+                :key="idx"
+                class="section-content"
+              >
+                <div class="block-title">{{ content.title }}</div>
                 <ul class="block-list">
-                  <li v-for="i in 4" :key="i">item</li>
+                  <li v-for="text in content.text" :key="text">{{ text }}</li>
                 </ul>
               </div>
             </div>
@@ -69,31 +60,31 @@
         </div>
       </section>
       <section class="product-video">
-        <div class="detailed-video">
-          <!-- <iframe
-              width="100%"
-              height="auto"
-              src="https://www.youtube.com/embed/vFZlgReIzOg"
-              title="YouTube video player"
-              frameborder="0"
-              allow="
-                accelerometer;
-                autoplay;
-                clipboard-write;
-                encrypted-media;
-                gyroscope;
-                picture-in-picture;
-              "
-              allowfullscreen
-            >
-            </iframe> -->
+        <div class="product-video-media">
+          <iframe
+            width="100%"
+            height="auto"
+            src="https://www.youtube.com/embed/vFZlgReIzOg"
+            title="YouTube video player"
+            frameborder="0"
+            allow="
+              accelerometer;
+              autoplay;
+              clipboard-write;
+              encrypted-media;
+              gyroscope;
+              picture-in-picture;
+            "
+            allowfullscreen
+          >
+          </iframe>
         </div>
       </section>
       <section class="product-features">
-        <div class="r3-1">
+        <div class="product-features-intro">
           <h2>下一代進化的冠軍滑鼠</h2>
         </div>
-        <div class="r3-2">
+        <div class="product-features-text">
           <p>
             受到冠軍的信任，憑藉我們的 HERO 2 感測器和閃電快速的 LIGHTFORCE
             開關的強大和精準度，您永遠不會錯過目標。專業級，準備好比賽，並以同級最佳表現為後盾。
@@ -107,14 +98,14 @@
             <h4>HERO 2 <br />感應器</h4>
             <p>最先進的遊戲感應器 <br />44K DPI, 888 IPS, 88</p>
           </div>
-          <div class="r3-col r3-col-2">
+          <div class="r3-col">
             <div>
               <img src="" alt="" />
             </div>
             <h4>LIGHTSPEED <br />無線連接</h4>
             <p>冠軍信賴的錦標賽級技術</p>
           </div>
-          <div class="r3-col r3-col-3">
+          <div class="r3-col">
             <div>
               <img src="" alt="" />
             </div>
@@ -150,26 +141,144 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed } from "vue";
+import CommonRecommend from "@/components/common/Recommend.vue";
+import type { Product } from "@/composables/useProducts";
+//商品來源
+const productSeed: Product = {
+  id: "MSI-1003",
+  brand: "MSI",
+  name: "GH50 電競耳機",
+  subtitle: "舒適耐用，長時間遊戲不累",
+  category: "耳機",
+  color: "粉紅",
+  discount: 1899,
+  price: 2400,
+  onsale: true,
+  description:
+    "搭配 RGB 背光系統，視覺效果升級，具備虛擬 7.1 聲道與可拆卸麥克風，專為沉浸式遊戲體驗打造。",
+  images: {
+    main: "/images/pic-detal/MSI-1003/10002.png",
+    thumbnails: [
+      "/images/pic-detal/MSI-1003/10001.png",
+      "/images/pic-detal/MSI-1003/10002.png",
+      "/images/pic-detal/MSI-1003/10003.png",
+    ],
+  },
+  details: [
+    {
+      section: "規格與詳細資訊",
+      content: [
+        {
+          title: "音效技術",
+          text: ["虛擬 7.1 聲道環繞音效", "40mm 驅動單體", "可調整低音效果"],
+        },
+        {
+          title: "設計與功能",
+          text: [
+            "RGB 燈效可自訂",
+            "金屬頭帶結構",
+            "可拆卸式降噪麥克風",
+            "折疊式設計便於攜帶",
+          ],
+        },
+      ],
+    },
+    {
+      section: "相容性",
+      content: [
+        {
+          title: "作業系統",
+          text: ["Windows 10 或更新版本"],
+        },
+        {
+          title: "連接方式",
+          text: ["USB 介面"],
+        },
+      ],
+    },
+    {
+      section: "包裝內容物",
+      content: [
+        {
+          title: "內容物",
+          text: ["GH50 電競耳機", "可拆卸式麥克風", "便攜收納包", "使用手冊"],
+        },
+      ],
+    },
+    {
+      section: "支援",
+      content: [
+        {
+          title: "項目",
+          text: [
+            "驅動程式下載",
+            "產品註冊",
+            "常見問題",
+            "保固服務（2 年有限保固）",
+            "技術支援",
+          ],
+        },
+      ],
+    },
+  ],
+  highlights: {
+    title: "下一代進化的冠軍耳機",
+    description:
+      "採用高品質音效單體與低延遲傳輸技術，提供沉浸式定位與舒適長時間佩戴體驗。",
+
+    items: [
+      {
+        id: "surround71",
+        title: "7.1 聲道",
+        subtitle: "環繞音效",
+        icon: "/images/icons/surround.svg",
+        desc: ["虛擬 7.1 聲道", "精準定位敵人方向"],
+      },
+      {
+        id: "rgb",
+        title: "RGB",
+        subtitle: "燈效系統",
+        icon: "/images/icons/rgb.svg",
+        desc: ["自訂燈光效果", "與 MSI Mystic Light 同步"],
+      },
+      {
+        id: "mic",
+        title: "降噪麥克風",
+        subtitle: "可拆卸設計",
+        icon: "/images/icons/mic.svg",
+        desc: ["清晰收音", "方便攜帶"],
+      },
+    ],
+  },
+  tags: ["藍芽耳機", "電競耳機", "⭐⭐⭐⭐"],
+};
+//過濾後商品內容
+const currentImage = ref<string>("");
+
+onMounted(() => {
+  currentImage.value = productSeed.images.main;
+});
+
+const product = computed<Product>(() => {
+  return productSeed;
+});
+</script>
 
 <style scoped lang="scss">
-
-
 .product-detailed {
-  // height: 100vh;
   margin-top: 70px;
   width: 100%;
-  border: 1px solid red;
   background-color: var(--bg-surface);
   .product-overview {
-    padding-block: 32px;
     .product-overview-inner {
       display: flex;
       align-items: center;
       gap: 32px;
       height: calc(100vh - 160px);
       // overflow: hidden;
-      border: 1px solid;
+      padding-block: 32px;
     }
     .product-media {
       flex: 0 0 60%;
@@ -177,7 +286,6 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      // justify-content: center;
       align-items: center;
       gap: 32px;
 
@@ -185,10 +293,10 @@
         flex: 0 0 50%;
         display: flex;
         justify-content: center;
+
         img {
           max-height: 480px;
           max-width: 720px;
-
           width: 100%;
           height: 100%;
           object-fit: contain;
@@ -230,16 +338,19 @@
       gap: 16px;
       overflow: auto;
       scrollbar-width: none; //隱藏滾輪
-
+      .information-color {
+        display: flex;
+        gap: 8px;
+        align-items: flex-end;
+      }
       .info-section {
         background-color: var(--bg-surface-strong);
         border-radius: 4px;
         // border-bottom: 1px dashed lighten($color-darkgery, 20%);
         padding: 4px 4px;
-        margin: 8px 0;
         // border: 1px solid rgb(163, 126, 58);
         .section-title {
-          padding: 4px 0;
+          padding: 8px 0;
           cursor: pointer;
           &:hover {
             color: var(--brand);
@@ -256,14 +367,16 @@
 
           .block-title {
             font-weight: bolder;
-            padding: 4px 4px;
+            font-size: 16px;
+            font-weight: bolder;
+            padding: 4px;
             cursor: default;
           }
 
           .block-list {
-            padding: 0px 4px 8px;
-            font-weight: normal;
-            margin-top: 1px;
+            padding: 0px 4px 12px;
+            font-weight: lighter;
+            // margin-top: 2px;
 
             li:hover {
               color: var(--brand);
@@ -280,21 +393,23 @@
   }
 
   .product-video {
-    // background-color: #000;
+    background-color: #000;
     padding: 32px;
-
-    .detailed-video {
+    border: 1px solid;
+    * {
+      border: 1px solid;
+    }
+    .product-video-media {
       position: relative;
-      padding-bottom: 56.25%; // 16:9 的比例（9 ÷ 16 = 0.5625）
       height: 0;
       // overflow: hidden;
-      width: 90vw;
+      // width: 90vw;
       height: 80vh;
       margin: 0 auto;
       padding: 32px;
 
       iframe {
-        position: absolute;
+        // position: absolute;
         top: 0;
         left: 0;
         width: 100%;
@@ -310,15 +425,15 @@
     flex-direction: column;
     align-items: center;
     background-color: var(--bg-surface-soft);
-    .r3-1,
-    .r3-2,
+    .product-features-intro,
+    .product-features-text,
     .r3-3 {
       padding: 32px;
       width: 80%;
       text-align: center;
     }
 
-    .r3-2 {
+    .product-features-text {
       p {
         margin: 0;
         font-size: 20px;

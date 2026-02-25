@@ -8,6 +8,18 @@ export interface ProductDetail {
   section: string;
   content: DetailContent[];
 }
+export interface FeatureItem {
+  id: string;         
+  title:string;
+  subtitle?: string;   
+  icon?: string;       
+  desc?: string[];      
+}
+export interface highlights{
+  title:string;
+  description:string;
+  items:FeatureItem[]
+}
 export interface ProductImages {
   main: string;
   thumbnails: string[];
@@ -28,6 +40,7 @@ export interface Product {
 
   images: ProductImages;
   details: ProductDetail[];
+  highlights?:highlights
 
   tags: string[];
 }
