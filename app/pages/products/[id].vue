@@ -1,5 +1,5 @@
 <template>
-  <div class="product">
+  <div v-if="product" class="product">
     <main class="product-detailed">
       <!-- Product Overview: media + information -->
       <section class="product-overview">
@@ -119,6 +119,7 @@
         </div>
       </section>
     </main>
+
     <!-- Recommend -->
     <section class="recommend">
       <div class="container">
@@ -147,124 +148,36 @@
       </div>
     </section>
   </div>
+  <div v-else class="noProduct">商品不存在</div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
 import CommonRecommend from "@/components/common/Recommend.vue";
-import type { Product } from "@/composables/useProducts";
-
+import { useProducts } from "@/composables/useProducts";
 //商品資料來源
-const productSeed: Product = {
-  id: "MSI-1003",
-  brand: "MSI",
-  name: "GH50 電競耳機",
-  subtitle: "舒適耐用，長時間遊戲不累",
-  category: "耳機",
-  color: "粉紅",
-  discount: 1899,
-  price: 2400,
-  onsale: true,
-  description:
-    "搭配 RGB 背光系統，視覺效果升級，具備虛擬 7.1 聲道與可拆卸麥克風，專為沉浸式遊戲體驗打造。",
-  images: {
-    main: "/images/pic-detal/MSI-1003/10002.png",
-    thumbnails: [
-      "/images/pic-detal/MSI-1003/10001.png",
-      "/images/pic-detal/MSI-1003/10002.png",
-      "/images/pic-detal/MSI-1003/10003.png",
-    ],
-  },
-  details: [
-    {
-      section: "規格與詳細資訊",
-      content: [
-        {
-          title: "音效技術",
-          text: ["虛擬 7.1 聲道環繞音效", "40mm 驅動單體", "可調整低音效果"],
-        },
-        {
-          title: "設計與功能",
-          text: [
-            "RGB 燈效可自訂",
-            "金屬頭帶結構",
-            "可拆卸式降噪麥克風",
-            "折疊式設計便於攜帶",
-          ],
-        },
-      ],
-    },
-    {
-      section: "相容性",
-      content: [
-        {
-          title: "作業系統",
-          text: ["Windows 10 或更新版本"],
-        },
-        {
-          title: "連接方式",
-          text: ["USB 介面"],
-        },
-      ],
-    },
-    {
-      section: "包裝內容物",
-      content: [
-        {
-          title: "內容物",
-          text: ["GH50 電競耳機", "可拆卸式麥克風", "便攜收納包", "使用手冊"],
-        },
-      ],
-    },
-    {
-      section: "支援",
-      content: [
-        {
-          title: "項目",
-          text: [
-            "驅動程式下載",
-            "產品註冊",
-            "常見問題",
-            "保固服務（2 年有限保固）",
-            "技術支援",
-          ],
-        },
-      ],
-    },
-  ],
-  highlights: {
-    title: "下一代進化的冠軍耳機",
-    description:
-      "受到冠軍的信任，憑藉我們的 HERO 2 感測器和閃電快速的 LIGHTFORCE開關的強大和精準度，您永遠不會錯過目標。專業級，準備好比賽，並以同級最佳表現為後盾。",
+import type { Product } from "@/composables/useProducts";
+const route = useRoute();
 
-    items: [
-      {
-        id: "surround71",
-        title: "HERO 2",
-        subtitle: "感應器",
-        icon: "/images/icon/g502x-hero25k-icon 1.png",
-        desc: ["最先進的遊戲感應器", "44K DPI, 888 IPS, 88"],
-      },
-      {
-        id: "rgb",
-        title: "LIGHTSPEED",
-        subtitle: "無線連接",
-        icon: "/images/icon/g502x-lightspeed-icon 1.png",
-        desc: ["冠軍信賴的錦標賽級技術"],
-      },
-      {
-        id: "mic",
-        title: "LIGHTFORCE",
-        subtitle: "混合微動",
-        icon: "/images/icon/g502x-lightforce-icon 1.png",
-        desc: ["光學精準", "機械觸感"],
-      },
-    ],
-  },
-  tags: ["藍芽耳機", "電競耳機", "⭐⭐⭐⭐"],
-};
+//從路由接收ID
+const id = computed(() => String(route.params.id ?? ""));
+//從useProducts接收商品資料
+const productSeed: Product[] = await useProducts();
+
+//過濾商品內容
+const product = computed<Product | undefined>(() =>
+  productSeed.find((item) => item.id === id.value),
+);
+
 //主要大圖
-const currentImage = ref<string>(productSeed.images.main);
+const currentImage = ref("");
+watch(
+  product,
+  (value) => {
+    currentImage.value = value?.images.main ?? "";
+  },
+  { immediate: true },
+);
 
 const openInfoSections = ref<number[]>([]);
 //設定InfoSection點擊事件
@@ -277,11 +190,6 @@ const toggleInfoSection = (index: number) => {
 const isOpenInfoSection = (index: number) => {
   return openInfoSections.value.includes(index);
 };
-
-//過濾後商品內容
-const product = computed<Product>(() => {
-  return productSeed;
-});
 </script>
 
 <style scoped lang="scss">
@@ -517,7 +425,6 @@ const product = computed<Product>(() => {
   background-color: rgba(var(--bg-header), 0.8);
   backdrop-filter: blur(8px);
 
-  // color: $color-darkgery;
   width: 100%;
   z-index: 100;
   box-shadow: var(--shadow-focus);
@@ -532,7 +439,7 @@ const product = computed<Product>(() => {
     justify-content: space-between;
     align-items: center;
 
-    gap: 16px;
+    gap: 24px;
   }
   .bottomBar-info {
     width: 100%;
@@ -540,12 +447,12 @@ const product = computed<Product>(() => {
     justify-content: space-between;
 
     .bottomBar-price {
+      /* border: 1px solid; */
       font-size: clamp(20px, 3vw, 28px);
       font-weight: 900;
-
       display: flex;
       justify-content: center;
-      align-items: flex-end;
+      align-items: baseline;
       flex-direction: row-reverse;
       gap: 8px;
     }
@@ -568,5 +475,12 @@ const product = computed<Product>(() => {
       font-weight: 600;
     }
   }
+}
+.noProduct{
+  background-color: $color-black;
+  height: 400px;
+  display: grid;
+  place-items: center;
+  font-size: 28px;
 }
 </style>

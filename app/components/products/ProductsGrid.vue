@@ -4,6 +4,7 @@
       v-for="product in productListView"
       :key="product.id"
       class="product-card"
+      @click="gotoProductDetail(product.id)"
     >
       <div class="card-media">
         <div class="card-image">
@@ -31,9 +32,21 @@
 
 <script setup lang="ts">
 import type { Product } from "@/composables/useProducts";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
 defineProps<{
   productListView: Product[];
 }>();
+
+const gotoProductDetail = (id: string) => {
+  console.log("指定ID", id);
+  router.push({
+    name: "products-id",
+    params: { id },
+  });
+};
 </script>
 
 <style scoped lang="scss">
