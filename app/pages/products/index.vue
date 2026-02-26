@@ -5,8 +5,12 @@
     </section>
     <div class="sidebar-toolbar">
       <div class="container">
-        <button class="filter-toggle" @click="toggleFilter">
-          關閉篩選條件
+        <button
+          class="filter-toggle"
+          :class="{ active: isSidebarClose }"
+          @click="toggleFilter"
+        >
+          {{ isSidebarClose ? "開啟篩選條件" : "關閉篩選條件" }}
           <icon
             class="icon"
             :class="{ rotate: isSidebarClose }"
@@ -205,21 +209,10 @@ const productListView = computed<Product[]>(() => {
 const scrollToProductsMainRef = () => {
   if (!productMainRef.value) return;
   const top =
-    productMainRef.value!.getBoundingClientRect().top + window.scrollY - 120;
+    productMainRef.value!.getBoundingClientRect().top + window.scrollY - 140;
   // productMainRef.value.scrollIntoView({ behavior: "smooth" });
   window.scrollTo({ top, behavior: "smooth" });
 };
-//頁碼改變時捲動
-// watch(
-//   productListView,
-//   async (newVal, oldVal) => {
-//     if (newVal === oldVal) return;
-//     await nextTick();
-//     await looding(100);
-//     scrollToProductsMainRef();
-//   },
-//   { flush: "post" }
-// );
 
 /*--分頁頁碼--*/
 const currentPage = ref(1);
@@ -235,6 +228,7 @@ const producPagedList = computed<Product[]>(() => {
 const totalPages = computed(() =>
   Math.max(1, Math.ceil(productListView.value.length / itemsPage.value)),
 );
+
 //productListView改變時回到第一頁
 watch(
   selectTags,
@@ -246,6 +240,7 @@ watch(
   },
   { flush: "post" },
 );
+
 //頁碼改變時捲動
 watch(
   currentPage,
@@ -257,25 +252,15 @@ watch(
   { flush: "post" },
 );
 
-/* 讀取時判斷
 onMounted(() => {
-  watch(
-    isDesktop,
-    (v) => {
-      itemsPage.value = v ? 9 : 6;
-      if (isSidebarClose.value === false) isSidebarClose.value = true; // 手機關、桌機開
-    },
-    { immediate: true },
-  );
-}); */
-watch(
-  isDesktop,
-  (v) => {
-    itemsPage.value = v ? 9 : 6;
-    isSidebarClose.value = !v;
-  },
-  { immediate: true },
-);
+  console.log(isDesktop.value);
+  if (!isDesktop.value) {
+    itemsPage.value = 6;
+    isSidebarClose.value = true;
+  } else {
+    isSidebarClose.value = false;
+  }
+});
 
 /*----工具列----*/
 // 價格區間（建議：Infinity 代表「4000+」）
@@ -324,11 +309,6 @@ function toNumArray(
 ): number[] {
   return toStrArray(v).map(Number).filter(Number.isFinite);
 }
-
-//搜尋query上的值
-// const keyword = computed(() => {
-//   return String(route.query.keyword ?? "").trim();
-// });
 </script>
 
 <style scoped lang="scss">
@@ -340,7 +320,7 @@ function toNumArray(
   max-height: 480px;
 }
 .sidebar-toolbar {
-  padding: 8px 0px;
+  padding: 8px 12px;
   background: var(--bg-surface);
 
   .filter-toggle {
@@ -352,18 +332,14 @@ function toNumArray(
     border-radius: 8px;
     letter-spacing: 2px;
     color: var(--text-tertiary);
-    background: transparent;
+    background: var(--bg-surface-strong);
+    transition: background-color 0.2s ease;
     cursor: pointer;
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        background: var(--bg-surface-soft);
-        color: var(--text-primary);
-        .icon {
-          color: var(--brand-hover);
-        }
-      }
-    }
 
+    &.active {
+      color: var(--text-primary);
+      background: var(--bg-surface-soft);
+    }
     .icon {
       transition: transform 0.3s ease;
     }
@@ -375,6 +351,15 @@ function toNumArray(
     &:active {
       background: transparent;
     }
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background: var(--bg-surface-secondary);
+        color: var(--text-primary);
+        .icon {
+          color: var(--brand-hover);
+        }
+      }
+    }
   }
 }
 .product-main {
@@ -384,9 +369,6 @@ function toNumArray(
     width: 100%;
     /*   gap: 32px; */
     padding-block: 16px 32px;
-    @media (pointer: coarse) and (max-width: 1024px) {
-      flex-direction: column;
-    }
     @media (max-width: 768px) {
       flex-direction: column;
     }

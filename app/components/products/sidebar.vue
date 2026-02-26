@@ -1,5 +1,5 @@
 <template>
-  <section class="main-sidebar" :class="{ isClose: !isSidebarClose }">
+  <section class="main-sidebar" :class="{ isClose: isSidebarClose }">
     <div class="sidebar-title">篩選</div>
     <ul class="sidebar-groups">
       <li
@@ -103,19 +103,18 @@ const resetTags = async () => {
   opacity: 1;
   /*   color: var(--text-primary); */
   background: var(--bg-surface-strong);
+  padding-right: 32px;
+  transition:
+    max-width 0.3s ease-out,
+    opacity 0.2s ease-out,
+    padding-right 0.2s ease-out 0.1s;
+  &.isClose {
+    opacity: 0;
 
-  @media (pointer: fine) {
-    padding-right: 32px;
-    transition:
-      max-width 0.4s ease-out,
-      opacity 0.2s ease-out,
-      padding-right 0.2s ease-out 0.1s;
+    max-width: 0px;
+    padding-right: 0px;
   }
-  @media (pointer: coarse) {
-    transition:
-      max-height 0.4s ease-out,
-      opacity 0.3s ease-out;
-  }
+
   .sidebar-title {
     font-size: 24px;
     font-weight: 600;
@@ -241,14 +240,8 @@ const resetTags = async () => {
       width: 90%;
     }
   }
-  &.isClose {
-    opacity: 0;
-    @media (pointer: fine) {
-      max-width: 0px;
-      padding-right: 0px;
-    }
-  }
-  @media (pointer: coarse) and (max-width: 1024px), (max-width: 768px) {
+
+  @media (max-width: 768px) {
     position: fixed;
     left: 0;
     top: 0px;
@@ -260,14 +253,16 @@ const resetTags = async () => {
     height: 100%;
     z-index: 200;
     padding: 32px 48px;
-
+    transition:
+      max-height 0.3s ease-out,
+      opacity 0.2s ease-out;
     .sidebar-title {
       display: flex;
     }
     .sidebar-groups {
       flex: 1;
       overflow-y: scroll;
-      scrollbar-width: none; 
+      scrollbar-width: none;
       /* 隱藏滾輪 */
       gap: 8px;
       max-height: 400px;
@@ -293,6 +288,8 @@ const resetTags = async () => {
       max-height: 0%;
       z-index: 10;
       visibility: hidden;
+      padding-right: 0px;
+      opacity: 0;
     }
   }
 }
