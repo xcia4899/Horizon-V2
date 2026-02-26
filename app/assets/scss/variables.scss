@@ -7,7 +7,7 @@ $indigo11: #2c3e50;
 // Neutral
 $color-white: rgb(250, 250, 250);
 $color-black: rgb(10, 10, 10);
-$color-gray-50:  #fafafa; // 幾乎白，page 背景
+$color-gray-50: #fafafa; // 幾乎白，page 背景
 $color-gray-100: #f0f0f0; // surface 
 $color-gray-200: #e0e0e0; // border 
 $color-gray-300: #c8c8c8; // disabled 
@@ -57,7 +57,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --bg-surface-glass: rgba(2, 2, 3, 0.7); // 對比的 surface
     // ========== Border =========
     --border-default: #{$color-gray-400}; // 一般邊框
-    --border-soft: #{$color-gray-800}; // 一般邊框
+    --border-soft: #{$color-gray-800};
     //  ========== Brand =========
     --brand: #{$color-purple-500}; // 品牌主色
     --brand-hover: #{$color-purple-500}; // hover / active
@@ -66,8 +66,9 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --action-primary: var(--brand); // 主 CTA
     --action-primary-hover: var(--brand-soft);
     --action-primary-soft: var(--brand-soft);
-    --shadow-default: 0px 3px 4px 0px rgba(22, 22, 22, 0.4);
-    --shadow-focus: 0 0px 4px 1px rgba(31, 31, 31, 0.4);
+    --shadow-default: 0px 2px 2px 0px rgba(31, 31, 31, 0.4);
+    --shadow-card: 0 0px 2px 1px rgba(31, 31, 31, 0.4);
+    --shadow-bottomBar: 0 -2px 2px 0px rgba(31, 31, 31, 0.4);
     //  ========== State =========
     --state-danger: #{$color-red-500}; // 
 }
@@ -87,7 +88,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --text-inverse-soft: #{$color-gray-700}; // 淺色背景上的文
         //  ========== Background =========
         --bg-page: #{$color-gray-800}; // 整頁最底背景
-        --bg-header:10, 10, 10; // Header / Navbar 背景
+        --bg-header: 10, 10, 10; // Header / Navbar 背景
         --bg-footer: #{$color-black}; // footer 背景
         --bg-surface: #{$color-gray-900}; // 一般內容區
         --bg-surface-soft: #{$color-gray-800}; // 內容內層（較亮）
@@ -98,7 +99,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --bg-surface-glass: rgba(255, 255, 255, 0.6); // 對比的 surface
         /* ========== Border ========= */
         --border-default: #{$color-gray-600}; // 邊框（避免過亮）
-        --border-soft: #{$color-gray-100}; // 邊框（避免過亮）
+        --border-soft: #{$color-gray-100}; //
         //   ========== Brand =========
         --brand: #{$color-purple-500}; // 品牌主色
         --brand-hover: #{$color-purple-300}; // hover / active（更亮）
@@ -107,9 +108,9 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --action-primary: var(--brand);
         --action-primary-hover: var(--brand);
         --action-primary-soft: var(--brand-soft);
-        --shadow-default: 0px 2px 4px 0px rgba(117, 117, 117, 0.4);
-        /* 浮起元件 / Dropdown / Modal */
-        --shadow-focus: 0 0px 4px 1px rgba(117, 117, 117, 0.4);
+        --shadow-default: 0px 2px 2px 0px rgba(117, 117, 117, 0.4);
+        --shadow-card: 0 0px 2px 1px rgba(117, 117, 117, 0.4);
+        --shadow-bottomBar: 0 -2px 2px 0px rgba(117, 117, 117, 0.4);
         // /========== State ========= 
         --state-danger: #{$color-red-500}; //
     }

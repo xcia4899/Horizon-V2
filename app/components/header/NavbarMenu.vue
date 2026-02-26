@@ -96,7 +96,7 @@ const goProducts = async (item: MenuItem) => {
     query: item ? {} : {},
   });
   openMenu.value = null;
-  props.closeMenuOpenMobile()
+  props.closeMenuOpenMobile();
 };
 </script>
 
@@ -241,13 +241,14 @@ const goProducts = async (item: MenuItem) => {
       transform: scaleY(0);
       transform-origin: top;
       background: var(--bg-surface-soft);
-      @include baseTransition(transform, 0.3s);
+      box-shadow: transparent;
+      transition: transform 0.4s ease ,box-shadow 0.6s ease ;
       z-index: 0;
     }
     @media (hover: hover) and (pointer: fine) {
       .card:hover::after {
         transform: scaleY(1);
-        box-shadow: var(--shadow-float);
+        box-shadow: var(--shadow-card);
       }
     }
   }

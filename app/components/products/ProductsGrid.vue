@@ -185,7 +185,7 @@ const gotoProductDetail = (id: string) => {
       &:hover {
         &::after {
           height: 100%;
-          box-shadow: var(--shadow-focus);
+          box-shadow: var(--shadow-card);
         }
         .card-content {
           .card-title {

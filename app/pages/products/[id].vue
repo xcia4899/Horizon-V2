@@ -23,7 +23,7 @@
 
           <div class="product-information">
             <div class="information-title">
-              <h3 class="product-title">{{ product.name }}</h3>
+              <h2 class="product-title">{{ product.name }}</h2>
               <p class="product-subtitle">{{ product.subtitle }}</p>
             </div>
             <div class="information-color">
@@ -33,37 +33,38 @@
             <div class="information-shipping">
               <h4>免費運送</h4>
             </div>
-            <div class="information-text">
-              <p>
-                {{ product.description }}
-              </p>
-            </div>
-            <div
-              v-for="(item, index) in product.details"
-              :key="index"
-              class="info-section"
-            >
-              <h4 class="section-title" @click="toggleInfoSection(index)">
-                {{ item.section }}
-                <icon
-                  class="icon"
-                  :class="{ rotate: isOpenInfoSection(index) }"
-                  name="icon-park-solid:up-c"
-                  size="24"
-                />
-              </h4>
-
+            <p class="information-text">
+              {{ product.description }}
+            </p>
+            <div class="information-detail">
               <div
-                v-for="(content, idx) in item.content"
-                :key="content.title + idx"
-                class="section-content"
-                :class="{ isOpen: isOpenInfoSection(index) }"
+                v-for="(item, index) in product.details"
+                :key="index"
+                class="info-section"
               >
-                <div class="section-content-inner">
-                  <div class="block-title">{{ content.title }}</div>
-                  <ul class="block-list">
-                    <li v-for="text in content.text" :key="text">{{ text }}</li>
-                  </ul>
+                <h4 class="section-title" @click="toggleInfoSection(index)">
+                  {{ item.section }}
+                  <icon
+                    class="icon"
+                    :class="{ rotate: isOpenInfoSection(index) }"
+                    name="icon-park-solid:up-c"
+                    size="24"
+                  />
+                </h4>
+                <div
+                  v-for="(content, idx) in item.content"
+                  :key="content.title + idx"
+                  class="section-content"
+                  :class="{ isOpen: isOpenInfoSection(index) }"
+                >
+                  <div class="section-content-inner">
+                    <h5 class="block-title">{{ content.title }}</h5>
+                    <ul class="block-list">
+                      <li v-for="text in content.text" :key="text">
+                        {{ text }}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -73,23 +74,26 @@
       <!-- Product Video -->
       <section class="product-video">
         <div class="product-video-media">
-          <!-- <iframe
-            width="100%"
-            height="auto"
-            src="https://www.youtube.com/embed/vFZlgReIzOg"
-            title="YouTube video player"
-            frameborder="0"
-            allow="
-              accelerometer;
-              autoplay;
-              clipboard-write;
-              encrypted-media;
-              gyroscope;
-              picture-in-picture;
-            "
-            allowfullscreen
-          >
-          </iframe> -->
+          <ClientOnly>
+            <iframe
+              width="100%"
+              src="https://www.youtube.com/embed/vFZlgReIzOg"
+              title="YouTube video player"
+              frameborder="0"
+              allow="
+                accelerometer;
+                autoplay;
+                clipboard-write;
+                encrypted-media;
+                gyroscope;
+                picture-in-picture;
+              "
+              allowfullscreen
+            ></iframe>
+            <template #fallback>
+              <div class="video-skeleton"></div>
+            </template>
+          </ClientOnly>
         </div>
       </section>
       <!-- Product Features -->
@@ -130,7 +134,10 @@
     <section class="product-bottomBar">
       <div class="bottomBar-inner">
         <div class="bottomBar-info">
-          <h3 class="bottomBar-brand">{{ product.brand }} 系列</h3>
+          <div class="bottomBar-brand">
+            <h3>{{ product.brand }}</h3>
+            <h3>系列</h3>
+          </div>
           <div class="bottomBar-price">
             <!-- 特價顯示（僅限有特價時） -->
             <h3 v-if="product.onsale" class="discount">
@@ -193,26 +200,35 @@ const isOpenInfoSection = (index: number) => {
 </script>
 
 <style scoped lang="scss">
+.product {
+  position: relative;
+  width: 100%;
+}
 .product-detailed {
   margin-top: 70px;
   width: 100%;
+
   background-color: var(--bg-surface);
   .product-overview {
+    // height: 100%;
+    width: 100%;
     .product-overview-inner {
+      position: relative;
       display: flex;
-      align-items: center;
       gap: 32px;
-      height: calc(100vh - 160px);
-      // overflow: hidden;
-      padding-block: 32px;
+      height: calc(100vh - 70px);
+      width: 100%;
+      padding-block: 32px 32px;
     }
     .product-media {
       flex: 0 0 60%;
-      // width: 70%;
+      width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+
       gap: 32px;
 
       .product-media-main {
@@ -233,12 +249,12 @@ const isOpenInfoSection = (index: number) => {
         gap: 24px;
         .thumbnails-btn {
           display: flex;
-          height: clamp(60px, 8vw, 80px);
+          height: clamp(50px, 10vw, 100px);
           aspect-ratio: 6/4;
           padding: 4px;
           border: 2px solid var(--border-default);
           border-radius: 4px;
-          // overflow: hidden;
+          transition: border-color 0.3s ease;
           cursor: pointer;
           img {
             width: 100%;
@@ -247,6 +263,10 @@ const isOpenInfoSection = (index: number) => {
           }
           &.active {
             border-color: var(--brand);
+            background: var(--bg-surface-strong);
+          }
+          &:hover:not(.active) {
+            border-color: var(--border-soft);
           }
         }
       }
@@ -255,20 +275,30 @@ const isOpenInfoSection = (index: number) => {
       flex: 1;
       display: flex;
       flex-direction: column;
-
       height: 100%;
-      min-width: 300px;
-
-      gap: 16px;
+      min-width: 280px;
+      gap: 32px;
       overflow: auto;
       scrollbar-width: none; //隱藏滾輪
+      .information-title {
+        .product-title {
+          font-size: clamp(24px, 3vw, 40px);
+        }
+        .product-subtitle {
+          color: var(--text-secondary);
+        }
+      }
       .information-color {
         display: flex;
         gap: 8px;
         align-items: flex-end;
       }
+      .information-text {
+        color: var(--text-secondary);
+      }
       .info-section {
-        background-color: var(--bg-surface-strong);
+        margin-top: 8px;
+        background: var(--bg-surface-strong);
         border-radius: 4px;
         padding: 8px;
 
@@ -276,12 +306,15 @@ const isOpenInfoSection = (index: number) => {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          // color: var(--text-primary);
           cursor: pointer;
-
           .icon {
-            transition: transform 0.25s ease;
+            transition:
+              transform 0.25s ease,
+              color 0.2s ease;
             &.rotate {
               transform: rotate(-180deg);
+              color: var(--brand-hover);
             }
           }
           @media (hover: hover) and (pointer: fine) {
@@ -293,7 +326,7 @@ const isOpenInfoSection = (index: number) => {
         .section-content {
           display: grid;
           grid-template-rows: 0fr;
-          overflow: hidden;
+          color: var(--text-secondary);
           padding: 0 8px;
           opacity: 0;
           transition:
@@ -308,12 +341,12 @@ const isOpenInfoSection = (index: number) => {
 
           .block-title {
             font-weight: bolder;
-            font-size: 16px;
             padding-block: 12px 4px;
+
             cursor: default;
           }
           .block-list {
-            font-weight: lighter;
+            font-weight: normal;
             li {
               padding-block: 2px;
               cursor: default;
@@ -332,6 +365,14 @@ const isOpenInfoSection = (index: number) => {
         }
       }
     }
+    @media (max-width: 768px) {
+      .product-overview-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 32px;
+        height: 100%;
+      }
+    }
   }
 
   .product-video {
@@ -339,37 +380,37 @@ const isOpenInfoSection = (index: number) => {
     padding: 32px;
     .product-video-media {
       position: relative;
-      height: 0;
-      // overflow: hidden;
-      // width: 90vw;
-      height: 80vh;
-      margin: 0 auto;
-      padding: 32px;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 12px;
 
       iframe {
-        // position: absolute;
-        top: 0;
-        left: 0;
+        position: absolute;
+        inset: 0;
         width: 100%;
         height: 100%;
-        border: none;
+        border: 0;
       }
+    }
+    .video-skeleton {
+      width: 100%;
+      height: 100%;
     }
   }
 
   .product-features {
     padding: 32px 32px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     background: var(--bg-surface);
-    // gap: 32px;
-
     .product-features-intro,
     .product-features-text,
     .product-features-content {
-      padding: 32px;
-      width: 80%;
+      padding: 16px;
+      width: 100%;
       text-align: center;
     }
     .product-features-text {
@@ -379,7 +420,7 @@ const isOpenInfoSection = (index: number) => {
       // width: 60%;
       display: flex;
       justify-content: space-around;
-      gap: 24px;
+      gap: 30px;
 
       .content-item {
         display: flex;
@@ -388,7 +429,7 @@ const isOpenInfoSection = (index: number) => {
         width: 240px;
         gap: 16px;
         .item-icon {
-          min-height: 200px;
+          // min-height: 200px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -413,6 +454,9 @@ const isOpenInfoSection = (index: number) => {
           color: var(--text-secondary);
         }
       }
+      @media (max-width: 768px) {
+        flex-wrap: wrap;
+      }
     }
   }
 }
@@ -420,34 +464,37 @@ const isOpenInfoSection = (index: number) => {
   background: var(--bg-surface-strong);
 }
 .product-bottomBar {
-  position: fixed;
-  bottom: 0px;
+  position: sticky;
+  bottom: -1px;
+
   background-color: rgba(var(--bg-header), 0.8);
   backdrop-filter: blur(8px);
-
   width: 100%;
   z-index: 100;
-  box-shadow: var(--shadow-focus);
+  box-shadow: var(--shadow-bottomBar);
   .bottomBar-inner {
     position: relative;
     max-width: 1440px;
     margin: 0 auto;
     padding-inline: $padding-RWD;
+    padding-block: 8px;
     height: $headerHeight;
 
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     gap: 24px;
   }
   .bottomBar-info {
     width: 100%;
     display: flex;
     justify-content: space-between;
-
+    .bottomBar-brand {
+      display: flex;
+      // flex-wrap: wrap;
+      gap: 8px;
+    }
     .bottomBar-price {
-      /* border: 1px solid; */
       font-size: clamp(20px, 3vw, 28px);
       font-weight: 900;
       display: flex;
@@ -467,7 +514,6 @@ const isOpenInfoSection = (index: number) => {
       font-size: clamp(16px, 3vw, 20px);
     }
   }
-
   .bottomBar-actions {
     .bottomBar-btn {
       width: 200px;
@@ -475,8 +521,32 @@ const isOpenInfoSection = (index: number) => {
       font-weight: 600;
     }
   }
+  @media (max-width: 768px) {
+    .bottomBar-inner {
+      flex-direction: column;
+      gap: 8px;
+      padding-block: 16px;
+      height: 100%;
+    }
+    .bottomBar-actions {
+      width: 100%;
+      .bottomBar-btn {
+        width: 100%;
+      }
+    }
+    .bottomBar-info {
+      align-items: flex-end;
+      .bottomBar-brand {
+        flex-direction: column;
+      }
+      .bottomBar-price {
+        flex-direction: column-reverse;
+        align-items: end;
+      }
+    }
+  }
 }
-.noProduct{
+.noProduct {
   background-color: $color-black;
   height: 400px;
   display: grid;
