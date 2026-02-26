@@ -257,18 +257,17 @@ watch(
   { flush: "post" },
 );
 
-/*--讀取時判斷--*/
-//讀取時判斷
-// onMounted(() => {
-//   watch(
-//     isDesktop,
-//     (v) => {
-//       itemsPage.value = v ? 9 : 6;
-//       if (isSidebarClose.value === false) isSidebarClose.value = true; // 手機關、桌機開
-//     },
-//     { immediate: true },
-//   );
-// });
+/* 讀取時判斷
+onMounted(() => {
+  watch(
+    isDesktop,
+    (v) => {
+      itemsPage.value = v ? 9 : 6;
+      if (isSidebarClose.value === false) isSidebarClose.value = true; // 手機關、桌機開
+    },
+    { immediate: true },
+  );
+}); */
 watch(
   isDesktop,
   (v) => {
@@ -383,12 +382,12 @@ function toNumArray(
   .product-main-inner {
     display: flex;
     width: 100%;
-    // gap: 32px;
+    /*   gap: 32px; */
     padding-block: 16px 32px;
-    @media  (pointer:coarse) and (max-width: 1024px) {
+    @media (pointer: coarse) and (max-width: 1024px) {
       flex-direction: column;
     }
-    @media   (max-width: 768px) {
+    @media (max-width: 768px) {
       flex-direction: column;
     }
   }
@@ -398,6 +397,5 @@ function toNumArray(
   flex: 1;
   display: flex;
   flex-direction: column;
-  //上方清除TAG
 }
 </style>

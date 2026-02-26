@@ -40,29 +40,29 @@ feature-content
   position: relative;
 }
 
-//打造你的理想戰場---------------
+/* 打造你的理想戰場--------------- */
 .home-feature {
   background-color: var(--bg-surface-strong);
 }
-//熱門推薦
+/* 熱門推薦 */
 .home-recommend {
   background: var(--bg-surface);
   .container {
     padding-inline: clamp(16px, 4vw, 32px);
   }
 }
-//進入 Horizon 啟動新視野---------------
+/* 進入 Horizon 啟動新視野--------------- */
 .home-showcase {
   color: var(--text-inverse);
   background: var(--bg-surface-contrast);
 }
-//樣品廣告
+/* 樣品廣告 */
 .home-promo {
   display: flex;
   flex-direction: column;
   background: radial-gradient(var(--bg-surface), var(--bg-surface-strong));
 }
-//橫式宣傳圖----------
+/* 橫式宣傳圖---------- */
 .home-ad {
   max-height: 400px;
   overflow: hidden;

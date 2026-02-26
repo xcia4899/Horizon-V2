@@ -104,7 +104,7 @@ const goProducts = async (item: MenuItem) => {
 .nav-list {
   display: flex;
   justify-content: center;
-  // gap: 8px;
+
   margin: auto auto;
 }
 .navbar-item {
@@ -138,7 +138,7 @@ const goProducts = async (item: MenuItem) => {
     font-size: clamp(14px, 2vw, 18px);
     white-space: nowrap;
     background-color: transparent;
-    // color: $color-white;
+
     color: var(--color-primary);
     padding: 8px 8px;
     cursor: pointer;
@@ -148,7 +148,6 @@ const goProducts = async (item: MenuItem) => {
       width: 100%;
     }
     &:active {
-      // transform: translateY(-4px);
       opacity: 0.85;
     }
     &.active {
@@ -160,7 +159,7 @@ const goProducts = async (item: MenuItem) => {
     position: fixed;
     top: $headerHeight;
     left: 1%;
-    // right: auto;
+
     width: 98%;
 
     padding: 16px;
@@ -171,7 +170,7 @@ const goProducts = async (item: MenuItem) => {
     transform: translateY(8px);
     pointer-events: none;
     cursor: default;
-    // overflow: hidden;
+
     box-shadow: var(--shadow-default);
     transition:
       max-height 0.4s ease,
@@ -187,8 +186,8 @@ const goProducts = async (item: MenuItem) => {
     pointer-events: auto;
   }
   .dropdown-inner {
-    max-width: 1280px; // 只限制內容
-    margin: 0 auto; // 內容置中
+    max-width: 1280px;
+    margin: 0 auto; 
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -264,7 +263,7 @@ const goProducts = async (item: MenuItem) => {
     flex-direction: column;
     padding: 8px 0;
     gap: 8px;
-    // overflow-y: auto;
+    /* // overflow-y: auto; */
   }
   .navbar-item {
     display: block;
@@ -278,7 +277,7 @@ const goProducts = async (item: MenuItem) => {
       left: 0;
       padding: 0;
       max-height: 0px;
-      // padding: 0px;
+
       width: 100%;
       border-radius: 0px;
       background-color: transparent;

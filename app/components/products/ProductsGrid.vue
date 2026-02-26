@@ -51,10 +51,10 @@ const gotoProductDetail = (id: string) => {
 
 <style scoped lang="scss">
 .products-view {
-  // border: 1px solid;
+
   width: 100%;
   display: grid;
-  // grid-template-columns: repeat(3, 1fr); /* 建立三欄，每欄 1fr 寬 */
+   /* 建立三欄，每欄 1fr 寬 */
   grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
   grid-template-rows: auto-fit;
   /* 自動高度 */
@@ -100,17 +100,15 @@ const gotoProductDetail = (id: string) => {
         height: 100%;
         width: 100%;
         padding: 8px 8px 32px;
-        // border-radius: 6px;
         overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         img {
-          // height: 100%;
           width: 100%;
           height: 200px;
           padding: 8px;
-          // overflow: hidden;
+/*           overflow: hidden; */
           object-fit: cover;
           object-position: center;
         }
@@ -128,7 +126,6 @@ const gotoProductDetail = (id: string) => {
     .card-content {
       flex: 1;
       word-wrap: break-word;
-      // color: $color-darkgery;;
       display: flex;
       justify-content: space-between;
       flex-direction: column;

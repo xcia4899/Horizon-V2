@@ -162,21 +162,21 @@
 import { computed } from "vue";
 import CommonRecommend from "@/components/common/Recommend.vue";
 import { useProducts } from "@/composables/useProducts";
-//商品資料來源
+/* 商品資料來源  */
 import type { Product } from "@/composables/useProducts";
 const route = useRoute();
 
-//從路由接收ID
+/* 從路由接收ID */
 const id = computed(() => String(route.params.id ?? ""));
-//從useProducts接收商品資料
+/* 從useProducts接收商品資料 */
 const productSeed: Product[] = await useProducts();
 
-//過濾商品內容
+/* 過濾商品內容 */
 const product = computed<Product | undefined>(() =>
   productSeed.find((item) => item.id === id.value),
 );
 
-//主要大圖
+/* 主要大圖 */
 const currentImage = ref("");
 watch(
   product,
@@ -187,13 +187,13 @@ watch(
 );
 
 const openInfoSections = ref<number[]>([]);
-//設定InfoSection點擊事件
+/* 設定InfoSection點擊事件 */
 const toggleInfoSection = (index: number) => {
   const idx = openInfoSections.value.indexOf(index);
   if (idx > -1) openInfoSections.value.splice(idx, 1);
   else openInfoSections.value.push(index);
 };
-//點擊後查詢有無值
+/* 點擊後查詢有無值 */
 const isOpenInfoSection = (index: number) => {
   return openInfoSections.value.includes(index);
 };
@@ -210,7 +210,7 @@ const isOpenInfoSection = (index: number) => {
 
   background-color: var(--bg-surface);
   .product-overview {
-    // height: 100%;
+ /*     height: 100%; */
     width: 100%;
     .product-overview-inner {
       position: relative;
@@ -279,7 +279,8 @@ const isOpenInfoSection = (index: number) => {
       min-width: 280px;
       gap: 32px;
       overflow: auto;
-      scrollbar-width: none; //隱藏滾輪
+      scrollbar-width: none;
+      /*  隱藏滾輪 */
       .information-title {
         .product-title {
           font-size: clamp(24px, 3vw, 40px);
@@ -306,7 +307,7 @@ const isOpenInfoSection = (index: number) => {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          // color: var(--text-primary);
+          /*  color: var(--text-primary); */
           cursor: pointer;
           .icon {
             transition:
@@ -417,7 +418,7 @@ const isOpenInfoSection = (index: number) => {
       color: var(--text-secondary);
     }
     .product-features-content {
-      // width: 60%;
+      /*  width: 60%; */
       display: flex;
       justify-content: space-around;
       gap: 30px;
@@ -429,7 +430,7 @@ const isOpenInfoSection = (index: number) => {
         width: 240px;
         gap: 16px;
         .item-icon {
-          // min-height: 200px;
+          /*  min-height: 200px; */
           display: flex;
           align-items: center;
           justify-content: center;
@@ -491,7 +492,7 @@ const isOpenInfoSection = (index: number) => {
     justify-content: space-between;
     .bottomBar-brand {
       display: flex;
-      // flex-wrap: wrap;
+      /*  flex-wrap: wrap; */
       gap: 8px;
     }
     .bottomBar-price {

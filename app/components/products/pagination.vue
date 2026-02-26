@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 // import { ref, computed, watch } from "vue";
-import { looding } from "@/composables/useFetchState";
+// import { looding } from "@/composables/useFetchState";
 
 const props = defineProps<{
   currentPage: number;
@@ -52,13 +52,12 @@ const nextPage = async () => {
 </script>
 
 <style scoped lang="scss">
-//換頁UI
+
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  //   padding-block: 16px;
   margin-top: 32px;
   gap: 8px;
 
@@ -86,8 +85,6 @@ const nextPage = async () => {
   .page.active {
     color: $color-white;
     background: $color-purple-500;
-
-    // font-weight: bold;
   }
   button:disabled {
     opacity: 0.6;

@@ -269,8 +269,6 @@ const cartView = computed(() => {
     width: 40px;
 
     opacity: 0;
-    // transform: scaleX(0) ;
-    // transform-origin: right;
     transition:
       width 0.6s ease,
       opacity 0.4s ease;
@@ -343,13 +341,14 @@ const cartView = computed(() => {
 
     color: $color-white;
     background-color: var(--action-primary);
-    pointer-events: none; // 不干擾點擊
+    pointer-events: none; 
+    /* // 不干擾點擊 */
   }
 }
 
 .miniCart {
   display: flex;
-  // display: none;
+
   position: absolute;
   flex-direction: column;
   top: $headerHeight;
@@ -376,7 +375,7 @@ const cartView = computed(() => {
     overflow-y: auto;
   }
   .cart-item {
-    // width: 100%;
+
     min-height: 90px;
     display: flex;
     justify-content: space-between;
@@ -468,7 +467,7 @@ const cartView = computed(() => {
 @media (hover: hover) and (pointer: fine) {
   .cart-btn:hover + .miniCart {
     max-height: 600px;
-    // background-color: #cf7e7e;
+
   }
 }
 </style>

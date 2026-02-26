@@ -112,8 +112,8 @@ const recommendList = [
   padding: 32px;
 }
 .carousel {
-  //Swiper 預設按鈕
-  // width: 100%;
+  /* //Swiper 預設按鈕 */
+
   :deep(.swiper-slide) {
     height: auto;
   }
@@ -169,7 +169,7 @@ const recommendList = [
     @media (hover: hover) and (pointer: fine) {
       &:hover {
         border-color: var(--inverse);
-        // background: var(--bg-surface-soft);
+
         .image {
           transform: scale(1.2);
         }
@@ -183,7 +183,7 @@ const recommendList = [
     }
     &:active {
       border-color: var(--inverse);
-      // background: var(--bg-surface-soft);
+
       .image {
         transform: scale(1.2);
       }
@@ -197,7 +197,7 @@ const recommendList = [
 }
 /* pagination 控制區 */
 .recommend-carousel-pagination {
-  // margin-top: 32px;
+
   display: flex;
   justify-content: center;
   padding-block: 48px 64px;
@@ -223,7 +223,7 @@ const recommendList = [
     }
   }
 }
-//翻頁控制器
+/* //翻頁控制器 */
 .carousel-control {
   position: absolute;
   left: 12px;

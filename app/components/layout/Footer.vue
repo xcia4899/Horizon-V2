@@ -149,7 +149,6 @@ const footerLinks = [
     width: 100%;
   }
   .main-left {
-    // background-color: #bbbbbb;
     display: flex;
     justify-content: space-between;
     flex: 1;

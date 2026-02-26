@@ -107,8 +107,8 @@ const goHome = async () => {
 </script>
 
 <style scoped lang="scss">
-//header高度設定
-// $headerHeight: 70px;
+/* header高度設定
+$headerHeight: 70px; */
 
 .header-inner {
   display: flex;
@@ -125,7 +125,7 @@ const goHome = async () => {
   .nav-right,
   .navbar {
     flex: 1;
-    // max-width: 300px;
+   /*  max-width: 300px; */
     align-items: baseline;
   }
   .menu-toggle {
@@ -135,14 +135,14 @@ const goHome = async () => {
     cursor: pointer;
     .icon {
       font-size: 36px;
-      color: var(--inverse); // fill="currentColor" 會跟著變
+      color: var(--inverse); 
       cursor: pointer;
     }
     &:active {
       .icon {
         transform: scale(0.9);
         opacity: 0.85;
-        // color: $color-purple-500;
+
       }
     }
   }
@@ -154,9 +154,7 @@ const goHome = async () => {
     .logo {
       height: 100%;
       font-size: 40px;
-      // text-align: left;
       font-weight: bolder;
-      // line-height: $headerHeight;
 
       color: var(--brand);
       cursor: pointer;
@@ -183,18 +181,17 @@ const goHome = async () => {
     flex-wrap: wrap;
     @include baseTransition(height, 0.6s);
     .menu-toggle {
-      // position: absolute;
+
       flex: 0 0 auto;
       display: flex;
     }
     .nav-left {
       flex: 1;
-      // place-items: center;
       position: absolute;
       left: 50%;
       top: 0px;
       transform: translateX(-50%);
-      // transform: translateX(-50%);
+
       .logo {
         font-size: clamp(24px, 6vw, 40px);
       }
@@ -208,7 +205,6 @@ const goHome = async () => {
     .navbar,
     .nav-right {
       flex: 0 0 100%;
-      // color: $color-gray-800;
       background-color: var(--bg-header);
       max-height: 0;
       opacity: 0;
@@ -228,26 +224,4 @@ const goHome = async () => {
   }
 }
 
-// @media screen and (max-width: 550px) {
-//   #header-inner {
-//     .logo {
-//       font-size: 28px;
-//       width: 100%;
-//     }
-
-//     .menu-toggle {
-//       transform: scale(0.8);
-//       left: 16px;
-//     }
-
-//     .navbar {
-//       ul {
-//         a {
-//           font-size: 20px;
-//         }
-//       }
-//     }
-
-//   }
-// }
 </style>

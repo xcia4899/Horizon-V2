@@ -198,7 +198,6 @@ const heroSlides = [
     transition: opacity 0.3s ease-out;
     .swiper-btn {
       pointer-events: auto;
-      // color: var(--barnd);
       background: transparent;
       .icon {
         color: var(--brand);
@@ -222,7 +221,6 @@ const heroSlides = [
     right: $padding-RWD;
     bottom: clamp(40px, 5vw, 10%);
     border-radius: 1px;
-    // height: 6px;
     :deep(.swiper-pagination-bullet) {
       position: relative;
       width: clamp(60px, 10vw, 120px);
@@ -231,7 +229,7 @@ const heroSlides = [
       &.swiper-pagination-bullet-active {
         background: $color-gray-300;
       }
-      //進度條動畫
+   /*    //進度條動畫 */
       &::after {
         content: "";
         position: absolute;
@@ -244,7 +242,7 @@ const heroSlides = [
         background: $color-purple-500;
       }
     }
-    //進度條動畫
+    /* //進度條動畫 */
     @keyframes bulletProgress {
       from {
         transform: scaleX(0);

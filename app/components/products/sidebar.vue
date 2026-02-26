@@ -101,8 +101,7 @@ const resetTags = async () => {
   max-width: 280px;
   overflow: hidden;
   opacity: 1;
-
-  // color: var(--text-primary);
+  /*   color: var(--text-primary); */
   background: var(--bg-surface-strong);
 
   @media (pointer: fine) {
@@ -130,7 +129,6 @@ const resetTags = async () => {
     flex-direction: column;
     gap: 8px;
     .sidebar-group {
-      // margin-bottom: 4px;
       border-bottom: 2px dashed var(--border-default);
       transition:
         border-style 0.4s ease-out,
@@ -225,7 +223,6 @@ const resetTags = async () => {
       align-items: center;
       justify-content: center;
       padding: 8px 16px;
-      // width: 90%;
       border: 1px solid var(--border-default);
       border-radius: 4px;
       text-align: center;
@@ -263,14 +260,15 @@ const resetTags = async () => {
     height: 100%;
     z-index: 200;
     padding: 32px 48px;
-    // background-color: #030303;
+
     .sidebar-title {
       display: flex;
     }
     .sidebar-groups {
       flex: 1;
       overflow-y: scroll;
-      scrollbar-width: none; //隱藏滾輪
+      scrollbar-width: none; 
+      /* 隱藏滾輪 */
       gap: 8px;
       max-height: 400px;
       top: 0;
@@ -286,9 +284,7 @@ const resetTags = async () => {
     .mobile-btnArea {
       display: flex;
       &.btnAreaShow {
-        // opacity: 0;
         visibility: visible;
-        // z-index: 200;
         opacity: 1;
         transition: opacity 0.5s ease-out 0.3s;
       }
