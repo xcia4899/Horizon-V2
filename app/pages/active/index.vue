@@ -1,22 +1,22 @@
 <template>
-  <main id="main" class="page-activity">
+  <main class="page-activity">
     <!-- hero -->
-    <section class="hero">
-      <div class="container hero-inner">
-        <p class="kicker">Horizon Events</p>
-        <h1 class="title">Horizon 活動一覽</h1>
-        <p class="desc">
-          精選檔期、品牌週、限時優惠與新品活動。你可以用標籤與月份快速篩選。
+    <section class="activity-hero">
+      <div class="container activity-hero-inner">
+        <p class="hero-kicer">Horizon Events</p>
+        <h1 class="hero-title">Horizon 活動一覽</h1>
+        <p class="hero-desc">
+          精選檔期、品牌週、限時優惠與新品活動。你可以用標籤快速篩選。
         </p>
       </div>
     </section>
 
-    <!-- toolbar -->
-    <section class="toolbar">
-      <div class="container toolbar-inner">
-        <div class="filters">
+    <!-- activity-toolbar -->
+    <section class="activity-toolbar">
+      <div class="container activity-toolbar-inner">
+        <div class="toolbar-filters">
+          <h4>標籤</h4>
           <div class="filter-group">
-            <label class="label">標籤</label>
             <div class="chips">
               <button
                 class="chip"
@@ -38,11 +38,9 @@
               </button>
             </div>
           </div>
-
           <div class="filter-group">
-            <label class="label" for="month">月份</label>
-            <select id="month" v-model="activeMonth" class="select">
-              <option value="all">全部</option>
+            <select v-model="activeMonth" class="select">
+              <option value="all">月份</option>
               <option v-for="m in monthOptions" :key="m.value" :value="m.value">
                 {{ m.label }}
               </option>
@@ -50,9 +48,9 @@
           </div>
         </div>
 
-        <div class="meta">
+        <div class="toolbar-meta">
           <span class="count">共 {{ filteredEvents.length }} 筆</span>
-          <button class="ghost" type="button" @click="resetFilters">
+          <button class="toolbar-meta-btn" type="button" @click="resetFilters">
             清除篩選
           </button>
         </div>
@@ -60,38 +58,26 @@
     </section>
 
     <!-- list -->
-    <section class="content">
+    <section class="activity-content">
       <div class="container">
-        <!-- loading skeleton (你接 API 時可以用) -->
-        <div v-if="isLoading" class="grid">
-          <div v-for="n in 6" :key="n" class="card skeleton">
-            <div class="thumb"></div>
-            <div class="body">
-              <div class="line w-60"></div>
-              <div class="line w-90"></div>
-              <div class="line w-40"></div>
-            </div>
-          </div>
-        </div>
-
         <!-- empty -->
-        <div v-else-if="filteredEvents.length === 0" class="empty">
+        <div v-if="filteredEvents.length === 0" class="empty">
           <h3 class="empty-title">找不到符合條件的活動</h3>
           <p class="empty-desc">試試看切換標籤或月份，或直接清除篩選。</p>
-          <button class="primary" type="button" @click="resetFilters">
+          <button class="btn" type="button" @click="resetFilters">
             清除篩選
           </button>
         </div>
 
         <!-- grid -->
-        <div v-else class="grid">
+        <div v-else class="activity-content-grid">
           <article
             v-for="item in filteredEvents"
             :key="item.id"
-            class="card"
+            class="activity-card"
             :class="{ featured: item.featured }"
           >
-            <NuxtLink class="media" :to="item.to || '#'">
+            <NuxtLink class="card-media" :to="item.to || '#'">
               <img
                 class="img"
                 :src="item.image"
@@ -101,8 +87,8 @@
               <div v-if="item.badge" class="badge">{{ item.badge }}</div>
             </NuxtLink>
 
-            <div class="body">
-              <header class="header">
+            <div class="activity-card-content">
+              <header class="content-header">
                 <h3 class="card-title">
                   <NuxtLink class="title-link" :to="item.to || '#'">
                     {{ item.title }}
@@ -111,22 +97,22 @@
                 <p class="card-desc">{{ item.description }}</p>
               </header>
 
-              <footer class="footer">
-                <div class="meta-row">
+              <footer class="content-footer">
+                <div class="meta-tags">
                   <span class="date">{{ item.dateRange }}</span>
                   <div class="tags">
-                    <span v-for="t in item.tags" :key="t" class="tag">
-                      {{ t }}
+                    <span v-for="tag in item.tags" :key="tag" class="tag">
+                      {{ tag }}
                     </span>
                   </div>
                 </div>
 
-                <div class="actions">
-                  <NuxtLink class="primary" :to="item.to || '#'">
+                <div class="card-btns">
+                  <NuxtLink class="btn" :to="item.to || '#'">
                     查看活動
                   </NuxtLink>
                   <button
-                    class="ghost"
+                    class="btn"
                     type="button"
                     @click="copyTitle(item.title)"
                   >
@@ -156,7 +142,7 @@ type EventItem = {
   to?: string;
 };
 
-const isLoading = ref(false);
+// const isLoading = ref(false);
 
 // 假資料：你之後要接 API / seed 也很容易換掉
 const events = ref<EventItem[]>([
@@ -182,14 +168,14 @@ const events = ref<EventItem[]>([
     tags: ["品牌週", "Razer"],
     to: "/products?keyword=Razer",
   },
-   {
+  {
     id: "event-razer-week",
     title: "Razer 品牌週",
     description: "指定系列滿額送，熱門品項限量補貨。",
     dateRange: "2026/03/10 - 2026/03/20",
     start: "2026-03-10",
     image: "/images/promoBanner/banner-02.jpg",
-    tags: ["品牌週", "Razer"],
+    tags: ["品牌週", "MSI"],
     to: "/products?keyword=Razer",
   },
   {
@@ -252,7 +238,7 @@ const filteredEvents = computed(() => {
 });
 
 const resetFilters = () => {
-  activeTag.value = "全部"; 
+  activeTag.value = "全部";
   activeMonth.value = "all";
 };
 
@@ -266,345 +252,266 @@ const copyTitle = async (text: string) => {
 </script>
 
 <style scoped lang="scss">
-/* 若你專案已有全域 tokens，可刪掉這段 fallback */
 .page-activity {
-  --bg: var(--bg-app, #0b0c10);
-  --surface: var(--bg-surface, rgba(255, 255, 255, 0.04));
-  --surface-2: var(--bg-surface-strong, rgba(255, 255, 255, 0.06));
-  --text: var(--text-primary, rgba(255, 255, 255, 0.92));
-  --muted: var(--text-secondary, rgba(255, 255, 255, 0.68));
-  --brand: var(--brand, #a78bfa);
-  --border: var(--border-color, rgba(255, 255, 255, 0.1));
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  background: var(--bg-surface);
 }
 
-.container {
-  width: min(1120px, calc(100% - 40px));
-  margin-inline: auto;
-}
-
-.page-activity {
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100%;
-}
-
-/* hero */
-.hero {
-  padding: 88px 0 20px;
-}
-.hero-inner {
-  background: linear-gradient(
-    180deg,
-    rgba(167, 139, 250, 0.12),
-    transparent 60%
-  );
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 28px 22px;
-}
-.kicker {
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  font-size: 12px;
-  margin: 0 0 6px;
-}
-.title {
-  font-size: clamp(24px, 3vw, 34px);
-  margin: 0 0 8px;
-}
-.desc {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-/* toolbar */
-.toolbar {
-  padding: 14px 0 18px;
-}
-.toolbar-inner {
-  display: flex;
-  gap: 16px;
-  align-items: flex-end;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-.filters {
-  display: grid;
-  gap: 12px;
-}
-.filter-group {
-  display: grid;
-  gap: 8px;
-}
-.label {
-  font-size: 12px;
-  color: var(--muted);
-}
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.chip {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease;
-  &:hover {
-    transform: translateY(-1px);
-    border-color: rgba(167, 139, 250, 0.5);
+/* activity-hero */
+.activity-hero {
+  padding: calc(72px + $padding-RWD) $padding-RWD 20px;
+  .activity-hero-inner {
+    background: linear-gradient(180deg, $color-purple-300, transparent 40%);
+    border: 2px solid var(--brand-hover);
+    border-radius: 8px;
+    padding: 24px 16px;
   }
-  &.active {
-    background: rgba(167, 139, 250, 0.18);
-    border-color: rgba(167, 139, 250, 0.6);
+  .hero-kicer {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    font-size: 12px;
+    margin: 0 0 6px;
+  }
+  .hero-title {
+    font-size: clamp(24px, 3vw, 34px);
+    margin: 0 0 8px;
+  }
+  .hero-desc {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  @media (max-width: 550px) {
+    .activity-hero {
+      padding-top: 72px;
+    }
   }
 }
-.select {
-  width: 180px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  color: var(--text);
-}
-.meta {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  color: var(--muted);
-}
-.count {
-  font-size: 12px;
-}
 
-/* content */
-.content {
-  padding: 10px 0 64px;
-}
-
-/* grid/cards */
-.grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(12, 1fr);
-}
-
-.card {
-  grid-column: span 4;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: none;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    border-color 0.25s ease;
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow);
-    border-color: rgba(167, 139, 250, 0.35);
+/* activity-toolbar */
+.activity-toolbar {
+  padding: 16px 0 20px;
+  .activity-toolbar-inner {
+    display: flex;
+    gap: 16px;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
-  &.featured {
-    grid-column: span 12;
+  .toolbar-filters {
     display: grid;
-    grid-template-columns: 1.2fr 1fr;
+    gap: 18px;
+    .filter-group {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      .chip {
+        border: 2px solid var(--border-default);
+        background: var(--bg-surface);
+        color: var(--text-primary);
+        padding: 8px 16px;
+        border-radius: 16px;
+        cursor: pointer;
+        transition:
+          color 0.3s ease,
+          border-color 0.3s ease,
+          background-color 0.3s ease;
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            border-color: var(--brand);
+          }
+        }
+
+        &.active {
+          background: var(--brand);
+          border-color: var(--brand);
+          color: $color-white;
+        }
+      }
+    }
+    .select {
+      width: 180px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 2px solid var(--border-default);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      @media (max-width: 550px) {
+        width: 100%;
+      }
+    }
+  }
+  .toolbar-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+
+    .count {
+      font-size: clamp(12px, 2vw, 14px);
+    }
+    .toolbar-meta-btn {
+      color: var(--text-secondary);
+      border: 1px solid var(--border-default);
+      padding: 4px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      &:hover {
+        border: 1px solid var(--brand-hover);
+      }
+      &:active {
+        transform: scale(0.95);
+        background-color: var(--bg-surface-strong);
+      }
+    }
   }
 }
 
-.media {
-  position: relative;
-  display: block;
-  aspect-ratio: 16 / 9;
-  background: var(--surface-2);
-}
-.img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transform: scale(1);
-  transition: transform 0.35s ease;
-}
-.card:hover .img {
-  transform: scale(1.03);
-}
-.badge {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 12px;
-  background: rgba(167, 139, 250, 0.22);
-  border: 1px solid rgba(167, 139, 250, 0.45);
-  color: var(--text);
-  backdrop-filter: blur(10px);
-}
+/* activity-content */
+.activity-content {
+  padding: 10px 0 64px;
+  /* grid/cards */
+  .activity-content-grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(12, 1fr);
+    .activity-card {
+      grid-column: span 4;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: none;
+      transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+        border-color: rgba(167, 139, 250, 0.35);
+      }
+      &.featured {
+        grid-column: span 12;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+      }
+      .card-media {
+        position: relative;
+        display: block;
+        aspect-ratio: 16 / 9;
+        background: var(--bg-surface-strong);
+        .badge {
+          position: absolute;
+          top: 12px;
+          left: 12px;
+          padding: 6px 10px;
+          border-radius: 999px;
+          font-size: 12px;
+          background: rgba(167, 139, 250, 0.22);
+          border: 1px solid rgba(167, 139, 250, 0.45);
+          color: var(--text-primary);
+          backdrop-filter: blur(10px);
+        }
+        .img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transform: scale(1);
+          transition: transform 0.35s ease;
+        }
+      }
+      &:hover .card-media .img {
+        transform: scale(1.03);
+      }
+    }
+    @media (max-width: 1024px) {
+      .activity-card {
+        grid-column: span 6;
+      }
+      .activity-card.featured {
+        grid-column: span 12;
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 680px) {
+      .activity-card {
+        grid-column: span 12;
+      }
+    }
+  }
 
-.body {
-  padding: 14px 14px 16px;
-  display: grid;
-  gap: 12px;
-}
-.card-title {
-  margin: 0;
-  font-size: 18px;
-  line-height: 1.25;
-}
-.title-link {
-  color: var(--text);
-  text-decoration: none;
-  &:hover {
-    color: var(--brand);
+  .activity-card-content {
+    padding: 14px 14px 16px;
+    display: grid;
+    gap: 12px;
+    .card-title {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.25;
+      .title-link {
+        color: var(--text-primary);
+        text-decoration: none;
+        &:hover {
+          color: var(--brand);
+        }
+      }
+    }
+    .card-desc {
+      margin: 8px 0 0;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+    .content-footer {
+      display: grid;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      .meta-tags {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        .date {
+          font-size: 12px;
+          color: var(--text-secondary);
+        }
+        .tags {
+          display: flex;
+          gap: 6px;
+          flex-wrap: wrap;
+          .tag {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text-secondary);
+          }
+        }
+      }
+    }
   }
-}
-.card-desc {
-  margin: 8px 0 0;
-  color: var(--muted);
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-.footer {
-  display: grid;
-  gap: 12px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.meta-row {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.date {
-  font-size: 12px;
-  color: var(--muted);
-}
-.tags {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-.tag {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--muted);
-}
-
-.actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-/* buttons */
-.primary,
-.ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 12px;
-  border-radius: 14px;
-  text-decoration: none;
-  cursor: pointer;
-  border: 1px solid var(--border);
-  transition:
-    transform 0.18s ease,
-    border-color 0.18s ease,
-    background 0.18s ease;
-}
-.primary {
-  background: rgba(167, 139, 250, 0.18);
-  border-color: rgba(167, 139, 250, 0.55);
-  color: var(--text);
-  &:hover {
-    transform: translateY(-1px);
-    border-color: rgba(167, 139, 250, 0.85);
-  }
-}
-.ghost {
-  background: transparent;
-  color: var(--muted);
-  &:hover {
-    transform: translateY(-1px);
-    color: var(--text);
-    border-color: rgba(255, 255, 255, 0.18);
-  }
-}
-
-/* empty */
-.empty {
-  text-align: center;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 22px;
-  padding: 32px 18px;
-}
-.empty-title {
-  margin: 0 0 8px;
-}
-.empty-desc {
-  margin: 0 0 16px;
-  color: var(--muted);
-}
-
-/* skeleton */
-.skeleton {
-  pointer-events: none;
-  .thumb {
-    aspect-ratio: 16 / 9;
-    background: rgba(255, 255, 255, 0.06);
-  }
-  .line {
-    height: 12px;
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 999px;
-  }
-  .w-60 {
-    width: 60%;
-  }
-  .w-90 {
-    width: 90%;
-  }
-  .w-40 {
-    width: 40%;
-  }
-}
-
-/* RWD */
-@media (max-width: 1024px) {
-  .card {
-    grid-column: span 6;
-  }
-  .card.featured {
-    grid-column: span 12;
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 680px) {
-  .hero {
-    padding-top: 72px;
-  }
-  .card {
-    grid-column: span 12;
-  }
-  .select {
-    width: 100%;
+  /* empty */
+  .empty {
+    text-align: center;
+    border: 1px solid var(--border-default);
+    background: var(--bg-surface);
+    border-radius: 22px;
+    padding: 32px 18px;
+    .empty-title {
+      margin: 0 0 8px;
+    }
+    .empty-desc {
+      margin: 0 0 16px;
+      color: var(--text-secondary);
+    }
   }
 }
 </style>

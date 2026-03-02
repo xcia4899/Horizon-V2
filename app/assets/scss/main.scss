@@ -110,6 +110,7 @@ button {
 }
 
 .btn {
+    display: block;
     width: clamp(120px, 16vw, 160px);
     height: 44px;
 
@@ -201,6 +202,7 @@ button {
     transform: scale(1);
     transition: transform 0.3s ease-out;
     cursor: pointer;
+
     &::after {
         content: "";
         position: absolute;
@@ -215,11 +217,13 @@ button {
         transform: translate3d(-50%, -50%, 0) scale(1);
         animation: pointscale 2s linear infinite;
     }
+
     @media (hover:hover) and (pointer:fine) {
         &:hover::after {
             animation: pointscale 0.8s linear infinite;
         }
     }
+
     @keyframes pointscale {
         0% {
             transform: translate3d(-50%, -50%, 0) scale(1);
@@ -236,8 +240,9 @@ button {
             opacity: 0;
         }
     }
-    &:active{
-         transform:  scale(0.88)
+
+    &:active {
+        transform: scale(0.88)
     }
 }
 
