@@ -8,10 +8,12 @@ export  interface MenuItem {
   text: string;
   img: string;
   tag?: string;
+  to:string;
 }
 // 主選單結構
 export  interface SetMenu {
   ID: MenuKey;
   label: string;
   items: MenuItem[];
+  to?:string;
 }

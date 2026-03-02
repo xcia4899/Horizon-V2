@@ -9,11 +9,13 @@
     >
       <!-- label -->
       <button
-        type="button"
+        v-if="!menu.items.length"
         class="navbar-title"
-        :class="{ active: openMenu === menu.ID && menu.items.length > 0 }"
-        @click="isTouch && toggleMenu(menu.ID)"
+        @click.prevent="navigateWithDelay(menu.to)"
       >
+        {{ menu.label }}
+      </button>
+      <button v-else class="navbar-title" @click="toggleMenu(menu.ID)">
         {{ menu.label }}
       </button>
       <!-- 下拉選單 -->
@@ -93,10 +95,17 @@ const goProducts = async (item: MenuItem) => {
   await looding(200);
   router.push({
     path: "/products",
-    query: item ? {} : {},
+    query: item ? {tags: item.tag} : {},
   });
+  // await navigateTo({ path: "/products", query: { tags: item.tag } });
   openMenu.value = null;
   props.closeMenuOpenMobile();
+};
+
+const navigateWithDelay = async (to?: string) => {
+  if (!to) return;
+  await looding(200);
+  await router.push(to);
 };
 </script>
 
@@ -187,7 +196,7 @@ const goProducts = async (item: MenuItem) => {
   }
   .dropdown-inner {
     max-width: 1280px;
-    margin: 0 auto; 
+    margin: 0 auto;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -241,7 +250,9 @@ const goProducts = async (item: MenuItem) => {
       transform-origin: top;
       background: var(--bg-surface-soft);
       box-shadow: transparent;
-      transition: transform 0.4s ease ,box-shadow 0.6s ease ;
+      transition:
+        transform 0.4s ease,
+        box-shadow 0.6s ease;
       z-index: 0;
     }
     @media (hover: hover) and (pointer: fine) {

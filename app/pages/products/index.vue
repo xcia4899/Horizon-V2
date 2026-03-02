@@ -63,17 +63,6 @@ const router = useRouter();
 const { isDesktop } = useInteractionMode();
 const products = await useProducts();
 
-//keyword搜尋值
-const keyword = computed({
-  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
-  set: (val) => {
-    const query = { ...route.query };
-    if (!val) delete query.keyword;
-    else query.keyword = val;
-    router.replace({ query: query });
-  },
-});
-
 //sidebar 是否關閉
 const isSidebarClose = ref(true);
 // 切換 sidebar 開關
@@ -110,7 +99,7 @@ const sidebarList: SidebarList[] = [
   {
     title: "滑鼠",
     key: "tags",
-    type: "multi",
+    type: "mouse",
     options: [
       { label: "有線滑鼠", value: "有線滑鼠" },
       { label: "無線滑鼠", value: "無線滑鼠" },
@@ -175,9 +164,35 @@ const collapseAllSections = () => {
 
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
-
 /*--main-products 商品資料--*/
+
+// 從route.query.tags加入selectTags
+const parseTags = (q: unknown): string[] => {
+  if (Array.isArray(q)) return q.map(String);
+  if (typeof q === "string") return q.split(",").filter(Boolean);
+  return [];
+};
+watch(
+  () => route.query.tags,
+  (q) => {
+    selectTags.value = parseTags(q);
+    console.log(route.query.tags)
+  },
+  { immediate: true },
+);
+
 //建立productMainRef
+
+//keyword搜尋值
+const keyword = computed({
+  get: () => (route.query.keyword ? String(route.query.keyword) : ""),
+  set: (val) => {
+    const query = { ...route.query };
+    if (!val) delete query.keyword;
+    else query.keyword = val;
+    router.replace({ query: query });
+  },
+});
 const productMainRef = ref<HTMLElement | null>(null);
 // 計算後的用商品資料
 const productListView = computed<Product[]>(() => {
@@ -186,7 +201,7 @@ const productListView = computed<Product[]>(() => {
   const stringTags = tags.filter((t): t is string => typeof t === "string");
   const numberTags = tags.filter((t): t is number => typeof t === "number");
 
-  const kw = keyword.value.trim();
+  const kw = keyword.value.trim().toLowerCase();
 
   const list = products.filter((product) => {
     const matchSidebarTag =
@@ -198,7 +213,18 @@ const productListView = computed<Product[]>(() => {
       numberTags.length === 0 ||
       numberTags.some((maxPrice) => priceMatch(product.price, maxPrice));
 
-    const matchKeyword = !kw || product.name.includes(kw);
+    const searchText = [
+      product.name,
+      product.subtitle,
+      product.brand,
+      product.category,
+      product.color,
+      product.description,
+      ...(product.tags ?? []),
+    ]
+      .join(" ")
+      .toLowerCase();
+    const matchKeyword = !kw || searchText.includes(kw);
 
     return matchSidebarTag && matchSidebarPrice && matchKeyword;
   });

@@ -45,50 +45,88 @@ const menus: SetMenu[] = [
   {
     ID: "product",
     label: "商品",
+    to: "/products",
     items: [
-      { text: "新品上市", img: "/images/pic-detal/RAZER-1000/10001.jpg" },
-      { text: "特價商品", img: "/images/pic-detal/PRO-1002/10001.png" },
+      {
+        text: "新品上市",
+        img: "/images/pic-detal/RAZER-1000/10001.jpg",
+        to: "/products?sort=new",
+      },
+      {
+        text: "特價商品",
+        img: "/images/pic-detal/PRO-1002/10001.png",
+        to: "/products?onsale=true",
+      },
       {
         text: "滑鼠",
         img: "/images/picture/fourth-row2-01.png",
         tag: "mouse",
+        to: "/products?tags=mouse",
       },
       {
         text: "鍵盤",
         img: "/images/picture/fourth-row2-06.png",
         tag: "keyboard",
+        to: "/products?tags=keyboard",
       },
       {
         text: "耳機",
         img: "/images/pic-detal/PRO-1007/10007.png",
         tag: "headset",
+        to: "/products/category/headset",
       },
       {
         text: "麥克風",
         img: "/images/pic-detal/ROG-1005/10003.png",
         tag: "mic",
+        to: "/products/category/mic",
       },
     ],
   },
+
   {
     ID: "brand",
     label: "品牌",
+    to: "/products",
     items: [
-      { text: "MSI", img: "/images/logo/MSI.png", tag: "msi" },
-      { text: "Logitech", img: "/images/logo/LOGI.png", tag: "logitech" },
-      { text: "Razer", img: "/images/logo/RAZER.png", tag: "razer" },
-      { text: "ROG", img: "/images/logo/ROG.png", tag: "rog" },
+      {
+        text: "MSI",
+        img: "/images/logo/MSI.png",
+        tag: "msi",
+        to: "/products?brand=MSI",
+      },
+      {
+        text: "Logitech",
+        img: "/images/logo/LOGI.png",
+        tag: "logitech",
+        to: "/products?brand=Logitech",
+      },
+      {
+        text: "Razer",
+        img: "/images/logo/RAZER.png",
+        tag: "razer",
+        to: "/products?brand=Razer",
+      },
+      {
+        text: "ROG",
+        img: "/images/logo/ROG.png",
+        tag: "rog",
+        to: "/products?brand=ROG",
+      },
     ],
   },
 
   {
     ID: "event",
     label: "活動",
+    to: "/activity",
     items: [],
   },
+
   {
     ID: "about",
     label: "關於",
+    to: "/about",
     items: [],
   },
 ];

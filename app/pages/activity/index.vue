@@ -152,7 +152,7 @@ const events = ref<EventItem[]>([
     description: "鍵盤、滑鼠、耳機與螢幕周邊精選折扣，會員再享加碼券。",
     dateRange: "2026/03/01 - 2026/03/14",
     start: "2026-03-01",
-    image: "/images/promoBanner/banner-01.jpg",
+    image: "/images/pic-active/10004.jpg",
     tags: ["限時", "全館"],
     badge: "HOT",
     featured: true,
@@ -164,19 +164,19 @@ const events = ref<EventItem[]>([
     description: "指定系列滿額送，熱門品項限量補貨。",
     dateRange: "2026/03/10 - 2026/03/20",
     start: "2026-03-10",
-    image: "/images/promoBanner/banner-02.jpg",
+    image: "/images/pic-active/10005.jpg",
     tags: ["品牌週", "Razer"],
     to: "/products?keyword=Razer",
   },
   {
-    id: "event-razer-week",
-    title: "Razer 品牌週",
+    id: "event-Logitech-week",
+    title: "Logitech 品牌週",
     description: "指定系列滿額送，熱門品項限量補貨。",
     dateRange: "2026/03/10 - 2026/03/20",
     start: "2026-03-10",
-    image: "/images/promoBanner/banner-02.jpg",
-    tags: ["品牌週", "MSI"],
-    to: "/products?keyword=Razer",
+    image: "/images/pic-active/10001.jpg",
+    tags: ["品牌週", "Logitech"],
+    to: "/products?keyword=Logitech",
   },
   {
     id: "event-new-arrivals",
@@ -184,7 +184,7 @@ const events = ref<EventItem[]>([
     description: "整理桌面風格，從細節開始。多款材質與配色上架。",
     dateRange: "2026/02/20 - 2026/03/31",
     start: "2026-02-20",
-    image: "/images/products/promo-banner.jpg",
+    image: "/images/pic-active/10002.jpg",
     tags: ["新品", "配件"],
     to: "/products?keyword=新品",
   },
@@ -194,7 +194,7 @@ const events = ref<EventItem[]>([
     description: "整理桌面風格，從細節開始。多款材質與配色上架。",
     dateRange: "2026/02/20 - 2026/03/31",
     start: "2026-02-20",
-    image: "/images/products/promo-banner.jpg",
+    image: "/images/pic-active/10003.jpg",
     tags: ["新品", "配件"],
     to: "/products?keyword=新品",
   },
@@ -260,9 +260,8 @@ const copyTitle = async (text: string) => {
 .activity-hero {
   padding: calc(72px + $padding-RWD) $padding-RWD 20px;
   .activity-hero-inner {
-    background: linear-gradient(180deg, $color-purple-300, transparent 40%);
-    border: 2px solid var(--brand-hover);
-    border-radius: 8px;
+    border-bottom: 2px solid var(--brand-hover);
+    // border-radius: 8px;
     padding: 24px 16px;
   }
   .hero-kicer {

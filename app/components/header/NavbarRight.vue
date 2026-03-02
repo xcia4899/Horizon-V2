@@ -100,6 +100,7 @@ const toggleMenuMobile = () => {
 };
 
 const route = useRoute();
+const router = useRouter();
 // 取得el-input 實例
 const inputRef = ref<InputInstance | null>(null);
 //螢幕、手機模式判斷
@@ -111,8 +112,11 @@ const keyword = ref("");
 const showSearch = ref(false);
 //keyword是否有值，用來判斷是否關閉搜尋框
 const hasKeyword = computed(() => !!keyword.value?.trim());
+
 //判斷是否在商品頁面
 const isOnProducts = computed(() => route.path === "/products");
+
+//
 
 // 點擊搜尋/關閉按鈕
 const onSearchClick = async () => {
@@ -127,21 +131,26 @@ const onSearchClick = async () => {
   }
   // 不再商品頁但有關鍵字
   if (hasKeyword.value) {
+    keyword.value = "";
     return;
   }
+
   showSearch.value = false;
 };
+
 //清除關鍵字關閉搜索框
 const clearSearch = async () => {
-  const newQuery = { ...route.query };
-  delete newQuery.keyword;
-  await navigateTo({
-    path: "/products",
-    query: newQuery,
-  });
-
   keyword.value = "";
   showSearch.value = false;
+  //  只要 URL 目前有 keyword，就把它移除（不換頁）
+  if ("keyword" in route.query) {
+    const newQuery = { ...route.query };
+    delete newQuery.keyword;
+    await router.replace({
+      path: route.path, // 保持當前頁面
+      query: newQuery, // 只更新 query
+    });
+  }
 };
 
 const blurSearch = () => {
@@ -149,6 +158,7 @@ const blurSearch = () => {
   showSearch.value = false;
   clearSearch();
 };
+
 // ESC 關閉
 const onKeydown = (e: KeyboardEvent) => {
   if (!isDesktop.value) return;
@@ -341,7 +351,7 @@ const cartView = computed(() => {
 
     color: $color-white;
     background-color: var(--action-primary);
-    pointer-events: none; 
+    pointer-events: none;
     /* // 不干擾點擊 */
   }
 }
@@ -375,7 +385,6 @@ const cartView = computed(() => {
     overflow-y: auto;
   }
   .cart-item {
-
     min-height: 90px;
     display: flex;
     justify-content: space-between;
@@ -467,7 +476,6 @@ const cartView = computed(() => {
 @media (hover: hover) and (pointer: fine) {
   .cart-btn:hover + .miniCart {
     max-height: 600px;
-
   }
 }
 </style>
