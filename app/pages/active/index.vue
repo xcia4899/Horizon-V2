@@ -89,11 +89,11 @@
 
             <div class="activity-card-content">
               <header class="content-header">
-                <h3 class="card-title">
+                <h4 class="card-title">
                   <NuxtLink class="title-link" :to="item.to || '#'">
                     {{ item.title }}
                   </NuxtLink>
-                </h3>
+                </h4>
                 <p class="card-desc">{{ item.description }}</p>
               </header>
 
@@ -381,7 +381,7 @@ const copyTitle = async (text: string) => {
     .activity-card {
       grid-column: span 4;
       background: var(--bg-surface);
-      border: 1px solid var(--border-default);
+      border: 2px solid var(--border-default);
       border-radius: 22px;
       overflow: hidden;
       box-shadow: none;
@@ -390,14 +390,14 @@ const copyTitle = async (text: string) => {
         box-shadow 0.25s ease,
         border-color 0.25s ease;
       &:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow);
-        border-color: rgba(167, 139, 250, 0.35);
+        box-shadow: var(--shadow-card);
+        border-color: var(--brand);
       }
       &.featured {
         grid-column: span 12;
         display: grid;
-        grid-template-columns: 1.2fr 1fr;
+        gap: 16px;
+        grid-template-columns: 1.3fr 1fr;
       }
       .card-media {
         position: relative;
@@ -408,11 +408,11 @@ const copyTitle = async (text: string) => {
           position: absolute;
           top: 12px;
           left: 12px;
-          padding: 6px 10px;
+          padding: 8px 12px;
           border-radius: 999px;
           font-size: 12px;
-          background: rgba(167, 139, 250, 0.22);
-          border: 1px solid rgba(167, 139, 250, 0.45);
+          background: rgba($color-purple-500, 0.22);
+          border: 1px solid $color-purple-300;
           color: var(--text-primary);
           backdrop-filter: blur(10px);
         }
@@ -427,6 +427,69 @@ const copyTitle = async (text: string) => {
       }
       &:hover .card-media .img {
         transform: scale(1.03);
+      }
+    }
+    .activity-card-content {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+      .content-header {
+        .card-title {
+          .title-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            &:hover {
+              color: var(--brand);
+            }
+          }
+        }
+        .card-desc {
+          margin: 8px 0 0;
+          color: var(--text-secondary);
+          line-height: 1.6;
+        }
+      }
+
+      .content-footer {
+        display: grid;
+        // place-content: center;
+        gap: 12px;
+        padding-top: 8px;
+        border-top: 1px solid var(--border-default);
+        .meta-tags {
+          display: flex;
+          gap: 8px;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: wrap;
+          .date {
+            font-size: 12px;
+            color: var(--text-secondary);
+          }
+          .tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            .tag {
+              font-size: 12px;
+              padding: 4px 8px;
+              border-radius: 24px;
+              border: 1px solid var(--border-default);
+              color: var(--text-secondary);
+            }
+          }
+        }
+        .card-btns {
+          display: flex;
+          justify-content: left;
+          align-items: end;
+          gap: 16px;
+          .btn {
+            display: grid;
+            place-content: center;
+            width: clamp(80px, 16vw, 120px);
+          }
+        }
       }
     }
     @media (max-width: 1024px) {
@@ -445,59 +508,6 @@ const copyTitle = async (text: string) => {
     }
   }
 
-  .activity-card-content {
-    padding: 14px 14px 16px;
-    display: grid;
-    gap: 12px;
-    .card-title {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.25;
-      .title-link {
-        color: var(--text-primary);
-        text-decoration: none;
-        &:hover {
-          color: var(--brand);
-        }
-      }
-    }
-    .card-desc {
-      margin: 8px 0 0;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-size: 14px;
-    }
-    .content-footer {
-      display: grid;
-      gap: 12px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      .meta-tags {
-        display: flex;
-        gap: 10px;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        .date {
-          font-size: 12px;
-          color: var(--text-secondary);
-        }
-        .tags {
-          display: flex;
-          gap: 6px;
-          flex-wrap: wrap;
-          .tag {
-            font-size: 12px;
-            padding: 4px 8px;
-            border-radius: 999px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-secondary);
-          }
-        }
-      }
-    }
-  }
   /* empty */
   .empty {
     text-align: center;

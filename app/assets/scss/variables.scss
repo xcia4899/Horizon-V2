@@ -67,7 +67,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
     --action-primary-hover: var(--brand-soft);
     --action-primary-soft: var(--brand-soft);
     --shadow-default: 0px 2px 2px 0px rgba(31, 31, 31, 0.4);
-    --shadow-card: 0 0px 2px 1px rgba(31, 31, 31, 0.4);
+    --shadow-card: 0 0px 8px 4px rgba(31, 31, 31, 0.4);
     --shadow-bottomBar: 0 -2px 2px 0px rgba(31, 31, 31, 0.4);
     //  ========== State =========
     --state-danger: #{$color-red-500}; // 
@@ -109,7 +109,7 @@ $padding-RWD: clamp(16px, 4vw, 32px);
         --action-primary-hover: var(--brand);
         --action-primary-soft: var(--brand-soft);
         --shadow-default: 0px 2px 2px 0px rgba(117, 117, 117, 0.4);
-        --shadow-card: 0 0px 2px 1px rgba(117, 117, 117, 0.4);
+        --shadow-card: 0 0px 8px 4px rgba(117, 117, 117, 0.4);
         --shadow-bottomBar: 0 -2px 2px 0px rgba(117, 117, 117, 0.4);
         // /========== State ========= 
         --state-danger: #{$color-red-500}; //
