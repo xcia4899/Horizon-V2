@@ -1,10 +1,9 @@
 export interface SidbarOption {
   label:string;
-  value:string |number
+  value:string |number | object
 }
 export interface SidebarList {
   title:string
   key:string
-  type:string
   options:SidbarOption[]
 }

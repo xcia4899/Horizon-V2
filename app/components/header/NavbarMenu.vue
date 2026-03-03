@@ -93,11 +93,12 @@ onBeforeUnmount(() => {
 //跳轉商品頁 可代參數
 const goProducts = async (item: MenuItem) => {
   await looding(200);
+
   router.push({
     path: "/products",
-    query: item ? {tags: item.tag} : {},
+    query: item?.tag ? { tag: [item.tag] } : {},
+    
   });
-  // await navigateTo({ path: "/products", query: { tags: item.tag } });
   openMenu.value = null;
   props.closeMenuOpenMobile();
 };

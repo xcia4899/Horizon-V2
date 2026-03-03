@@ -74,43 +74,51 @@ const toggleFilter = async () => {
 
 //sidebar項目
 const sidebarList: SidebarList[] = [
+    {
+    title: "品牌",
+    key: "brand",
+
+    options: [
+      { label: "特價中", value: "logitech" },
+    ],
+  },
   {
     title: "品牌",
     key: "brand",
-    type: "multi",
+
     options: [
-      { label: "Logitech", value: "Logitech" },
-      { label: "Razer", value: "Razer" },
-      { label: "ROG", value: "ROG" },
-      { label: "MSI", value: "MSI" },
+      { label: "Logitech", value: "logitech" },
+      { label: "Razer", value: "razer" },
+      { label: "ROG", value: "rog" },
+      { label: "MSI", value: "msi" },
     ],
   },
   {
     title: "鍵盤",
-    key: "tags",
-    type: "multi",
+    key: "keyboard",
+
     options: [
       { label: "機械鍵盤", value: "機械鍵盤" },
       { label: "薄式鍵盤", value: "薄式鍵盤" },
       { label: "無線鍵盤", value: "無線鍵盤" },
-      { label: "RGB 鍵盤", value: "RGB 鍵盤" },
+      { label: "RGB 鍵盤", value: "rgb 鍵盤" },
     ],
   },
   {
     title: "滑鼠",
-    key: "tags",
-    type: "mouse",
+    key: "mouse",
+
     options: [
       { label: "有線滑鼠", value: "有線滑鼠" },
       { label: "無線滑鼠", value: "無線滑鼠" },
       { label: "電競滑鼠", value: "電競滑鼠" },
-      { label: "RGB 滑鼠", value: "RGB 滑鼠" },
+      { label: "RGB 滑鼠", value: "rgb 滑鼠" },
     ],
   },
   {
     title: "耳機",
-    key: "tags",
-    type: "multi",
+    key: "earphone",
+
     options: [
       { label: "藍芽耳機", value: "藍芽耳機" },
       { label: "有線耳機", value: "有線耳機" },
@@ -120,28 +128,28 @@ const sidebarList: SidebarList[] = [
   },
   {
     title: "麥克風",
-    key: "tags",
-    type: "multi",
+    key: "mic",
+
     options: [
-      { label: "USB 麥克風", value: "USB 麥克風" },
+      { label: "USB 麥克風", value: "usb 麥克風" },
       { label: "3.5mm 麥克風", value: "3.5mm 麥克風" },
       { label: "電容式麥克風", value: "電容式麥克風" },
     ],
   },
   {
     title: "滑鼠墊",
-    key: "tags",
-    type: "multi",
+    key: "mousepad",
+
     options: [
       { label: "小型滑鼠墊", value: "小型滑鼠墊" },
       { label: "大型滑鼠墊", value: "大型滑鼠墊" },
-      { label: "RGB 滑鼠墊", value: "RGB 滑鼠墊" },
+      { label: "RGB 滑鼠墊", value: "rgb 滑鼠墊" },
     ],
   },
   {
     title: "價格",
     key: "price",
-    type: "single",
+
     options: [
       { label: "$2,000以下", value: 2000 },
       { label: "$4,000以下", value: 4000 },
@@ -149,6 +157,24 @@ const sidebarList: SidebarList[] = [
     ],
   },
 ];
+//過濾route.tag名單
+const tagGroupKeys = new Set([
+  "keyboard",
+  "mouse",
+  "earphone",
+  "mic",
+  "mousepad",
+]);
+//從sidebar提取出tagGroupKeys的內容
+const tagGroupMap: Record<string, string[]> = Object.fromEntries(
+  sidebarList
+    .filter((g) => tagGroupKeys.has(g.key))
+    .map((g) => [
+      g.key,
+      g.options.map((o) => String(o.value)), 
+    ]),
+);
+
 //sidbar的Sections展開關閉
 const openSections = ref<number[]>([]);
 const toggleSection = (index: number) => {
@@ -166,21 +192,6 @@ const collapseAllSections = () => {
 const selectTags = ref<(string | number)[]>([]);
 /*--main-products 商品資料--*/
 
-// 從route.query.tags加入selectTags
-const parseTags = (q: unknown): string[] => {
-  if (Array.isArray(q)) return q.map(String);
-  if (typeof q === "string") return q.split(",").filter(Boolean);
-  return [];
-};
-watch(
-  () => route.query.tags,
-  (q) => {
-    selectTags.value = parseTags(q);
-    console.log(route.query.tags)
-  },
-  { immediate: true },
-);
-
 //建立productMainRef
 
 //keyword搜尋值
@@ -194,20 +205,29 @@ const keyword = computed({
   },
 });
 const productMainRef = ref<HTMLElement | null>(null);
+const norm = (s: string) => s.trim().toLowerCase();
 // 計算後的用商品資料
 const productListView = computed<Product[]>(() => {
   const tags = selectTags.value;
 
-  const stringTags = tags.filter((t): t is string => typeof t === "string");
+  const stringTags = tags
+    .filter((t): t is string => typeof t === "string")
+    .map(norm);
+
   const numberTags = tags.filter((t): t is number => typeof t === "number");
 
   const kw = keyword.value.trim().toLowerCase();
 
+  // const saleOnly = stringTags.includes(norm("onSale"));
+
   const list = products.filter((product) => {
+    const brandKey = norm(product.brand);
+    const productTags = (product.tags ?? []).map(norm);
+
     const matchSidebarTag =
       stringTags.length === 0 ||
-      stringTags.includes(product.brand) ||
-      stringTags.some((tag) => product.tags?.includes(tag));
+      stringTags.includes(brandKey) ||
+      stringTags.some((t) => productTags.includes(t));
 
     const matchSidebarPrice =
       numberTags.length === 0 ||
@@ -224,11 +244,12 @@ const productListView = computed<Product[]>(() => {
     ]
       .join(" ")
       .toLowerCase();
+
     const matchKeyword = !kw || searchText.includes(kw);
 
     return matchSidebarTag && matchSidebarPrice && matchKeyword;
   });
-  // scrollToProductsMainRef();
+
   return list;
 });
 //捲動到指定列表高度
@@ -301,13 +322,21 @@ watch(
     const stringTags = tags.filter((t) => typeof t === "string");
     const numberTags = tags.filter((t) => typeof t === "number");
 
-    router.replace({
-      query: {
-        ...route.query,
-        tag: stringTags.length ? stringTags : undefined,
-        price: numberTags.length ? numberTags : undefined,
-      },
-    });
+    const nextQuery = {
+      ...route.query,
+      tag: stringTags.length ? stringTags : undefined,
+      price: numberTags.length ? numberTags : undefined,
+    };
+
+    // 如果下一個 query 跟現在一樣，就不要replace
+    const same =
+      JSON.stringify(nextQuery.tag ?? []) ===
+        JSON.stringify(route.query.tag ?? []) &&
+      JSON.stringify(nextQuery.price ?? []) ===
+        JSON.stringify(route.query.price ?? []);
+    if (same) return;
+
+    router.replace({ query: nextQuery });
   },
   { deep: true },
 );
@@ -315,9 +344,12 @@ watch(
 watch(
   () => route.query,
   (q) => {
-    const tags = toStrArray(q.tag); // string[]
+    const rawTags = toStrArray(q.tag).map(norm); // 先正規化
     const prices = toNumArray(q.price); // number[]
-    selectTags.value = [...tags, ...prices];
+    const expandedTags = rawTags.flatMap((t) => tagGroupMap[t] ?? [t]);
+    const finalTags = expandedTags.map(norm);
+
+    selectTags.value = [...finalTags, ...prices];
   },
   { immediate: true },
 );
