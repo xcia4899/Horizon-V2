@@ -255,6 +255,11 @@ const copyTitle = async (text: string) => {
 .page-activity {
   background: var(--bg-surface);
 }
+.container {
+  width: min(1024px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
 
 /* activity-hero */
 .activity-hero {

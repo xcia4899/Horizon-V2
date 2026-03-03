@@ -2,72 +2,32 @@
 <template>
   <div class="about">
     <!-- Hero -->
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-content">
-          <p class="kicker">About Horizon V2</p>
-          <h1 class="title">關於我們</h1>
-          <p class="subtitle">
+    <section class="about-hero">
+      <div class="container about-hero-inner">
+        <div class="about-hero-content">
+          <p class="about-hero-kicker">About Horizon V2</p>
+          <h1 class="about-hero-title">關於我們</h1>
+          <p class="about-hero-subtitle">
             我們專注於電競周邊精選與更好的購物體驗：清楚的分類、好用的篩選、快速的導覽。
           </p>
 
-          <div class="hero-actions">
-            <NuxtLink class="btn primary" to="/products">前往商品</NuxtLink>
-            <NuxtLink class="btn ghost" to="/contact">聯絡我們</NuxtLink>
+          <div class="about-hero-actions">
+            <NuxtLink class="btn" to="/products">前往商品</NuxtLink>
+            <NuxtLink class="btn">聯絡我們</NuxtLink>
           </div>
 
-          <div class="hero-highlights" aria-label="quick highlights">
-            <div class="chip">
+          <div class="about-hero-highlights" aria-label="quick highlights">
+            <div class="about-hero-chip">
               <span class="chip-dot"></span>
               <span>嚴選品牌</span>
             </div>
-            <div class="chip">
+            <div class="about-hero-chip">
               <span class="chip-dot"></span>
               <span>快速出貨</span>
             </div>
-            <div class="chip">
+            <div class="about-hero-chip">
               <span class="chip-dot"></span>
               <span>售後支援</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-card" aria-label="about summary card">
-          <div class="card-head">
-            <div class="logo">H</div>
-            <div class="card-title">
-              <div class="name">Horizon V2</div>
-              <div class="tag">Gaming Gear Store</div>
-            </div>
-          </div>
-
-          <ul class="card-list">
-            <li>
-              <strong>成立</strong>
-              <span>{{ foundedYear }}</span>
-            </li>
-            <li>
-              <strong>服務</strong>
-              <span>鍵盤・滑鼠・耳機・螢幕・周邊</span>
-            </li>
-            <li>
-              <strong>理念</strong>
-              <span>把挑選變簡單，把體驗變更好</span>
-            </li>
-          </ul>
-
-          <div class="card-foot">
-            <div class="stat">
-              <div class="stat-num">{{ stats.products }}+</div>
-              <div class="stat-label">商品</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">{{ stats.brands }}+</div>
-              <div class="stat-label">品牌</div>
-            </div>
-            <div class="stat">
-              <div class="stat-num">{{ stats.supportDays }}</div>
-              <div class="stat-label">天支援</div>
             </div>
           </div>
         </div>
@@ -75,85 +35,94 @@
     </section>
 
     <!-- Values -->
-    <section class="section">
+    <section class="about-values">
       <div class="container">
-        <header class="section-head">
-          <h2 class="section-title">我們的核心價值</h2>
-          <p class="section-desc">
+        <header class="about-values-head">
+          <h2 class="about-values-title">我們的核心價值</h2>
+          <p class="about-values-desc">
             用更好的資訊呈現與互動，讓使用者在最短時間找到最適合的裝備。
           </p>
         </header>
 
-        <div class="grid values">
-          <article v-for="item in values" :key="item.title" class="card">
-            <div class="card-icon" aria-hidden="true">{{ item.icon }}</div>
-            <h3 class="card-title">{{ item.title }}</h3>
-            <p class="card-desc">{{ item.desc }}</p>
+        <div class="about-values-grid">
+          <article
+            v-for="item in values"
+            :key="item.title"
+            class="about-values-card"
+          >
+            <div class="about-values-card-icon" aria-hidden="true">
+              {{ item.icon }}
+            </div>
+            <h3 class="about-values-card-title">{{ item.title }}</h3>
+            <p class="about-values-card-desc">{{ item.desc }}</p>
           </article>
         </div>
       </div>
     </section>
 
     <!-- Timeline -->
-    <section class="section alt">
+    <section class="about-timeline">
       <div class="container">
-        <header class="section-head">
-          <h2 class="section-title">里程碑</h2>
-          <p class="section-desc">把每一次迭代做到更貼近使用者。</p>
+        <header class="about-timeline-head">
+          <h2 class="about-timeline-title">里程碑</h2>
+          <p class="about-timeline-desc">把每一次迭代做到更貼近使用者。</p>
         </header>
 
-        <ol class="timeline">
-          <li>
-            <div v-for="m in milestones" :key="m.title" class="timeline-item">
-              <div class="dot" aria-hidden="true"></div>
-              <div class="content">
-                <div class="meta">
-                  <span class="badge">{{ m.year }}</span>
-                  <span class="meta-title">{{ m.title }}</span>
-                </div>
-                <p class="meta-desc">{{ m.desc }}</p>
+        <ol class="about-timeline-list">
+          <li
+            v-for="m in milestones"
+            :key="m.title"
+            class="about-timeline-item"
+          >
+            <div class="chip-dot" aria-hidden="true"></div>
+
+            <div class="about-timeline-content">
+              <div class="about-timeline-meta">
+                <span class="about-timeline-badge">{{ m.year }}</span>
+                <span class="about-timeline-meta-title">{{ m.title }}</span>
               </div>
+              <p class="about-timeline-meta-desc">{{ m.desc }}</p>
             </div>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="section">
+    <!-- Support: FAQ + CTA -->
+    <section class="about-support">
       <div class="container">
-        <header class="section-head">
-          <h2 class="section-title">常見問題</h2>
-          <p class="section-desc">先把你可能在意的整理好。</p>
+        <header class="about-support-head">
+          <h2 class="about-support-title">常見問題</h2>
+          <p class="about-support-desc">先把你可能在意的整理好。</p>
         </header>
 
-        <div class="faq">
+        <div class="about-faq">
           <details
             v-for="(f, idx) in faqs"
             :key="f.q"
-            class="faq-item"
+            class="about-faq-item"
             :open="idx === 0"
           >
-            <summary class="faq-q">
+            <summary class="about-faq-q">
               <span>{{ f.q }}</span>
-              <span class="chev" aria-hidden="true">▾</span>
+              <span class="about-faq-chev" aria-hidden="true">▾</span>
             </summary>
-            <div class="faq-a">
+            <div class="about-faq-a">
               <p>{{ f.a }}</p>
             </div>
           </details>
         </div>
 
-        <div class="cta">
-          <div class="cta-content">
-            <h3 class="cta-title">需要協助挑選？</h3>
-            <p class="cta-desc">
+        <div class="about-cta">
+          <div class="about-cta-content">
+            <h3 class="about-cta-title">需要協助挑選？</h3>
+            <p class="about-cta-desc">
               把預算、用途、喜好告訴我們，我們會提供搭配建議。
             </p>
           </div>
-          <div class="cta-actions">
-            <NuxtLink class="btn primary" to="/contact">聯絡我們</NuxtLink>
-            <NuxtLink class="btn ghost" to="/products">直接逛逛</NuxtLink>
+          <div class="about-cta-actions">
+            <NuxtLink class="btn" to="/">聯絡我們</NuxtLink>
+            <NuxtLink class="btn" to="/products">直接逛逛</NuxtLink>
           </div>
         </div>
       </div>
@@ -162,24 +131,16 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: "關於我們 | Horizon V2",
-  meta: [
-    {
-      name: "description",
-      content:
-        "Horizon V2 關於我們：電競周邊精選、清楚分類與篩選、快速導覽，讓你更快找到適合的裝備。",
-    },
-  ],
-});
-
-const foundedYear = "2026";
-
-const stats = reactive({
-  products: 300,
-  brands: 20,
-  supportDays: 7,
-});
+// useHead({
+//   title: "關於我們 | Horizon V2",
+//   meta: [
+//     {
+//       name: "description",
+//       content:
+//         "Horizon V2 關於我們：電競周邊精選、清楚分類與篩選、快速導覽，讓你更快找到適合的裝備。",
+//     },
+//   ],
+// });
 
 const values = [
   {
@@ -239,65 +200,27 @@ const faqs = [
 </script>
 
 <style scoped lang="scss">
-/* ========= tokens (fallback) ========= */
 .about {
-  --bg: var(--bg, #0b0d12);
-  --surface: var(--bg-surface, rgba(255, 255, 255, 0.04));
-  --surface-strong: var(--bg-surface-strong, rgba(255, 255, 255, 0.08));
-  --text: var(--text, rgba(255, 255, 255, 0.92));
-  --muted: var(--text-muted, rgba(255, 255, 255, 0.68));
-  --brand: var(--brand, #8b5cf6);
-  --brand-hover: var(--brand-hover, #a78bfa);
-  --border: rgba(255, 255, 255, 0.08);
   --shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
-
-  color: var(--text);
-  background: var(--bg);
-  min-height: 100vh;
 }
-
 /* ========= layout ========= */
 .container {
-  width: min(1120px, calc(100% - 32px));
+  width: min(1024px, calc(100% - 32px));
   margin: 0 auto;
 }
-
-.section {
-  padding: clamp(36px, 5vw, 72px) 0;
-
-  &.alt {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
-    border-block: 1px solid var(--border);
-  }
+.chip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: transparent;
+  box-shadow: 0 0 0 4px rgba($color-purple-500, 0.6);
 }
-
-.section-head {
-  margin-bottom: 18px;
-
-  .section-title {
-    font-size: clamp(22px, 2.4vw, 32px);
-    letter-spacing: 0.2px;
-  }
-
-  .section-desc {
-    color: var(--muted);
-    margin-top: 8px;
-    max-width: 72ch;
-    line-height: 1.7;
-  }
-}
-
-.grid {
-  display: grid;
-  gap: 14px;
-}
-
-/* ========= hero ========= */
-.hero {
+/* ========= Hero ========= */
+.about-hero {
   position: relative;
   padding: clamp(44px, 6vw, 92px) 0;
   overflow: hidden;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--border-default);
   background:
     radial-gradient(
       900px 480px at 20% 10%,
@@ -311,7 +234,7 @@ const faqs = [
     ),
     linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 45%);
 
-  .hero-inner {
+  .about-hero-inner {
     display: grid;
     gap: 16px;
     align-items: start;
@@ -322,7 +245,7 @@ const faqs = [
     }
   }
 
-  .kicker {
+  .about-hero-kicker {
     display: inline-flex;
     padding: 6px 10px;
     border-radius: 999px;
@@ -333,374 +256,284 @@ const faqs = [
     letter-spacing: 0.4px;
   }
 
-  .title {
+  .about-hero-title {
     margin-top: 12px;
     font-size: clamp(34px, 5vw, 56px);
     line-height: 1.05;
     letter-spacing: 0.2px;
   }
 
-  .subtitle {
+  .about-hero-subtitle {
     margin-top: 12px;
-    color: var(--muted);
+    color: var(--text-secondary);
     line-height: 1.8;
     max-width: 68ch;
   }
 
-  .hero-actions {
+  .about-hero-actions {
     display: flex;
     gap: 10px;
     margin-top: 18px;
     flex-wrap: wrap;
   }
 
-  .hero-highlights {
+  .about-hero-highlights {
     margin-top: 18px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
   }
 
-  .chip {
+  .about-hero-chip {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 8px 10px;
     border-radius: 999px;
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
     color: rgba(255, 255, 255, 0.86);
     font-size: 13px;
+  }
+}
 
-    .chip-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 99px;
-      background: var(--brand);
-      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.15);
+/* ========= Values ========= */
+.about-values {
+  padding: clamp(36px, 5vw, 72px) 0;
+
+  .about-values-head {
+    margin-bottom: 18px;
+
+    .about-values-title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      letter-spacing: 0.2px;
+    }
+
+    .about-values-desc {
+      color: var(--text-secondary);
+      margin-top: 8px;
+      max-width: 72ch;
+      line-height: 1.7;
     }
   }
 
-  /* ========= hero card ========= */
-  .hero-card {
-    background: rgba(0, 0, 0, 0.25);
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    padding: 18px;
-    box-shadow: var(--shadow);
-    backdrop-filter: blur(10px);
+  .about-values-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(4, 1fr);
 
-    .card-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    @media (max-width: 980px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 520px) {
+      grid-template-columns: 1fr;
+    }
 
-      .logo {
-        width: 44px;
-        height: 44px;
+    .about-values-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-default);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+
+      .about-values-card-icon {
+        width: 40px;
+        height: 40px;
         border-radius: 14px;
         display: grid;
         place-items: center;
-        background: rgba(139, 92, 246, 0.18);
-        border: 1px solid rgba(139, 92, 246, 0.28);
-        font-weight: 800;
-        letter-spacing: 0.5px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-default);
+        font-size: 18px;
       }
 
-      .card-title {
-        .name {
-          font-weight: 700;
-          letter-spacing: 0.3px;
-        }
-
-        .tag {
-          margin-top: 2px;
-          font-size: 12px;
-          color: var(--muted);
-        }
-      }
-    }
-
-    .card-list {
-      list-style: none;
-      padding: 0;
-      margin: 14px 0 0;
-      display: grid;
-      gap: 10px;
-
-      li {
-        display: grid;
-        grid-template-columns: 56px 1fr;
-        gap: 12px;
-        padding: 10px 12px;
-        border-radius: 14px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-
-        strong {
-          color: rgba(255, 255, 255, 0.86);
-          font-size: 13px;
-        }
-
-        span {
-          color: var(--muted);
-          line-height: 1.6;
-          font-size: 13px;
-        }
-      }
-    }
-
-    .card-foot {
-      margin-top: 14px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-
-      .stat {
-        padding: 12px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid var(--border);
-
-        .stat-num {
-          font-size: 22px;
-          font-weight: 800;
-          letter-spacing: 0.2px;
-        }
-
-        .stat-label {
-          margin-top: 2px;
-          color: var(--muted);
-          font-size: 12px;
-        }
-      }
-    }
-  }
-}
-
-/* ========= cards ========= */
-.values {
-  grid-template-columns: repeat(4, 1fr);
-
-  @media (max-width: 980px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  @media (max-width: 520px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-
-  .card-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 14px;
-    display: grid;
-    place-items: center;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--border);
-    font-size: 18px;
-  }
-
-  .card-title {
-    margin-top: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-  }
-
-  .card-desc {
-    margin-top: 8px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-}
-
-/* ========= timeline ========= */
-.timeline {
-  margin: 14px 0 0;
-  padding: 0;
-  list-style: none;
-  display: grid;
-  gap: 12px;
-
-  .timeline-item {
-    display: grid;
-    grid-template-columns: 16px 1fr;
-    gap: 12px;
-    align-items: start;
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 99px;
-      background: var(--brand);
-      margin-top: 10px;
-      box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.14);
-    }
-
-    .content {
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-
-      .meta {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex-wrap: wrap;
-
-        .badge {
-          display: inline-flex;
-          padding: 6px 10px;
-          border-radius: 999px;
-          border: 1px solid rgba(255, 255, 255, 0.12);
-          background: rgba(0, 0, 0, 0.16);
-          color: rgba(255, 255, 255, 0.86);
-          font-size: 12px;
-        }
-
-        .meta-title {
-          font-weight: 700;
-        }
+      .about-values-card-title {
+        margin-top: 10px;
+        font-weight: 700;
+        letter-spacing: 0.2px;
       }
 
-      .meta-desc {
+      .about-values-card-desc {
         margin-top: 8px;
-        color: var(--muted);
+        color: var(--text-secondary);
         line-height: 1.8;
       }
     }
   }
 }
 
-/* ========= faq ========= */
-.faq {
-  display: grid;
-  gap: 10px;
-  margin-top: 12px;
+/* ========= Timeline ========= */
+.about-timeline {
+  padding: clamp(36px, 5vw, 72px) 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
+  border-block: 1px solid var(--border-default);
 
-  .faq-item {
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    overflow: hidden;
+  .about-timeline-head {
+    margin-bottom: 18px;
 
-    .faq-q {
-      cursor: pointer;
-      list-style: none;
-      padding: 14px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .about-timeline-title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      letter-spacing: 0.2px;
+    }
+
+    .about-timeline-desc {
+      color: var(--text-secondary);
+      margin-top: 8px;
+      max-width: 72ch;
+      line-height: 1.7;
+    }
+  }
+
+  .about-timeline-list {
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 12px;
+
+    .about-timeline-item {
+      display: grid;
+      grid-template-columns: 16px 1fr;
       gap: 12px;
-      user-select: none;
+      align-items: start;
 
-      &::-webkit-details-marker {
-        display: none;
+      .about-timeline-content {
+        padding: 14px 16px;
+        border-radius: 16px;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-default);
+
+        .about-timeline-meta {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+
+          .about-timeline-badge {
+            display: inline-flex;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(0, 0, 0, 0.16);
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 12px;
+          }
+
+          .about-timeline-meta-title {
+            font-weight: 700;
+          }
+        }
+
+        .about-timeline-meta-desc {
+          margin-top: 8px;
+          color: var(--text-secondary);
+          line-height: 1.8;
+        }
+      }
+    }
+  }
+}
+
+/* ========= Support (FAQ + CTA) ========= */
+.about-support {
+  padding: clamp(36px, 5vw, 72px) 0;
+
+  .about-support-head {
+    margin-bottom: 18px;
+
+    .about-support-title {
+      font-size: clamp(22px, 2.4vw, 32px);
+      letter-spacing: 0.2px;
+    }
+
+    .about-support-desc {
+      color: var(--text-secondary);
+      margin-top: 8px;
+      max-width: 72ch;
+      line-height: 1.7;
+    }
+  }
+
+  /* FAQ */
+  .about-faq {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+
+    .about-faq-item {
+      border-radius: 16px;
+      border: 1px solid var(--border-default);
+      background: var(--bg-surface);
+      overflow: hidden;
+
+      .about-faq-q {
+        cursor: pointer;
+        list-style: none;
+        padding: 14px 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        user-select: none;
+
+        &::-webkit-details-marker {
+          display: none;
+        }
       }
 
-      .chev {
+      .about-faq-chev {
         opacity: 0.8;
         transition: transform 0.25s ease;
       }
-    }
 
-    &[open] {
-      .chev {
-        transform: rotate(180deg);
+      &[open] {
+        .about-faq-chev {
+          transform: rotate(180deg);
+        }
+      }
+
+      .about-faq-a {
+        padding: 0 16px 14px 16px;
+        color: var(--text-secondary);
+        line-height: 1.8;
       }
     }
+  }
 
-    .faq-a {
-      padding: 0 16px 14px 16px;
-      color: var(--muted);
+  /* CTA */
+  .about-cta {
+    margin-top: 18px;
+    padding: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(139, 92, 246, 0.26);
+    background:
+      radial-gradient(
+        700px 260px at 20% 0%,
+        rgba(139, 92, 246, 0.18),
+        transparent 60%
+      ),
+      rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+
+    .about-cta-title {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .about-cta-desc {
+      margin-top: 6px;
+      color: var(--text-secondary);
       line-height: 1.8;
     }
-  }
-}
 
-/* ========= CTA ========= */
-.cta {
-  margin-top: 18px;
-  padding: 16px;
-  border-radius: 18px;
-  border: 1px solid rgba(139, 92, 246, 0.26);
-  background:
-    radial-gradient(
-      700px 260px at 20% 0%,
-      rgba(139, 92, 246, 0.18),
-      transparent 60%
-    ),
-    rgba(255, 255, 255, 0.03);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: wrap;
-
-  .cta-title {
-    font-size: 18px;
-    font-weight: 800;
-  }
-
-  .cta-desc {
-    margin-top: 6px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  .cta-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-}
-
-/* ========= buttons ========= */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 14px;
-  border: 1px solid var(--border);
-  text-decoration: none;
-  color: rgba(255, 255, 255, 0.9);
-  background: rgba(255, 255, 255, 0.04);
-  transition:
-    transform 0.15s ease,
-    background 0.15s ease,
-    border-color 0.15s ease;
-
-  &.primary {
-    background: rgba(139, 92, 246, 0.9);
-    border-color: rgba(139, 92, 246, 0.55);
-    color: #0b0d12;
-    font-weight: 800;
-  }
-
-  &.ghost {
-    background: rgba(255, 255, 255, 0.03);
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &:hover {
-      transform: translateY(-1px);
-      border-color: rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    &.primary:hover {
-      background: rgba(167, 139, 250, 0.92);
-      border-color: rgba(167, 139, 250, 0.7);
+    .about-cta-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
     }
   }
 }
