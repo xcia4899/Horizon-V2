@@ -386,7 +386,7 @@ const copyTitle = async (text: string) => {
       grid-column: span 4;
       background: var(--bg-surface);
       border: 2px solid var(--border-default);
-      border-radius: 22px;
+      border-radius: 16px;
       overflow: hidden;
       box-shadow: none;
       transition:
@@ -457,15 +457,13 @@ const copyTitle = async (text: string) => {
       .content-footer {
         display: grid;
         // place-content: center;
-        gap: 12px;
+        gap: 16px;
         padding-top: 8px;
         border-top: 1px solid var(--border-default);
         .meta-tags {
           display: flex;
           gap: 8px;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
+          flex-direction: column;
           .date {
             font-size: 12px;
             color: var(--text-secondary);

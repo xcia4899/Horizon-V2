@@ -110,7 +110,8 @@ button {
 }
 
 .btn {
-    display: block;
+    display: grid;
+    place-items: center;
     width: clamp(120px, 16vw, 160px);
     height: 44px;
 
