@@ -215,8 +215,9 @@ const resetTags = async () => {
     width: 100%;
     padding: 16px 0px 48px;
     font-size: 16px;
-    opacity: 0;
-    visibility: hidden;
+    visibility: visible;
+    opacity: 1;
+    // z-index: 100;
     .reset {
       display: flex;
       align-items: center;
@@ -278,10 +279,10 @@ const resetTags = async () => {
     }
     .mobile-btnArea {
       display: flex;
+      transition: opacity 0.5s ease-out 0.4s;
       &.btnAreaShow {
-        visibility: visible;
-        opacity: 1;
-        transition: opacity 0.5s ease-out 0.3s;
+        visibility: hidden;
+        opacity: 0;
       }
     }
     &.isClose {

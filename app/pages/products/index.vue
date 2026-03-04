@@ -4,7 +4,7 @@
       <BannerPromoBanner />
     </section>
     <div class="sidebar-toolbar">
-      <div class="container">
+      <div class="container sidebar-toolbar-inner">
         <button
           class="filter-toggle"
           :class="{ active: isSidebarClose }"
@@ -18,6 +18,9 @@
             size="24"
           />
         </button>
+        <div class="total">
+          共 {{ productListView.length }} 筆
+        </div>
       </div>
     </div>
     <main ref="productMainRef" class="product-main">
@@ -74,13 +77,11 @@ const toggleFilter = async () => {
 
 //sidebar項目
 const sidebarList: SidebarList[] = [
-    {
+  {
     title: "品牌",
     key: "brand",
 
-    options: [
-      { label: "特價中", value: "logitech" },
-    ],
+    options: [{ label: "特價中", value: "logitech" }],
   },
   {
     title: "品牌",
@@ -169,10 +170,7 @@ const tagGroupKeys = new Set([
 const tagGroupMap: Record<string, string[]> = Object.fromEntries(
   sidebarList
     .filter((g) => tagGroupKeys.has(g.key))
-    .map((g) => [
-      g.key,
-      g.options.map((o) => String(o.value)), 
-    ]),
+    .map((g) => [g.key, g.options.map((o) => String(o.value))]),
 );
 
 //sidbar的Sections展開關閉
@@ -380,6 +378,11 @@ function toNumArray(
 .sidebar-toolbar {
   padding: 8px 12px;
   background: var(--bg-surface);
+  .sidebar-toolbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
 
   .filter-toggle {
     display: flex;
@@ -418,6 +421,13 @@ function toNumArray(
         }
       }
     }
+  }
+  .total {
+    padding: 6px 16px;
+    border-radius: 16px;
+    color: var(--text-tertiary);
+    border: 1px solid var(--border-default);
+    font-size: 12px;
   }
 }
 .product-main {

@@ -38,13 +38,13 @@
         <header class="about-values-head">
           <h2 class="about-values-title">我們的核心價值</h2>
           <p class="about-values-desc">
-            用更好的資訊呈現與互動，讓使用者在最短時間找到最適合的裝備。
+            更好的資訊呈現，讓使用者在最短時間找需要的商品。
           </p>
         </header>
 
         <div class="about-values-grid">
           <article
-            v-for="item in values"
+            v-for="item in aboutValues"
             :key="item.title"
             class="about-values-card"
           >
@@ -89,8 +89,10 @@
     <section class="about-support">
       <div class="container about-support-inner">
         <header class="about-support-head">
-          <h2 class="about-support-title">常見問題</h2>
-          <p class="about-support-desc">先把你可能在意的整理好。</p>
+          <h2 class="about-support-title">網站開發 FAQ</h2>
+          <p class="about-support-desc">
+            這裡整理了關於 Horizon 網站製作與開發過程的一些問題。
+          </p>
         </header>
 
         <div class="about-faq">
@@ -128,70 +130,84 @@
 </template>
 
 <script setup lang="ts">
-// useHead({
-//   title: "關於我們 | Horizon V2",
-//   meta: [
-//     {
-//       name: "description",
-//       content:
-//         "Horizon V2 關於我們：電競周邊精選、清楚分類與篩選、快速導覽，讓你更快找到適合的裝備。",
-//     },
-//   ],
-// });
+useHead({
+  title: "關於我們 | Horizon V2",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Horizon V2 關於我們：電競周邊精選、清楚分類與篩選、快速導覽，讓你更快找到適合的裝備。",
+    },
+  ],
+});
 
-const values = [
+const aboutValues = [
   {
     icon: "⚡",
     title: "效率",
-    desc: "更快找到商品：分類、搜尋與篩選設計以「少走一步」為目標。",
+    desc: "更快找到商品：分類、搜尋與篩選設計。",
   },
   {
     icon: "🧩",
     title: "清楚",
-    desc: "規格與特色整理成易讀資訊，降低比較成本，提升決策信心。",
+    desc: "規格與特色整理成易讀資訊。",
   },
   {
     icon: "🛡️",
-    title: "可靠",
+    title: "安全",
     desc: "出貨與售後流程透明，遇到問題可快速協助處理。",
   },
   {
     icon: "🎛️",
     title: "可用性",
-    desc: "重視 RWD 與操作手感，讓桌機與手機都有一致的體驗。",
+    desc: "重視 RWD 與操作手感，讓桌機與手機都有良好的使用體驗。",
   },
 ] as const;
 
 const milestones = [
   {
-    year: "2025",
-    title: "專案起步",
-    desc: "從資料結構與 UI 系統開始，建立可擴充的產品模型。",
+    year: "2025-06",
+    title: "Horizon專案起步",
+    desc: "從 Figma 設計稿開始規劃網站，以設計經驗為基礎從零開始設計網站。",
   },
   {
-    year: "2026",
+    year: "2025-07",
+    title: "Horizon 初版",
+    desc: "完成首頁、商品列表、篩選系統、商品詳細頁與購物車頁面，包含完整的 RWD 響應式版型。",
+  },
+  {
+    year: "2026-01",
+    title: "Horizon V2 開發",
+    desc: "採用 Vue 3 與 Nuxt 重新設計網站架構，整理語意化命名與專案結構，透過模組化開發優化元件拆分與維護性，並建立黑白模式的主題顏色系統。",
+  },
+  {
+    year: "2026-02",
     title: "Horizon V2 上線",
-    desc: "完成主要商品頁、篩選、分頁與詳細頁的體驗。",
+    desc: "整合 Horizon 初版所有核心功能，並以 Nuxt 架構重新製作網站，優化專案結構、效能與整體使用體驗。。",
   },
   {
     year: "Next",
     title: "會員與後台",
-    desc: "規劃加入登入、訂單管理與內容維護流程。",
+    desc: "預計加入會員登入、訂單管理與後台內容管理，並建立後端，打造更完整的電商平台。",
   },
 ] as const;
 
 const faqs = [
   {
-    q: "你們的商品來源是什麼？",
-    a: "以品牌原廠與授權經銷合作為主，並保留完整的規格與保固資訊。",
+    q: "Horizon 是使用什麼技術製作的？",
+    a: "網站以 Vue 3 與 Nuxt 為核心框架開發，並透過元件化與模組化方式建立整體網站架構。",
   },
   {
-    q: "可以退換貨嗎？",
-    a: "可依購買條款申請退換貨；若有瑕疵或運送問題，優先協助處理。",
+    q: "這個網站是如何規劃與設計的？",
+    a: "專案從 Figma 介面設計開始，先規劃整體版面與使用流程，再逐步實作成可互動的網站。",
   },
   {
-    q: "如何挑選適合的電競周邊？",
-    a: "先確認用途（FPS/MMO/日常）、預算、手感偏好與桌面空間，再用篩選縮小範圍。",
+    q: "網站有哪些前端功能實作？",
+    a: "包含商品列表、篩選系統、搜尋、分頁、商品詳細頁與響應式版型等功能，並持續增加功能中。",
+  },
+  {
+    q: "這個專案的開發目的是什麼？",
+    a: "主要作為前端開發實作專案，用來練習前端框架、網站架構設計與電商介面開發。",
   },
 ] as const;
 </script>
@@ -219,7 +235,14 @@ const faqs = [
   padding: clamp(96px, 12vw, 128px) 0 36px;
   overflow: hidden;
   border-bottom: 1px solid var(--border-default);
-  background: linear-gradient(180deg, var(--bg-surface-soft), transparent 20%);
+  background:
+    linear-gradient(180deg, var(--bg-surface-soft), transparent 20%),
+    radial-gradient(
+      700px 260px at 20% 0%,
+      rgba(#cb8cf5, 0.18),
+      transparent 60%
+    ),
+    rgba(#690fa6, 0.03);
 
   .about-hero-inner {
     display: flex;
@@ -305,6 +328,8 @@ const faqs = [
 
       display: grid;
       gap: 8px;
+
+      transition: border-color 0.6s ease;
       .about-values-card-icon {
         width: 40px;
         height: 40px;
@@ -320,6 +345,11 @@ const faqs = [
       }
       .about-values-card-desc {
         color: var(--text-secondary);
+      }
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          border-color: var(--border-soft);
+        }
       }
     }
   }
@@ -356,6 +386,7 @@ const faqs = [
         border-radius: 8px;
         background: var(--bg-surface-soft);
         border: 2px solid var(--border-default);
+        transition: border-color 0.6s ease;
         .about-timeline-meta {
           display: flex;
           align-items: center;
@@ -375,6 +406,11 @@ const faqs = [
         }
         .about-timeline-meta-desc {
           color: var(--text-secondary);
+        }
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            border-color: var(--border-soft);
+          }
         }
       }
     }
@@ -417,11 +453,15 @@ const faqs = [
         user-select: none;
       }
       .about-faq-icon {
+        font-size: 20px;
         transition: transform 0.4s ease;
+        color: var(--text-secondary);
       }
       &[open] {
+        border-color: var(--brand-hover);
         .about-faq-icon {
-          transform: rotate(180deg);
+          transform: rotate(180deg) scale(2);
+          color: var(--brand-hover);
         }
       }
       .about-faq-a {
@@ -434,9 +474,9 @@ const faqs = [
   /* CTA */
   .about-cta {
     margin-top: 16px;
-    padding:16px 60px;
+    padding: 16px 60px;
     border-radius: 999px;
-    border: 1px solid rgba(#cb8cf5, 0.26);
+    border: 1px solid rgba(#cb8cf5, 0.8);
     background:
       radial-gradient(
         700px 260px at 20% 0%,
