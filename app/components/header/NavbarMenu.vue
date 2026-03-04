@@ -91,16 +91,19 @@ onBeforeUnmount(() => {
 });
 
 //跳轉商品頁 可代參數
+// 跳轉商品頁，可帶參數
 const goProducts = async (item: MenuItem) => {
   await looding(200);
 
+  const query: Record<string, string | string[]> = {};
+  if (item?.tag) query.tag = [item.tag];
+  if (item?.text === "特價商品") query.onsale = "true";
+  
   await router.push({
     path: "/products",
-    query: {
-      ...(item?.tag ? { tag: [item.tag] } : {}),
-      ...(item?.text === "特價商品" ? { onsale: "true" } : {}),
-    },
+    query,
   });
+
   openMenu.value = null;
   props.closeMenuOpenMobile();
 };

@@ -183,7 +183,7 @@ const collapseAllSections = () => {
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
 
-const onsale = ref(false)
+const onsale = ref(false);
 
 onMounted(() => {
   if (route.query.onsale === "true") {
@@ -316,66 +316,63 @@ const priceMatch = (productPrice: number, maxPrice: number) => {
   return productPrice <= maxPrice;
 };
 //寫入 query
+// helpers（你已有的就沿用）
+const sameArray = (a: unknown, b: unknown) =>
+  JSON.stringify(a ?? []) === JSON.stringify(b ?? []);
+
 watch(
-  selectTags,
-  (tags) => {
-    const stringTags = tags.filter((t) => typeof t === "string").map(norm);
-    const numberTags = tags.filter((t) => typeof t === "number");
+  () => route.query,
+  (q) => {
+    // ===== query -> state =====
+    const rawTags = toStrArray(q.tag).map(norm);
+    const prices = toNumArray(q.price);
+
+    // 先展開 tagGroupMap（有的話）
+    const expandedTags = rawTags.flatMap((t) => tagGroupMap[t] ?? [t]);
+    const finalTags = expandedTags.map(norm);
+
+    // onsale: true/1 也視為開（依你需求）
+    const sale = q.onsale === "true" || q.onsale === "1";
+
+    // 避免無效回寫造成循環：只有真的不同才更新 state
+    const nextSelect = [...finalTags, ...prices];
+    if (!sameArray(nextSelect, selectTags.value)) {
+      selectTags.value = nextSelect;
+    }
+    if (onsale.value !== sale) {
+      onsale.value = sale;
+    }
+  },
+  { immediate: true },
+);
+
+watch(
+  [selectTags, onsale],
+  ([tags, sale]) => {
+    // ===== state -> query =====
+    const stringTags = tags
+      .filter((t): t is string => typeof t === "string")
+      .map(norm);
+    const numberTags = tags.filter((t): t is number => typeof t === "number");
 
     const nextQuery = {
       ...route.query,
       tag: stringTags.length ? stringTags : undefined,
       price: numberTags.length ? numberTags : undefined,
+      onsale: sale ? "true" : undefined,
     };
 
-    // 如果下一個 query 跟現在一樣，就不要replace
+    // 只比較你會改的欄位，避免每次都 replace
     const same =
-      JSON.stringify(nextQuery.tag ?? []) ===
-        JSON.stringify(route.query.tag ?? []) &&
-      JSON.stringify(nextQuery.price ?? []) ===
-        JSON.stringify(route.query.price ?? []);
+      sameArray(nextQuery.tag, route.query.tag) &&
+      sameArray(nextQuery.price, route.query.price) &&
+      (nextQuery.onsale ?? undefined) === (route.query.onsale ?? undefined);
+
     if (same) return;
 
     router.replace({ query: nextQuery });
   },
   { deep: true },
-);
-//將值寫入selectTags陣列
-watch(
-  () => route.query,
-  (q) => {
-    const rawTags = toStrArray(q.tag).map(norm); // 先正規化
-    const prices = toNumArray(q.price); // number[]
-    const expandedTags = rawTags.flatMap((t) => tagGroupMap[t] ?? [t]);
-    const finalTags = expandedTags.map(norm);
-
-    selectTags.value = [...finalTags, ...prices];
-  },
-  { immediate: true },
-);
-
-watch(
-  () => onsale.value,
-  (v) => {
-    const nextQuery = {
-      ...route.query,
-      onsale: v ? "true" : undefined, // 用 1/undefined 表示開/關
-    };
-
-    // 避免重複 replace
-    if ((route.query.onsale ?? undefined) === nextQuery.onsale) return;
-
-    router.replace({ query: nextQuery });
-  },
-  { immediate: true },
-);
-watch(
-  () => route.query.onsale,
-  (v) => {
-    // onsale=1 / true 都視為開
-    onsale.value = v === "true" || v === "true";
-  },
-  { immediate: true },
 );
 //query 變成可用陣列工具
 function toStrArray(
