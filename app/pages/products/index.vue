@@ -18,15 +18,14 @@
             size="24"
           />
         </button>
-        <div class="total">
-          共 {{ productListView.length }} 筆
-        </div>
+        <div class="total">共 {{ productListView.length }} 筆</div>
       </div>
     </div>
     <main ref="productMainRef" class="product-main">
       <div class="product-main-inner container">
         <ProductsSidebar
           v-model:selectTags="selectTags"
+          v-model:onsale="onsale"
           :sidebarList="sidebarList"
           :openSections="openSections"
           :isSidebarClose="isSidebarClose"
@@ -37,6 +36,7 @@
         <section class="main-products">
           <ProductsSelectedFilters
             v-model:selectTags="selectTags"
+            v-model:onsale="onsale"
             :collapseAllSections="collapseAllSections"
           />
 
@@ -77,12 +77,6 @@ const toggleFilter = async () => {
 
 //sidebar項目
 const sidebarList: SidebarList[] = [
-  {
-    title: "品牌",
-    key: "brand",
-
-    options: [{ label: "特價中", value: "logitech" }],
-  },
   {
     title: "品牌",
     key: "brand",
@@ -188,6 +182,7 @@ const collapseAllSections = () => {
 
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
+const onsale = ref(false)
 /*--main-products 商品資料--*/
 
 //建立productMainRef
@@ -216,8 +211,6 @@ const productListView = computed<Product[]>(() => {
 
   const kw = keyword.value.trim().toLowerCase();
 
-  // const saleOnly = stringTags.includes(norm("onSale"));
-
   const list = products.filter((product) => {
     const brandKey = norm(product.brand);
     const productTags = (product.tags ?? []).map(norm);
@@ -230,6 +223,8 @@ const productListView = computed<Product[]>(() => {
     const matchSidebarPrice =
       numberTags.length === 0 ||
       numberTags.some((maxPrice) => priceMatch(product.price, maxPrice));
+
+    const matchSale = onsale.value.onsale ? product.onsale === true : true;
 
     const searchText = [
       product.name,
@@ -245,7 +240,7 @@ const productListView = computed<Product[]>(() => {
 
     const matchKeyword = !kw || searchText.includes(kw);
 
-    return matchSidebarTag && matchSidebarPrice && matchKeyword;
+    return matchSidebarTag && matchSidebarPrice && matchSale && matchKeyword;
   });
 
   return list;
@@ -317,7 +312,7 @@ const priceMatch = (productPrice: number, maxPrice: number) => {
 watch(
   selectTags,
   (tags) => {
-    const stringTags = tags.filter((t) => typeof t === "string");
+    const stringTags = tags.filter((t) => typeof t === "string").map(norm);
     const numberTags = tags.filter((t) => typeof t === "number");
 
     const nextQuery = {
@@ -348,6 +343,30 @@ watch(
     const finalTags = expandedTags.map(norm);
 
     selectTags.value = [...finalTags, ...prices];
+  },
+  { immediate: true },
+);
+
+watch(
+  () => onsale.value.onsale,
+  (v) => {
+    const nextQuery = {
+      ...route.query,
+      onsale: v ? "true" : undefined, // 用 1/undefined 表示開/關
+    };
+
+    // 避免重複 replace
+    if ((route.query.onsale ?? undefined) === nextQuery.onsale) return;
+
+    router.replace({ query: nextQuery });
+  },
+  { immediate: true },
+);
+watch(
+  () => route.query.onsale,
+  (v) => {
+    // onsale=1 / true 都視為開
+    onsale.value.onsale = v === "true" || v === "true";
   },
   { immediate: true },
 );

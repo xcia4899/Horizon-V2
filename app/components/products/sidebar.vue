@@ -2,6 +2,14 @@
   <section class="main-sidebar" :class="{ isClose: isSidebarClose }">
     <div class="sidebar-title">篩選</div>
     <ul class="sidebar-groups">
+      <li class="sidebar-group">
+        <el-switch
+          active-text="Open"
+          inactive-text="Close"
+          :model-value="onsale.onsale"
+          @change="updateOnsale"
+        />
+      </li>
       <li
         v-for="(item, index) in sidebarList"
         :key="item.key"
@@ -58,6 +66,7 @@ const props = defineProps<{
   sidebarList: SidebarList[];
   openSections: number[];
   selectTags: (string | number)[];
+  onsale: { onsale: boolean | number | string };
   isSidebarClose: boolean;
   toggleFilter: () => void;
   collapseAllSections: () => void;
@@ -65,6 +74,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "update:selectTags", value: (string | number)[]): void;
+  (e: "update:onsale", value: { onsale: boolean | number | string }): void;
   (e: "toggle-section", index: number): void;
 }>();
 
@@ -92,6 +102,11 @@ const resetTags = async () => {
   await looding(100);
   toggleFilter.value();
   collapseAllSections.value();
+};
+
+const updateOnsale = (val: boolean) => {
+  emit("update:onsale", { onsale: val });
+  // console.log("updateOnsale:", val);
 };
 </script>
 

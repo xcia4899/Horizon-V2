@@ -1,7 +1,15 @@
 <template>
-  <div v-show="selectTags.length" class="filter-selected">
+  <div v-show="selectTags.length || onsale.onsale" class="filter-selected">
     <button class="selected-allClear" @click="clearAll">
       清除篩選條件
+      <Icon class="icon" name="iconoir:cancel" size="24" />
+    </button>
+    <button
+      v-show="onsale.onsale"
+      class="selected-allClear"
+      @click="updateOnsale"
+    >
+      特價商品
       <Icon class="icon" name="iconoir:cancel" size="24" />
     </button>
     <button
@@ -20,10 +28,12 @@
 type Tag = string | number;
 const props = defineProps<{
   selectTags: Tag[];
+  onsale: { onsale: boolean };
   collapseAllSections: () => void;
 }>();
 const emit = defineEmits<{
   (e: "update:selectTags", value: Tag[]): void;
+  (e: "update:onsale", value: { onsale: boolean }): void;
 }>();
 //filter-selected 刪除TAG
 const removeTag = async (tag: string | number) => {
@@ -41,8 +51,14 @@ const clearAll = async () => {
   await looding(100);
 
   emit("update:selectTags", []);
+  emit("update:onsale", { onsale: false });
   props.collapseAllSections();
   //    return (selectTags.value = []);
+};
+
+const updateOnsale = () => {
+  emit("update:onsale", { onsale: false });
+  console.log("updateOnsale:", false);
 };
 </script>
 
@@ -79,7 +95,7 @@ const clearAll = async () => {
         }
       }
     }
-    &:active{
+    &:active {
       transform: scale(0.95);
     }
   }
