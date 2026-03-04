@@ -54,7 +54,6 @@ const menus: SetMenu[] = [
       {
         text: "特價商品",
         img: "/images/pic-detal/PRO-1002/10001.png",
-        tag: "onSale",
       },
       {
         text: "滑鼠",

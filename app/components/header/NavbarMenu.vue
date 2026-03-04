@@ -94,10 +94,12 @@ onBeforeUnmount(() => {
 const goProducts = async (item: MenuItem) => {
   await looding(200);
 
-  router.push({
+  await router.push({
     path: "/products",
-    query: item?.tag ? { tag: [item.tag] } : {},
-    
+    query: {
+      ...(item?.tag ? { tag: [item.tag] } : {}),
+      ...(item?.text === "特價商品" ? { onsale: "true" } : {}),
+    },
   });
   openMenu.value = null;
   props.closeMenuOpenMobile();

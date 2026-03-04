@@ -6,6 +6,8 @@
         <label class="sidebar-sale-switch">
           <h4>特價商品</h4>
           <el-switch
+            :width="60"
+            size="large"
             :model-value="onsale"
             :active-action-icon="View"
             :inactive-action-icon="Hide"
@@ -175,7 +177,9 @@ const updateOnsale = (val: string | number | boolean) => {
         }
         .el-switch {
           --el-switch-on-color: var(--brand);
-          --el-switch-off-color: var(--bg-surface-soft);
+          --el-switch-off-color: var(--bg-surface-secondary);
+          --el-switch-border-color: #5f5f5f;
+          // --el-switch-button-color: #333;
         }
         .el-switch_label {
           font-size: 20px;

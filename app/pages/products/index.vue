@@ -182,7 +182,14 @@ const collapseAllSections = () => {
 
 //依照商品TAG 搜尋
 const selectTags = ref<(string | number)[]>([]);
+
 const onsale = ref(false)
+
+onMounted(() => {
+  if (route.query.onsale === "true") {
+    onsale.value = true;
+  }
+});
 /*--main-products 商品資料--*/
 
 //建立productMainRef
@@ -293,7 +300,7 @@ watch(
 );
 
 onMounted(() => {
-  console.log(isDesktop.value);
+  // console.log(isDesktop.value);
   if (!isDesktop.value) {
     itemsPage.value = 6;
     isSidebarClose.value = true;
@@ -444,8 +451,9 @@ function toNumArray(
   .total {
     padding: 6px 16px;
     border-radius: 16px;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     border: 1px solid var(--border-default);
+    background: var(--bg-surface);
     font-size: 12px;
   }
 }
