@@ -3,12 +3,15 @@
     <div class="sidebar-title">篩選</div>
     <ul class="sidebar-groups">
       <li class="sidebar-group">
-        <el-switch
-          active-text="Open"
-          inactive-text="Close"
-          :model-value="onsale.onsale"
-          @change="updateOnsale"
-        />
+        <label class="sidebar-sale-switch">
+          <h4>特價商品</h4>
+          <el-switch
+            :model-value="onsale"
+            :active-action-icon="View"
+            :inactive-action-icon="Hide"
+            @change="updateOnsale"
+          />
+        </label>
       </li>
       <li
         v-for="(item, index) in sidebarList"
@@ -61,12 +64,12 @@
 <script setup lang="ts">
 import { computed, toRefs, nextTick } from "vue";
 import type { SidebarList } from "@/types/ui/sidebar";
-
+import { Hide, View } from "@element-plus/icons-vue";
 const props = defineProps<{
   sidebarList: SidebarList[];
   openSections: number[];
   selectTags: (string | number)[];
-  onsale: { onsale: boolean | number | string };
+  onsale: boolean | number | string;
   isSidebarClose: boolean;
   toggleFilter: () => void;
   collapseAllSections: () => void;
@@ -74,7 +77,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   (e: "update:selectTags", value: (string | number)[]): void;
-  (e: "update:onsale", value: { onsale: boolean | number | string }): void;
+  (e: "update:onsale", value: boolean | number | string): void;
   (e: "toggle-section", index: number): void;
 }>();
 
@@ -104,9 +107,10 @@ const resetTags = async () => {
   collapseAllSections.value();
 };
 
-const updateOnsale = (val: boolean) => {
-  emit("update:onsale", { onsale: val });
-  // console.log("updateOnsale:", val);
+const updateOnsale = (val: string | number | boolean) => {
+  // 轉成 boolean，避免上層傳入 0/1、"true"/"false" 時出問題
+  const next = typeof val === "boolean" ? val : Boolean(val);
+  emit("update:onsale", next);
 };
 </script>
 
@@ -142,6 +146,7 @@ const updateOnsale = (val: boolean) => {
     display: flex;
     flex-direction: column;
     gap: 8px;
+
     .sidebar-group {
       border-bottom: 2px dashed var(--border-default);
       transition:
@@ -157,7 +162,26 @@ const updateOnsale = (val: boolean) => {
           border-color: var(--border-soft);
         }
       }
+      .sidebar-sale-switch {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding-block: 12px;
 
+        cursor: pointer;
+        h4 {
+          cursor: pointer;
+        }
+        .el-switch {
+          --el-switch-on-color: var(--brand);
+          --el-switch-off-color: var(--bg-surface-soft);
+        }
+        .el-switch_label {
+          font-size: 20px;
+          color: var(--text-primary);
+        }
+      }
       .sidebar-group-title {
         padding: 8px 6px;
         display: flex;

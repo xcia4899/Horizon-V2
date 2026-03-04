@@ -224,7 +224,7 @@ const productListView = computed<Product[]>(() => {
       numberTags.length === 0 ||
       numberTags.some((maxPrice) => priceMatch(product.price, maxPrice));
 
-    const matchSale = onsale.value.onsale ? product.onsale === true : true;
+    const matchSale = onsale.value ? product.onsale === true : true;
 
     const searchText = [
       product.name,
@@ -348,7 +348,7 @@ watch(
 );
 
 watch(
-  () => onsale.value.onsale,
+  () => onsale.value,
   (v) => {
     const nextQuery = {
       ...route.query,
@@ -366,7 +366,7 @@ watch(
   () => route.query.onsale,
   (v) => {
     // onsale=1 / true 都視為開
-    onsale.value.onsale = v === "true" || v === "true";
+    onsale.value = v === "true" || v === "true";
   },
   { immediate: true },
 );
@@ -408,8 +408,8 @@ function toNumArray(
     align-items: center;
     gap: 2px;
     font-size: 20px;
-    padding: 6px 16px;
-    border-radius: 8px;
+    padding: 8px 20px;
+    border-radius: 16px;
     letter-spacing: 2px;
     color: var(--text-tertiary);
     background: var(--bg-surface-strong);
