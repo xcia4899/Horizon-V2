@@ -87,9 +87,11 @@
                 encrypted-media;
                 gyroscope;
                 picture-in-picture;
+                web-share;
               "
               allowfullscreen
             ></iframe>
+
             <template #fallback>
               <div class="video-skeleton"></div>
             </template>
@@ -210,7 +212,7 @@ const isOpenInfoSection = (index: number) => {
 
   background-color: var(--bg-surface);
   .product-overview {
- /*     height: 100%; */
+    /*     height: 100%; */
     width: 100%;
     .product-overview-inner {
       position: relative;
