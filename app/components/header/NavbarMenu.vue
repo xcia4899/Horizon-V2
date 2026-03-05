@@ -99,7 +99,7 @@ const goProducts = async (item: MenuItem) => {
   if (item?.tag) query.tag = [item.tag];
   if (item?.text === "特價商品") query.onsale = "true";
   
-  await router.push({
+  await navigateTo({
     path: "/products",
     query,
   });
@@ -111,7 +111,7 @@ const goProducts = async (item: MenuItem) => {
 const navigateWithDelay = async (to?: string) => {
   if (!to) return;
   await looding(200);
-  await router.push(to);
+  await navigateTo(to);
 };
 </script>
 

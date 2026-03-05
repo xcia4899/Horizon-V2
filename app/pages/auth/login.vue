@@ -11,14 +11,12 @@
           <input
             id="email"
             type="email"
-            class="input"
             autocomplete="email"
             placeholder="Email"
           />
           <input
             id="password"
             type="password"
-            class="input"
             autocomplete="current-password"
             placeholder="密碼"
           />
@@ -34,12 +32,8 @@
           <span>or</span>
           <hr />
         </div>
-        <ul class="othermethods-logonicon">
-          <li v-for="item in icons" :key="item.icon">
-            <button type="button" class="logonicon-btn">
-              <img :src="item.src" :alt="item.alt" />
-            </button>
-          </li>
+        <ul class="othermethods-logoicon">
+          <AuthLogoicon />
         </ul>
         <NuxtLink class="register" to="/auth/register">註冊會員</NuxtLink>
       </section>
@@ -48,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-interface LoginIcon {
+/* interface LoginIcon {
   src: string;
   alt: string;
   icon: string;
@@ -66,18 +60,17 @@ const icons: LoginIcon[] = [
   { src: "/images/loginicon/10005.svg", alt: "Twitter login", icon: "twitter" },
   { src: "/images/loginicon/10006.svg", alt: "Discord login", icon: "discord" },
   { src: "/images/loginicon/10007.svg", alt: "Github login", icon: "github" },
-];
+]; */
 </script>
 
 <style scoped lang="scss">
 .login {
-  height: 100vh;
+  background: var(--bg-surface);
+  // height: 100vh;
   display: grid;
   place-items: center;
   .login-inner {
-    padding: 92px 32px;
-    // min-height: 800px;
-    max-height: 100vh;
+    padding: 120px 32px;
     margin: 0 auto;
 
     width: clamp(200px, 100%, 600px);
@@ -92,6 +85,7 @@ const icons: LoginIcon[] = [
     text-align: center;
   }
   .login-enter {
+    margin-top: 32px;
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -100,7 +94,7 @@ const icons: LoginIcon[] = [
       display: grid;
       gap: 32px;
     }
-    .input {
+    input {
       padding: 8px;
       outline: none;
       border: none;
@@ -162,7 +156,7 @@ const icons: LoginIcon[] = [
         padding: 4px;
         font-size: 20px;
         color: var(--text-tertiary);
-        background: var(--bg-page);
+        background: var(--bg-surface);
         user-select: none;
       }
       hr {
@@ -170,26 +164,11 @@ const icons: LoginIcon[] = [
         color: var(--border-default);
       }
     }
-    .othermethods-logonicon {
+    .othermethods-logoicon {
       display: flex;
       justify-content: space-evenly;
       flex-wrap: wrap;
       gap: 8px;
-
-      .logonicon-btn {
-        max-width: 60px;
-        border-radius: 50%;
-        aspect-ratio: 1/1;
-        border: 6px solid transparent;
-        @media (hover: hover) and (pointer: fine) {
-          &:hover {
-            border-color: $color-white;
-          }
-        }
-        img {
-          cursor: pointer;
-        }
-      }
     }
 
     .register {
@@ -204,14 +183,6 @@ const icons: LoginIcon[] = [
           color: var(--brand-hover);
         }
       }
-    }
-  }
-}
-
-@media screen and (max-width: 670px) {
-  .login .othermethods {
-    .logonicon {
-      width: 280px;
     }
   }
 }

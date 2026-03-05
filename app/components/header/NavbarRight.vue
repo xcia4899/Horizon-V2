@@ -32,13 +32,8 @@
   </div>
 
   <!-- 登入 -->
-  <button type="button" class="btnItem setItem login-btn">
+  <button type="button" class="btnItem setItem login-btn" @click="goToMember">
     <Icon name="mdi:account-circle" class="icon" size="24" />
-    <!-- 以登入 -->
-    <!-- <Icon
-          :name="isLogin ? 'mdi:account-circle' : 'mdi:account-outline'"
-          class="icon"
-        /> -->
   </button>
   <!-- 購物車 -->
   <button type="button" class="btnItem setItem cart-btn">
@@ -234,6 +229,12 @@ const cartCount = computed(() => cartItems.value.length);
 const cartView = computed(() => {
   return cartItems.value.map((item) => ({ ...item }));
 });
+
+// 跳轉登入
+const goToMember = async () => {
+  await looding(100);
+  await navigateTo("/auth/login")
+};
 </script>
 
 <style scoped lang="scss">
