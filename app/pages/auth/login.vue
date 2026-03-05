@@ -178,12 +178,12 @@ const icons: LoginIcon[] = [
 
       .logonicon-btn {
         max-width: 60px;
-        padding: 8px;
         border-radius: 50%;
         aspect-ratio: 1/1;
+        border: 6px solid transparent;
         @media (hover: hover) and (pointer: fine) {
           &:hover {
-            background-color: var(--bg-surface-soft);
+            border-color: $color-white;
           }
         }
         img {
