@@ -1,87 +1,99 @@
 <template>
-  <main id="main" class="product-cart">
-    <section class="cart-row1">
-      <div class="row1-area content-area mobile">
-        <div class="cart-area">
-          <div id="cart-title" class="cart-item">
-            <div class="cart-col-01">
+  <main class="cart">
+    <div class="cart-inner container">
+      <section class="cart-items">
+        <ul class="cart-items-inner">
+          <li class="cart-item cart-item--header">
+            <div class="cart-col cart-col-01">
               <h2>您的購物車</h2>
-              <h4 class="item-title"></h4>
             </div>
-            <div class="cart-col-02">
+            <div class="cart-col cart-col-02">
               <h4 class="c2-01">單價</h4>
               <h4 class="c2-02">數量</h4>
               <h4 class="c2-03">合計</h4>
             </div>
-            <div class="cart-col-03"></div>
-          </div>
-          <ul class="cart-items">
-            <li v-for="item in cartItems" :key="item.id" class="cart-item">
-              <div class="item-image cart-col-01">
-                <img :src="item.images" :alt="item.name" />
-                <div class="item-title">
-                  <h4>{{ item.brand }}</h4>
-                  <h5>{{ item.name }}</h5>
-                </div>
-              </div>
-              <div class="item-details cart-col-02">
-                <div class="item-price c2-01">
-                  <h5
-                    v-show="item.onsale"
-                    :class="{ redcharacter: item.onsale }"
-                  >
-                    NT${{ item.price.toLocaleString() }}
-                  </h5>
-                  <h5 :class="{ strike: item.onsale }">
-                    NT${{ item.originalPrice.toLocaleString() }}
-                  </h5>
-                </div>
 
-                <div class="item-quantity c2-02">
-                  <button class="btn-decrease" :disabled="item.quantity == 1">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <!-- 減號（-）置中 -->
-                      <path
-                        d="M5 10h10"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </button>
-                  <input type="number" min="1" class="quantity-input" />
-                  <button class="btn-increase">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                      <!-- 加號（+）置中 -->
-                      <path
-                        d="M10 5v10M5 10h10"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-                <h5 class="item-total c2-03">400</h5>
+            <div class="cart-col cart-col-03"></div>
+          </li>
+          <li v-for="item in cartItems" :key="item.id" class="cart-item">
+            <div class="cart-col cart-col-01 item-image">
+              <img :src="item.images" :alt="item.name" />
+              <div class="item-title">
+                <h4>{{ item.brand }}</h4>
+                <h5>{{ item.name }}</h5>
               </div>
-              <div class="cart-col-03">
-                <div class="btn-remove">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                    <!-- 加號（+） -->
+            </div>
+
+            <div class="cart-col cart-col-02 item-details">
+              <div class="item-price c2-01">
+                <h5 v-show="item.onsale" :class="{ redcharacter: item.onsale }">
+                  NT${{ item.price.toLocaleString() }}
+                </h5>
+
+                <h5 :class="{ strike: item.onsale }">
+                  NT${{ item.originalPrice.toLocaleString() }}
+                </h5>
+              </div>
+
+              <div class="item-quantity c2-02">
+                <button class="btn-decrease" :disabled="item.quantity === 1">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
-                      d="M12 5v14M5 12h14"
+                      d="M5 10h10"
                       stroke="currentColor"
                       stroke-width="2"
                       stroke-linecap="round"
                     />
                   </svg>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
+                </button>
 
-        <div class="cart-summary">
+                <input
+                  :value="item.quantity"
+                  type="number"
+                  min="1"
+                  class="quantity-input"
+                />
+
+                <button class="btn-increase">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path
+                      d="M10 5v10M5 10h10"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <h5 class="item-total c2-03">
+                NT${{
+                  (
+                    item.quantity *
+                    (item.onsale ? item.price : item.originalPrice)
+                  ).toLocaleString()
+                }}
+              </h5>
+            </div>
+
+            <div class="cart-col cart-col-03">
+              <button class="btn-remove" type="button" aria-label="移除商品">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <section class="cart-summary">
+        <div class="cart-summary-inner">
           <div class="Remark">
             <h4>
               備註
@@ -159,8 +171,8 @@
           </div>
           <p>運費、稅金和折扣碼在結帳時計算</p>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </main>
 </template>
 
@@ -195,76 +207,88 @@ const cartItems = ref([
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
     images: "/images/pic-detal/RAZER-1000/10001.jpg",
   },
+  {
+    id: "RAZER-1000",
+    brand: "RAZER ",
+    name: "RAZER 2 DEX RGB電競鍵盤",
+    subtitle: "穩定可靠，電競鍵盤的專業之選",
+    price: 4490,
+    originalPrice: 4990,
+    quantity: 1,
+    onsale: true,
+    colorOptions: "黑色",
+    description:
+      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
+    images: "/images/pic-detal/RAZER-1000/10001.jpg",
+  },
+  {
+    id: "RAZER-1000",
+    brand: "RAZER ",
+    name: "RAZER 2 DEX RGB電競鍵盤",
+    subtitle: "穩定可靠，電競鍵盤的專業之選",
+    price: 4490,
+    originalPrice: 4990,
+    quantity: 1,
+    onsale: true,
+    colorOptions: "黑色",
+    description:
+      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
+    images: "/images/pic-detal/RAZER-1000/10001.jpg",
+  },
+  {
+    id: "RAZER-1000",
+    brand: "RAZER ",
+    name: "RAZER 2 DEX RGB電競鍵盤",
+    subtitle: "穩定可靠，電競鍵盤的專業之選",
+    price: 4490,
+    originalPrice: 4990,
+    quantity: 1,
+    onsale: true,
+    colorOptions: "黑色",
+    description:
+      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
+    images: "/images/pic-detal/RAZER-1000/10001.jpg",
+  },
 ]);
 </script>
 
 <style scoped lang="scss">
-.product-cart {
-  .cart-row1 {
-    padding: 64px 0px 64px;
-
+.cart {
+  display: grid;
+  place-items: center;
+  * {
+    border: 1px solid;
   }
+  padding-block: clamp(84px, 10vw, 120px);
+  min-height: 100vh;
 
-  .row1-area {
+  .cart-inner {
     display: flex;
-    // flex-wrap: wrap;
     gap: 32px;
-    padding-top: 64px;
+    // padding-top: 64px;
+    // padding: 120px 0px ;
   }
 
-  .cart-area {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    flex: 1;
-
-    #cart-title {
-      height: 80px;
-      min-height: auto;
-
-      &::after {
-        height: 2px;
-
-        border-radius: 1px;
-      }
-    }
-
-    #cart-title.cart-item:hover {
-      // border-radius: 12px;
-      background-color: transparent;
-
-    }
-
-    .cart-items {
-
-      height: 100%;
-      margin: 0;
+  .cart-items {
+    position: relative;
+    .cart-items-inner {
       display: flex;
       flex-direction: column;
       gap: 16px;
-      max-height: 540px;
-      overflow-y: auto;
-      scrollbar-width: none; //隱藏滾輪
+      // max-height: 540px;
+      // overflow-y: auto;
+      // scrollbar-width: none;
     }
 
     .cart-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(220px, 36%) minmax(420px, 60%) 40px;
+      align-items: center;
+      gap: 8px;
       padding: 16px 8px;
       min-height: 140px;
-      display: flex;
-      justify-content: space-evenly;
-      gap: 4px;
-      // border-bottom: 1px solid darken($color-middlekgery, 30%);
       transition: all 0.2s ease;
-
-      &:hover {
-        border-radius: 12px;
-
-        color: #e95b5b;
-      }
-
-      &:hover .item-quantity {
-        border-color: #db4b4b;
-      }
 
       &::after {
         content: "";
@@ -273,66 +297,79 @@ const cartItems = ref([
         bottom: -8px;
         width: 100%;
         height: 1px;
-
+        border-radius: 1px;
+        background-color: var(--border-default);
       }
 
-      .cart-col-01,
-      .cart-col-02,
-      .cart-col-03 {
+      &:hover {
+        border-radius: 12px;
+        color: #e95b5b;
+      }
+
+      &:hover .item-quantity {
+        border-color: #db4b4b;
+      }
+
+      .cart-col {
         display: flex;
-        justify-content: center;
         align-items: center;
-        // height: 100%;
+        height: 100%;
       }
 
       .cart-col-01 {
-        width: 36%;
-        min-width: 200px;
-        justify-content: flex-start;
-
-        h2 {
-          white-space: nowrap;
-        }
+        min-width: 0;
       }
 
       .cart-col-02 {
-        width: 60%;
-        display: flex;
-        justify-content: space-evenly;
-        gap: 4px;
-        padding: 8px 0;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        align-items: center;
+        justify-items: center;
+        gap: 8px;
+        min-width: 0;
 
         .c2-01,
         .c2-02,
         .c2-03 {
-          // text-align: center;
+          width: 100%;
           display: flex;
           justify-content: center;
-          align-items: flex-end;
-          width: 30%;
-          max-width: 100px;
-          min-width: 100px;
-          height: 100%;
           white-space: nowrap;
         }
       }
 
       .cart-col-03 {
-        width: 4%;
+        justify-content: center;
+        width: 40px;
+      }
+
+      &.cart-item--header {
+        height: 80px;
+        &:hover {
+          color: inherit;
+        }
+        &::after {
+          height: 2px;
+        }
       }
 
       .item-image {
-        min-width: 200px;
+        display: flex;
+        align-items: center;
         gap: 12px;
+        min-width: 0;
 
         img {
-          width: 30%;
+          width: 88px;
+          height: 88px;
           object-fit: cover;
+          border-radius: 8px;
+          flex-shrink: 0;
         }
 
         .item-title {
-          width: 70%;
-          text-align: center;
+          min-width: 0;
+          text-align: left;
 
           h4 {
             font-weight: 600;
@@ -340,6 +377,11 @@ const cartItems = ref([
 
           h5 {
             margin-top: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
           }
         }
       }
@@ -355,45 +397,51 @@ const cartItems = ref([
 
         .item-quantity {
           display: flex;
-          max-height: 36px;
+          align-items: stretch;
+          width: 100%;
+          max-width: 120px;
+          height: 36px;
           border: 1px solid #cecece;
           border-radius: 4px;
           transition: all 0.3s ease;
           overflow: hidden;
 
           .quantity-input {
+            width: 100%;
             height: 100%;
-            width: 50%;
             text-align: center;
-            // border: 1px solid;
-            border-color: #c7c7c7;
-            border-style: solid;
-            border-width: 0px 1px;
+            border: none;
+            border-left: 1px solid #c7c7c7;
+            border-right: 1px solid #c7c7c7;
             background-color: transparent;
             outline: none;
             transition: all 0.3s ease;
+
+            &[type="number"]::-webkit-outer-spin-button,
+            &[type="number"]::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
           }
 
           .btn-increase,
           .btn-decrease {
+            width: 32px;
+            min-width: 32px;
             height: 100%;
-            width: calc(50% / 2);
-
             outline: none;
             border: none;
-
+            background-color: transparent;
             transition: all 0.3s ease;
-
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
 
             svg {
-
-              height: 100%;
-              width: 100%;
-              transform: scale(1.4);
+              width: 18px;
+              height: 18px;
+              transform: scale(1.2);
             }
 
             &:hover {
@@ -406,36 +454,32 @@ const cartItems = ref([
 
             &:disabled {
               opacity: 0.5;
-
               cursor: not-allowed;
             }
-          }
-
-          input[type="number"]::-webkit-outer-spin-button,
-          input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
           }
         }
 
         .item-total {
+          display: flex;
+          justify-content: center;
           align-items: center;
         }
       }
 
       .btn-remove {
-        // border: 1px solid;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 30px;
         height: 30px;
-        aspect-ratio: 1/1;
+        aspect-ratio: 1 / 1;
+        border: none;
+        background-color: transparent;
         border-radius: 50%;
         cursor: pointer;
+        transition: all 0.3s ease;
 
         svg {
-
           transform: scale(1.2) rotate(45deg);
         }
 
@@ -451,26 +495,30 @@ const cartItems = ref([
   }
 
   .cart-summary {
-    // margin-top: 32px;
-    padding: 16px;
-    border-radius: 12px;
-    // height: 600px;
-    background-color: #fff;
-    height: 100%;
-    min-width: 200px;
-    max-width: 360px;
+    position: relative;
+    .cart-summary-inner {
+      position: sticky;
+      top: 72px;
+      top: clamp(72px, 5vh, 90px);
+      // margin-top: 32px;
+      padding: 16px;
+      border-radius: 12px;
+      // height: 600px;
+      background-color: #fff;
+      // height: 100%;
+      min-width: 200px;
+      max-width: 360px;
 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 32px;
-    text-align: center;
-
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      text-align: center;
+    }
     h4 {
       font-weight: 600;
     }
-
     div {
       // margin-bottom: 32px;
       width: 100%;
@@ -584,9 +632,7 @@ const cartItems = ref([
 
     p {
       font-size: 14px;
-
     }
   }
 }
-
 </style>
