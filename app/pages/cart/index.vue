@@ -1,31 +1,31 @@
 <template>
   <main class="cart">
     <div class="cart-inner container">
-      <section class="cart-items">
-        <ul class="cart-items-inner">
-          <li class="cart-item cart-item--header">
-            <div class="cart-col cart-col-01">
+      <section class="cart-products">
+        <ul class="cart-products-inner">
+          <li class="cart-card cart-head">
+            <div class="card-title">
               <h2>您的購物車</h2>
             </div>
-            <div class="cart-col cart-col-02">
-              <h4 class="c2-01">單價</h4>
-              <h4 class="c2-02">數量</h4>
-              <h4 class="c2-03">合計</h4>
+            <div class="card-details">
+              <h4 class="card-price">單價</h4>
+              <h4 class="card-quantity">數量</h4>
+              <h4 class="card-total">合計</h4>
             </div>
 
-            <div class="cart-col cart-col-03"></div>
+            <div class="card-delete"></div>
           </li>
-          <li v-for="item in cartItems" :key="item.id" class="cart-item">
-            <div class="cart-col cart-col-01 item-image">
+          <li v-for="item in cartItems" :key="item.id" class="cart-card">
+            <div class="card-title">
               <img :src="item.images" :alt="item.name" />
-              <div class="item-title">
+              <div class="card-title">
                 <h4>{{ item.brand }}</h4>
                 <h5>{{ item.name }}</h5>
               </div>
             </div>
 
-            <div class="cart-col cart-col-02 item-details">
-              <div class="item-price c2-01">
+            <div class="card-details">
+              <div class="card-price">
                 <h5 v-show="item.onsale" :class="{ redcharacter: item.onsale }">
                   NT${{ item.price.toLocaleString() }}
                 </h5>
@@ -35,7 +35,7 @@
                 </h5>
               </div>
 
-              <div class="item-quantity c2-02">
+              <div class="card-quantity">
                 <button class="btn-decrease" :disabled="item.quantity === 1">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                     <path
@@ -66,7 +66,7 @@
                 </button>
               </div>
 
-              <h5 class="item-total c2-03">
+              <h5 class="card-total">
                 NT${{
                   (
                     item.quantity *
@@ -76,7 +76,7 @@
               </h5>
             </div>
 
-            <div class="cart-col cart-col-03">
+            <div class="card-delete">
               <button class="btn-remove" type="button" aria-label="移除商品">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                   <path
@@ -264,30 +264,34 @@ const cartItems = ref([
 
   .cart-inner {
     display: flex;
+
     gap: 32px;
     // padding-top: 64px;
     // padding: 120px 0px ;
   }
 
-  .cart-items {
+  .cart-products {
     position: relative;
-    .cart-items-inner {
-      display: flex;
-      flex-direction: column;
+
+    .cart-products-inner {
+      display: grid;
+      // flex-direction: column;
+      grid-template-rows: 100px 1fr;
       gap: 16px;
       // max-height: 540px;
       // overflow-y: auto;
       // scrollbar-width: none;
     }
 
-    .cart-item {
+    .cart-card {
       position: relative;
       display: grid;
       grid-template-columns: minmax(220px, 36%) minmax(420px, 60%) 40px;
+
       align-items: center;
       gap: 8px;
       padding: 16px 8px;
-      min-height: 140px;
+
       transition: all 0.2s ease;
 
       &::after {
@@ -306,54 +310,16 @@ const cartItems = ref([
         color: #e95b5b;
       }
 
-      &:hover .item-quantity {
+      &:hover .card-quantity {
         border-color: #db4b4b;
       }
 
-      .cart-col {
-        display: flex;
-        align-items: center;
-        height: 100%;
-      }
-
-      .cart-col-01 {
-        min-width: 0;
-      }
-
-      .cart-col-02 {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
-        align-items: center;
-        justify-items: center;
-        gap: 8px;
-        min-width: 0;
-
-        .c2-01,
-        .c2-02,
-        .c2-03 {
-          width: 100%;
-          display: flex;
-          justify-content: center;
-          white-space: nowrap;
-        }
-      }
-
-      .cart-col-03 {
+      .card-delete {
         justify-content: center;
         width: 40px;
       }
 
-      &.cart-item--header {
-        height: 80px;
-        &:hover {
-          color: inherit;
-        }
-        &::after {
-          height: 2px;
-        }
-      }
-
-      .item-image {
+      .card-title {
         display: flex;
         align-items: center;
         gap: 12px;
@@ -367,7 +333,7 @@ const cartItems = ref([
           flex-shrink: 0;
         }
 
-        .item-title {
+        .card-title {
           min-width: 0;
           text-align: left;
 
@@ -378,16 +344,19 @@ const cartItems = ref([
           h5 {
             margin-top: 8px;
             overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
           }
         }
       }
 
-      .item-details {
-        .item-price {
+      .card-details {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        align-items: center;
+        justify-items: center;
+        gap: 8px;
+        min-width: 0;
+
+        .card-price {
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -395,7 +364,7 @@ const cartItems = ref([
           gap: 4px;
         }
 
-        .item-quantity {
+        .card-quantity {
           display: flex;
           align-items: stretch;
           width: 100%;
@@ -459,7 +428,7 @@ const cartItems = ref([
           }
         }
 
-        .item-total {
+        .card-total {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -490,6 +459,14 @@ const cartItems = ref([
         &:hover svg {
           color: $color-white;
         }
+      }
+    }
+    .cart-card.cart-head {
+      &:hover {
+        color: inherit;
+      }
+      &::after {
+        height: 2px;
       }
     }
   }
