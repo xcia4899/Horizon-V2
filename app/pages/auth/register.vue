@@ -5,16 +5,65 @@
         <h3>建立帳戶</h3>
         <p>填寫欄位以建立您的ID</p>
       </header>
-
-      <form class="register-enter">
+      <el-form
+        ref="formRegisterRef"
+        :model="formRegister"
+        :rules="registerRule"
+        status-icon
+        class="register-enter"
+      >
         <div class="enter-inputs">
-          <input type="text" placeholder="名子" />
-          <input type="text" placeholder="姓氏" />
-          <input type="email" placeholder="Email" />
-          <input type="text" placeholder="密碼" />
-          <input type="text" placeholder="確認密碼" />
+          <el-form-item prop="lastName">
+            <el-input
+              v-model="formRegister.lastName"
+              type="text"
+              autocomplete="off"
+              placeholder="姓氏"
+            />
+          </el-form-item>
+          <el-form-item prop="name">
+            <el-input
+              v-model="formRegister.name"
+              type="text"
+              autocomplete="off"
+              placeholder="名字"
+            />
+          </el-form-item>
+          <el-form-item prop="birthday">
+            <el-date-picker
+              v-model="formRegister.birthday"
+              type="date"
+              placeholder="出生日期"
+              value-format="YYYY-MM-DD"
+            />
+          </el-form-item>
+          <el-form-item prop="email">
+            <el-input
+              v-model="formRegister.email"
+              type="text"
+              autocomplete="off"
+              placeholder="帳號"
+            />
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input
+              v-model="formRegister.password"
+              type="password"
+              autocomplete="off"
+              placeholder="密碼"
+              show-password
+            />
+          </el-form-item>
+          <el-form-item prop="passwordConfirm">
+            <el-input
+              v-model="formRegister.passwordConfirm"
+              type="password"
+              autocomplete="off"
+              placeholder="再次輸入密碼"
+              show-password
+            />
+          </el-form-item>
         </div>
-
         <div class="register-enter-submits">
           <label class="register-label">
             <input type="checkbox" name="marketingConsent" />
@@ -31,9 +80,15 @@
             hCaptcha 保護機制，並適用其 <span>隱私權政策</span> 與
             <span>服務條款</span>。
           </div>
-          <button type="button" class="btn register-btn">建立</button>
+          <button
+            type="button"
+            class="btn register-btn"
+            @click.prevent="submitRegisterForm"
+          >
+            建立
+          </button>
         </div>
-      </form>
+      </el-form>
       <section class="register-othermethods">
         <div class="othermethods-or">
           <span>or</span>
@@ -48,7 +103,107 @@
   </main>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { FormRules } from "element-plus";
+import { useAuthStore } from "@/stores/useUserAuth";
+const auth = useAuthStore();
+
+interface RegisterForm {
+  lastName: string;
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  birthday?: string;
+}
+
+const formRegisterRef = ref();
+
+const formRegister = reactive<RegisterForm>({
+  lastName: "",
+  name: "",
+  email: "",
+  password: "",
+  passwordConfirm: "",
+  birthday: "",
+});
+
+//密碼檢查規則
+const validateRegisterPwd = (
+  rule: unknown,
+  value: string,
+  callback: (error?: Error) => void,
+) => {
+  if (!value) {
+    return callback(new Error("密碼不能為空"));
+  }
+  callback();
+};
+//密碼二次確認規則
+const validateConfirmPwd = (
+  rule: unknown,
+  value: string,
+  callback: (error?: Error) => void,
+) => {
+  if (!value) {
+    return callback(new Error("請再次輸入密碼"));
+  }
+  if (value !== formRegister.password) {
+    return callback(new Error("兩次輸入的密碼不一致"));
+  }
+  callback();
+};
+
+const registerRule: FormRules = reactive({
+  lastName: [
+    { required: true, trigger: "blur", message: "請輸入姓氏" },
+    { min: 1, max: 20, message: "姓氏長度 1–20 字", trigger: "blur" },
+  ],
+  name: [
+    { required: true, trigger: "blur", message: "請輸入名字" },
+    { min: 1, max: 20, message: "名字長度 1–20 字", trigger: "blur" },
+  ],
+  email: [
+    { required: true, trigger: "blur", message: "請輸入帳號" },
+    { type: "email", message: "請輸入正確的 email 格式", trigger: "blur" },
+    { max: 100, message: "Email 長度不可超過 100", trigger: "blur" },
+  ],
+  password: [
+    {
+      required: true,
+      min: 6,
+      max: 20,
+      message: "密碼為長度為 6–20 位",
+      trigger: "blur",
+    },
+    { validator: validateRegisterPwd, trigger: "blur" },
+  ],
+  passwordConfirm: [
+    { required: true, message: "請再次輸入密碼", trigger: "blur" },
+    { validator: validateConfirmPwd, trigger: "blur" },
+  ],
+  birthday: [{ required: true, message: "請選擇生日", trigger: "change" }],
+});
+
+const submitRegisterForm = async () => {
+  if (!formRegisterRef.value) return;
+
+  // 1. 先做表單驗證
+  try {
+    await formRegisterRef.value.validate();
+    console.log("註冊表單驗證成功");
+  } catch (err) {
+    console.log("註冊表單驗證失敗", err);
+    return;
+  }
+  //2 .呼叫註冊API (目前是localStorage 模擬)
+  try {
+    await auth.register(formRegister);
+  } catch (e) {
+    alert((e as Error).message);
+  }
+};
+</script>
 
 <style scoped lang="scss">
 .register {
@@ -77,38 +232,42 @@
     flex-direction: column;
     gap: 32px;
     width: 100%;
+
     .enter-inputs {
       display: grid;
       gap: 32px;
     }
-    input {
-      padding: 8px;
+
+    :deep(.el-input__wrapper) {
       outline: none;
       border: none;
+      box-shadow: none;
+      width: 100%;
+      padding: 2px 8px;
       background-color: transparent;
+      border-radius: 0;
       border-bottom: 2px solid var(--border-default);
-
-      &:focus {
-        border-color: var(--border-soft);
+    }
+    :deep(.el-input__inner) {
+      &::placeholder {
+        color: var(--text-primary);
       }
     }
-
-    input::placeholder {
-      padding: 0 8px;
-      font-size: 16px;
+    :deep(.el-input__wrapper.is-focus) {
+      border-bottom-color: var(--border-soft);
     }
-    input[type="date"]::placeholder {
-      color: red;
+    :deep(.el-date-editor) {
+      width: 100%;
     }
     .register-enter-submits {
       display: grid;
       place-items: center;
       gap: 16px;
       line-height: 1.6;
+
       span {
         text-decoration: underline;
         text-underline-offset: 2px;
-        
         cursor: pointer;
       }
       .register-label {
@@ -116,6 +275,7 @@
         display: flex;
         gap: 8px;
         cursor: pointer;
+
         input {
           width: 20px;
           height: auto;
@@ -123,9 +283,11 @@
           cursor: pointer;
         }
       }
+
       .register-btn {
         margin-top: 16px;
         width: 100%;
+
         @media (hover: hover) and (pointer: fine) {
           &:hover {
             color: var(--brand-hover);

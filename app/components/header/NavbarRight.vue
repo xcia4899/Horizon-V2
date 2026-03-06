@@ -32,11 +32,11 @@
   </div>
 
   <!-- 登入 -->
-  <button type="button" class="btnItem setItem login-btn" @click="goToMember">
+  <button type="button" class="btnItem setItem login-btn" @click="goToLogin">
     <Icon name="mdi:account-circle" class="icon" size="24" />
   </button>
   <!-- 購物車 -->
-  <button type="button" class="btnItem setItem cart-btn">
+  <button type="button" class="btnItem setItem cart-btn" @click="goToCart">
     <Icon name="meteor-icons:cart-shopping" class="icon" size="24" />
     <span v-if="cartCount > 0" class="cart-badge">
       {{ cartCount > 99 ? "99+" : cartCount }}
@@ -231,9 +231,13 @@ const cartView = computed(() => {
 });
 
 // 跳轉登入
-const goToMember = async () => {
+const goToLogin = async () => {
   await looding(100);
-  await navigateTo("/auth/login")
+  await navigateTo("/auth/login");
+};
+const goToCart = async () => {
+  await looding(100);
+  await navigateTo("/cart");
 };
 </script>
 

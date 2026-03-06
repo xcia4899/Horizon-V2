@@ -9,6 +9,7 @@
       <el-form
         ref="formLoginRef"
         :model="formLogin"
+        status-icon
         :rules="loginRules"
         class="login-enter"
       >
@@ -18,6 +19,7 @@
               v-model="formLogin.email"
               class="input"
               type="text"
+
               autocomplete="off"
               placeholder="帳號"
             />
@@ -38,7 +40,9 @@
             type="submit"
             class="btn login-btn"
             @click.prevent="submitLoginForm"
-          >登入</button>
+          >
+            登入
+          </button>
         </div>
       </el-form>
       <section class="login-othermethods">
@@ -60,7 +64,6 @@ import type { FormRules } from "element-plus";
 import { useAuthStore } from "@/stores/useUserAuth";
 
 const auth = useAuthStore();
-
 
 //表單物件
 const formLoginRef = ref();
@@ -97,7 +100,16 @@ const loginRules: FormRules = reactive({
       trigger: "blur",
     },
   ],
-  password: [{ validator: validatePwd, trigger: "blur" }],
+  password: [
+    {
+      required: true,
+      min: 6,
+      max: 20,
+      message: "密碼為長度為 6–20 位",
+      trigger: "blur",
+    },
+    { validator: validatePwd, trigger: "blur" },
+  ],
 });
 // 登入方法
 const submitLoginForm = async () => {
@@ -115,7 +127,7 @@ const submitLoginForm = async () => {
 
   // 2) 呼叫「登入 API」（目前由 localStorage 模擬）
   try {
-    await auth.login(formLogin.email, formLogin.password);
+    await auth.login(formLogin);
   } catch (e) {
     alert((e as Error).message);
     return;

@@ -32,9 +32,9 @@
 
 <script setup lang="ts">
 import type { Product } from "@/composables/useProducts";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 
-const router = useRouter();
+
 
 defineProps<{
   productListView: Product[];
@@ -42,7 +42,7 @@ defineProps<{
 
 const gotoProductDetail = (id: string) => {
   console.log("指定ID", id);
-  router.push({
+  navigateTo({
     name: "products-id",
     params: { id },
   });
@@ -51,10 +51,9 @@ const gotoProductDetail = (id: string) => {
 
 <style scoped lang="scss">
 .products-view {
-
   width: 100%;
   display: grid;
-   /* 建立三欄，每欄 1fr 寬 */
+  /* 建立三欄，每欄 1fr 寬 */
   grid-template-columns: repeat(auto-fit, minmax(220px, max-content));
   grid-template-rows: auto-fit;
   /* 自動高度 */
@@ -108,7 +107,7 @@ const gotoProductDetail = (id: string) => {
           width: 100%;
           height: 200px;
           padding: 8px;
-/*           overflow: hidden; */
+          /*           overflow: hidden; */
           object-fit: cover;
           object-position: center;
         }

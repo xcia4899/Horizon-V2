@@ -9,6 +9,18 @@ export type UserRecord = {
   role?: "user" | "admin";
 };
 
+export interface LoginForm {
+  email: string;
+  password: string;
+}
+export interface RegisterForm {
+  lastName: string;
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  birthday?: string;
+}
 const USERS_KEY = "users";
 const SESSION_USER_KEY = "currentUserId";
 const SESSION_TOKEN_KEY = "msToken";
@@ -39,11 +51,11 @@ export const useAuthStore = defineStore("auth", () => {
     token.value = localStorage.getItem(SESSION_TOKEN_KEY);
   };
 
-  const login = async (emailRaw: string, passwordRaw: string) => {
+  const login = async (form:LoginForm) => {
     if (!import.meta.client) throw new Error("client only");
 
-    const email = String(emailRaw).trim().toLowerCase();
-    const password = String(passwordRaw);
+    const email = String(form.email).trim().toLowerCase();
+    const password = String(form.password);
 
     const users = loadUsers();
     if (!users.length) throw new Error("目前沒有任何註冊帳號");
@@ -72,11 +84,12 @@ export const useAuthStore = defineStore("auth", () => {
     token.value = null;
   };
 
-  const register = async (emailRaw: string, passwordRaw: string) => {
+  const register = async (form:RegisterForm) => {
     if (!import.meta.client) throw new Error("client only");
 
-    const email = emailRaw.trim().toLowerCase();
-    const password = passwordRaw;
+    // const lastName =
+    const email = form.email.trim().toLowerCase();
+    const password = form.password;
 
     const users = loadUsers();
     if (users.some((u) => u.email.trim().toLowerCase() === email)) {
