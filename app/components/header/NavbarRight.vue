@@ -442,7 +442,7 @@ const goToCart = async () => {
         position: absolute;
         top: -8px;
         font-size: 12px;
-        right: 0;
+        right: 0px;
         left: auto;
 
         transform: translate(0px, 0px);
@@ -452,16 +452,19 @@ const goToCart = async () => {
 
         opacity: 0;
         visibility: hidden;
-        border: 1px solid var(----state-danger);
+        border: 1px solid var(--state-danger);
         border-radius: 6px;
-        color: var(--inverse);
-        background: var(--bg-surface-soft);
+        color: var(--text-primary);
       }
       @media (hover: hover) {
         &:hover::after {
           opacity: 0.6;
           visibility: visible;
         }
+      }
+      &:active .icon {
+        transform: scale(0.9);
+        color: var(--text-secondary);
       }
     }
   }

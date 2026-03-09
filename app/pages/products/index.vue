@@ -400,7 +400,7 @@ function toNumArray(
 }
 .sidebar-toolbar {
   padding: 8px 12px;
-  background: var(--bg-surface);
+  background: var(--bg-surface-strong);
   .sidebar-toolbar-inner {
     display: flex;
     justify-content: space-between;
@@ -416,7 +416,7 @@ function toNumArray(
     border-radius: 16px;
     letter-spacing: 2px;
     color: var(--text-tertiary);
-    background: var(--bg-surface-strong);
+    background: var(--bg-surface);
     transition: background-color 0.2s ease;
     cursor: pointer;
 
@@ -455,7 +455,7 @@ function toNumArray(
   }
 }
 .product-main {
-  background: var(--bg-surface-strong);
+  background: var(--bg-surface);
   .product-main-inner {
     display: flex;
     width: 100%;

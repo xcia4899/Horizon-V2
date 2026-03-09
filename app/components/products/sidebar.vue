@@ -123,7 +123,7 @@ const updateOnsale = (val: string | number | boolean) => {
   overflow: hidden;
   opacity: 1;
   /*   color: var(--text-primary); */
-  background: var(--bg-surface-strong);
+  background: var(--bg-surface);
   padding-right: 32px;
   transition:
     max-width 0.3s ease-out,

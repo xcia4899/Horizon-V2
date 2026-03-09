@@ -74,82 +74,64 @@
 
       <section class="cart-information">
         <div class="cart-information-inner">
-          <div class="Remark">
-            <h4>
-              備註
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path d="M3 5h18v2H3zM7 11h10v2H7zM10 17h4v2h-4z" />
-              </svg>
-            </h4>
+          <div class="into-remark">
+            <h4 class="title">備註</h4>
             <textarea v-show="true" placeholder="請輸入備註..."></textarea>
           </div>
-          <div>
-            <div class="arrangement">
-              <h4>發票類型</h4>
-              <select v-model="billType">
+          <div class="into-bill">
+            <div class="bill-select into-inner">
+              <h4 class="title">發票類型</h4>
+              <select v-model="billType" class="select">
                 <option disabled value="">請選擇發票類型</option>
-                <option value="electronic">電子發票</option>
-                <option value="carrier">條碼載具</option>
-                <option value="invoice">統一發票</option>
-                <option value="donate">捐贈</option>
+                <option
+                  v-for="type in billTypes"
+                  :key="type.value"
+                  :value="type.value"
+                >
+                  {{ type.label }}
+                </option>
               </select>
             </div>
-            <div class="bill_area">
-              <div v-if="billType === 'electronic'">
-                <label>
-                  <p>電子發票：系統自動開立，無須提供資料。</p>
-                </label>
-              </div>
-              <div v-if="billType === 'carrier'">
-                <label
-                  >載具條碼： <input type="text" placeholder="請輸入條碼"
-                /></label>
-              </div>
-              <div v-if="billType === 'invoice'">
-                <label
-                  >統一編號：<input type="text" placeholder="請輸入統一編號"
-                /></label>
-                <label
-                  >公司抬頭：<input type="text" placeholder="請輸入公司名稱"
-                /></label>
-              </div>
-              <div v-if="billType === 'donate'">
-                <label
-                  >捐贈碼：<input type="text" placeholder="請輸入捐贈碼"
-                /></label>
-              </div>
+
+            <div v-if="currentBill" class="bill-area">
+              <!-- 說明 -->
+              <p v-if="currentBill.description">
+                {{ currentBill.description }}
+              </p>
+
+              <!-- 欄位 -->
+              <label v-for="field in currentBill.fields" :key="field.key">
+                {{ field.label }}
+
+                <input
+                  v-model="billForm[field.key]"
+                  type="text"
+                  :placeholder="field.placeholder"
+                />
+              </label>
             </div>
           </div>
 
-          <div class="arrangement">
+          <div class="into-inner">
             <h4>運費</h4>
             <span>$400</span>
           </div>
-          <div class="arrangement">
+          <div class="into-inner">
             <h4>總計</h4>
             <span>$ (total + 400).toLocaleString() </span>
           </div>
-          <div class="agreeCheckbox">
-            <label>
-              <input type="checkbox" />
-              <span
-                >我同意辦理退/換貨時，由賣方代為處理銷售憑證(發票處理/銷售折讓)以加速作業流程</span
-              >
-            </label>
+          <label class="into-agree">
+            <input type="checkbox" />
+            <p>
+              我同意辦理退/換貨時，由賣方代為處理銷售憑證(發票處理/銷售折讓)以加速作業流程
+            </p>
+          </label>
+          <div class="into-btns">
+            <button class="btn btn-checkout">前往結帳</button>
+
+            <button class="btn btn-keep">繼續購物</button>
           </div>
-          <div class="btn-area">
-            <a><button class="btn btn-checkout">前往結帳</button></a>
-            <a href="./productlist.html"
-              ><button class="btn btn-keep">繼續購物</button></a
-            >
-          </div>
-          <p>運費、稅金和折扣碼在結帳時計算</p>
+          <p class="into-subtitle">運費、稅金和折扣碼在結帳時計算</p>
         </div>
       </section>
     </div>
@@ -157,7 +139,78 @@
 </template>
 
 <script setup lang="ts">
-const billType = ref(null);
+interface BillField {
+  label: string;
+  placeholder?: string;
+  key: keyof typeof billForm;
+}
+interface BillType {
+  value: string;
+  label: string;
+  description?: string;
+  fields?: BillField[];
+}
+//綁定發票選擇select
+const billType = ref("");
+//綁定發票內輸入資料
+const billForm = reactive({
+  carrierCode: "",
+  taxId: "",
+  company: "",
+  donateCode: "",
+});
+//發票資料
+const billTypes: BillType[] = [
+  {
+    value: "electronic",
+    label: "電子發票",
+    description: "系統自動開立，無須提供資料",
+  },
+  {
+    value: "carrier",
+    label: "條碼載具",
+    fields: [
+      {
+        label: "載具條碼",
+        placeholder: "請輸入條碼",
+        key: "carrierCode",
+      },
+    ],
+  },
+  {
+    value: "invoice",
+    label: "統一發票",
+    fields: [
+      {
+        label: "統一編號",
+        placeholder: "請輸入統一編號",
+        key: "taxId",
+      },
+      {
+        label: "公司抬頭",
+        placeholder: "請輸入公司名稱",
+        key: "company",
+      },
+    ],
+  },
+  {
+    value: "donate",
+    label: "捐贈",
+    fields: [
+      {
+        label: "捐贈碼",
+        placeholder: "請輸入捐贈碼",
+        key: "donateCode",
+      },
+    ],
+  },
+];
+//發票選擇
+const currentBill = computed(() =>
+  billTypes.find((b) => b.value === billType.value),
+);
+
+//購物車資訊
 const cartItems = ref([
   {
     id: "RAZER-1000",
@@ -214,7 +267,7 @@ const cartItems = ref([
     category: "鍵盤",
     discount: 4490,
     price: 4990,
-    onsale: true,
+    onsale: false,
     color: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
@@ -227,7 +280,7 @@ const cartItems = ref([
         "/images/pic-detal/RAZER-1000/10004.jpg",
       ],
     },
-    quantity: 1,
+    quantity: 3,
   },
   {
     id: "RAZER-1000",
@@ -260,7 +313,7 @@ const cartItems = ref([
     category: "鍵盤",
     discount: 4490,
     price: 4990,
-    onsale: true,
+    onsale: false,
     color: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
@@ -273,41 +326,44 @@ const cartItems = ref([
         "/images/pic-detal/RAZER-1000/10004.jpg",
       ],
     },
-    quantity: 1,
+    quantity: 2,
   },
 ]);
 </script>
 
 <style scoped lang="scss">
 .cart {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding-block: clamp(84px, 10vw, 120px);
-  min-height: 100vh;
-
+  // min-height: 100vh;
+  background: var(--bg-surface);
   .cart-inner {
     display: flex;
+    justify-content: center;
+
     gap: 32px;
   }
 
   .cart-products {
+    flex: 0 0 64%;
     position: relative;
     .cart-products-inner {
       display: grid;
-
-      grid-template-rows: 100px 1fr;
+      grid-template-rows: minmax(80px, 120px) 1fr;
       gap: 16px;
     }
-
     .cart-card {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(220px, 36%) minmax(420px, 60%) 40px;
-
+      grid-template-columns: minmax(200px, 1fr) minmax(0, 1fr) 40px;
       align-items: center;
-      gap: 8px;
+      // display: flex;
+      // justify-content: space-between;
+      gap: 16px;
       padding: 16px 8px;
-
+      // background: var(--bg-surface-soft);
       /* 底線 */
       &::after {
         content: "";
@@ -317,14 +373,14 @@ const cartItems = ref([
         width: 100%;
         height: 1px;
         border-radius: 1px;
-        background-color: var(--border-default);
+        background: var(--border-default);
       }
-      &:hover {
-        border-radius: 12px;
-        color: #e95b5b;
-      }
-      &:hover .card-quantity {
-        border-color: #db4b4b;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          border-radius: 12px;
+          background: var(--bg-surface-soft);
+        }
       }
 
       .card-title {
@@ -343,17 +399,20 @@ const cartItems = ref([
           display: flex;
           flex-direction: column;
           gap: 8px;
+          .name {
+            color: var(--text-secondary);
+          }
         }
       }
 
       .card-details {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(80px, 1fr));
+        display: flex;
+        justify-content: space-between;
         align-items: center;
-        justify-items: center;
         gap: 8px;
 
         .card-price {
+          flex: 0 0 30%;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -372,26 +431,31 @@ const cartItems = ref([
         }
 
         .card-quantity {
+          flex: 0 0 33%;
           display: flex;
           justify-content: center;
           align-items: center;
           // width: 100%;
           max-width: 120px;
           height: 40px;
-          border: 1px solid #cecece;
+          min-height: 40px;
+          border: 1px solid var(--border-soft);
           border-radius: 8px;
           // transition: all 0.3s ease;
           overflow: hidden;
 
           .quantity-input {
             width: 100%;
+            min-width: 20px;
             height: 100%;
             text-align: center;
+            font-size: 20px;
             border: none;
             outline: none;
-            border-left: 1px solid #c7c7c7;
-            border-right: 1px solid #c7c7c7;
-            background-color: transparent;
+            border-left: 1px solid var(--border-default);
+            border-right: 1px solid var(--border-default);
+            color: var(--text-primary);
+            background: transparent;
             // transition: all 0.3s ease;
 
             &[type="number"]::-webkit-outer-spin-button,
@@ -408,35 +472,46 @@ const cartItems = ref([
             height: 100%;
             outline: none;
             border: none;
-            // background-color: transparent;
-            transition: all 0.3s ease;
+            background: var(--bg-surface-strong);
+            transition:
+              color 0.3s ease,
+              background-color 0.3s ease;
 
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             .icon {
-              font-size: 18px;
+              font-size: 24px;
+              color: var(--text-primary);
             }
-
-            &:hover {
-              background-color: #e95b5b;
+            @media (hover: hover) and (pointer: fine) {
+              &:hover:not(:disabled) {
+                background: var(--brand);
+              }
+              &:hover:not(:disabled) .icon {
+                color: $color-white;
+              }
             }
-
-            &:hover .icon {
-              color: $color-white;
+            &:active {
+              background: transparent;
+              .icon {
+                transform: scale(0.95);
+              }
             }
-
             &:disabled {
-              opacity: 0.5;
+              // background: var(--bg-surface);
+              opacity: 0.4;
               cursor: not-allowed;
             }
           }
         }
         .card-total {
+          flex: 0 0 30%;
           display: flex;
           justify-content: center;
           align-items: center;
+          font-size: 900;
         }
       }
       .card-delete {
@@ -444,163 +519,185 @@ const cartItems = ref([
           display: flex;
           align-items: center;
           justify-content: center;
-
+          color: var(--text-secondary);
           cursor: pointer;
           transition: color 0.3s ease;
-          &:hover {
-            color: var(--state-danger)
+          @media (hover: hover) and (pointer: fine) {
+            &:hover {
+              color: var(--state-danger);
+            }
+          }
+          &:active {
+            transform: scale(0.9);
+            color: var(--text-secondary);
           }
         }
       }
     }
     .cart-card.cart-head {
+      user-select: none;
+      padding: 8px;
       &:hover {
         color: inherit;
+        background: inherit;
       }
       &::after {
         height: 2px;
+        background: var(--border-soft);
+        border-radius: 2px;
+      }
+      .card-details {
+        gap: 0px;
+      }
+      .card-quantity {
+        border: none;
       }
     }
   }
 
   .cart-information {
+    flex: 0 0 30%;
+    width: 100%;
     position: relative;
+    // background-color: #fff;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
     .cart-information-inner {
       position: sticky;
-      top: 72px;
       top: clamp(86px, 5vh, 104px);
-      // margin-top: 32px;
+      width: clamp(280px, 100%, 360px);
+      width: 100%;
       padding: 16px;
       border-radius: 12px;
-      // height: 600px;
-      background-color: #fff;
-      // height: 100%;
-      min-width: 200px;
-      max-width: 360px;
-
+      background: var(--bg-surface-card);
+      color: $color-black;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-      text-align: center;
-    }
-    h4 {
-      font-weight: 600;
-    }
-    div {
-      // margin-bottom: 32px;
-      width: 100%;
+
+      gap: 20px;
     }
 
-    .Remark {
+    .into-remark {
       text-align: left;
       display: flex;
       flex-direction: column;
+      gap: 8px;
       cursor: pointer;
-
-      &:hover svg {
-        color: #e95b5b;
-      }
-
-      svg {
-        transition: all 0.3s ease;
-        vertical-align: bottom;
-      }
-
-      svg.rotate {
-        transform: rotateX(180deg);
-      }
-
-      label {
-        cursor: pointer;
-      }
-
       textarea {
-        min-width: 268px;
         height: 100px;
         resize: vertical;
-        margin-top: 8px;
       }
     }
 
-    .arrangement {
-      outline: none;
+    .into-inner {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-
-      h4 {
-        width: 40%;
-        text-align: left;
-      }
-
-      span {
-        width: 60%;
-        text-align: right;
-      }
-
-      select {
-        width: 60%;
-      }
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
     }
-
-    .bill_area {
-      h4 {
-        font-weight: 500;
+    .into-bill {
+      display: grid;
+      gap: 8px;
+      .bill-select {
+        .select {
+          height: 100%;
+          padding: 4px;
+        }
       }
-
-      p {
-        margin: 0;
-        text-align: left;
-      }
-
-      label {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 8px;
-        font-size: 16px;
-
+      .bill-area {
+        display: grid;
+        gap: 8px;
+        padding: 8px;
+        label {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
         input {
-          padding: 4px 4px;
-          width: 60%;
-          // margin-top: 8px;
+          padding: 8px;
+          border-radius: 4px;
+          border: 1px solid var(--border-default);
+          &:focus {
+            border-color: var(--border-soft);
+          }
+          &::placeholder {
+            color: $color-gray-700;
+          }
         }
       }
     }
-
-    .agreeCheckbox {
-      label,
-      span {
-        vertical-align: top;
+    .into-agree {
+      display: flex;
+      gap: 8px;
+      input {
+        transform: scale(1.4);
       }
-
-      label {
-        cursor: pointer;
-
-        span {
-          font-size: 14px;
-        }
+      p {
+        font-size: 14px;
       }
     }
-
-    .btn-area {
+    .into-btns {
+      display: grid;
+      gap: 8px;
       .btn {
         width: 100%;
-
-        &:hover {
-          color: #e95b5b;
-        }
-      }
-
-      .btn-keep {
-        margin-top: 8px;
       }
     }
+    .into-subtitle {
+      text-align: center;
+    }
+  }
+  @media screen and (max-width: 1024px) {
+    .cart-inner {
+      // flex-direction: column;
+      width: 100%;
+    }
+    .cart-products {
+      .cart-card {
+        .card-details {
+          flex-direction: column;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .cart-inner {
+      flex-direction: column;
+      width: 100%;
+    }
+    .cart-products {
+      .cart-card {
+        grid-template-columns: minmax(0, 1fr) 40px;
+        grid-template-rows: auto auto;
+        gap: 16px 4px;
 
-    p {
-      font-size: 14px;
+        .card-title {
+          grid-column: 1 / 2;
+          grid-row: 1;
+        }
+        .card-details {
+          grid-column: 1/3;
+          grid-row: 2;
+          flex-direction: row;
+          // justify-content: space-between;
+          // gap: 16px;
+          .card-price,
+          .card-total {
+            flex: 0 0 20%;
+          }
+          .card-quantity {
+            flex: 0 0 48%;
+          }
+        }
+        .card-delete {
+          grid-column: 2;
+          grid-row: 1;
+          justify-self: end;
+        }
+      }
     }
   }
 }
