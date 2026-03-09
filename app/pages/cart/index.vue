@@ -17,36 +17,31 @@
           </li>
           <li v-for="item in cartItems" :key="item.id" class="cart-card">
             <div class="card-title">
-              <img :src="item.images" :alt="item.name" />
-              <div class="card-title">
-                <h4>{{ item.brand }}</h4>
-                <h5>{{ item.name }}</h5>
+              <img :src="item.images.main" :alt="item.name" />
+              <div class="title">
+                <h4 class="brand">{{ item.brand }}</h4>
+                <h5 class="name">{{ item.name }}</h5>
               </div>
             </div>
 
             <div class="card-details">
               <div class="card-price">
-                <h5 v-show="item.onsale" :class="{ redcharacter: item.onsale }">
-                  NT${{ item.price.toLocaleString() }}
+                <h5
+                  v-show="item.onsale"
+                  class="discount"
+                  :class="{ redcharacter: item.onsale }"
+                >
+                  NT${{ item.discount.toLocaleString() }}
                 </h5>
-
-                <h5 :class="{ strike: item.onsale }">
-                  NT${{ item.originalPrice.toLocaleString() }}
+                <h5 class="price" :class="{ strike: item.onsale }">
+                  NT${{ item.price.toLocaleString() }}
                 </h5>
               </div>
 
               <div class="card-quantity">
-                <button class="btn-decrease" :disabled="item.quantity === 1">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                      d="M5 10h10"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
+                <button class="btn-minus" :disabled="item.quantity === 1">
+                  <icon class="icon" name="humbleicons:minus" />
                 </button>
-
                 <input
                   :value="item.quantity"
                   type="number"
@@ -54,23 +49,15 @@
                   class="quantity-input"
                 />
 
-                <button class="btn-increase">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path
-                      d="M10 5v10M5 10h10"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                  </svg>
+                <button class="btn-add">
+                  <icon class="icon" name="humbleicons:plus" />
                 </button>
               </div>
 
               <h5 class="card-total">
                 NT${{
                   (
-                    item.quantity *
-                    (item.onsale ? item.price : item.originalPrice)
+                    item.quantity * (item.onsale ? item.discount : item.price)
                   ).toLocaleString()
                 }}
               </h5>
@@ -78,22 +65,15 @@
 
             <div class="card-delete">
               <button class="btn-remove" type="button" aria-label="移除商品">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 5v14M5 12h14"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
+                <Icon name="mdi:delete-circle-outline" class="icon" size="36" />
               </button>
             </div>
           </li>
         </ul>
       </section>
 
-      <section class="cart-summary">
-        <div class="cart-summary-inner">
+      <section class="cart-information">
+        <div class="cart-information-inner">
           <div class="Remark">
             <h4>
               備註
@@ -184,70 +164,116 @@ const cartItems = ref([
     brand: "RAZER ",
     name: "RAZER 2 DEX RGB電競鍵盤",
     subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
-    quantity: 1,
+    category: "鍵盤",
+    discount: 4490,
+    price: 4990,
     onsale: true,
-    colorOptions: "黑色",
+    color: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
+    images: {
+      main: "/images/pic-detal/RAZER-1000/10001.jpg",
+      thumbnails: [
+        "/images/pic-detal/RAZER-1000/10001.jpg",
+        "/images/pic-detal/RAZER-1000/10002.jpg",
+        "/images/pic-detal/RAZER-1000/10003.jpg",
+        "/images/pic-detal/RAZER-1000/10004.jpg",
+      ],
+    },
+    quantity: 1,
   },
   {
     id: "RAZER-1000",
     brand: "RAZER ",
     name: "RAZER 2 DEX RGB電競鍵盤",
     subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
-    quantity: 1,
+    category: "鍵盤",
+    discount: 4490,
+    price: 4990,
     onsale: true,
-    colorOptions: "黑色",
+    color: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
+    images: {
+      main: "/images/pic-detal/RAZER-1000/10001.jpg",
+      thumbnails: [
+        "/images/pic-detal/RAZER-1000/10001.jpg",
+        "/images/pic-detal/RAZER-1000/10002.jpg",
+        "/images/pic-detal/RAZER-1000/10003.jpg",
+        "/images/pic-detal/RAZER-1000/10004.jpg",
+      ],
+    },
+    quantity: 1,
+  },
+
+  {
+    id: "RAZER-1000",
+    brand: "RAZER ",
+    name: "RAZER 2 DEX RGB電競鍵盤",
+    subtitle: "穩定可靠，電競鍵盤的專業之選",
+    category: "鍵盤",
+    discount: 4490,
+    price: 4990,
+    onsale: true,
+    color: "黑色",
+    description:
+      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
+    images: {
+      main: "/images/pic-detal/RAZER-1000/10001.jpg",
+      thumbnails: [
+        "/images/pic-detal/RAZER-1000/10001.jpg",
+        "/images/pic-detal/RAZER-1000/10002.jpg",
+        "/images/pic-detal/RAZER-1000/10003.jpg",
+        "/images/pic-detal/RAZER-1000/10004.jpg",
+      ],
+    },
+    quantity: 1,
   },
   {
     id: "RAZER-1000",
     brand: "RAZER ",
     name: "RAZER 2 DEX RGB電競鍵盤",
     subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
-    quantity: 1,
+    category: "鍵盤",
+    discount: 4490,
+    price: 4990,
     onsale: true,
-    colorOptions: "黑色",
+    color: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
+    images: {
+      main: "/images/pic-detal/RAZER-1000/10001.jpg",
+      thumbnails: [
+        "/images/pic-detal/RAZER-1000/10001.jpg",
+        "/images/pic-detal/RAZER-1000/10002.jpg",
+        "/images/pic-detal/RAZER-1000/10003.jpg",
+        "/images/pic-detal/RAZER-1000/10004.jpg",
+      ],
+    },
+    quantity: 1,
   },
   {
     id: "RAZER-1000",
     brand: "RAZER ",
     name: "RAZER 2 DEX RGB電競鍵盤",
     subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
-    quantity: 1,
+    category: "鍵盤",
+    discount: 4490,
+    price: 4990,
     onsale: true,
-    colorOptions: "黑色",
+    color: "黑色",
     description:
       "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
-  },
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
+    images: {
+      main: "/images/pic-detal/RAZER-1000/10001.jpg",
+      thumbnails: [
+        "/images/pic-detal/RAZER-1000/10001.jpg",
+        "/images/pic-detal/RAZER-1000/10002.jpg",
+        "/images/pic-detal/RAZER-1000/10003.jpg",
+        "/images/pic-detal/RAZER-1000/10004.jpg",
+      ],
+    },
     quantity: 1,
-    onsale: true,
-    colorOptions: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
   },
 ]);
 </script>
@@ -256,31 +282,21 @@ const cartItems = ref([
 .cart {
   display: grid;
   place-items: center;
-  * {
-    border: 1px solid;
-  }
   padding-block: clamp(84px, 10vw, 120px);
   min-height: 100vh;
 
   .cart-inner {
     display: flex;
-
     gap: 32px;
-    // padding-top: 64px;
-    // padding: 120px 0px ;
   }
 
   .cart-products {
     position: relative;
-
     .cart-products-inner {
       display: grid;
-      // flex-direction: column;
+
       grid-template-rows: 100px 1fr;
       gap: 16px;
-      // max-height: 540px;
-      // overflow-y: auto;
-      // scrollbar-width: none;
     }
 
     .cart-card {
@@ -292,8 +308,7 @@ const cartItems = ref([
       gap: 8px;
       padding: 16px 8px;
 
-      transition: all 0.2s ease;
-
+      /* 底線 */
       &::after {
         content: "";
         position: absolute;
@@ -304,57 +319,39 @@ const cartItems = ref([
         border-radius: 1px;
         background-color: var(--border-default);
       }
-
       &:hover {
         border-radius: 12px;
         color: #e95b5b;
       }
-
       &:hover .card-quantity {
         border-color: #db4b4b;
-      }
-
-      .card-delete {
-        justify-content: center;
-        width: 40px;
       }
 
       .card-title {
         display: flex;
         align-items: center;
         gap: 12px;
-        min-width: 0;
 
         img {
           width: 88px;
           height: 88px;
           object-fit: cover;
           border-radius: 8px;
-          flex-shrink: 0;
         }
 
-        .card-title {
-          min-width: 0;
-          text-align: left;
-
-          h4 {
-            font-weight: 600;
-          }
-
-          h5 {
-            margin-top: 8px;
-            overflow: hidden;
-          }
+        .title {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
         }
       }
 
       .card-details {
         display: grid;
-        grid-template-columns: repeat(3, minmax(100px, 1fr));
+        grid-template-columns: repeat(3, minmax(80px, 1fr));
         align-items: center;
         justify-items: center;
         gap: 8px;
-        min-width: 0;
 
         .card-price {
           display: flex;
@@ -362,17 +359,28 @@ const cartItems = ref([
           justify-content: center;
           align-items: center;
           gap: 4px;
+          .discount {
+            color: var(--state-danger);
+            font-weight: bolder;
+          }
+          .price.strike {
+            text-decoration: line-through;
+            color: var(--text-tertiary);
+            opacity: 0.8;
+            font-size: 14px;
+          }
         }
 
         .card-quantity {
           display: flex;
-          align-items: stretch;
-          width: 100%;
+          justify-content: center;
+          align-items: center;
+          // width: 100%;
           max-width: 120px;
-          height: 36px;
+          height: 40px;
           border: 1px solid #cecece;
-          border-radius: 4px;
-          transition: all 0.3s ease;
+          border-radius: 8px;
+          // transition: all 0.3s ease;
           overflow: hidden;
 
           .quantity-input {
@@ -380,11 +388,11 @@ const cartItems = ref([
             height: 100%;
             text-align: center;
             border: none;
+            outline: none;
             border-left: 1px solid #c7c7c7;
             border-right: 1px solid #c7c7c7;
             background-color: transparent;
-            outline: none;
-            transition: all 0.3s ease;
+            // transition: all 0.3s ease;
 
             &[type="number"]::-webkit-outer-spin-button,
             &[type="number"]::-webkit-inner-spin-button {
@@ -393,31 +401,29 @@ const cartItems = ref([
             }
           }
 
-          .btn-increase,
-          .btn-decrease {
-            width: 32px;
+          .btn-add,
+          .btn-minus {
+            // width: 32px;
             min-width: 32px;
             height: 100%;
             outline: none;
             border: none;
-            background-color: transparent;
+            // background-color: transparent;
             transition: all 0.3s ease;
+
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
-
-            svg {
-              width: 18px;
-              height: 18px;
-              transform: scale(1.2);
+            .icon {
+              font-size: 18px;
             }
 
             &:hover {
               background-color: #e95b5b;
             }
 
-            &:hover svg {
+            &:hover .icon {
               color: $color-white;
             }
 
@@ -427,37 +433,23 @@ const cartItems = ref([
             }
           }
         }
-
         .card-total {
           display: flex;
           justify-content: center;
           align-items: center;
         }
       }
+      .card-delete {
+        .btn-remove {
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
-      .btn-remove {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 30px;
-        height: 30px;
-        aspect-ratio: 1 / 1;
-        border: none;
-        background-color: transparent;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-
-        svg {
-          transform: scale(1.2) rotate(45deg);
-        }
-
-        &:hover {
-          background-color: #e95b5b;
-        }
-
-        &:hover svg {
-          color: $color-white;
+          cursor: pointer;
+          transition: color 0.3s ease;
+          &:hover {
+            color: var(--state-danger)
+          }
         }
       }
     }
@@ -471,12 +463,12 @@ const cartItems = ref([
     }
   }
 
-  .cart-summary {
+  .cart-information {
     position: relative;
-    .cart-summary-inner {
+    .cart-information-inner {
       position: sticky;
       top: 72px;
-      top: clamp(72px, 5vh, 90px);
+      top: clamp(86px, 5vh, 104px);
       // margin-top: 32px;
       padding: 16px;
       border-radius: 12px;

@@ -404,7 +404,7 @@ function toNumArray(
   .sidebar-toolbar-inner {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
   }
 
   .filter-toggle {
