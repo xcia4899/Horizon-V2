@@ -566,7 +566,7 @@ const cartItems = ref([
     .cart-information-inner {
       position: sticky;
       top: clamp(86px, 5vh, 104px);
-      width: clamp(280px, 100%, 360px);
+      width: clamp(320px, 100%, 360px);
       width: 100%;
       padding: 16px;
       border-radius: 12px;
@@ -594,9 +594,10 @@ const cartItems = ref([
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       gap: 8px;
       width: 100%;
+
     }
     .into-bill {
       display: grid;
@@ -663,7 +664,7 @@ const cartItems = ref([
       }
     }
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 860px) {
     .cart-inner {
       flex-direction: column;
       width: 100%;
