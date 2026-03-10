@@ -15,41 +15,59 @@
 
             <div class="card-delete"></div>
           </li>
-          <li v-for="item in cartItems" :key="item.id" class="cart-card">
+          <li
+            v-for="item in cartStore.carts"
+            :key="item.product.id"
+            class="cart-card"
+          >
             <div class="card-title">
-              <img :src="item.images.main" :alt="item.name" />
+              <img :src="item.product.images.main" :alt="item.product.name" />
               <div class="title">
-                <h4 class="brand">{{ item.brand }}</h4>
-                <h5 class="name">{{ item.name }}</h5>
+                <h4 class="brand">{{ item.product.brand }}</h4>
+                <h5 class="name">{{ item.product.name }}</h5>
               </div>
             </div>
 
             <div class="card-details">
               <div class="card-price">
                 <h5
-                  v-show="item.onsale"
+                  v-show="item.product.onsale"
                   class="discount"
-                  :class="{ redcharacter: item.onsale }"
+                  :class="{ redcharacter: item.product.onsale }"
                 >
-                  NT${{ item.discount.toLocaleString() }}
+                  NT${{ item.product.discount.toLocaleString() }}
                 </h5>
-                <h5 class="price" :class="{ strike: item.onsale }">
-                  NT${{ item.price.toLocaleString() }}
+                <h5 class="price" :class="{ strike: item.product.onsale }">
+                  NT${{ item.product.price.toLocaleString() }}
                 </h5>
               </div>
 
               <div class="card-quantity">
-                <button class="btn-minus" :disabled="item.quantity === 1">
+                <button
+                  class="btn-minus"
+                  :disabled="item.quantity === 0"
+                  @click="
+                    cartStore.updateQuantity(item.product.id, item.quantity - 1)
+                  "
+                >
                   <icon class="icon" name="humbleicons:minus" />
                 </button>
                 <input
-                  :value="item.quantity"
+                  v-model.number="item.quantity"
                   type="number"
                   min="1"
                   class="quantity-input"
+                  @change="
+                    cartStore.updateQuantity(item.product.id, item.quantity)
+                  "
                 />
 
-                <button class="btn-add">
+                <button
+                  class="btn-add"
+                  @click="
+                    cartStore.updateQuantity(item.product.id, item.quantity + 1)
+                  "
+                >
                   <icon class="icon" name="humbleicons:plus" />
                 </button>
               </div>
@@ -57,14 +75,22 @@
               <h5 class="card-total">
                 NT${{
                   (
-                    item.quantity * (item.onsale ? item.discount : item.price)
+                    item.quantity *
+                    (item.product.onsale
+                      ? item.product.discount
+                      : item.product.price)
                   ).toLocaleString()
                 }}
               </h5>
             </div>
 
             <div class="card-delete">
-              <button class="btn-remove" type="button" aria-label="移除商品">
+              <button
+                class="btn-remove"
+                type="button"
+                aria-label="移除商品"
+                @click="useRemoveCart(item.product.id)"
+              >
                 <Icon name="mdi:delete-circle-outline" class="icon" size="36" />
               </button>
             </div>
@@ -118,7 +144,7 @@
           </div>
           <div class="into-inner">
             <h4>總計</h4>
-            <span>$ (total + 400).toLocaleString() </span>
+            <span>$ {{ (cartStore.totalPrice + 400).toLocaleString() }} </span>
           </div>
           <label class="into-agree">
             <input type="checkbox" />
@@ -139,10 +165,14 @@
 </template>
 
 <script setup lang="ts">
-// import { useCartStore  } from "@/stores/useCart";
+import { useCartStore } from "@/stores/useCart";
+const cartStore = useCartStore();
 
-
-
+/* ----購物車資訊 ------*/
+// const cartItems = cartStore.carts;
+const useRemoveCart = (id: string) => {
+  cartStore.removeFromCart(id);
+};
 
 interface BillField {
   label: string;
@@ -214,126 +244,6 @@ const billTypes: BillType[] = [
 const currentBill = computed(() =>
   billTypes.find((b) => b.value === billType.value),
 );
-
-//購物車資訊
-const cartItems = ref([
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    category: "鍵盤",
-    discount: 4490,
-    price: 4990,
-    onsale: true,
-    color: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: {
-      main: "/images/pic-detal/RAZER-1000/10001.jpg",
-      thumbnails: [
-        "/images/pic-detal/RAZER-1000/10001.jpg",
-        "/images/pic-detal/RAZER-1000/10002.jpg",
-        "/images/pic-detal/RAZER-1000/10003.jpg",
-        "/images/pic-detal/RAZER-1000/10004.jpg",
-      ],
-    },
-    quantity: 1,
-  },
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    category: "鍵盤",
-    discount: 4490,
-    price: 4990,
-    onsale: true,
-    color: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: {
-      main: "/images/pic-detal/RAZER-1000/10001.jpg",
-      thumbnails: [
-        "/images/pic-detal/RAZER-1000/10001.jpg",
-        "/images/pic-detal/RAZER-1000/10002.jpg",
-        "/images/pic-detal/RAZER-1000/10003.jpg",
-        "/images/pic-detal/RAZER-1000/10004.jpg",
-      ],
-    },
-    quantity: 1,
-  },
-
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    category: "鍵盤",
-    discount: 4490,
-    price: 4990,
-    onsale: false,
-    color: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: {
-      main: "/images/pic-detal/RAZER-1000/10001.jpg",
-      thumbnails: [
-        "/images/pic-detal/RAZER-1000/10001.jpg",
-        "/images/pic-detal/RAZER-1000/10002.jpg",
-        "/images/pic-detal/RAZER-1000/10003.jpg",
-        "/images/pic-detal/RAZER-1000/10004.jpg",
-      ],
-    },
-    quantity: 3,
-  },
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    category: "鍵盤",
-    discount: 4490,
-    price: 4990,
-    onsale: true,
-    color: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: {
-      main: "/images/pic-detal/RAZER-1000/10001.jpg",
-      thumbnails: [
-        "/images/pic-detal/RAZER-1000/10001.jpg",
-        "/images/pic-detal/RAZER-1000/10002.jpg",
-        "/images/pic-detal/RAZER-1000/10003.jpg",
-        "/images/pic-detal/RAZER-1000/10004.jpg",
-      ],
-    },
-    quantity: 1,
-  },
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    category: "鍵盤",
-    discount: 4490,
-    price: 4990,
-    onsale: false,
-    color: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: {
-      main: "/images/pic-detal/RAZER-1000/10001.jpg",
-      thumbnails: [
-        "/images/pic-detal/RAZER-1000/10001.jpg",
-        "/images/pic-detal/RAZER-1000/10002.jpg",
-        "/images/pic-detal/RAZER-1000/10003.jpg",
-        "/images/pic-detal/RAZER-1000/10004.jpg",
-      ],
-    },
-    quantity: 2,
-  },
-]);
 </script>
 
 <style scoped lang="scss">
@@ -346,13 +256,13 @@ const cartItems = ref([
   background: var(--bg-surface);
   .cart-inner {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 
-    gap: 32px;
+    gap: 16px;
   }
 
   .cart-products {
-    flex: 0 0 64%;
+    flex: 0 0 70%;
     position: relative;
     .cart-products-inner {
       display: grid;
@@ -362,12 +272,12 @@ const cartItems = ref([
     .cart-card {
       position: relative;
       display: grid;
-      grid-template-columns: minmax(200px, 1fr) minmax(0, 1fr) 40px;
+      grid-template-columns: minmax(200px, 0.6fr) minmax(0, 1fr) 40px;
       align-items: center;
       // display: flex;
       // justify-content: space-between;
-      gap: 16px;
-      padding: 16px 8px;
+      gap: 8px;
+      padding: 8px 4px;
       // background: var(--bg-surface-soft);
       /* 底線 */
       &::after {
@@ -391,12 +301,12 @@ const cartItems = ref([
       .card-title {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 8px;
 
         img {
           width: 88px;
           height: 88px;
-          object-fit: cover;
+          // object-fit: cover;
           border-radius: 8px;
         }
 
@@ -411,13 +321,14 @@ const cartItems = ref([
       }
 
       .card-details {
+        flex: 1;
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 8px;
 
         .card-price {
-          flex: 0 0 30%;
+          flex: 0 0 28%;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -436,12 +347,12 @@ const cartItems = ref([
         }
 
         .card-quantity {
-          flex: 0 0 33%;
+          flex: 0 0 40%;
           display: flex;
           justify-content: center;
           align-items: center;
           // width: 100%;
-          max-width: 120px;
+          max-width: 160px;
           height: 40px;
           min-height: 40px;
           border: 1px solid var(--border-soft);
@@ -451,7 +362,7 @@ const cartItems = ref([
 
           .quantity-input {
             width: 100%;
-            min-width: 20px;
+            min-width: 30px;
             height: 100%;
             text-align: center;
             font-size: 20px;
@@ -512,7 +423,7 @@ const cartItems = ref([
           }
         }
         .card-total {
-          flex: 0 0 30%;
+          flex: 0 0 28%;
           display: flex;
           justify-content: center;
           align-items: center;

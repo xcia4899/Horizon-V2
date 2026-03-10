@@ -119,8 +119,7 @@ const isOnProducts = computed(() => route.path === "/products");
 const cartStore = useCartStore();
 //購物車顯示資料
 const { carts } = storeToRefs(cartStore);
-//booleam判斷
-const cartCount = computed(() => carts.value.length);
+
 //判斷總價
 const totalPrice = computed(() => {
   return cartStore.totalPrice;
