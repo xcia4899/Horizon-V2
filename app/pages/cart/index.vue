@@ -50,7 +50,7 @@
                     cartStore.updateQuantity(item.product.id, item.quantity - 1)
                   "
                 >
-                  <icon class="icon" name="humbleicons:minus" />
+                  <Icon class="icon" name="humbleicons:minus" />
                 </button>
                 <input
                   v-model.number="item.quantity"
@@ -68,7 +68,7 @@
                     cartStore.updateQuantity(item.product.id, item.quantity + 1)
                   "
                 >
-                  <icon class="icon" name="humbleicons:plus" />
+                  <Icon class="icon" name="humbleicons:plus" />
                 </button>
               </div>
 
