@@ -37,7 +37,6 @@ export const useCartStore = defineStore("cart", () => {
       quantity: 1,
     });
   };
-
   const removeFromCart = (productId: string) => {
     carts.value = carts.value.filter((item) => item.product.id !== productId);
   };
@@ -53,11 +52,18 @@ export const useCartStore = defineStore("cart", () => {
 
     item.quantity = quantity;
   };
-
   const clearCart = () => {
     carts.value = [];
   };
-
+  const totalPrice = computed(() => {
+    return carts.value.reduce(
+      (sum, item) => sum + item.quantity * item.product.price,
+      0,
+    );
+  });
+  const totalQuantity = computed(() =>
+    carts.value.reduce((total, item) => total + item.quantity, 0),
+  );
   //   carts 有變動就同步到 localStorage
   watch(
     carts,
@@ -76,5 +82,7 @@ export const useCartStore = defineStore("cart", () => {
     removeFromCart,
     updateQuantity,
     clearCart,
+    totalPrice,
+    totalQuantity,
   };
 });

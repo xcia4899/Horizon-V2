@@ -38,8 +38,8 @@
   <!-- 購物車 -->
   <button type="button" class="btnItem setItem cart-btn" @click="goToCart">
     <Icon name="meteor-icons:cart-shopping" class="icon" size="24" />
-    <span v-if="cartCount > 0" class="cart-badge">
-      {{ cartCount > 99 ? "99+" : cartCount }}
+    <span v-if="cartStore.totalQuantity > 0" class="cart-badge">
+      {{ cartStore.totalQuantity > 99 ? "99+" : cartStore.totalQuantity }}
     </span>
   </button>
 
@@ -57,7 +57,7 @@
             小計:{{ (item.quantity * item.product.price).toLocaleString() }}
           </p>
         </div>
-        <div class="delete" @click="''">
+        <div class="delete" @click="removeCart(item.product.id)">
           <Icon name="mdi:delete-circle-outline" class="icon" />
         </div>
       </div>
@@ -122,13 +122,12 @@ const { carts } = storeToRefs(cartStore);
 //booleam判斷
 const cartCount = computed(() => carts.value.length);
 //判斷總價
-
 const totalPrice = computed(() => {
-  return carts.value.reduce(
-    (sum, item) => sum + item.quantity * item.product.price,
-    0,
-  );
+  return cartStore.totalPrice;
 });
+const removeCart = (id: string) => {
+  cartStore.removeFromCart(id);
+};
 
 // 點擊搜尋/關閉按鈕
 const onSearchClick = async () => {
@@ -375,7 +374,7 @@ const goToCart = async () => {
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-    padding: 8px 4px;
+    padding: 8px 8px;
     border-bottom: 1px solid var(--border-default);
 
     .item-img {
@@ -384,12 +383,16 @@ const goToCart = async () => {
       align-items: center;
       gap: 8px;
       // margin: auto 0;
-
+  
       img {
+        height: 60px;
         max-width: 60px;
+        // object-fit: cover;
+        background: $color-gray-100;
+        border-radius: 4px;
       }
       .item-name {
-        // max-width: 100px;
+        max-width: 120px;
         white-space: wrap;
         font-weight: 600;
         font-size: 14px;
