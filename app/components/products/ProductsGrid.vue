@@ -24,7 +24,7 @@
             NT$ {{ product.price.toLocaleString() }}
           </p>
         </div>
-        <button class="card-add btn" @click.stop="addToCart(product)">加入購物車</button>
+        <button class="card-add btn" @click.stop="handleAddToCart(product)">加入購物車</button>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
 import type { Product } from "@/composables/useProducts";
 // import { useRouter } from "vue-router";
 import { useCartStore } from "@/stores/useCart";
-const { addToCart } = useCartStore();
+
 
 defineProps<{
   productListView: Product[];
@@ -47,6 +47,12 @@ const gotoProductDetail = (id: string) => {
     params: { id },
   });
 };
+const cartStore = useCartStore();
+
+const handleAddToCart = (product: Product) => {
+  cartStore.addToCart(product);
+};
+
 </script>
 
 <style scoped lang="scss">

@@ -31,7 +31,11 @@ useSeoMeta({
   twitterImage: "",
 });
 
+const cartStore = useCartStore();
 
+onMounted(() => {
+  cartStore.initCart();
+});
 </script>
 
 <style scoped lang="scss">
