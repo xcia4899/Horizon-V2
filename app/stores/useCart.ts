@@ -45,7 +45,7 @@ export const useCartStore = defineStore("cart", () => {
     const item = carts.value.find((i) => i.product.id === productId);
     if (!item) return;
 
-    const q = Number(quantity)
+    const q = Number(quantity);
 
     if (!q || q <= 0) {
       removeFromCart(productId);
