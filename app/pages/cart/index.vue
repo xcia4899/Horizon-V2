@@ -139,6 +139,11 @@
 </template>
 
 <script setup lang="ts">
+// import { useCartStore  } from "@/stores/useCart";
+
+
+
+
 interface BillField {
   label: string;
   placeholder?: string;
@@ -597,7 +602,6 @@ const cartItems = ref([
       // flex-wrap: wrap;
       gap: 8px;
       width: 100%;
-
     }
     .into-bill {
       display: grid;

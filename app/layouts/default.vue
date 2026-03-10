@@ -30,6 +30,8 @@ useSeoMeta({
   twitterDescription: "Nuxt 4 + Vue 3 專案",
   twitterImage: "",
 });
+
+
 </script>
 
 <style scoped lang="scss">

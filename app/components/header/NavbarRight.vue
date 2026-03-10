@@ -46,16 +46,16 @@
   <!-- 迷你購物車顯示 -->
   <div class="miniCart">
     <div class="cart-view">
-      <div v-for="item in cartView" :key="item.id" class="cart-item">
+      <div v-for="item in carts" :key="item.product.id" class="cart-item">
         <div class="item-img">
-          <img :src="item.images" :alt="item.name" />
-          <!-- <p>{{ item.brand }}</p> -->
+          <img :src="item.product.images.main" :alt="item.product.name" />
+          <p class="item-name">{{ item.product.name }}</p>
         </div>
-        <p class="item-name">{{ item.name }}</p>
-        <!-- <div>單價：{{ item.price }}</div> -->
         <div class="item-detal">
-          <p>數量：2</p>
-          <p class="price">小計：1992${{}}</p>
+          <p>數量:{{ item.quantity }}</p>
+          <p class="price">
+            小計:{{ (item.quantity * item.product.price).toLocaleString() }}
+          </p>
         </div>
         <div class="delete" @click="''">
           <Icon name="mdi:delete-circle-outline" class="icon" />
@@ -63,7 +63,7 @@
       </div>
     </div>
     <div class="bottom-area">
-      <h4>總金額：4450{{}}元</h4>
+      <h4>總金額：{{ totalPrice.toLocaleString() }}元</h4>
       <button class="btn">結帳</button>
     </div>
   </div>
@@ -81,6 +81,9 @@ import {
 
 // import { Search } from "@element-plus/icons-vue";
 import type { InputInstance } from "element-plus";
+import { storeToRefs } from "pinia";
+import { useCartStore } from "@/stores/useCart";
+
 //接收props
 const props = defineProps<{
   isMenuOpenMobile: boolean;
@@ -111,7 +114,21 @@ const hasKeyword = computed(() => !!keyword.value?.trim());
 //判斷是否在商品頁面
 const isOnProducts = computed(() => route.path === "/products");
 
-//
+/* ---------購物車程式碼--------- */
+//購物車原始資料
+const cartStore = useCartStore();
+//購物車顯示資料
+const { carts } = storeToRefs(cartStore);
+//booleam判斷
+const cartCount = computed(() => carts.value.length);
+//判斷總價
+
+const totalPrice = computed(() => {
+  return carts.value.reduce(
+    (sum, item) => sum + item.quantity * item.product.price,
+    0,
+  );
+});
 
 // 點擊搜尋/關閉按鈕
 const onSearchClick = async () => {
@@ -191,44 +208,6 @@ const submitSearch = async () => {
   });
   toggleMenuMobile();
 };
-
-//購物車程式碼---------
-//購物車原始資料
-const cartItems = ref([
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
-    quantity: 1,
-    onsale: true,
-    colorOptions: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
-  },
-  {
-    id: "RAZER-1000",
-    brand: "RAZER ",
-    name: "RAZER 2 DEX RGB電競鍵盤",
-    subtitle: "穩定可靠，電競鍵盤的專業之選",
-    price: 4490,
-    originalPrice: 4990,
-    quantity: 1,
-    onsale: true,
-    colorOptions: "黑色",
-    description:
-      "RAZER 2 DEX RGB 是一款專為電競玩家設計的高性能機械鍵盤，搭載靈敏且耐用的機械軸，支援全鍵無衝突和快速響應，配備可自訂的 RGB 燈光效果，並提供多種快捷鍵和宏設定，讓玩家在遊戲和工作中皆能獲得流暢且精準的操作體驗。",
-    images: "/images/pic-detal/RAZER-1000/10001.jpg",
-  },
-]);
-const cartCount = computed(() => cartItems.value.length);
-//購物車顯示資料
-const cartView = computed(() => {
-  return cartItems.value.map((item) => ({ ...item }));
-});
 
 // 跳轉登入
 const goToLogin = async () => {
@@ -388,29 +367,39 @@ const goToCart = async () => {
   .cart-view {
     padding: 16px;
     overflow-y: auto;
+    scrollbar-width: none;
   }
   .cart-item {
     min-height: 90px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    gap: 8px;
     padding: 8px 4px;
     border-bottom: 1px solid var(--border-default);
 
     .item-img {
-      margin: auto 0;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      // margin: auto 0;
+
       img {
         max-width: 60px;
       }
+      .item-name {
+        // max-width: 100px;
+        white-space: wrap;
+        font-weight: 600;
+        font-size: 14px;
+      }
     }
 
-    .item-name {
-      max-width: 100px;
-      white-space: wrap;
-      font-weight: 600;
-      font-size: 14px;
-    }
     .item-detal {
+      flex: 0 0 30%;
+      display: grid;
+      gap: 4px;
       p {
         font-size: 14px;
       }
@@ -422,7 +411,7 @@ const goToCart = async () => {
     .delete {
       position: relative;
       padding: 16px 0px 0px;
-      margin: auto 0;
+      // margin: auto 0;
       color: var(--text-secondary);
       cursor: pointer;
       .icon {

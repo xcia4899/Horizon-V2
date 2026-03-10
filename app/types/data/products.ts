@@ -1,6 +1,3 @@
-import productList from "@/assets/data/json/productList.json";
-
-
 export interface DetailContent {
   title: string;
   text: string[];
@@ -10,16 +7,16 @@ export interface ProductDetail {
   content: DetailContent[];
 }
 export interface FeatureItem {
-  id: string;
-  title: string;
-  subtitle?: string;
-  icon?: string;
-  desc?: string[];
+  id: string;         
+  title:string;
+  subtitle?: string;   
+  icon?: string;       
+  desc?: string[];      
 }
-export interface highlights {
-  title: string;
-  description: string;
-  items: FeatureItem[];
+export interface highlights{
+  title:string;
+  description:string;
+  items:FeatureItem[]
 }
 export interface ProductImages {
   main: string;
@@ -41,16 +38,7 @@ export interface Product {
 
   images: ProductImages;
   details: ProductDetail[];
-  highlights: highlights;
+  highlights:highlights
 
   tags: string[];
 }
-
-  // 未來：換成後端時，只改這裡
-  // const config = useRuntimeConfig()
-  // return await $fetch(`${config.public.apiBase}/products`)
-export const useProducts = async (): Promise<Product[]> => {
-  // 現在：本地 JSON
-  return productList;
-
-};
