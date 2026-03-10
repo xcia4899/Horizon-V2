@@ -10,24 +10,18 @@ type CartItem = {
 const CART_KEY = "cart";
 
 export const useCartStore = defineStore("cart", () => {
-  const carts = ref<CartItem[]>([]);
-
   // 初始化購物車
+  const carts = ref<CartItem[]>([]);
+  const isReady = ref(false);
+
   const initCart = () => {
     if (!import.meta.client) return;
-
-    const saved = localStorage.getItem(CART_KEY);
-    if (!saved) {
-      carts.value = [];
-      return;
-    }
-
     try {
-      carts.value = JSON.parse(saved);
-    } catch (error) {
-      console.error("讀取購物車失敗:", error);
+      carts.value = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+    } catch {
       carts.value = [];
     }
+    isReady.value = true;
   };
 
   const addToCart = (product: Product) => {
@@ -64,14 +58,15 @@ export const useCartStore = defineStore("cart", () => {
     carts.value = [];
   };
 
-  // carts 有變動就同步到 localStorage
+  //   carts 有變動就同步到 localStorage
   watch(
     carts,
     (val) => {
       if (!import.meta.client) return;
+      if (!isReady.value) return;
       localStorage.setItem(CART_KEY, JSON.stringify(val));
     },
-    { deep: true }
+    { deep: true },
   );
 
   return {
