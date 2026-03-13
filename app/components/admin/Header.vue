@@ -1,53 +1,93 @@
 <template>
-  <div class="admin-header-inner">
-    <div class="admin-title">
-      <h2>Horizon</h2>
+  <header class="admin-header">
+    <div class="admin-header-brand">
+      <h3 class="admin-header-logo">Horizon Admin</h3>
+      <p class="admin-header-subtitle">後台管理系統</p>
+    </div>
 
-    </div>
-    <div class="header-info">
-      <div class="info-user">
-        <div>XXX管理員</div>
-        <div>登出帳號</div>
+    <div class="admin-header-actions">
+      <div class="admin-header-user">
+        <span class="admin-header-user-name">XXX 管理員</span>
       </div>
-      <div>回到網站</div>
+
+      <div class="admin-header-buttons">
+        <button type="button" class="admin-btn">回到網站</button>
+        <button type="button" class="admin-btn admin-logout">登出帳號</button>
+      </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts"></script>
 
 <style scoped lang="scss">
-.admin-header-inner {
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-}
-.admin-title {
-  flex: 0 0 20%;
-  display: flex;
-  align-items: center;
-  // flex-direction: column;
-  padding: 4px 16px;
-  // gap: 8px;
-  max-width: 200px;
-  min-width: 160px;
-  color: var(--brand);
-  background: var(--bg-surface);
-}
-.header-info {
-  padding: 4px 16px;
-  // height: 100%;
+.admin-header {
+  min-height: 72px;
 
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  align-items: flex-end;
-  // align-items: flex-end;
-  gap: 24px;
-  .info-user {
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-default);
+}
+.admin-header-brand {
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  .admin-header-logo {
+    margin: 0;
+    // font-size: 22px;
+    font-weight: 700;
+    color: var(--brand);
+  }
+  .admin-header-subtitle {
+    margin: 4px 0 0;
+    font-size: 12px;
+    color: var(--text-secondary);
+  }
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  .admin-header-user {
+    font-size: 14px;
+    color: var(--text-primary);
+    .admin-header-user-name {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-default);
+    }
+  }
+  .admin-header-buttons {
     display: flex;
-    gap: 8px;
+    gap: 10px;
+    // flex-wrap: wrap;
+    .admin-logout {
+      color: #d9534f;
+      &:hover {
+        border-color: #d9534f;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 16px;
+    .admin-header-actions {
+      width: 100%;
+      justify-content: flex-end;
+    }
   }
 }
 </style>

@@ -195,7 +195,28 @@ button {
         transform: scale(0.96);
     }
 }
+.admin-btn {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--border-default);
+  border-radius: 10px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    transform 0.4s ease;
+  &:hover {
+    border-color: var(--brand);
+  }
 
+  &:active {
+    transform: scale(0.95);
+  }
+}
 .point {
     width: 30px;
     height: 30px;
