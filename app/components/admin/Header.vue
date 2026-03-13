@@ -1,7 +1,7 @@
 <template>
   <header class="admin-header">
     <div class="admin-header-brand">
-      <h3 class="admin-header-logo">Horizon Admin</h3>
+      <h3 class="admin-header-logo" @click="goToAdmin">Horizon Admin</h3>
       <p class="admin-header-subtitle">後台管理系統</p>
     </div>
 
@@ -11,14 +11,23 @@
       </div>
 
       <div class="admin-header-buttons">
-        <button type="button" class="admin-btn">回到網站</button>
+        <button type="button" class="admin-btn" @click="goToHome">
+          回到網站
+        </button>
         <button type="button" class="admin-btn admin-logout">登出帳號</button>
       </div>
     </div>
   </header>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const goToHome = () => {
+  navigateTo("/");
+};
+const goToAdmin = () => {
+  navigateTo("/admin");
+};
+</script>
 
 <style scoped lang="scss">
 .admin-header {
@@ -37,7 +46,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
   .admin-header-logo {
+    cursor: pointer;
     margin: 0;
     // font-size: 22px;
     font-weight: 700;

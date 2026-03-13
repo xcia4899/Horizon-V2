@@ -42,7 +42,10 @@
       {{ cartStore.totalQuantity > 99 ? "99+" : cartStore.totalQuantity }}
     </span>
   </button>
-
+  <!-- 後台進入 -->
+  <button v-if="true" type="button" class="btnItem" @click="goToPanel">
+    <Icon name="mdi:wrench" class="icon" size="24" />
+  </button>
   <!-- 迷你購物車顯示 -->
   <div class="miniCart">
     <div class="cart-view">
@@ -216,6 +219,9 @@ const goToCart = async () => {
   await looding(100);
   await navigateTo("/cart");
 };
+const goToPanel = () => {
+  navigateTo("/admin");
+};
 </script>
 
 <style scoped lang="scss">
@@ -382,7 +388,7 @@ const goToCart = async () => {
       align-items: center;
       gap: 8px;
       // margin: auto 0;
-  
+
       img {
         height: 60px;
         max-width: 60px;

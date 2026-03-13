@@ -28,12 +28,12 @@ useSeoMeta({
   flex-direction: column;
   position: relative;
   isolation: isolate;
-  background: var(--bg-surface);
+
 }
 .admin-header {
   //   position: fixed;
   top: 0;
-  background: var(--bg-surface-strong);
+  background: var(--bg-header);
   overflow-x: clip;
   width: 100%;
   z-index: 100;
@@ -49,9 +49,11 @@ useSeoMeta({
     background:var(text-tertiary);
   }
   .admin-main {
+
     flex: 1;
     position: relative;
     padding: 16px;
+    background: var(--bg-surface-soft);
   }
 }
 </style>

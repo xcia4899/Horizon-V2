@@ -1,8 +1,8 @@
 <template>
   <aside class="admin-sidebar">
-    <div class="sidebar-head">
+    <div class="sidebar-head" @click="goToAdmin">
       <h2>Admin Panel</h2>
-      <p>內容管理</p>
+      <p>內容管理 | 說明 | 首頁</p>
     </div>
 
     <nav class="sidebar-nav">
@@ -45,15 +45,19 @@
   </aside>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const goToAdmin = () => {
+  navigateTo("/admin");
+};
+</script>
 
 <style scoped lang="scss">
 .admin-sidebar {
   //   width: 240px;
   min-height: 100vh;
   padding: 20px 16px;
-  background: var(--bg-surface-soft);
-
+  background: var(--bg-surface);
+  border-right: 2px dotted var(--border-default);
   color: var(--text-primary);
 }
 
@@ -62,6 +66,10 @@
   padding: 8px 8px 16px;
   color: var(--text-secondary);
   border-bottom: 2px solid var(--border-default);
+  cursor: pointer;
+  * {
+    cursor: pointer;
+  }
   h2 {
     font-size: 20px;
     font-weight: 700;
@@ -97,7 +105,7 @@
     transform 0.25s ease,
     box-shadow 0.25s ease;
   &:hover {
-    background: rgba($color-gray-500, 0.2);
+    background: rgba($color-gray-600, 0.18);
     color: var(--text-primary);
     transform: translateX(2px);
   }

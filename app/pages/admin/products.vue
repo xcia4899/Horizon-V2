@@ -1,14 +1,10 @@
 <template>
   <div class="admin-page">
-    <AdminPageHeader
-      title="商品管理"
-      desc="管理網站商品資料"
-    >
-      <button class="admin-btn add-btn" @click="handleAddProduct">
-        新增商品
-      </button>
-    </AdminPageHeader>
+    <AdminPageHeader title="商品管理" desc="管理網站商品資料" />
 
+    <button class="admin-btn add-btn" @click="handleAddProduct">
+      新增商品
+    </button>
     <section class="page-content">
       <AdminDataList
         :tableTitle="tableTitle"
@@ -41,6 +37,9 @@
         </div>
       </AdminDataList>
     </section>
+     <button class="admin-btn add-btn" @click="handleAddProduct">
+      儲存
+    </button>
   </div>
 </template>
 <script setup lang="ts">
@@ -73,7 +72,7 @@ const products = ref<Product[]>([
   { id: "2", name: "Gaming Mouse", price: 1990 },
 ]);
 
-const gridColumns  = computed(() => "1fr 5fr 2fr 2fr");
+const gridColumns = computed(() => "1fr 5fr 2fr 2fr");
 
 const handleAddProduct = () => {
   console.log("新增商品");

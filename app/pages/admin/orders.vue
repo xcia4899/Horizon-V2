@@ -1,6 +1,6 @@
 <template>
   <div>
-    其他
+    <AdminPageHeader title="訂單管理" desc="管理訂單資料" />
   </div>
 </template>
 
@@ -10,6 +10,4 @@ definePageMeta({
 });
 </script>
 
-<style scoped lang="scss">
-
-</style>
+<style scoped lang="scss"></style>
