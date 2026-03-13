@@ -1,122 +1,141 @@
 <template>
   <div class="admin-page">
-    <!-- page header -->
-    <header class="page-header">
-      <div>
-        <h1 class="page-title">商品管理</h1>
-        <p class="page-desc">管理網站商品資料</p>
-      </div>
+    <AdminPageHeader
+      title="商品管理"
+      desc="管理網站商品資料"
+    >
+      <button class="admin-btn add-btn" @click="handleAddProduct">
+        新增商品
+      </button>
+    </AdminPageHeader>
 
-      <div class="page-actions">
-        <button class="btn-primary">新增商品</button>
-      </div>
-    </header>
-
-    <!-- toolbar -->
-    <section class="page-toolbar">
-      <input placeholder="搜尋商品..." class="search-input" />
-    </section>
-
-    <!-- main content -->
     <section class="page-content">
-      <div class="content-card">
-        <!-- table example -->
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>商品名稱</th>
-              <th>價格</th>
-              <th>操作</th>
-            </tr>
-          </thead>
+      <AdminDataList
+        :tableTitle="tableTitle"
+        :items="products"
+        :grid-columns="gridColumns"
+        empty-text="目前沒有商品資料"
+      >
+        <div
+          v-for="item in products"
+          :key="item.id"
+          class="data-row"
+          :style="{ gridTemplateColumns: gridColumns }"
+        >
+          <div>{{ item.id }}</div>
+          <div>{{ item.name }}</div>
+          <div>${{ item.price }}</div>
 
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Gaming Keyboard</td>
-              <td>$2990</td>
-              <td>
-                <button>編輯</button>
-                <button>刪除</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <div class="actions">
+            <button class="admin-btn" @click="editProduct(item.id)">
+              編輯
+            </button>
+
+            <button
+              class="admin-btn delete-btn"
+              @click="deleteProduct(item.id)"
+            >
+              刪除
+            </button>
+          </div>
+        </div>
+      </AdminDataList>
     </section>
   </div>
 </template>
-
 <script setup lang="ts">
+import { computed, ref } from "vue";
+
 definePageMeta({
   layout: "admin",
 });
-</script>
 
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+}
+
+interface AdminColumn {
+  key: string;
+  label: string;
+}
+
+const tableTitle: AdminColumn[] = [
+  { key: "id", label: "ID" },
+  { key: "name", label: "商品名稱" },
+  { key: "price", label: "價格" },
+  { key: "actions", label: "操作" },
+];
+
+const products = ref<Product[]>([
+  { id: "1", name: "Gaming Keyboard", price: 2990 },
+  { id: "2", name: "Gaming Mouse", price: 1990 },
+]);
+
+const gridColumns  = computed(() => "1fr 5fr 2fr 2fr");
+
+const handleAddProduct = () => {
+  console.log("新增商品");
+};
+
+const editProduct = (id: string) => {
+  console.log("編輯商品:", id);
+};
+
+const deleteProduct = (id: string) => {
+  products.value = products.value.filter((p) => p.id !== id);
+};
+</script>
 <style scoped lang="scss">
 .admin-page {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  color: var(--text-primary);
 }
-
-/* header */
-
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.page-title {
-  font-size: 24px;
-  font-weight: 700;
-}
-
-.page-desc {
-  font-size: 14px;
-  color: #666;
-}
-
-/* toolbar */
-
-.page-toolbar {
-  display: flex;
-  gap: 12px;
-}
-
-/* content */
 
 .page-content {
-  flex: 1;
+  display: grid;
+  gap: 8px;
 }
 
-.content-card {
-  padding: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+.data-row {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border-default);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--bg-surface-soft);
+  }
 }
 
-/* table */
+.actions {
+  display: flex;
+  gap: 8px;
+}
 
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-
-  th,
-  td {
-    padding: 12px;
-    text-align: left;
+.add-btn {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: var(--brand);
+      color: $color-white;
+    }
   }
+}
 
-  thead {
-    background: #f5f5f5;
-  }
-
-  tbody tr {
-    border-bottom: 1px solid #eee;
+.delete-btn {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      color: var(--state-danger);
+      border-color: var(--state-danger);
+    }
   }
 }
 </style>
