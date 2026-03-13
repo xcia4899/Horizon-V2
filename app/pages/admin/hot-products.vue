@@ -1,5 +1,5 @@
 <template>
-  <h1>內容</h1>
+  <div>熱門商品</div>
 </template>
 
 <script setup lang="ts">
@@ -7,3 +7,5 @@ definePageMeta({
   layout: "admin",
 });
 </script>
+
+<style scoped lang="scss"></style>
