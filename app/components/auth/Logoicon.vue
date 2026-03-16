@@ -1,7 +1,7 @@
 <template>
   <li v-for="item in icons" :key="item.icon">
     <button type="button" class="logonicon-btn">
-      <img :src="item.src" :alt="item.alt" />
+      <NuxtImg :src="item.src" :alt="item.alt" />
     </button>
   </li>
 </template>

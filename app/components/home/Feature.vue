@@ -28,7 +28,7 @@
             class="panel-card"
           >
             <div class="card-media">
-              <img :src="item.media" alt="" />
+              <NuxtImg :src="item.media" alt="" />
               <div
                 v-for="value in item.pointerItems"
                 :key="value.title"

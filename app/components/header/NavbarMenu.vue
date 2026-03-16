@@ -32,7 +32,7 @@
           >
             <div class="card" @click="goProducts(item)">
               <div class="item-pic">
-                <img :src="item.img" alt="" />
+                <NuxtImg :src="item.img" alt="" />
               </div>
               <div class="item-text">
                 <h4>{{ item.text }}</h4>
@@ -50,7 +50,7 @@ import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
 import type { MenuKey, MenuItem, OpenMenu, SetMenu } from "@/types/ui/menu";
 
-const router = useRouter();
+
 //控制menuOPen 手機版本開關控制
 
 //螢幕、手機模式判斷

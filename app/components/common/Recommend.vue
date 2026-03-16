@@ -25,7 +25,7 @@
         class="carousel-card"
       >
         <div class="card-media">
-          <img class="image" :src="item.image.src" :alt="item.image.alt" />
+          <NuxtImg class="image" :src="item.image.src" :alt="item.image.alt" />
         </div>
         <h4 class="card-title">{{ item.title }}</h4>
       </SwiperSlide>

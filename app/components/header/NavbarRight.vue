@@ -51,7 +51,7 @@
     <div class="cart-view">
       <div v-for="item in carts" :key="item.product.id" class="cart-item">
         <div class="item-img">
-          <img :src="item.product.images.main" :alt="item.product.name" />
+          <NuxtImg :src="item.product.images.main" :alt="item.product.name" />
           <p class="item-name">{{ item.product.name }}</p>
         </div>
         <div class="item-detal">

@@ -1,6 +1,6 @@
 <template>
   <div class="banner">
-    <img
+    <NuxtImg
       v-if="currentbanner"
       class="image"
       :src="currentbanner.image"
