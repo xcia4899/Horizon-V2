@@ -53,7 +53,7 @@ const showcaseHero = {
   subtitle: "Voxen Prime",
   title: "藍色的聲音-大聲清晰地播放... 或者作為外星人",
   text: "藍色的 VO！CE是一組先進的廣播風格濾鏡和效果，可確保您得到大聲清晰的聲音。在Discord或角色扮演角色扮演您最喜歡的惡魔或外星人，全部都遠離兼容設備的麥克風路徑。",
-  image: "./images/home/showcase/showcase-hero.png",
+  image: "/images/home/showcase/showcase-hero.png",
   link: "https://www.nvidia.com/zh-tw/geforce/news/rtx-5090-5080-out-now/",
 };
 const showcaseCardContent = [
@@ -62,7 +62,7 @@ const showcaseCardContent = [
     subtitle: "NVIDIA RTX 5090",
     title: "新任顯示卡王者",
     text: "全新的 GeForce RTX 5080 和 GeForce RTX 5090 現已上市！來自頂尖顯示卡供應商 如ASUS全新的 GeForce RTX 5080 和 GeForce RTX 5090 現已上市！全新的 GeForce RTX 5080 和 GeForce RTX 5090 現已上市！",
-    image: "./images/home/showcase/showcase-01.jpg",
+    image: "/images/home/showcase/showcase-01.jpg",
     link: "https://www.nvidia.com/zh-tw/geforce/news/rtx-5090-5080-out-now/",
   },
   {
@@ -70,7 +70,7 @@ const showcaseCardContent = [
     subtitle: "Ryzen7 9800X3D",
     title: "最強的遊戲處理器",
     text: "Ryzen 7 9800X3D 正式登場，究竟遊戲表現能與自家 Ryzen 9000 系列處理器以及對手旗艦拉開多少差距？",
-    image: "./images/home/showcase/showcase-02.jpg",
+    image: "/images/home/showcase/showcase-02.jpg",
     link: "https://www.4gamers.com.tw/news/detail/68287/amd-ryzen-7-9800x3d-review",
   },
   {
@@ -78,7 +78,7 @@ const showcaseCardContent = [
     subtitle: "Nintendo Switch 2",
     title: "任天堂全新主機",
     text: "Switch 2 採用 7.9 吋 LCD 螢幕，解析度提升到 1080p，並支援 HDR10 與最高 120Hz 的可變更新...",
-    image: "./images/home/showcase/showcase-03.jpg",
+    image: "/images/home/showcase/showcase-03.jpg",
     link: "https://www.nintendo.com/tw/index.html?srsltid=AfmBOooYIinP5RcLgK1U2_khNlRXDpwLON6F1z4qiLP9mLGxmAQZgmi7",
   },
   {
@@ -86,7 +86,7 @@ const showcaseCardContent = [
     subtitle: "MacBook Air",
     title: "全新蘋果商品",
     text: "蘋果今日（14）中午正式開賣新一代 MacBook Air，搭載 M4 晶片帶來更強的 AI 效能還有嶄新的天藍色...",
-    image: "./images/home/showcase/showcase-04.jpg",
+    image: "/images/home/showcase/showcase-04.jpg",
     link: "https://3c.ltn.com.tw/news/61567",
   },
 ];

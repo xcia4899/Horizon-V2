@@ -17,11 +17,11 @@ const emit = defineEmits<{
 const bannerList = [
   {
     id: "banner-01",
-    image: "./images/promoBanner/banner-01.jpg",
+    image: "/images/promoBanner/banner-01.jpg",
   },
   {
     id: "banner-02",
-    image: "./images/promoBanner/banner-02.jpg",
+    image: "/images/promoBanner/banner-02.jpg",
   },
 ];
 

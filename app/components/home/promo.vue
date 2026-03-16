@@ -27,7 +27,7 @@ const promoList = [
       "結合優雅外型與強大效能。搭載全新的 ROG RX 矮軸與雙層消音泡棉，" +
       "為您帶來無與倫比的打字與遊戲體驗。",
     image: {
-      src: "./images/home/promo/promo-01.png",
+      src: "/images/home/promo/promo-01.png",
       alt: "ROG Falchion RX Low Profile 電競鍵盤",
     },
     linkText: "了解更多",
@@ -41,7 +41,7 @@ const promoList = [
       "我們最先進的滑鼠經過全面升級，解鎖全新反應標準，" +
       "讓你在頂級競技遊戲中獲得所需的速度與精準度。",
     image: {
-      src: "./images/home/promo/promo-02.png",
+      src: "/images/home/promo/promo-02.png",
       alt: "ROG PRO 無線電競滑鼠",
     },
     linkText: "了解更多",
