@@ -19,10 +19,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      // 前端與 server 端都能讀到的環境變數
-      // 之後接後端 API 只要改這個，不用改程式碼
-      backendBaseURL: process.env.NUXT_PUBLIC_BACKEND_BASE_URL || "",
-      // 例：https://your-api.onrender.com
+      // Nuxt 會自動對應 NUXT_PUBLIC_BACKEND_BASE_URL
+      backendBaseURL: "",
     },
   },
 
@@ -65,5 +63,8 @@ export default defineNuxtConfig({
   ],
   image: {
     provider: "none",
+  },
+  icon: {
+    serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
   },
 });
