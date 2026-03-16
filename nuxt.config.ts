@@ -12,9 +12,7 @@ export default defineNuxtConfig({
     // GitHub Pages 需要 /repo-name/ 子路徑
     // 本機開發通常用 /
     baseURL: process.env.NUXT_APP_BASE_URL || "/",
-    // 例如：
-    // 本機："/"
-    // GH Pages："/Horizon-V2/"
+    buildAssetsDir: "/_nuxt/", // 確保靜態資源資料夾名稱正確
   },
 
   runtimeConfig: {
@@ -62,7 +60,10 @@ export default defineNuxtConfig({
     "@element-plus/nuxt",
   ],
   image: {
-    provider: "none",
+    // 強制使用靜態轉發，這會讓 NuxtImg 在產出 HTML 時尊重 baseURL
+    provider: "static",
+    // 如果圖片都在 public/ 下，這行能確保路徑正確
+    dir: "public",
   },
   icon: {
     // serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效

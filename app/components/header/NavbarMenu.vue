@@ -38,6 +38,14 @@
                 <h4>{{ item.text }}</h4>
               </div>
             </div>
+            <div class="card" @click="goProducts(item)">
+              <div class="item-pic">
+                <img :src="item.img" alt="" />
+              </div>
+              <div class="item-text">
+                <h4>{{ item.text }}</h4>
+              </div>
+            </div>
           </li>
         </ul>
       </div>
@@ -49,7 +57,6 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
 import type { MenuKey, MenuItem, OpenMenu, SetMenu } from "@/types/ui/menu";
-
 
 //控制menuOPen 手機版本開關控制
 
@@ -98,7 +105,7 @@ const goProducts = async (item: MenuItem) => {
   const query: Record<string, string | string[]> = {};
   if (item?.tag) query.tag = [item.tag];
   if (item?.text === "特價商品") query.onsale = "true";
-  
+
   await navigateTo({
     path: "/products",
     query,
