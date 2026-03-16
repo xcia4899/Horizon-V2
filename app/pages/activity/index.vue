@@ -78,7 +78,7 @@
             :class="{ featured: item.featured }"
           >
             <NuxtLink class="card-media" :to="item.to || '#'">
-              <NuxtImg
+              <img
                 class="img"
                 :src="item.image"
                 :alt="item.title"

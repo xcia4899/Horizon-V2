@@ -7,7 +7,7 @@
     <div class="showcase-content">
       <div class="showcase-hero">
         <div class="hero-media">
-          <NuxtImg :src="showcaseHero.image" alt="" />
+          <img :src="showcaseHero.image" alt="" />
         </div>
         <div class="hero-content">
           <h4 class="hero-subtitle">
@@ -29,7 +29,7 @@
           class="showcase-card"
         >
           <div class="card-media" @click="gotoWebsit(item.link)">
-            <NuxtImg :src="item.image" alt="" />
+            <img :src="item.image" alt="" />
           </div>
           <h4 class="card-subtitle">
             {{ item.subtitle }}

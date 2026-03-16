@@ -6,7 +6,7 @@
         <div class="container product-overview-inner">
           <div class="product-media">
             <div class="product-media-main">
-              <NuxtImg :src="currentImage" :alt="`${product.name}商品大圖`" />
+              <img :src="currentImage" :alt="`${product.name}商品大圖`" />
             </div>
             <div class="product-media-thumbnails">
               <button
@@ -16,7 +16,7 @@
                 :class="{ active: currentImage === img }"
                 @click="currentImage = img"
               >
-                <NuxtImg :src="img" alt="商品縮圖" />
+                <img :src="img" alt="商品縮圖" />
               </button>
             </div>
           </div>
@@ -113,7 +113,7 @@
             class="content-item"
           >
             <div class="item-icon">
-              <NuxtImg :src="item.icon" :alt="item.title + '圖示'" />
+              <img :src="item.icon" :alt="item.title + '圖示'" />
             </div>
             <h4>{{ item.title }} <br />{{ item.subtitle }}</h4>
             <div class="desc">

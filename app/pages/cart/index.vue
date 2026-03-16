@@ -21,7 +21,7 @@
             class="cart-card"
           >
             <div class="card-title">
-              <NuxtImg :src="item.product.images.main" :alt="item.product.name" />
+              <img :src="item.product.images.main" :alt="item.product.name" />
               <div class="title">
                 <h4 class="brand">{{ item.product.brand }}</h4>
                 <h5 class="name">{{ item.product.name }}</h5>

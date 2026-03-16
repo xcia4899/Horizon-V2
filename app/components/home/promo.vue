@@ -1,7 +1,7 @@
 <template>
   <div v-for="item in promoList" :key="item.id" class="promo">
     <div class="promo-media">
-      <NuxtImg :src="item.image.src" :alt="item.image.alt" />
+      <img :src="item.image.src" :alt="item.image.alt" />
     </div>
     <div class="promo-content">
       <div class="promo-content-inner">

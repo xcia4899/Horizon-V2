@@ -61,7 +61,7 @@ export default defineNuxtConfig({
   ],
   image: {
     // 強制使用靜態轉發，這會讓 NuxtImg 在產出 HTML 時尊重 baseURL
-    provider: "static",
+    // provider: "static",
     // 如果圖片都在 public/ 下，這行能確保路徑正確
     dir: "public",
   },

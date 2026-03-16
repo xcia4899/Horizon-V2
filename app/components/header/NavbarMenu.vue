@@ -30,14 +30,7 @@
             :key="item.text"
             class="dropdown-content"
           >
-            <div class="card" @click="goProducts(item)">
-              <div class="item-pic">
-                <NuxtImg :src="item.img" alt="" />
-              </div>
-              <div class="item-text">
-                <h4>{{ item.text }}</h4>
-              </div>
-            </div>
+           
             <div class="card" @click="goProducts(item)">
               <div class="item-pic">
                 <img :src="item.img" alt="" />
