@@ -8,7 +8,7 @@
     >
       <div class="card-media">
         <div class="card-image">
-          <img :src="product.images.main" :alt="product.name" />
+          <img :src="resolveImg(product.images.main)" :alt="product.name" />
         </div>
         <div class="card-barnd">{{ product.brand }}</div>
       </div>
@@ -24,7 +24,9 @@
             NT$ {{ product.price.toLocaleString() }}
           </p>
         </div>
-        <button class="card-add btn" @click.stop="handleAddToCart(product)">加入購物車</button>
+        <button class="card-add btn" @click.stop="handleAddToCart(product)">
+          加入購物車
+        </button>
       </div>
     </div>
   </div>
@@ -34,7 +36,7 @@
 import type { Product } from "@/composables/useProducts";
 // import { useRouter } from "vue-router";
 import { useCartStore } from "@/stores/useCart";
-
+const { resolveImg } = useImageResolver();
 
 defineProps<{
   productListView: Product[];
@@ -52,7 +54,6 @@ const cartStore = useCartStore();
 const handleAddToCart = (product: Product) => {
   cartStore.addToCart(product);
 };
-
 </script>
 
 <style scoped lang="scss">
@@ -110,7 +111,7 @@ const handleAddToCart = (product: Product) => {
         align-items: center;
         justify-content: center;
         img {
-          width: 100%;
+          // width: 100%;
           height: 200px;
           padding: 8px;
           /*           overflow: hidden; */

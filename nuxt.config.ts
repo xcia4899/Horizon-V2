@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   app: {
     // GitHub Pages 需要 /repo-name/ 子路徑
     // 本機開發通常用 /
-    baseURL: process.env.NUXT_APP_BASE_URL || "/",
+    baseURL: process.env.NODE_ENV === "production" ? "/Horizon-V2/" : "/",
     // 例如：
     // 本機："/"
     // GH Pages："/Horizon-V2/"
