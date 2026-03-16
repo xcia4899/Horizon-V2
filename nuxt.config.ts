@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   app: {
     // GitHub Pages 需要 /repo-name/ 子路徑
     // 本機開發通常用 /
-    baseURL: process.env.NODE_ENV === "production" ? "/Horizon-V2/" : "/",
+    baseURL: process.env.NUXT_APP_BASE_URL || "/",
     // 例如：
     // 本機："/"
     // GH Pages："/Horizon-V2/"
@@ -63,15 +63,8 @@ export default defineNuxtConfig({
   ],
   image: {
     provider: "none",
-    // 設定別名，讓 /images 自動對應到正確的環境路徑
-    alias: {
-      "/images":
-        process.env.NODE_ENV === "production"
-          ? "/Horizon-V2/images"
-          : "/images",
-    },
   },
   icon: {
-    serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
+    // serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
   },
 });

@@ -8,7 +8,7 @@
     >
       <div class="card-media">
         <div class="card-image">
-          <NuxtImg :src="product.images.main" :alt="product.name" />
+          <img :src="product.images.main" :alt="product.name" />
         </div>
         <div class="card-barnd">{{ product.brand }}</div>
       </div>
