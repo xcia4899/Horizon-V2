@@ -66,6 +66,6 @@ export default defineNuxtConfig({
     dir: "public",
   },
   icon: {
-    // serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
+    serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
   },
 });
