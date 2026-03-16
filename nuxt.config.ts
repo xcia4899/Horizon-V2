@@ -67,9 +67,18 @@ export default defineNuxtConfig({
     },
   },
 
-  icon: {
-    // 圖標設定：強制使用 CSS 模式並從遠端抓取，避免靜態環境下 API 路徑失效
-    mode: 'css',
-    serverBundle: "remote",
+ icon: {
+    // 解決方案 A：強制轉為純 CSS，不產生任何 JSON 請求
+    mode: 'css', 
+    
+    // 解決方案 B：把你要用的圖標集直接打包進去 (Bundle)
+    // 這樣 Nuxt 就不用去 api 找圖標資料
+    clientBundle: {
+      scan: true, // 自動掃描專案中用到的圖標並打包
+      includeCustomCollections: true,
+    },
+    
+    // 停用本地 API 供應商
+    provider: 'iconify', 
   },
 });
