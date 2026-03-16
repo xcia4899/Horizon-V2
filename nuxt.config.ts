@@ -59,16 +59,12 @@ export default defineNuxtConfig({
     "@element-plus/nuxt",
   ],
   image: {
-    // 解決 TS 報錯：直接移除 static 物件
-    // 透過 dir 確保抓取 public 目錄
+    provider: "none",
     dir: "public",
-
-    // 如果未來需要針對不同環境調整路徑，我們可以用 providers 寫法，
-    // 但對 GitHub Pages 來說，最簡單且不報錯的方式是直接把 baseURL 寫在 app 裡就好，
-    // 然後透過一個簡單的變數來處理 alias。
+    // 設定 alias 處理 GitHub Pages 的子路徑
     alias: {
       "/images": process.env.NUXT_APP_BASE_URL
-        ? `${process.env.NUXT_APP_BASE_URL}/images`
+        ? `${process.env.NUXT_APP_BASE_URL}/images`.replace(/\/+/g, "/")
         : "/images",
     },
   },
