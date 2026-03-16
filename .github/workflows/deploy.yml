@@ -34,8 +34,8 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build Nuxt (github_pages preset)
-        run: npx nuxi build --preset github_pages
+      - name: Build Nuxt site
+        run: npx nuxt build --preset github_pages
         env:
           # ✅ 必須是 /<repo>/
           NUXT_APP_BASE_URL: /Horizon-V2/

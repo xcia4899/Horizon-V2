@@ -22,7 +22,7 @@
         class="hero-slide"
       >
         <div class="slide-image">
-          <img
+          <NuxtImg
             :src="slide.image.src"
             :alt="slide.image.alt"
             sizes="100vw"

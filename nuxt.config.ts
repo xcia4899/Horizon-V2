@@ -12,7 +12,6 @@ export default defineNuxtConfig({
     // GitHub Pages 需要 /repo-name/ 子路徑
     // 本機開發通常用 /
     baseURL: process.env.NUXT_APP_BASE_URL || "/",
-    buildAssetsDir: "/_nuxt/", // 確保靜態資源資料夾名稱正確
   },
 
   runtimeConfig: {
@@ -60,10 +59,18 @@ export default defineNuxtConfig({
     "@element-plus/nuxt",
   ],
   image: {
-    // 強制使用靜態轉發，這會讓 NuxtImg 在產出 HTML 時尊重 baseURL
-    // provider: "static",
-    // 如果圖片都在 public/ 下，這行能確保路徑正確
+    // 解決 TS 報錯：直接移除 static 物件
+    // 透過 dir 確保抓取 public 目錄
     dir: "public",
+
+    // 如果未來需要針對不同環境調整路徑，我們可以用 providers 寫法，
+    // 但對 GitHub Pages 來說，最簡單且不報錯的方式是直接把 baseURL 寫在 app 裡就好，
+    // 然後透過一個簡單的變數來處理 alias。
+    alias: {
+      "/images": process.env.NUXT_APP_BASE_URL
+        ? `${process.env.NUXT_APP_BASE_URL}/images`
+        : "/images",
+    },
   },
   icon: {
     serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效

@@ -33,7 +33,7 @@
            
             <div class="card" @click="goProducts(item)">
               <div class="item-pic">
-                <img :src="item.img" alt="" />
+                <NuxtImg :src="item.img" alt="" />
               </div>
               <div class="item-text">
                 <h4>{{ item.text }}</h4>
