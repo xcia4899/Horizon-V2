@@ -63,9 +63,15 @@ export default defineNuxtConfig({
   ],
   image: {
     provider: "none",
+    // 設定別名，讓 /images 自動對應到正確的環境路徑
+    alias: {
+      "/images":
+        process.env.NODE_ENV === "production"
+          ? "/Horizon-V2/images"
+          : "/images",
+    },
   },
   icon: {
-    
     serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
   },
 });
