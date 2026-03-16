@@ -38,7 +38,7 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  css: ["@/assets/scss/main.scss", "element-plus/dist/index.css"],
+  css: ["@/assets/scss/main.scss"],
 
   vite: {
     css: {
@@ -65,6 +65,7 @@ export default defineNuxtConfig({
     provider: "none",
   },
   icon: {
+    
     serverBundle: "remote", // 改成遠端抓取，避免 API 路徑在 GitHub Pages 失效
   },
 });

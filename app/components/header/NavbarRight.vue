@@ -479,7 +479,7 @@ const goToPanel = () => {
   }
 }
 @media (hover: hover) and (pointer: fine) {
-  .cart-btn:hover + .miniCart {
+  .cart-btn:hover ~ .miniCart {
     max-height: 600px;
   }
 }
