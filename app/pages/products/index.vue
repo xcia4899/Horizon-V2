@@ -56,7 +56,7 @@
 import { ref, computed, watch, nextTick } from "vue";
 //商品資料引入
 import { useProducts } from "@/composables/useProducts";
-import { looding } from "@/composables/useFetchState";
+import { looding } from "~/composables/useFetchState";
 import type { Product } from "@/composables/useProducts";
 import type { LocationQueryValue } from "vue-router";
 import type { SidebarList } from "@/types/ui/sidebar";

@@ -86,10 +86,12 @@ import {
 import type { InputInstance } from "element-plus";
 import { storeToRefs } from "pinia";
 import { useCartStore } from "@/stores/useCart";
-
+// import { useMenu } from "~/composables/useMenu";
+const { openMenu, closeMenu } = useMenu();
 //接收props
 const props = defineProps<{
   isMenuOpenMobile: boolean;
+  closeMenuOpenMobile: () => void;
 }>();
 //傳出emit
 const emit = defineEmits<{
@@ -213,13 +215,19 @@ const submitSearch = async () => {
 // 跳轉登入
 const goToLogin = async () => {
   await looding(100);
+  closeMenu();
+  props.closeMenuOpenMobile();
   await navigateTo("/auth/login");
 };
 const goToCart = async () => {
   await looding(100);
+  closeMenu();
+  props.closeMenuOpenMobile();
   await navigateTo("/cart");
 };
 const goToPanel = () => {
+  closeMenu();
+  props.closeMenuOpenMobile();
   navigateTo("/admin");
 };
 </script>

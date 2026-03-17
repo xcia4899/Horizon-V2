@@ -25,7 +25,10 @@
       class="nav-right"
       :class="{ 'mobile-isOpen': isMenuOpenMobile === true }"
     >
-      <HeaderNavbarRight v-model:isMenuOpenMobile="isMenuOpenMobile" />
+      <HeaderNavbarRight
+        v-model:isMenuOpenMobile="isMenuOpenMobile"
+        :closeMenuOpenMobile="closeMenuOpenMobile"
+      />
     </aside>
   </div>
 </template>
@@ -37,7 +40,7 @@
 // 下拉選單邏輯 ==================
 //menu 型別
 import type { SetMenu } from "@/types/ui/menu";
-import { looding } from "@/composables/useFetchState";
+import { looding } from "~/composables/useFetchState";
 // const router = useRouter();
 
 // 所有導覽列選單資料
@@ -87,25 +90,21 @@ const menus: SetMenu[] = [
         text: "MSI",
         img: "/images/logo/MSI.png",
         tag: "msi",
-
       },
       {
         text: "Logitech",
         img: "/images/logo/LOGI.png",
         tag: "logitech",
-
       },
       {
         text: "Razer",
         img: "/images/logo/RAZER.png",
         tag: "razer",
-
       },
       {
         text: "ROG",
         img: "/images/logo/ROG.png",
         tag: "rog",
-
       },
     ],
   },
@@ -125,6 +124,7 @@ const menus: SetMenu[] = [
   },
 ];
 const isMenuOpenMobile = ref(false);
+
 const toggleMenu = () => {
   isMenuOpenMobile.value = !isMenuOpenMobile.value;
 };
@@ -136,6 +136,8 @@ const goHome = async () => {
   await looding(200);
   navigateTo("/");
 };
+
+
 </script>
 
 <style scoped lang="scss">
@@ -157,7 +159,7 @@ $headerHeight: 70px; */
   .nav-right,
   .navbar {
     flex: 1;
-   /*  max-width: 300px; */
+    /*  max-width: 300px; */
     align-items: baseline;
   }
   .menu-toggle {
@@ -167,14 +169,13 @@ $headerHeight: 70px; */
     cursor: pointer;
     .icon {
       font-size: 36px;
-      color: var(--inverse); 
+      color: var(--inverse);
       cursor: pointer;
     }
     &:active {
       .icon {
         transform: scale(0.9);
         opacity: 0.85;
-
       }
     }
   }
@@ -213,7 +214,6 @@ $headerHeight: 70px; */
     flex-wrap: wrap;
     @include baseTransition(height, 0.6s);
     .menu-toggle {
-
       flex: 0 0 auto;
       display: flex;
     }
@@ -255,5 +255,4 @@ $headerHeight: 70px; */
     height: 100vh;
   }
 }
-
 </style>

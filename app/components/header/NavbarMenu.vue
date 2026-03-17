@@ -30,7 +30,6 @@
             :key="item.text"
             class="dropdown-content"
           >
-           
             <div class="card" @click="goProducts(item)">
               <div class="item-pic">
                 <NuxtImg :src="item.img" alt="" />
@@ -49,8 +48,8 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
-import type { MenuKey, MenuItem, OpenMenu, SetMenu } from "@/types/ui/menu";
-
+import type {  MenuItem, SetMenu } from "@/types/ui/menu";
+const { openMenu,setOpenMenu, toggleMenu, closeMenu } = useMenu();
 //控制menuOPen 手機版本開關控制
 
 //螢幕、手機模式判斷
@@ -63,21 +62,13 @@ const props = defineProps<{
 // 導覽列ref，用來判斷是否點擊到外部
 const menuRef = ref<HTMLElement | null>(null);
 // 目前開啟的dropdown的ID
-const openMenu = ref<OpenMenu>(null);
-const setOpenMenu = (name: OpenMenu) => {
-  openMenu.value = name;
-};
-//dropdown 開關切換
-function toggleMenu(name: MenuKey) {
-  openMenu.value = openMenu.value === name ? null : name;
-}
 
 // 點擊選單外部時關閉所有選單
 function handleClickOutside(e: MouseEvent) {
   if (isTouch.value) return;
   if (!menuRef.value) return;
   if (!menuRef.value.contains(e.target as Node)) {
-    openMenu.value = null;
+    closeMenu()
   }
 }
 // console.log("SSR:", import.meta.server);
@@ -104,7 +95,7 @@ const goProducts = async (item: MenuItem) => {
     query,
   });
 
-  openMenu.value = null;
+  closeMenu()
   props.closeMenuOpenMobile();
 };
 
@@ -112,6 +103,8 @@ const navigateWithDelay = async (to?: string) => {
   if (!to) return;
   await looding(200);
   await navigateTo(to);
+  closeMenu()
+  props.closeMenuOpenMobile();
 };
 </script>
 
@@ -174,10 +167,8 @@ const navigateWithDelay = async (to?: string) => {
     position: fixed;
     top: $headerHeight;
     left: 1%;
-
     width: 98%;
-
-    padding: 16px;
+    padding: 24px 16px;
     background: var(--bg-surface);
     border-radius: 8px;
     opacity: 0;
@@ -204,10 +195,10 @@ const navigateWithDelay = async (to?: string) => {
     max-width: 1280px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: clamp(16px, 1.6vw, 32px);
   }
   .dropdown-content {
     .card {
@@ -229,7 +220,7 @@ const navigateWithDelay = async (to?: string) => {
         aspect-ratio: 1/1;
         border-radius: 6px;
         overflow: hidden;
-        background: var(--bg-surface-soft);
+        background: var(--bg-surface-card);
         img {
           height: 100%;
           width: 100%;
@@ -240,6 +231,7 @@ const navigateWithDelay = async (to?: string) => {
         padding: 16px 8px 16px;
         text-align: center;
         overflow-wrap: break-word;
+        transition: color 0.4s ease;
         h4 {
           cursor: pointer;
           font-size: clamp(12px, 2vw, 20px);
@@ -254,7 +246,7 @@ const navigateWithDelay = async (to?: string) => {
       inset: 0 0 0 0;
       transform: scaleY(0);
       transform-origin: top;
-      background: var(--bg-surface-soft);
+      background: var(--bg-surface-card);
       box-shadow: transparent;
       transition:
         transform 0.4s ease,
@@ -262,6 +254,9 @@ const navigateWithDelay = async (to?: string) => {
       z-index: 0;
     }
     @media (hover: hover) and (pointer: fine) {
+      .card:hover .item-text {
+        color: $color-purple-700;
+      }
       .card:hover::after {
         transform: scaleY(1);
         box-shadow: var(--shadow-card);
@@ -320,6 +315,7 @@ const navigateWithDelay = async (to?: string) => {
         .item-text {
           padding: 4px;
           text-align: center;
+          color: $color-purple-700;
         }
       }
       .card::after {
