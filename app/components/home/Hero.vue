@@ -35,7 +35,9 @@
         <div class="slide-content">
           <h3 class="slide-title">{{ slide.title }}</h3>
           <p class="slide-text">{{ slide.text }}</p>
-          <button class="btn slide-btn">立即購買</button>
+          <button class="btn slide-btn" @click="gotoProduct(slide.id)">
+            立即購買
+          </button>
         </div>
       </SwiperSlide>
 
@@ -108,33 +110,45 @@ function onSlideEnd(swiper: SwiperClass) {
 
 const heroSlides = [
   {
-    id: "powerplay-1",
+    id: "PRO-1001",
     title: "始終電力十足。隨時待命",
-    text: "認識 POWERPLAY 2。無限力量，化繁為簡。",
+    text: "精密調整，帶來極致手感，無限力量，化繁為簡。",
     image: {
       src: "/images/home/hero/hero-bg-01.jpg",
       alt: "POWERPLAY 2",
     },
+    to: "",
   },
   {
-    id: "powerplay-2",
-    title: "智慧供電，簡單就是力量",
-    text: "POWERPLAY 2，打造真正無感充電體驗。",
+    id: "RAZER-1000",
+    title: "智慧供電，炫光就是力量",
+    text: "穩定手感與高速反應兼具的 RGB 電競鍵盤。",
     image: {
       src: "/images/home/hero/hero-bg-02.jpg",
-      alt: "POWERPLAY 桌面展示",
+      alt: "RAZER-1000 桌面展示",
     },
+    to: "",
   },
   {
-    id: "powerplay-3",
-    title: "穩定供電，從不間斷",
-    text: "POWERPLAY 2，專為專注與持久打造。",
+    id: "RAZER-1017",
+    title: "極限敏捷，穩定制霸戰場",
+    text: " 高敏捷系統與高耐用設計，讓每一次操作都穩定且充滿戰鬥氛圍。",
     image: {
       src: "/images/home/hero/hero-bg-03.jpg",
-      alt: "POWERPLAY 桌面展示",
+      alt: "RAZER-1017 桌面展示",
     },
+    to: "",
   },
 ];
+
+const gotoProduct = async (id: string) => {
+  // console.log("指定ID", id);
+  await looding(100);
+  await navigateTo({
+    name: "products-id",
+    params: { id },
+  });
+};
 </script>
 
 <style scoped lang="scss">
@@ -172,6 +186,9 @@ const heroSlides = [
       transform: translateY(-50%);
       left: max(16px, 12%);
       right: max(16px, 12%);
+      .slide-title {
+        color: $color-white;
+      }
       .slide-text {
         color: $color-gray-200;
       }
@@ -229,7 +246,7 @@ const heroSlides = [
       &.swiper-pagination-bullet-active {
         background: $color-gray-300;
       }
-   /*    //進度條動畫 */
+      /*    //進度條動畫 */
       &::after {
         content: "";
         position: absolute;

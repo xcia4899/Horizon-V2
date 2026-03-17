@@ -130,7 +130,7 @@
     "id": "PRO-1001",
     "brand": "Logitech",
     "name": "PRO 精密電競滑鼠",
-    "subtitle": "精密調整，帶來極致手感",
+    "subtitle": "精密調整，帶來極致手感，無限力量，化繁為簡。",
     "category": "滑鼠",
     "color": "黑色",
     "discount": 3490,
@@ -1297,11 +1297,11 @@
     "onsale": false,
     "description": "Razer Seiren V3 Mini 是一款適合串流、語音聊天與錄音使用的 USB 麥克風，具備清晰收音與小巧外型。",
     "images": {
-      "main": "/images/pic-detal/Razer-1011/10002.png",
+      "main": "/images/pic-detal/RAZER-1011/10002.png",
       "thumbnails": [
-        "/images/pic-detal/Razer-1011/10001.jpg",
-        "/images/pic-detal/Razer-1011/10002.png",
-        "/images/pic-detal/Razer-1011/10003.webp"
+        "/images/pic-detal/RAZER-1011/10001.jpg",
+        "/images/pic-detal/RAZER-1011/10002.png",
+        "/images/pic-detal/RAZER-1011/10003.webp"
       ]
     },
     "details": [
@@ -1790,5 +1790,101 @@
       ]
     },
     "tags": ["有線滑鼠", "電競滑鼠", "⭐⭐⭐⭐⭐"]
-  }
+  },
+  {
+  "id": "RAZER-1017",
+  "brand": "RAZER",
+  "name": "RAZER-VS 滑鼠",
+  "subtitle": "極限敏捷，穩定制霸戰場",
+  "category": "滑鼠",
+  "color": "黑色",
+  "discount": 3199,
+  "price": 3991,
+  "onsale": true,
+  "description": "搭載 Razer 高敏捷系統與高耐用設計，結合高精準感應器與優化手感，讓每一次操作都穩定且充滿戰鬥氛圍。",
+  "images": {
+    "main": "/images/pic-detal/RAZER-1017/10001.png",
+    "thumbnails": [
+      "/images/pic-detal/RAZER-1017/10001.png",
+      "/images/pic-detal/RAZER-1017/10002.png",
+      "/images/pic-detal/RAZER-1017/10003.png"
+    ]
+  },
+  "details": [
+    {
+      "section": "規格與詳細資訊",
+      "content": [
+        {
+          "title": "硬體規格",
+          "text": [
+            "重量：85 克（最佳化平衡設計）",
+            "感應器：Razer Focus 光學感應器",
+            "DPI 範圍：100 - 20,000",
+            "按鍵壽命：高達 7,000 萬次點擊",
+            "連接方式：有線 USB"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "相容性",
+      "content": [
+        {
+          "title": "作業系統",
+          "text": ["Windows 10 或更新版本", "macOS 10.14 或更新版本"]
+        }
+      ]
+    },
+    {
+      "section": "包裝內容物",
+      "content": [
+        {
+          "title": "內容物",
+          "text": [
+            "RAZER PRO RGB 滑鼠 x1",
+            "USB 連接線 x1",
+            "使用者文件 x1"
+          ]
+        }
+      ]
+    },
+    {
+      "section": "支援",
+      "content": [
+        {
+          "title": "服務項目",
+          "text": ["產品註冊", "技術支援", "保固服務"]
+        }
+      ]
+    }
+  ],
+  "highlights": {
+    "title": "炫光視覺與極致耐用",
+    "description": "融合 Razer Chroma RGB 炫光與高耐用設計，讓滑鼠在長時間激戰中依然保持穩定表現與亮眼外觀。",
+    "items": [
+      {
+        "id": "rgb",
+        "title": "Chroma RGB 炫光",
+        "subtitle": "沉浸式燈效",
+        "icon": "/images/icon/g502x-hero25k-icon 1.png",
+        "desc": ["支援多區域燈效同步", "打造專屬電競風格"]
+      },
+      {
+        "id": "durability",
+        "title": "高耐用設計",
+        "subtitle": "長時間穩定",
+        "icon": "/images/icon/g502x-lightspeed-icon 1.png",
+        "desc": ["高達 7,000 萬次點擊壽命", "長時間使用依然穩定"]
+      },
+      {
+        "id": "sensor",
+        "title": "Focus 感應器",
+        "subtitle": "極速精準",
+        "icon": "/images/icon/g502x-lightforce-icon 1.png",
+        "desc": ["高精準追蹤", "低延遲即時反應"]
+      }
+    ]
+  },
+  "tags": ["無線滑鼠", "電競滑鼠"]
+}
 ]
