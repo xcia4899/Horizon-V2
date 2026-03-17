@@ -1,6 +1,17 @@
 <template>
   <div v-if="product" class="product">
     <main class="product-detailed">
+      <section class="page-header">
+        <div class="container">
+          <el-page-header :icon="ArrowLeft" @back="handleBack">
+            <template #content>
+              <span class="text-large mr-3">
+                {{ route.params.id || "Product Detail" }}
+              </span>
+            </template>
+          </el-page-header>
+        </div>
+      </section>
       <!-- Product Overview: media + information -->
       <section class="product-overview">
         <div class="container product-overview-inner">
@@ -20,7 +31,6 @@
               </button>
             </div>
           </div>
-
           <div class="product-information">
             <div class="information-title">
               <h2 class="product-title">{{ product.name }}</h2>
@@ -30,8 +40,22 @@
               <h4>顏色</h4>
               <h5>{{ product.color }}</h5>
             </div>
+
+            <div class="information-price">
+              <!-- 原價，若有特價則加上刪除線 -->
+              <h4>原價 NT$</h4>
+              <h4 class="price">{{ product.price.toLocaleString() }}</h4>
+              <!-- 特價顯示（僅限有特價時） -->
+            </div>
+            <div class="information-price">
+              <h4>特價 NT$</h4>
+              <h4 v-if="product.onsale" class="discount">
+                {{ product.discount.toLocaleString() }}
+              </h4>
+            </div>
+
             <div class="information-shipping">
-              <h4>免費運送</h4>
+              <h4>免運費</h4>
             </div>
             <p class="information-text">
               {{ product.description }}
@@ -126,12 +150,6 @@
       </section>
     </main>
 
-    <!-- Recommend -->
-    <section class="recommend">
-      <div class="container">
-        <CommonRecommend />
-      </div>
-    </section>
     <!-- Bottom Bar -->
     <section class="product-bottomBar">
       <div class="bottomBar-inner">
@@ -140,20 +158,30 @@
             <h3>{{ product.brand }}</h3>
             <h3>系列</h3>
           </div>
+
           <div class="bottomBar-price">
             <!-- 特價顯示（僅限有特價時） -->
             <h3 v-if="product.onsale" class="discount">
               特價 ${{ product.discount.toLocaleString() }}
             </h3>
             <!-- 原價，若有特價則加上刪除線 -->
-            <h3 class="price" :class="{ strike: product.onsale }">
+            <h3 v-else class="price" :class="{ strike: product.onsale }">
               NT$ {{ product.price.toLocaleString() }}
             </h3>
           </div>
         </div>
+
         <div class="bottomBar-actions">
-          <button class="btn bottomBar-btn">加入購物車</button>
+          <button class="btn add-to-cart-btn" @click="addToCart(product)">
+            加入購物車
+          </button>
         </div>
+      </div>
+    </section>
+    <!-- Recommend -->
+    <section class="recommend">
+      <div class="container">
+        <CommonRecommend />
       </div>
     </section>
   </div>
@@ -166,7 +194,11 @@ import CommonRecommend from "@/components/common/Recommend.vue";
 import { useProducts } from "@/composables/useProducts";
 /* 商品資料來源  */
 import type { Product } from "@/composables/useProducts";
+import { useCartStore } from "@/stores/useCart";
+import { ArrowLeft } from "@element-plus/icons-vue";
+const { addToCart } = useCartStore();
 const route = useRoute();
+const router = useRouter();
 
 /* 從路由接收ID */
 const id = computed(() => String(route.params.id ?? ""));
@@ -199,6 +231,14 @@ const toggleInfoSection = (index: number) => {
 const isOpenInfoSection = (index: number) => {
   return openInfoSections.value.includes(index);
 };
+
+const handleBack = () => {
+  if (window.history.length > 1) {
+    router.back();
+  } else {
+    navigateTo("/products"); // fallback
+  }
+};
 </script>
 
 <style scoped lang="scss">
@@ -206,11 +246,28 @@ const isOpenInfoSection = (index: number) => {
   position: relative;
   width: 100%;
 }
+.discount {
+  color: var(--state-danger);
+  font-weight: bolder;
+}
+.strike {
+  text-decoration: line-through;
+  color: var(--text--tertiary);
+  opacity: 0.8;
+  font-size: clamp(16px, 3vw, 20px);
+}
 .product-detailed {
   margin-top: 70px;
   width: 100%;
 
   background-color: var(--bg-surface);
+  .page-header {
+    padding-block: 16px 8px;
+    :deep(.el-page-header__content) {
+      color: var(--text-secondary);
+     
+    }
+  }
   .product-overview {
     /*     height: 100%; */
     width: 100%;
@@ -220,7 +277,7 @@ const isOpenInfoSection = (index: number) => {
       gap: 32px;
       height: calc(100vh - 70px);
       width: 100%;
-      padding-block: 32px 32px;
+      padding-block: 8px 32px;
     }
     .product-media {
       flex: 0 0 60%;
@@ -228,8 +285,8 @@ const isOpenInfoSection = (index: number) => {
       height: 100%;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      // align-items: center;
+      justify-content: stretch;
 
       gap: 32px;
 
@@ -237,6 +294,9 @@ const isOpenInfoSection = (index: number) => {
         flex: 0 0 50%;
         display: flex;
         justify-content: center;
+        background: var(--bg-surface-card);
+        border-radius: 20px;
+
         img {
           max-height: 480px;
           max-width: 720px;
@@ -251,17 +311,21 @@ const isOpenInfoSection = (index: number) => {
         gap: 24px;
         .thumbnails-btn {
           display: flex;
+          align-items: center;
+          justify-content: center;
           height: clamp(50px, 10vw, 100px);
           aspect-ratio: 6/4;
           padding: 4px;
           border: 2px solid var(--border-default);
           border-radius: 4px;
           transition: border-color 0.3s ease;
+
           cursor: pointer;
           img {
-            width: 100%;
+            // width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center;
           }
           &.active {
             border-color: var(--brand);
@@ -279,7 +343,7 @@ const isOpenInfoSection = (index: number) => {
       flex-direction: column;
       height: 100%;
       min-width: 280px;
-      gap: 32px;
+      gap: 20px;
       overflow: auto;
       scrollbar-width: none;
       /*  隱藏滾輪 */
@@ -290,6 +354,11 @@ const isOpenInfoSection = (index: number) => {
         .product-subtitle {
           color: var(--text-secondary);
         }
+      }
+      .information-price {
+        display: flex;
+        align-items: last baseline;
+        gap: 8px;
       }
       .information-color {
         display: flex;
@@ -473,7 +542,7 @@ const isOpenInfoSection = (index: number) => {
   background-color: rgba(var(--bg-header), 0.8);
   backdrop-filter: blur(8px);
   width: 100%;
-  z-index: 100;
+  z-index: 60;
   box-shadow: var(--shadow-bottomBar);
   .bottomBar-inner {
     position: relative;
@@ -506,21 +575,13 @@ const isOpenInfoSection = (index: number) => {
       flex-direction: row-reverse;
       gap: 8px;
     }
-    .discount {
-      color: var(--state-danger);
-      font-weight: bolder;
-    }
-    .strike {
-      text-decoration: line-through;
-      color: var(--text--tertiary);
-      opacity: 0.8;
-      font-size: clamp(16px, 3vw, 20px);
-    }
   }
   .bottomBar-actions {
-    .bottomBar-btn {
-      width: 200px;
+    display: flex;
+    gap: 8px;
+    .add-to-cart-btn {
       font-size: clamp(16px, 2vw, 20px);
+      width: 200px;
       font-weight: 600;
     }
   }
@@ -533,7 +594,7 @@ const isOpenInfoSection = (index: number) => {
     }
     .bottomBar-actions {
       width: 100%;
-      .bottomBar-btn {
+      .add-to-cart-btn {
         width: 100%;
       }
     }

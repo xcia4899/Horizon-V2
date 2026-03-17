@@ -67,7 +67,7 @@
     </div>
     <div class="bottom-area">
       <h4>總金額：{{ totalPrice.toLocaleString() }}元</h4>
-      <button class="btn">結帳</button>
+      <button class="btn" @click="goToCart">結帳</button>
     </div>
   </div>
 </template>
@@ -86,6 +86,7 @@ import {
 import type { InputInstance } from "element-plus";
 import { storeToRefs } from "pinia";
 import { useCartStore } from "@/stores/useCart";
+
 // import { useMenu } from "~/composables/useMenu";
 const { openMenu, closeMenu } = useMenu();
 //接收props
