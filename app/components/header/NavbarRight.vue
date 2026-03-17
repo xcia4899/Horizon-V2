@@ -287,14 +287,7 @@ const goToPanel = () => {
       box-shadow: none;
       padding: 4px 0;
       background: var(--bg-surface-card);
-
-      @media (hover: hover) and (pointer: fine) {
-        &:hover,
-        &:focus-within {
-          background: var(--bg-surface);
-          outline: 2px solid var(--brand);
-        }
-      }
+      outline: 2px solid var(--brand);
       @media (pointer: coarse) {
         height: 40px;
         .el-input__inner {

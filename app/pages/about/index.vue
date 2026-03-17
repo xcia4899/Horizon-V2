@@ -248,13 +248,14 @@ const faqs = [
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 8px;
+    // padding-inline: 16px;
   }
   .about-hero-kicker {
-    padding: 4px 12px;
-    border-radius: 8px;
-    background: var(--brand);
-    color: $color-white;
+    padding: 0px 12px;
+    // border-radius: 8px;
+    // background: var(--brand);
+    // color: $color-white;
     font-size: 12px;
   }
   .about-hero-title {
