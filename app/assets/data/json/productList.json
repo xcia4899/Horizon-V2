@@ -2,7 +2,7 @@
   {
     "id": "RAZER-1000",
     "brand": "RAZER",
-    "name": "DEX-2 RGB電競鍵盤",
+    "name": "DEX-2 RGB鍵盤",
     "subtitle": "穩定手感與高速反應兼具的 RGB 電競鍵盤",
     "category": "鍵盤",
     "discount": 4490,
@@ -129,7 +129,7 @@
   {
     "id": "PRO-1001",
     "brand": "Logitech",
-    "name": "PRO 精密電競滑鼠",
+    "name": "PRO-精密滑鼠",
     "subtitle": "精密調整，帶來極致手感，無限力量，化繁為簡。",
     "category": "滑鼠",
     "color": "黑色",
@@ -271,14 +271,14 @@
   {
     "id": "PRO-1002",
     "brand": "Logitech",
-    "name": "PRO X TKL RAPID",
+    "name": "TKL-X RAPID",
     "subtitle": "PRO X 系列，專為遊戲打造的無線鍵盤",
     "category": "鍵盤",
     "color": "金屬灰",
     "discount": 2999,
     "price": 3499,
     "onsale": true,
-    "description": "Logitech PRO X TKL RAPID 是一款專為職業電競選手設計的無數字區機械鍵盤，結合 LIGHTSPEED 無線技術與高速回報率，提供穩定且低延遲的輸入體驗。精簡的 TKL 配置讓滑鼠操作空間更充足，搭配耐用鋁合金結構與可自訂 RGB 燈效，無論是競技對戰或日常使用，都能保持流暢且精準的操作表現。",
+    "description": "Logitech TKL-X RAPID 是一款專為職業電競選手設計的無數字區機械鍵盤，結合 LIGHTSPEED 無線技術與高速回報率，提供穩定且低延遲的輸入體驗。精簡的 TKL 配置讓滑鼠操作空間更充足，搭配耐用鋁合金結構與可自訂 RGB 燈效，無論是競技對戰或日常使用，都能保持流暢且精準的操作表現。",
     "images": {
       "main": "/images/pic-detal/PRO-1002/10001.png",
       "thumbnails": [
@@ -336,7 +336,7 @@
           {
             "title": "內容物",
             "text": [
-              "PRO X TKL RAPID 無線鍵盤",
+              "TKL-X RAPID 無線鍵盤",
               "USB-C to USB-A 編織連接線",
               "LIGHTSPEED USB 接收器",
               "接收器延長轉接器",
@@ -512,7 +512,7 @@
   {
     "id": "RAZER-1004",
     "brand": "Razer",
-    "name": "Gigantus V2 滑鼠墊",
+    "name": "Gigantus-V2 滑鼠墊",
     "subtitle": "頂級布面，滑順流暢體驗",
     "category": "滑鼠墊",
     "color": "紅色",
@@ -737,14 +737,14 @@
   {
     "id": "ROG-1006",
     "brand": "ROG",
-    "name": "RX Profile 無線鍵盤",
+    "name": "Profile 無線鍵盤",
     "subtitle": "無線自由，專注每一次敲擊",
     "category": "鍵盤",
     "color": "金屬灰",
     "discount": 3430,
     "price": 3730,
     "onsale": false,
-    "description": "ROG RX Profile 無線鍵盤採用輕薄機身與矮軸機械鍵設計，提供快速反應與舒適敲擊手感。支援 2.4GHz 無線、藍牙與 USB-C 有線三種連接模式，搭配可自訂 RGB 燈效與長效電池續航，讓玩家在遊戲與日常使用中都能保持穩定且流暢的操作體驗。",
+    "description": "ROG Profile 無線鍵盤採用輕薄機身與矮軸機械鍵設計，提供快速反應與舒適敲擊手感。支援 2.4GHz 無線、藍牙與 USB-C 有線三種連接模式，搭配可自訂 RGB 燈效與長效電池續航，讓玩家在遊戲與日常使用中都能保持穩定且流暢的操作體驗。",
     "images": {
       "main": "/images/pic-detal/ROG-1006/10001.png",
       "thumbnails": [
@@ -800,7 +800,7 @@
           {
             "title": "內容物",
             "text": [
-              "ROG RX Profile 無線鍵盤",
+              "ROG Profile 無線鍵盤",
               "USB-C 連接線",
               "2.4GHz 無線接收器",
               "使用說明書"
@@ -856,7 +856,7 @@
   {
     "id": "PRO-1007",
     "brand": "Logitech",
-    "name": "G522 LIGHT 無線耳機",
+    "name": "G522 LIGHT 耳機",
     "subtitle": "輕巧設計，全天候陪伴",
     "category": "耳機",
     "color": "黑色",
@@ -1073,7 +1073,7 @@
   {
     "id": "PRO-1009",
     "brand": "Logitech",
-    "name": "G915 X LIGHTSPEED",
+    "name": "G915-X ",
     "subtitle": "LIGHTSPEED 無線，穩定快速",
     "category": "鍵盤",
     "color": "藍色",
@@ -1288,7 +1288,7 @@
   {
     "id": "Razer-1011",
     "brand": "Razer",
-    "name": "Razer Seiren V3 Mini",
+    "name": "Seiren-V3 Mini",
     "subtitle": "專為內容創作者打造的迷你麥克風",
     "category": "麥克風",
     "color": "藍色",
@@ -1394,7 +1394,7 @@
   {
     "id": "PRO-1012",
     "brand": "Logitech",
-    "name": "PRO X SUPERLIGHT 無線滑鼠",
+    "name": "PRO X SUPERLIGHT",
     "subtitle": "極致輕量，快速精準",
     "category": "滑鼠",
     "color": "粉色",
@@ -1491,7 +1491,7 @@
   {
     "id": "MSI-1013",
     "brand": "MSI",
-    "name": "商務滑鼠",
+    "name": "MSI-商務滑鼠",
     "subtitle": "穩定精準，日常辦公好上手",
     "category": "滑鼠",
     "color": "黑色",
@@ -1600,7 +1600,7 @@
   {
     "id": "PRO-1014",
     "brand": "Logitech",
-    "name": "PRO 精密調整電競滑鼠",
+    "name": "精密電競滑鼠",
     "subtitle": "精密調整，帶來極致手感",
     "category": "滑鼠",
     "color": "粉色",
@@ -1697,7 +1697,7 @@
   {
     "id": "PRO-1015",
     "brand": "Logitech",
-    "name": "PRO 精密調整電競滑鼠",
+    "name": "PRO-電競滑鼠",
     "subtitle": "精密調整，帶來極致手感",
     "category": "滑鼠",
     "color": "白色",

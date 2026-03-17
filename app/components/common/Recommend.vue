@@ -20,14 +20,15 @@
       }"
     >
       <SwiperSlide
-        v-for="item in recommendList"
+        v-for="item in randomProducts"
         :key="item.id"
         class="carousel-card"
+        @click="gotoProductDetail(item.id)"
       >
         <div class="card-media">
-          <NuxtImg class="image" :src="item.image.src" :alt="item.image.alt" />
+          <NuxtImg class="image" :src="item.images.main" :alt="item.name" />
         </div>
-        <h4 class="card-title">{{ item.title }}</h4>
+        <h4 class="card-title">{{ item.name }}</h4>
       </SwiperSlide>
     </Swiper>
     <div class="recommend-carousel-pagination"></div>
@@ -50,62 +51,30 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-const recommendList = [
-  {
-    id: 1,
-    title: "PRO 輕量滑鼠",
-    image: {
-      src: "/images/pic-detal/PRO-1001/10003.png",
-      alt: "PRO 輕量滑鼠",
-    },
-  },
-  {
-    id: 2,
-    title: "PRO X TKL ",
-    image: {
-      src: "/images/pic-detal/PRO-1002/10003.png",
-      alt: "PRO X TKL ",
-    },
-  },
-  {
-    id: 3,
-    title: "Razer V3 Mini",
-    image: {
-      src: "/images/pic-detal/Razer-1011/10002.png",
-      alt: "Razer V3 Mini",
-    },
-  },
-  {
-    id: 4,
-    title: "GM08 電競滑鼠",
-    image: {
-      src: "/images/pic-detal/MSI-1008/10003.png",
-      alt: "GM08 電競滑鼠",
-    },
-  },
-  {
-    id: 5,
-    title: "G522 無線耳機",
-    image: {
-      src: "/images/pic-detal/PRO-1007/10001.png",
-      alt: "G522 無線耳機",
-    },
-  },
-  {
-    id: 6,
-    title: "GH50 電競耳機",
-    image: {
-      src: "/images/pic-detal/MSI-1003/10002.png",
-      alt: "GH50 電競耳機",
-    },
-  },
-];
+import { useProducts } from "@/composables/useProducts";
+import type { Product } from "@/composables/useProducts";
+
+//獲取商品資料
+const products = await useProducts();
+//隨機選擇資料顯示
+const randomProducts = useState<Product[]>("random-products", () => {
+  return [...products].sort(() => 0.5 - Math.random()).slice(0, 6);
+});
+
+const gotoProductDetail = async (id: string) => {
+  // console.log("指定ID", id);
+  await looding(100);
+  await navigateTo({
+    name: "products-id",
+    params: { id },
+  });
+};
 </script>
 
 <style scoped lang="scss">
 .recommend-inner {
-    position: relative;
-  }
+  position: relative;
+}
 .recommend-intro {
   display: grid;
   place-content: center;
@@ -197,7 +166,6 @@ const recommendList = [
 }
 /* pagination 控制區 */
 .recommend-carousel-pagination {
-
   display: flex;
   justify-content: center;
   padding-block: 48px 64px;
