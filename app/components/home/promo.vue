@@ -9,8 +9,8 @@
         <p class="promo-text">
           {{ item.text }}
         </p>
-        <button class="promo-btn btn" @click="gotoLink(item.id, item.link)">
-          {{ item.linkText }}
+        <button class="promo-btn btn" @click="gotoProductDetail(item.id)">
+          了解更多
         </button>
       </div>
     </div>
@@ -20,7 +20,7 @@
 <script setup lang="ts">
 const promoList = [
   {
-    id: "falchion-rx",
+    id: "ROG-1006",
     title: "簡約優雅・輕鬆制敵",
     text:
       "ROG Falchion RX Low Profile 是一款精巧設計的 65% 電競鍵盤，" +
@@ -30,11 +30,9 @@ const promoList = [
       src: "/images/home/promo/promo-01.png",
       alt: "ROG Falchion RX Low Profile 電競鍵盤",
     },
-    linkText: "了解更多",
-    link: "#",
   },
   {
-    id: "mouse-pro",
+    id: "PRO-1015",
     title: "舒適自然的進化",
     text:
       "PRO 級無線傳輸技術帶來前所未見的高速與穩定性。" +
@@ -44,13 +42,16 @@ const promoList = [
       src: "/images/home/promo/promo-02.png",
       alt: "ROG PRO 無線電競滑鼠",
     },
-    linkText: "了解更多",
-    link: "#",
   },
 ];
-const gotoLink = (id: string, link: string) => {
-  // window.open(link, "_blank", "noopener,noreferrer");
-  console.log(`前往${id}的詳細頁面`, link);
+
+const gotoProductDetail = async (id: string) => {
+  // console.log("指定ID", id);
+  await looding(100)
+  await navigateTo({
+    name: "products-id",
+    params: { id },
+  });
 };
 </script>
 
@@ -100,16 +101,16 @@ const gotoLink = (id: string, link: string) => {
       flex: 0 0 100%;
     }
     .promo-content {
-        .promo-content-inner{
-            padding: 16px 16px 32px;
-        }
-        .promo-title{
-            align-self: center;
-        }
-        .promo-btn{
-            width: 100%;
-            height: 32px;
-        }
+      .promo-content-inner {
+        padding: 16px 16px 32px;
+      }
+      .promo-title {
+        align-self: center;
+      }
+      .promo-btn {
+        width: 100%;
+        height: 32px;
+      }
     }
   }
 }
