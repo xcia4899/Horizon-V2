@@ -155,7 +155,7 @@
           <div class="into-btns">
             <button class="btn btn-checkout">前往結帳</button>
 
-            <button class="btn btn-keep">繼續購物</button>
+            <button class="btn btn-keep" @click="goToProuduct">繼續購物</button>
           </div>
           <p class="into-subtitle">運費、稅金和折扣碼在結帳時計算</p>
         </div>
@@ -244,6 +244,10 @@ const billTypes: BillType[] = [
 const currentBill = computed(() =>
   billTypes.find((b) => b.value === billType.value),
 );
+const goToProuduct = async () => {
+  await looding(100);
+  await navigateTo("/products");
+};
 </script>
 
 <style scoped lang="scss">
