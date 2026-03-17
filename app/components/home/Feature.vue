@@ -38,7 +38,10 @@
                   top: value.position.top,
                 }"
               >
-                <button class="point"></button>
+                <button
+                  class="point"
+                  @click="gotoProductDetail(value.to)"
+                ></button>
                 <p class="text">{{ value.title }}</p>
               </div>
             </div>
@@ -64,11 +67,10 @@ const featureContent = [
     title: "專為專業人士而設計。",
     text: "為了在高強度使用情境下維持穩定表現，這些產品以實際需求為核心設計，兼顧效能與可靠性，讓你能專注於真正重要的事。",
     media: "/images/home/feature/feature-01.jpg",
-    href: "",
     pointerItems: [
       {
         title: "G522 LIGHT",
-        href: "",
+        to: "PRO-1007",
         position: {
           left: "26%",
           top: "22%",
@@ -81,11 +83,10 @@ const featureContent = [
     title: "競技表現，精準到位。",
     text: "從操作回饋到整體手感，每一個細節都為即時反應而生。透過精密調校與實戰驗證，帶來穩定且一致的操控體驗。",
     media: "/images/home/feature/feature-02.jpg",
-    href: "",
     pointerItems: [
       {
         title: "G522 LIGHT",
-        href: "",
+        to: "PRO-1007",
         position: {
           left: "8%",
           top: "60%",
@@ -93,7 +94,7 @@ const featureContent = [
       },
       {
         title: "PRO X TKL RAPID",
-        href: "",
+        to: "PRO-1002",
         position: {
           left: "36%",
           top: "52%",
@@ -101,7 +102,7 @@ const featureContent = [
       },
       {
         title: "GM08 滑鼠",
-        href: "",
+        to: "MSI-1008",
         position: {
           left: "73%",
           top: "64%",
@@ -114,11 +115,10 @@ const featureContent = [
     title: "為長時間專注而生。",
     text: "以人體工學為核心，提供良好的支撐與穩定性，減少長時間使用帶來的負擔，讓工作與創作都能保持流暢節奏。",
     media: "/images/home/feature/feature-03.jpg",
-    href: "",
     pointerItems: [
       {
         title: "G522 LIGHT",
-        href: "",
+        to: "PRO-1007",
         position: {
           left: "72%",
           top: "4%",
@@ -126,7 +126,7 @@ const featureContent = [
       },
       {
         title: "G915 X LIGHTSPEED",
-        href: "",
+        to: "PRO-1009",
         position: {
           left: "32%",
           top: "66%",
@@ -139,11 +139,10 @@ const featureContent = [
     title: "設計，回歸日常。",
     text: "簡潔而不失質感的設計語言，融入生活中的每一個場景，讓使用變得自然，讓風格成為日常的一部分。",
     media: "/images/home/feature/feature-04.webp",
-    href: "",
     pointerItems: [
       {
         title: "Cetra True 藍牙耳機",
-        href: "",
+        to: "ROG-1010",
         position: {
           left: "50%",
           top: "10%",
@@ -152,6 +151,15 @@ const featureContent = [
     ],
   },
 ];
+
+const gotoProductDetail = async (id: string) => {
+  // console.log("指定ID", id);
+  await looding(100);
+  await navigateTo({
+    name: "products-id",
+    params: { id },
+  });
+};
 // 預設為第一個
 const activeIndex = ref(0);
 //點擊切換
@@ -165,17 +173,17 @@ const panelStyle = computed(() => ({
 
 <style scoped lang="scss">
 .feature-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding-block: 76px 64px;
-    gap: clamp(32px, 5vw, 48px);
-    @media (max-width: 550px) {
-      padding-block: 64px 32px;
-
-    }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-block: 76px 64px;
+  gap: clamp(32px, 5vw, 48px);
+  @media (max-width: 550px) {
+    padding-block: 64px 32px;
+    gap: 16px;
   }
+}
 
 p {
   color: var(--text-secondary);
@@ -195,7 +203,6 @@ p {
   display: flex;
   flex-direction: column;
   .feature-actions {
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -207,11 +214,10 @@ p {
       font-size: clamp(18px, 2vw, 20px);
       font-weight: 400;
       color: var(--text-tertiary);
-      border-bottom: 2px solid var(--border-default);
- 
+      border-bottom: 4px solid var(--border-default);
+
       cursor: pointer;
       @media (hover: hover) and (pointer: fine) {
-        border-width: 4px;
         &:not(.active):hover {
           color: var(--text-secondary);
           border-color: var(--brand-hover);
@@ -222,6 +228,10 @@ p {
         color: var(--brand-hover);
         border-color: var(--brand);
         font-weight: 500;
+      }
+      @media (max-width: 550px) {
+        border-width: 2px;
+        padding: 8px 16px;
       }
     }
 
@@ -273,9 +283,11 @@ p {
           border-radius: 4px;
           transition: transform 0.3s ease-out;
         }
-        .point:hover+.text {
-          transform: translateY(-8px)scale(1.2);
-          background-color: rgba($color-white, 1);
+        @media (hover: hover) and (pointer: fine) {
+          .point:hover + .text {
+            transform: translateY(-8px) scale(1.2);
+            background-color: rgba($color-white, 1);
+          }
         }
       }
       .card-content {

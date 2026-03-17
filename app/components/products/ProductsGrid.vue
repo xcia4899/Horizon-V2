@@ -42,9 +42,10 @@ defineProps<{
   productListView: Product[];
 }>();
 
-const gotoProductDetail = (id: string) => {
-  console.log("指定ID", id);
-  navigateTo({
+const gotoProductDetail = async (id: string) => {
+  // console.log("指定ID", id);
+  await looding(100)
+  await navigateTo({
     name: "products-id",
     params: { id },
   });

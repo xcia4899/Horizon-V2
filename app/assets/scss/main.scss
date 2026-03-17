@@ -233,12 +233,12 @@ button {
         left: 50%;
         width: 40px;
         height: 40px;
-        border: 2px solid $color-white;
+        border: 1px solid $color-white;
         border-radius: 50%;
         opacity: 0;
-        will-change: transform, opacity;
+        will-change: transform, opacity ,border-width;
         transform: translate3d(-50%, -50%, 0) scale(1);
-        animation: pointscale 2s linear infinite;
+        animation: pointscale 1.2s linear infinite;
     }
 
     @media (hover:hover) and (pointer:fine) {
@@ -249,17 +249,20 @@ button {
 
     @keyframes pointscale {
         0% {
+            border-width: 1px;
             transform: translate3d(-50%, -50%, 0) scale(1);
             opacity: 1;
         }
 
         80% {
-            transform: translate3d(-50%, -50%, 0) scale(1.8);
+            border-width: 4px;
+            transform: translate3d(-50%, -50%, 0) scale(2);
             opacity: 0;
         }
 
         100% {
-            transform: translate3d(-50%, -50%, 0) scale(1.8);
+            border-width: 4px;
+            transform: translate3d(-50%, -50%, 0) scale(2);
             opacity: 0;
         }
     }
