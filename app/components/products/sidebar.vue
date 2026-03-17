@@ -309,7 +309,7 @@ const updateOnsale = (val: string | number | boolean) => {
       scrollbar-width: none;
       /* 隱藏滾輪 */
       gap: 8px;
-      max-height: 400px;
+      max-height: calc(100% - 200px);
       top: 0;
       bottom: 120px;
       .sidebar-group {
@@ -323,6 +323,7 @@ const updateOnsale = (val: string | number | boolean) => {
     .mobile-btnArea {
       display: flex;
       transition: opacity 0.5s ease-out 0.4s;
+      border-top: 1px solid var(--border-default);
       &.btnAreaShow {
         visibility: hidden;
         opacity: 0;

@@ -18,7 +18,9 @@
             size="24"
           />
         </button>
-        <div class="total">共 {{ productListView.length }} 筆</div>
+        <div class="total">
+          共 <b>{{ productListView.length }}</b> 筆
+        </div>
       </div>
     </div>
     <main ref="productMainRef" class="product-main">
@@ -392,6 +394,7 @@ function toNumArray(
 
 <style scoped lang="scss">
 .product-page {
+  margin-top: 70px;
   display: flex;
   flex-direction: column;
 }
@@ -411,8 +414,8 @@ function toNumArray(
     display: flex;
     align-items: center;
     gap: 2px;
-    font-size: 20px;
-    padding: 8px 20px;
+    font-size: clamp(14px, 2vw, 20px);
+    padding: 8px 16px;
     border-radius: 16px;
     letter-spacing: 2px;
     color: var(--text-tertiary);
@@ -446,12 +449,13 @@ function toNumArray(
     }
   }
   .total {
-    padding: 6px 16px;
+    padding: 8px 12px;
     border-radius: 16px;
     color: var(--text-secondary);
     border: 1px solid var(--border-default);
     background: var(--bg-surface);
     font-size: 12px;
+    font-weight: normal;
   }
 }
 .product-main {
