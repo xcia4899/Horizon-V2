@@ -29,14 +29,14 @@ feature-content
 </template>
 
 <script setup lang="ts">
-const client = useSupabaseClient()
+// const client = useSupabaseClient()
 
-const { data, error } = await client
-  .from("your_table")
-  .select("*");
+// const { data, error } = await client
+//   .from("your_table")
+//   .select("*");
 
-console.log("data:", data);
-console.log("error:", error);
+// console.log("data:", data);
+// console.log("error:", error);
 
 
 </script>

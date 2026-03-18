@@ -58,9 +58,6 @@ export default defineNuxtConfig({
   ],
 
   supabase: {
-    // url: "https://natuubskclzgsdezgjml.supabase.co",
-    // key: "sb_publishable_Jgu1bQTSF9ppbY_VzNFjqw_c0cU_BlN",
-
     redirect: false,
   },
   image: {
