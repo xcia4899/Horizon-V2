@@ -28,7 +28,18 @@ feature-content
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const client = useSupabaseClient()
+
+const { data, error } = await client
+  .from("your_table")
+  .select("*");
+
+console.log("data:", data);
+console.log("error:", error);
+
+
+</script>
 
 <style scoped lang="scss">
 .container {

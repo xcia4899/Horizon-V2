@@ -54,8 +54,15 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@pinia/nuxt",
     "@element-plus/nuxt",
+    "@nuxtjs/supabase",
   ],
 
+  supabase: {
+    // url: "https://natuubskclzgsdezgjml.supabase.co",
+    // key: "sb_publishable_Jgu1bQTSF9ppbY_VzNFjqw_c0cU_BlN",
+
+    redirect: false,
+  },
   image: {
     provider: "none",
     dir: "public",
@@ -67,18 +74,18 @@ export default defineNuxtConfig({
     },
   },
 
- icon: {
+  icon: {
     // 解決方案 A：強制轉為純 CSS，不產生任何 JSON 請求
-    mode: 'css', 
-    
+    mode: "css",
+
     // 解決方案 B：把你要用的圖標集直接打包進去 (Bundle)
     // 這樣 Nuxt 就不用去 api 找圖標資料
     clientBundle: {
       scan: true, // 自動掃描專案中用到的圖標並打包
       includeCustomCollections: true,
     },
-    
+
     // 停用本地 API 供應商
-    provider: 'iconify', 
+    provider: "iconify",
   },
 });

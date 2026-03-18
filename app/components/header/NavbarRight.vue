@@ -88,7 +88,7 @@ import { storeToRefs } from "pinia";
 import { useCartStore } from "@/stores/useCart";
 
 // import { useMenu } from "~/composables/useMenu";
-const { openMenu, closeMenu } = useMenu();
+const {  closeMenu } = useMenu();
 //接收props
 const props = defineProps<{
   isMenuOpenMobile: boolean;
