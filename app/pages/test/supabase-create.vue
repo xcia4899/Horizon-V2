@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Database } from "~/types/data/supabase";
+import type { Database } from "@/types/database.types";
 
 type ProductInsert = Database["public"]["Tables"]["test_products"]["Insert"];
 

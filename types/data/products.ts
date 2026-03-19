@@ -13,7 +13,7 @@ export interface FeatureItem {
   icon?: string;       
   desc?: string[];      
 }
-export interface highlights{
+export interface Highlights{
   title:string;
   description:string;
   items:FeatureItem[]
@@ -38,7 +38,7 @@ export interface Product {
 
   images: ProductImages;
   details: ProductDetail[];
-  highlights:highlights
+  highlights:Highlights
 
   tags: string[];
 }

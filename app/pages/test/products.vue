@@ -1,7 +1,7 @@
 <template>
   <section style="padding: 72px">
     <h1>Supabase 測試頁</h1>
-
+    <button @click="seedProducts">匯入商品資料</button>
     <p v-if="pending">資料讀取中...</p>
     <p v-else-if="errorMsg">{{ errorMsg }}</p>
 
@@ -16,7 +16,7 @@
 <script setup lang="ts">
 import type { Database } from "@/types/database.types";
 
-type Product = Database["public"]["Tables"]["test_products"]["Row"];
+type Product = Database["public"]["Tables"]["products"]["Row"];
 
 const supabase = useSupabaseClient<Database>();
 
@@ -30,7 +30,7 @@ const fetchProducts = async () => {
 
   try {
     const { data, error } = await supabase
-      .from("test_products")
+      .from("products")
       .select("*")
       .order("id", { ascending: true });
 
@@ -51,5 +51,29 @@ const fetchProducts = async () => {
   }
 };
 
+const seedProducts = async () => {
+  pending.value = true;
+  errorMsg.value = "";
+
+  try {
+    const result = await $fetch("/api/seed-products", {
+      method: "POST",
+    });
+
+    console.log("匯入成功", result);
+
+    await fetchProducts();
+  } catch (error: unknown) {
+    console.error("匯入失敗", error);
+
+    if (error instanceof Error) {
+      errorMsg.value = error.message;
+    } else {
+      errorMsg.value = "匯入失敗";
+    }
+  } finally {
+    pending.value = false;
+  }
+};
 onMounted(fetchProducts);
 </script>

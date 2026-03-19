@@ -1,25 +1,25 @@
-// import { serverSupabaseServiceRole } from "#supabase/server";
-// import { productSeed } from "../data/productSeed";
+import { serverSupabaseServiceRole } from "#supabase/server";
+import { productSeed } from "~~/server/data/productSeed";
 
-// export default defineEventHandler(async (event) => {
-//   const client = serverSupabaseServiceRole(event);
+export default defineEventHandler(async (event) => {
+  const client = serverSupabaseServiceRole(event);
 
-//   const { data, error } = await client
-//     .from("products")
-//     .upsert(productSeed, { onConflict: "id" })
-//     .select();
+  const { data, error } = await client
+    .from("products")
+    .upsert(productSeed, { onConflict: "id" })
+    .select();
 
-//   if (error) {
-//     throw createError({
-//       statusCode: 500,
-//       statusMessage: error.message,
-//     });
-//   }
+  if (error) {
+    console.error("seed-products error:", error);
+    throw createError({
+      statusCode: 500,
+      statusMessage: error.message,
+    });
+  }
 
-//   return {
-//     ok: true,
-//     message: "商品種子資料匯入成功",
-//     count: data.length,
-//     data,
-//   };
-// });
+  return {
+    ok: true,
+    count: data?.length ?? 0,
+    data,
+  };
+});
