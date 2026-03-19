@@ -1,3 +1,4 @@
+// useProducts.ts
 import productList from "@/assets/data/json/productList.json";
 
 

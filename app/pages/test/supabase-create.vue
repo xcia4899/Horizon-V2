@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Database } from "~/types/data/supabase";
 
-type ProductInsert = Database["public"]["Tables"]["products"]["Insert"];
+type ProductInsert = Database["public"]["Tables"]["test_products"]["Insert"];
 
 const supabase = useSupabaseClient<Database>();
 
@@ -42,7 +42,12 @@ const createProduct = async () => {
       description: form.value.description || null,
     };
 
-    const { error } = await supabase.from("products").insert([payload]);
+    const { data, error } = await supabase
+      .from("test_products")
+      .insert([payload]);
+
+    console.log("data:", data);
+    console.log("error:", error);
 
     if (error) throw error;
 

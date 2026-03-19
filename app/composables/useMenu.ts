@@ -1,4 +1,4 @@
-import type { MenuKey, OpenMenu } from "@/types/ui/menu";
+import type { MenuKey, OpenMenu } from "~~/types/ui/menu";
 
 export const useMenu = () => {
   const openMenu = useState<OpenMenu>("open-menu", () => null);

@@ -14,14 +14,11 @@
 </template>
 
 <script setup lang="ts">
-type Product = {
-  id: number;
-  name: string;
-  price: number;
-  created_at: string;
-};
+import type { Database } from "~/types/data/supabase";
 
-const supabase = useSupabaseClient();
+type Product = Database["public"]["Tables"]["test_products"]["Row"];
+
+const supabase = useSupabaseClient<Database>();
 
 const products = ref<Product[]>([]);
 const pending = ref(false);
@@ -33,13 +30,14 @@ const fetchProducts = async () => {
 
   try {
     const { data, error } = await supabase
-      .from("products")
+      .from("test_products")
       .select("*")
       .order("id", { ascending: true });
 
     if (error) throw error;
 
-    products.value = data ?? [];
+    const rows: Product[] = (data ?? []) as Product[];
+    products.value = rows;
   } catch (error: unknown) {
     console.error("讀取 products 失敗：", error);
 
@@ -53,7 +51,5 @@ const fetchProducts = async () => {
   }
 };
 
-onMounted(() => {
-  fetchProducts();
-});
+onMounted(fetchProducts);
 </script>

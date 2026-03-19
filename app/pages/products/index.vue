@@ -61,7 +61,7 @@ import { useProducts } from "@/composables/useProducts";
 import { looding } from "~/composables/useFetchState";
 import type { Product } from "@/composables/useProducts";
 import type { LocationQueryValue } from "vue-router";
-import type { SidebarList } from "@/types/ui/sidebar";
+import type { SidebarList } from "~~/types/ui/sidebar";
 const route = useRoute();
 const router = useRouter();
 

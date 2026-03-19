@@ -48,7 +48,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from "vue";
 //menu 型別
-import type {  MenuItem, SetMenu } from "@/types/ui/menu";
+import type {  MenuItem, SetMenu } from "~~/types/ui/menu";
 const { openMenu,setOpenMenu, toggleMenu, closeMenu } = useMenu();
 //控制menuOPen 手機版本開關控制
 

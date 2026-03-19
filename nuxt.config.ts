@@ -59,6 +59,7 @@ export default defineNuxtConfig({
 
   supabase: {
     redirect: false,
+    types: "~/types/data/supabase.ts",
   },
   image: {
     provider: "none",

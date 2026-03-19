@@ -39,7 +39,7 @@
 
 // 下拉選單邏輯 ==================
 //menu 型別
-import type { SetMenu } from "@/types/ui/menu";
+import type { SetMenu } from "~~/types/ui/menu";
 import { looding } from "~/composables/useFetchState";
 // const router = useRouter();
 

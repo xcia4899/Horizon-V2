@@ -9,7 +9,7 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      products: {
+      test_products: {
         Row: {
           id: number;
           name: string;
