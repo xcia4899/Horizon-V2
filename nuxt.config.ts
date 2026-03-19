@@ -54,12 +54,9 @@ export default defineNuxtConfig({
     "@nuxt/eslint",
     "@pinia/nuxt",
     "@element-plus/nuxt",
-    "@nuxtjs/supabase",
+
   ],
 
-  supabase: {
-    redirect: false,
-  },
   image: {
     provider: "none",
     dir: "public",
