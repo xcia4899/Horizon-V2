@@ -1,13 +1,14 @@
 <template>
   <section style="padding: 72px">
-    <h1>Supabase 測試頁</h1>
-    <button @click="seedProducts">匯入商品資料</button>
+    <h1>商品匯入 測試頁</h1>
+    <button class="btn" @click="seedProducts">匯入商品資料</button>
+    <br/>
     <p v-if="pending">資料讀取中...</p>
     <p v-else-if="errorMsg">{{ errorMsg }}</p>
 
     <ul v-else>
       <li v-for="item in products" :key="item.id">
-        {{ item.name }} - ${{ item.price }}
+        {{ item.id }} - {{ item.brand }} - {{ item.name }} - ${{ item.price }} -
       </li>
     </ul>
   </section>
@@ -75,5 +76,5 @@ const seedProducts = async () => {
     pending.value = false;
   }
 };
-onMounted(fetchProducts);
+// onMounted(fetchProducts);
 </script>

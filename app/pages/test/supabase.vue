@@ -51,5 +51,5 @@ const fetchProducts = async () => {
   }
 };
 
-onMounted(fetchProducts);
+// onMounted(fetchProducts);
 </script>

@@ -59,11 +59,6 @@ export default defineNuxtConfig({
 
   supabase: {
     redirect: false,
-<<<<<<< HEAD
-    types: "~/types/data/supabase.ts",
-=======
-    // types: "@@/shared/types/supDatabase.ts",
->>>>>>> 92325b5 (完成json 匯入supabase 資料庫)
   },
   image: {
     provider: "none",
