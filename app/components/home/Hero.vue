@@ -142,7 +142,6 @@ const heroSlides = [
 ];
 
 const gotoProduct = async (id: string) => {
-  // console.log("指定ID", id);
   await looding(100);
   await navigateTo({
     name: "products-id",
@@ -172,7 +171,7 @@ const gotoProduct = async (id: string) => {
         object-fit: cover;
         object-position: bottom;
         @media (max-width: 550px) {
-          object-position: 80% 100%;
+          object-position: center;
         }
       }
     }
