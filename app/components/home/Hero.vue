@@ -25,7 +25,6 @@
           <NuxtImg
             :src="slide.image.src"
             :alt="slide.image.alt"
-            sizes="100vw"
             format="webp"
             quality="80"
             class="image"
@@ -154,6 +153,7 @@ const gotoProduct = async (id: string) => {
 .hero-swiper-wrapper {
   position: relative;
   width: 100%;
+  height: 100svh;
   .hero-slide {
     position: relative;
     display: flex;
@@ -165,15 +165,11 @@ const gotoProduct = async (id: string) => {
       width: 100%;
       height: 100%;
       .image {
-        display: block;
         width: 100%;
-        height: 100vh;
-        /* max-height: 960px; */
+        height: 100%;
+        display: block;
         object-fit: cover;
         object-position: bottom;
-    /*     @media (max-width: 550px) {
-          object-position: center;
-        } */
       }
     }
     .slide-content {
