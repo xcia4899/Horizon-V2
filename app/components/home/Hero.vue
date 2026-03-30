@@ -153,12 +153,13 @@ const gotoProduct = async (id: string) => {
 <style scoped lang="scss">
 .hero-swiper-wrapper {
   position: relative;
-
+  width: 100%;
   .hero-slide {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
     height: 100%;
     .slide-image {
       width: 100%;
@@ -170,9 +171,9 @@ const gotoProduct = async (id: string) => {
         /* max-height: 960px; */
         object-fit: cover;
         object-position: bottom;
-        @media (max-width: 550px) {
+    /*     @media (max-width: 550px) {
           object-position: center;
-        }
+        } */
       }
     }
     .slide-content {
